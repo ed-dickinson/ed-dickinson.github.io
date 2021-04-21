@@ -1,0 +1,128 @@
+#intro-openup-container {width: 50%; height: 100%; position: absolute; border: 0px solid black; display: none; overflow: hidden; z-index: 1;}
+.intro-openup-bar {width: 100%; position: absolute; animation: glitchopenup 1s linear infinite; background-color: black; z-index: 15;}
+.intro-openup-bar:nth-of-type(even) {animation-delay: 0s;}
+.intro-openup-bar:nth-of-type(odd) {animation-delay: 0.5s;}
+@keyframes glitchopenup{
+  0%,49%{  height: 5%; width: 50%; left: 50%;   }
+  
+  50%,99%{  height: 5%; width: 50%; left: 0;}
+  100%{ height: 2.5%; width: 100%; left: 0;}
+} 
+
+
+
+.strips-slices {position: relative; width: 100%; height: 0px; z-index: 31;
+position: absolute;
+animation: stripGlitchAnim 0.02s linear infinite;
+}
+@keyframes stripGlitchAnim{
+  2%,64%{  height: 11%; width: 50%; left: 50%; position: relative;  }
+  4%,60%{  height: 1%; width: 50%; left: 0;}
+  62%{ height: 5%;}
+} 
+
+#intro-strips-container {z-index: 30;}
+#intro-strips-container, #intro-squares-container {position: absolute; top: 0; height: 100%; width: 100%; left: 0; overflow: hidden;}
+#intro-squares-container {background-color: black; z-index: 20;} 
+
+.intro-jump-square {border-color: black; border-style: solid; position: relative;}
+
+.intro-jump-square-glitch-sides {animation: glitchsidebars 2s linear infinite 0.25s;
+    height: 110%; position: absolute; width: 50%; background-color: black; top
+}
+.intro-jump-square-glitch-sides:nth-of-type(1) {left: -25%; top: -5%;}
+.intro-jump-square-glitch-sides:nth-of-type(even) {right: -25%; bottom: -5%;}
+@keyframes glitchsidebars{
+  1%,32%{    transform: translate(2px,0) skew(0deg); height: 110%; width: 50%;}
+  2%,30%{    transform: translate(-2px,0) skew(0deg); height: 55%; width: 75%;}
+  31%{ transform: translate(0,0) skew(5deg); height: 110%; width: 50%;}
+  /*2 64 4 60 62 */
+  
+}
+
+
+.intro-jump-square-glitch-bars {height: 25%; width: 100%; position:absolute; animation: ijsGlitchBarsAnim 2s linear infinite; background-color: black; left: 0;}
+
+@keyframes ijsGlitchBarsAnim {
+    0%,27%,48%,52%,72% { height: 25%;}
+    2%,25%,50% {height: 0%;}
+    74%,98% {height: 12.5%;}
+    100% {height: 25%;}
+}
+
+.intro-squares, .intro-main-square {display: inline; position: absolute;}
+.intro-squares { animation: squaresfadein 7s; animation-fill-mode: forwards; }
+.intro-main-square {animation: mainsquarefadein 7s; animation-delay: 2s; animation-fill-mode: forwards; z-index: 5;}
+.intro-main-square-slices {background-color: inherit;  width: 100%; height: 25%; background-color: transparent;}
+.intro-main-square-slices:nth-child(odd) {animation: glitchBotom 1s linear infinite;}
+.intro-main-square-slices:nth-child(even) {animation: glitchTop 1s linear infinite;}
+
+@keyframes squaresfadein {from{background-color: HSL(120, 2%, 0%);  } to {background-color: HSL(120, 2%, 7%);}}/*color: HSL(120, 2%, 78%);*/
+@keyframes mainsquarefadein {from{background-color: HSL(120, 2%, 0%);  } to {background-color: HSL(120, 2%, 78%);}}
+
+#size-finder {width: 1vw; height: 1vh; position: absolute; opacity: 0;} 
+
+#main-title-glitch img, #main-title-static img {width: 100%;}
+
+#main-title-static {display: block;}
+#main-title-glitch {display: none;}
+.split-title-glitch-right, .split-title-glitch-left {display: none;}
+
+.split-title-container {overflow: hidden;}
+
+.split-title-container img  {width: 200%;}
+.split-title-glitch-right img, .split-title-static-right img {left: -100%; position: relative;}
+
+div#main-title-glitch,
+.split-title-glitch-right, .split-title-glitch-left 
+{
+  animation: glitch 1s linear infinite 0.5s; 
+}
+
+@keyframes glitch{
+  2%,64%{    transform: translate(2px,0) skew(0deg);}
+  4%,60%{    transform: translate(-2px,0) skew(0deg); }
+  62%{ transform: translate(0,0) skew(5deg); }
+}
+
+
+div#main-title-glitch:before,
+div#main-title-glitch:after{
+  content: ' ';
+  background-image: url('../assets/monotext.png'); background-size: contain;
+  position: absolute;
+  left: 0; top: 0; width: 100%; height: 100%;
+}
+.split-title-glitch-right:before,.split-title-glitch-left:before,
+.split-title-glitch-right:after,.split-title-glitch-left:after{
+  content: ' ';
+  background-image: url('../assets/monotext.png'); background-size: contain;
+  position: absolute; top: 0; width: 200%; height: 200%;
+}
+.split-title-glitch-left:before,.split-title-glitch-left:after {left: 0;}
+.split-title-glitch-right:before,.split-title-glitch-right:after {right: 0;}
+
+div#main-title-glitch:before, .split-title-glitch-right:before, .split-title-glitch-left:before{
+  animation: glitchTop 1s linear infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+}
+
+@keyframes glitchTop{
+  2%,64%{ transform: translate(2px,-2px);}
+  4%,60%{  transform: translate(-2px,2px);}
+  62%{   transform: translate(13px,-1px) skew(-13deg); }
+}
+
+div#main-title-glitch:after, .split-title-glitch-right:after,
+.split-title-glitch-left:after{
+  animation: glitchBottom 1.5s linear infinite;
+  clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+  -webkit-clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+}
+
+@keyframes glitchBottom{
+  2%,64%{transform: translate(-2px,0);}
+    4%,60%{    transform: translate(-2px,0);}  
+    62%{    transform: translate(-22px,5px) skew(21deg); }
+}
