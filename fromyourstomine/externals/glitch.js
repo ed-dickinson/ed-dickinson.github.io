@@ -93,7 +93,7 @@ function introJumpSquareAnim() {
 var glitchDelay = 7000; //7 seconds
 var introsquarescontainer = document.getElementById("intro-squares-container");
 
-var videos = document.getElementsByClassName('mock-video');
+var videos = document.getElementsByClassName('mock-video'); // CHANGE THIS TO JUST GRAB VIDEO TAGS
 
 function glitchStart() {
 //  setTimeout(() => console.log('test func'), 1000)

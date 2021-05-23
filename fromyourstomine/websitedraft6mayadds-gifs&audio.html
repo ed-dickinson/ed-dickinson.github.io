@@ -1,0 +1,386 @@
+<!doctype html>
+<html>
+<head>
+<title></title>
+<meta charset="UTF-8">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="author" content="Ed Dickinson">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="">
+<style>
+/* MAIN CLASSES
+
+*/
+/* all post content must be one of these two classes */
+.left-column-content {}
+.right-column-content {}
+
+/* if it's to be on the main column for mobile, it must have this class */
+.mobile-column-content {}
+
+/* for column objects that link between each other, the left column must have this class: */
+.left-column-link {}
+/* and must have this in it's tag:  onclick="columnLink('####')"  where #### is the id of the element that is being linked to, which should have this class: */
+.right-column-linkee {}
+
+
+body {font-family: 'Avenir Next', sans-serif;}
+body {background-color: #C7C9C7; color: #050000; margin: 0;}
+a {color: #0a48cd;}
+body {border-color: #e87d14;}
+
+.post {margin-bottom: 1em; margin-top: 1em; position: static;}
+
+p.orange-top {border-top: 2.5px solid #e87d14; padding-top: 10px;}
+p.orange-bottom {border-bottom: 2.5px solid #e87d14; padding-bottom: 10px;}
+p {margin-top: 40px;}
+
+p.orange-line-bg {background-image: url(assets/orange-line.png); background-size: 66%; background-position: bottom right; background-repeat: no-repeat; padding-bottom: 20px;}
+p.hihowareyou {background-image: url(assets/orange-line.png); background-size: 100% 100%; font-size: 1.5em; text-transform: uppercase; display: inline-block; padding: 100px 20px; margin: -40px 0;}
+
+.column img {width: 100%;}
+
+.rightalign-link {text-align: right; display: block;}
+
+.mock-video {opacity: 0;}
+
+#main-title-container {margin-top: 20px; position: relative; z-index: 9;}
+#main-container {width: 100%; max-width: 1200px; height: 100vh; position: relative; margin: auto;}
+
+
+.column-container {width: 100%; height: 100%;}
+.column {width: 50%; display: block; position: absolute; overflow-y: scroll; height: 100%; 
+ -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+  }
+.column::-webkit-scrollbar {
+  display: none;
+}
+
+.column-inner {padding: 0 10px;}
+
+.column-two {right: 0%;}
+
+.column-two .column-inner {padding-bottom: 50%;}
+
+
+img.shadow {text-shadow: 12px 12px 12px black;
+filter: drop-shadow(1px -1px 1px gray);}
+img.center {margin: auto;}
+
+.right {width: 66%; position: relative; left: 34%;}
+
+#maintotoplink-container {padding-bottom: 4em;}
+#maintotoplink-cont { width: 100%; text-align: center;}
+#maintotoplink-arrow {width: 100px; height: 200px; position: relative; display: block; background-size: contain; margin: auto;}
+#maintotoplink img {position: absolute; bottom: 0;}
+#maintotoplink {width: 100px; height: 100px; background-image: url('assets/orange-circle-with-arrow.jpg'); background-size: 100px; position: absolute; bottom: 0; transition: 0.5s; background-position: bottom;}
+
+#maintotoplink:hover {height: 200px;}
+
+.linkee-popup-close-button {height: 20px; width: 20px; position: absolute; top: -30px; right: 10px; display: inline-block; cursor: pointer;}
+.linkee-popup-close-button:hover {opacity: 0.5;}
+
+/* responsive sizing */
+
+@media only screen and (min-width: 600px) {
+  #main-container {width: calc(100% - 40px);}
+}
+@media only screen and (min-width: 900px) {
+  #main-container {width: calc(100% - 80px);}
+}
+
+
+/* 600px for mobile cut-off */
+    /* MOBILE: */
+@media only screen and (max-width: 599px) {
+    .split-title-container {display: none;}
+    #main-title-container {display: block;}
+    #column-right {display: none;}
+    #main-container {width: calc(100% - 20px);}
+    #column-left {width: 100%;}
+    
+    .right-column-linkee {display: none; position: absolute; top: 10px; left: 10px;
+/*    box-shadow: 2px 2px #ff0000;*/
+filter: drop-shadow(0px 0px 20px #C7C9C7);
+    }
+/*
+    .right-column-linkee::after {content: 'X'; height: 20px; width: 20px; position: absolute; top: -30px; right: 10px; display: inline-block; cursor: pointer;}
+    .right-column-linkee::after:hover {}
+*/
+
+}
+    /* DESKTOP: */
+@media only screen and (min-width: 600px) {
+    #main-title-container {display: none;}
+    .split-title-container {display: block;}
+    #column-right {display: block;}
+}
+
+
+#maintimer, #skip-button, #hourly-glitch-button {position: absolute; background-color: white; color: black; z-index: 100; padding: 0 10px; opacity: 0.5;}
+#skip-button { right: 10px; position: fixed; cursor: pointer; top: 40px;}
+#hourly-glitch-button {right: 10px; position: fixed; cursor: pointer; top: 10px;}
+</style>
+<link rel="stylesheet" href="externals/glitch.css">
+
+
+
+</head>
+<body>
+
+<div id="maintimer">timer</div>
+<div id="skip-button" ><a  onclick="skip()">skip</a></div>
+<div id="hourly-glitch-button" ><a  onclick="hourlyGlitch()">hourly glitch</a></div>
+
+<!--intro stuff-->
+<div id="size-finder"></div>
+
+<div id="intro-strips-container"></div>
+<div id="intro-squares-container"></div>
+<div id="intro-openup-container"></div>
+
+<div id="hourly-bars-container"></div>
+
+<div id="main-container">
+
+    <div class="column-container">
+
+    
+    
+        <div class="column column-one" id="column-left">
+        
+            <div id="title-top" style="height: 0px;"></div> <!--linktotop-->
+            
+            <div class="split-title-container">
+                <div class="split-title-glitch-left"><img src="assets/monotext.png"></div>
+                <div class="split-title-static-left"><img src="assets/monotext.png"></div>
+            </div>
+            
+            <div id="main-title-container">
+                <div id="main-title-glitch"><img src="assets/monotext.png"></div>
+                <div id="main-title-static"><img src="assets/monotext.png"></div>
+            </div>
+            
+            <div class="column-content" id="main-column-content">
+            
+<!--- POSTS BELOW HERE --->
+            
+<div class="post left-column-content mobile-column-content">
+    <img style="filter: hue-rotate(45deg);" src="assets/thumb.gif">
+    <br><br>
+    <p class="orange-line-bg" >From yours to mine is a collaborative project that we started in Glasgow 2019. It looks at the complexity of personal digital data, with particular emphasis on the relationship between the body and how it’s entangled with artificial intelligence. We are curious of our data selves and the complexity of having these digital shadows.</p><br>
+</div>
+
+<div class="post left-column-content mobile-column-content">
+    
+    <video width="100%" height="auto" controls class="mock-video">
+  <source src="assets/claire-describing-the-glitching-signs.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+</div>
+ 
+<div class="post left-column-content">
+    <p style="width: 70%; position: relative; left: 25%; z-index: -1;" class="orange-top">From yours to mine has developed under the restrictions of a pandemic, whilst living in different cities. Initially we embraced the digital online communities as the only space our art work could be held, a year into the pandemic and we crave touch, objects and space. This has started to impact the visual nature of our work through tactile production and further development of sound. </p>
+    <img src="assets/hand.png" style="width: 38%; margin-top: -7.2em; z-index: 2; " class="shadow">
+    <br><br><br>
+</div>
+
+<div class="post left-column-content mobile-column-content">
+
+    <a href="#" class="left-column-link rightalign-link" onclick="columnLink('keys')" id="keyclicktest">keys</a><br><br><br>
+    <a href="#" class="left-column-link rightalign-link" onclick="columnLink('tracings')" id="keyclicktest">tracings</a><br><br><br>
+    <a href="#" class="left-column-link rightalign-link" onclick="columnLink('lowerkeys')" id="keyclicktest">lower keys</a><br><br><br>
+</div>
+
+
+
+
+
+<div class="post right-column-content mobile-column-content">
+    <p class="hihowareyou"><br>Hi!<br>How are you?<br></p>
+</div>     
+            
+<div class="post right-column-content mobile-column-content">            
+    <p class="orange-bottom right">The research for this website stems from our work Tuesday’s Step Report where we scrutinised a physical journey through the data surveillance model encoded in health and fitness apps. We juxtaposed the lack of care for the body used within this model with words that speak of compassion and friendship. Through our observation of the digital data extracted from Claire’s body we observed a connection between the body and its digital footprint. We realised that such a connection is most of the time only visible in traces, such as lines of code.
+    <br><br>
+    We interrogate these shadows by exploring the life trajectory of digital data once it has passed the body. Expanding on Tuesday’s Step Report, we are starting to go beyond the visual representation of digital data through focus on text and audio, created in response to our research.<br></p>
+</div>
+
+<div class="post right-column-content"> 
+    <img src="assets/keys.jpg" class="right right-column-linkee" style="width: 66%;" id="keys">
+    <audio controls style="width: 66%;" class="right">
+      <source src="assets/Poem_We.wav" type="audio/wav">
+    Your browser does not support the audio element.
+    </audio>
+</div>
+
+
+
+
+<div class="post right-column-content right-column-linkee" id="tracings"> 
+    
+    <img src="assets/trace1.jpg"  class="object" style="width: 49%;" >
+    <img src="assets/trace3.jpg" style="width: 49%;"> 
+</div>
+
+<div class="post right-column-content mobile-column-content"> 
+    <p>The research for this website stems from our work Tuesday’s Step Report where we scrutinised a physical journey through the data surveillance model encoded in health and fitness apps. We juxtaposed the lack of care for the body used within this model with words that speak of compassion and friendship. Through our observation of the digital data extracted from Claire’s body we observed a connection between the body and its digital footprint. We realised that such a connection is most of the time only visible in traces, such as lines of code.
+    <br><br>We interrogate these shadows by exploring the life trajectory of digital data once it has passed the body. Expanding on Tuesday’s Step Report, we are starting to go beyond the visual representation of digital data through focus on text and audio, created in response to our research.</p>
+    <br>
+</div>
+    
+
+<div class="post right-column-content">
+    <img src="assets/keys.jpg" style="width: 66%;" class="object right-column-linkee" id="lowerkeys">
+</div>
+
+<div class="post right-column-content mobile-column-content">         
+    <video width="100%" height="auto" controls>
+  <source src="assets/vid-scraper.MOV" type="video/mp4">
+Your browser does not support the video tag.
+    </video>
+</div>
+
+<!--- POSTS ABOVE HERE --->
+
+                
+
+<div id="maintotoplink-container">
+    <div id="maintotoplink-arrow">
+        <a id="maintotoplink" href="#titletop" onclick="document.getElementById('title-top').scrollIntoView(true);"> <img src="assets/orange-circle-no-arrow.jpg"></a>
+    </div>
+</div>
+
+            </div>
+        </div>
+        
+        <div class="column column-two" id="column-right">
+            <div class="split-title-container"><a name="titletop"></a>
+                <div class="split-title-glitch-right"><img src="assets/monotext.png"></div>
+                <div class="split-title-static-right"><img src="assets/monotext.png"></div>
+            </div>
+            <div class="column-inner" id="right-column-content">
+            
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="externals/glitch.js"></script>
+<script>
+
+
+const rightColumnItems = document.getElementsByClassName('right-column-content');
+var mainColumnContent = document.getElementById('main-column-content');
+var rightColumn = document.getElementById('right-column-content');
+var rightColumnLinkees = document.getElementsByClassName('right-column-linkee');
+
+if (window.outerWidth >= 600){
+    var mobile_view = false;
+} else {
+    var mobile_view = true;
+}
+
+function resizeChecker() {
+    console.log('resize' + window.outerWidth);
+//    if ()
+}
+
+document.body.onresize = resizeChecker;
+
+function setUpColumns() {
+    if (mobile_view == true) {
+        console.log('mobile');
+    } else if (mobile_view == false) { // DESKTOP
+        console.log('not mobile');
+        for (var cs = 0; cs < rightColumnItems.length; cs++) {
+            var child = rightColumnItems[0].parentNode.removeChild(rightColumnItems[0]);
+            //    var child = mainColumnContent.removeChild(rightColumnItems[cs]);
+            rightColumn.appendChild(child);
+        } 
+    }
+}
+
+setUpColumns();
+
+
+function columnLink(linkToId) {
+    console.log('works');
+    if (mobile_view == true) {
+        
+        if (document.getElementById(linkToId).style.display == 'block') {
+            document.getElementById(linkToId).style.display = 'none';
+        } else {
+        for (var i = 0; i < rightColumnLinkees.length; i++) {
+            if (rightColumnLinkees[i].style.display == 'block') {
+                rightColumnLinkees[i].style.display = 'none';
+            }
+        }
+        var close_buttons = document.getElementsByClassName('linkee-popup-close-button');
+        for (var i = 0; i < close_buttons.length; i++) {
+            close_buttons[i].remove();
+        }
+        
+        document.getElementById(linkToId).style.display = 'block';
+        document.getElementById(linkToId).addEventListener('click', () => {
+            document.getElementById(linkToId).style.display = 'none';
+        }, false);
+        }
+        
+        // positioner for linkee pop-up
+        document.getElementById(linkToId).style.top = event.target.offsetTop - (document.getElementById(linkToId).offsetHeight / 2) + 'px' ;
+        
+        // close button for linkee
+        var close_button = document.createElement("div");
+        close_button.innerHTML = 'X';
+        close_button.classList.add('linkee-popup-close-button');
+        if (document.getElementById(linkToId).nodeName == "IMG") {
+            close_button.style.top = event.target.offsetTop - (document.getElementById(linkToId).offsetHeight / 2) -30 + 'px';
+            close_button.style.right = window.outerWidth - document.getElementById(linkToId).getBoundingClientRect()['right'] -10 + 'px';
+            close_button.addEventListener('click', () => {
+                document.getElementById(linkToId).style.display = 'none';
+                close_button.remove();
+                }, false);
+            document.getElementById(linkToId).parentNode.appendChild(close_button);
+        } else {
+            document.getElementById(linkToId).appendChild(close_button);
+        }
+
+        // ADD SIZER //
+    } else if (mobile_view == false) {
+        document.getElementById('column-right').scrollTop = document.getElementById(linkToId).offsetTop - event.clientY + (document.getElementById(linkToId).clientHeight * 0.55);
+        console.log(event);
+    }
+}
+
+
+
+//var subjects = document.getElementsByClassName('subject');
+//const objects = document.getElementsByClassName('object');
+//
+//console.log(subjects);
+//console.log(objects);
+//console.log(objects[0].offsetTop);
+//var iteration = 0;
+//
+//for (let sub_it = 0; sub_it < subjects.length; sub_it++) {
+//    iteration = sub_it;
+//
+//    subjects[iteration].addEventListener("click", showNextCol, false);
+//}
+
+//function showNextCol() {
+//    console.log(subjects);
+//    subjects.indexOf(event.target);
+//}
+</script>
+</body>
+
+
+</html>
