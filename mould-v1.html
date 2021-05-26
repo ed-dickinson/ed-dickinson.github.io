@@ -134,7 +134,7 @@ const savedClothes= localStorage.getItem('savedClothes');
 if (savedClothes) {
   clothes = JSON.parse(savedClothes);
 } else {
-  clothes = defaultClothes;
+  clothes = clothes; //defaultClothes;
 }
 
 
