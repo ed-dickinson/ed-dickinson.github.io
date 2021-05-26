@@ -174,7 +174,8 @@ function updateClothesList() {
     if (clothes.length == 0) {
         var emptyClothesList = document.createElement("div");
         emptyClothesList.classList.add('clothing-item');
-        emptyClothesList.innerHTML = "There ain't nothin' in this wardrobe!"
+        emptyClothesList.innerHTML = "There ain't nothin' in this wardrobe yet! Add some clothes using the tools below:";
+        document.getElementById("wardrobe-tools").classList.add('open');
         clothesList.appendChild(emptyClothesList);
     }
     
