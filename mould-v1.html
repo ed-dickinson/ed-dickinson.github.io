@@ -24,7 +24,7 @@ button, input {border: 1px solid dodgerblue; background-color: white; border-rad
 
 button {cursor: pointer;}
 
-#wardrobe-tools {border: 1px dotted dodgerblue; border-radius: 5px; padding: 5px; height: 1em; overflow: hidden; transition: height 0.5s; cursor: pointer;}
+#wardrobe-tools {border: 1px dotted dodgerblue; border-radius: 5px; padding: 5px; height: 1.1em; overflow: hidden; transition: height 0.5s; cursor: pointer;}
 #wardrobe-tools-opener {position: relative; color: dodgerblue;}
 #wardrobe-tools-symbol {color: dodgerblue; position: absolute; right: 5px; top: 0px;transform: rotate(90deg); cursor: pointer; transition: 0.5s;}
 
@@ -193,7 +193,7 @@ function updateClothesList() {
         } else if (daysUnworn == 1){    var lastWornSig = "yesterday";
         } else {                        var lastWornSig = daysUnworn + " days ago";}
         
-        clothingItem.innerHTML = clothes[i].name + "<br>last worn " + lastWornSig + "."
+        clothingItem.innerHTML = clothes[i].name + "<br><span style='color:dodgerblue;'>last worn " + lastWornSig + ".<span>"
 //        ID: " + clothes[i].id
         ;
 
