@@ -1,0 +1,33 @@
+main {margin: auto; max-width: 700px;}
+
+#above-text {  border-top: 20px solid;
+  border-image-slice: 1;
+  border-image-source: linear-gradient(to right, grey, white); margin-top: 10px; padding: 10px 0; text-align: center;} 
+#above-text > p {margin: 0.5em 0 ;}
+#below-text {border-bottom: 20px solid;
+  border-image-slice: 1;
+  border-image-source: linear-gradient(to left, grey, white); padding: 10px 0; text-align: center; }
+
+#button-container {margin: 0 auto; width: 100%; position: relative;}
+
+div.card-container {width: 33.3%; display: inline-block; }
+div.card-container:nth-of-type(1) {left: 0%; position: relative;}
+div.card-container:nth-of-type(2) {left: 33.3%; position: absolute;}
+div.card-container:nth-of-type(3) {right: 0%; position: absolute;}
+
+
+div.mushi-card {border: 0px solid black; height: 50vh; width: 100%;  background-position: center; background-size: contain; background-repeat: no-repeat; cursor: pointer; z-index: 1;}
+
+div.mushi-card.comp-selected {opacity: 1;}
+
+
+div.mushi-card.comp-selected:hover {opacity: 1;}
+div.mushi-card:hover {opacity: 0.5;}
+div.mushi-card.comp-notselected {opacity: 0.2;}
+
+
+.frog-card {background-image: url(assets/frog.jpg); }
+.slug-card {background-image: url(assets/slug.jpg); }
+.snake-card {background-image: url(assets/snake.jpg); }
+
+div.card-label {text-align: center;}
