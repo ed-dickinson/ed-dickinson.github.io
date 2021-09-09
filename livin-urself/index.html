@@ -1,0 +1,718 @@
+<!doctype html>
+<html>
+<head>
+<title>wear life</title>
+<meta charset="UTF-8">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="author" content="Crumb Douglas">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link id="tabicon" rel="icon" href="">
+<style>
+body {background-color: rgb(40, 36, 40);}
+
+body {background-color: oldlace; } 
+	
+.bodybgpads {position: fixed; top: -10vh; height: 120vh; width: calc(60vw - 26ch); min-width: 0; z-index: -200;} 
+.bgpadl {left: -10vw; background-image: linear-gradient(to left, oldlace, PapayaWhip); } /*antiquewhite, blanchedalmond, bisque, PapayaWhip*/
+.bgpadr {right: -10vw; background-image: linear-gradient(to right, oldlace, PapayaWhip); }
+
+#maincontain {max-width: 500px; margin: auto; background-color: ; }
+
+#livinmancont {margin: auto; text-align: center; position: relative; width: 100%;}
+    #livinman {position: relative; height: auto; width: 80%;}
+
+    #livinmanshimmer {position: absolute; top: 12%;  height: 78%; width: 63.5%; border-radius: 50%; left: 18%; background-image: linear-gradient(135deg, rgba(255,255,255,0) 40%,rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 60%); background-size: 300%; background-position:0%; animation-name: shimmeranim; animation-duration: 5s; animation-direction: normal; animation-iteration-count: infinite; animation-timing-function: linear; }
+    
+    #livinurself {font-family: redaction-bold; font-size: 55px; text-align: center; position: absolute; bottom: 15px; margin: auto; width: 100%;} 
+    
+    @media only screen and (max-width: 500px) {
+        /*#livinman {width: 100%;}
+        #livinmanshimmer {width: 78.5%; left: 10.5%;}*/
+        #livinman {width: 110%; left: -5%; overflow: hidden;}
+        #livinmanshimmer {width: 85.5%; left: 7%;}
+        #livinurself {font-size: 250%; bottom: 5%;}
+    }
+    
+/*
+#maincontain {max-width: 500px; margin: auto; background-color: ; }
+
+#livinmancont {margin: auto; text-align: center; position: relative;}
+    #livinman {position: relative; height: 400px; width: 400px;}
+
+    #livinmanshimmer {position: absolute; top: 12%; background-color: ; height: 78%; width: 63.5%; border-radius: 50%; left: 18%; background-image: linear-gradient(135deg, rgba(255,255,255,0) 40%,rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 60%); background-size: 300%; background-position:0%; animation-name: shimmeranim; animation-duration: 5s; animation-direction: normal; animation-iteration-count: infinite; animation-timing-function: linear;}
+    
+    #livinurself {font-family: redaction-bold; font-size: 55px; text-align: center; position: absolute; bottom: 15px; margin: auto; width: 100%;}
+*/
+
+@keyframes shimmeranim {
+    0% {background-position:0%;}
+    40% {background-position:0%;}
+    47.5% {background-position:100%;}
+    100% {background-position:100%;}
+}
+
+
+
+.controls {font-size: 2rem; cursor: pointer;}
+#buttons {margin: auto; text-align: center; height: 45px; position: relative; margin-bottom: 25px;}
+
+#playerdisplay {color: rgb(40, 36, 40); border: 0px solid black; margin:auto; }
+#playbutton {font-size: 3rem;}
+
+#prevbutton, #fastbackwardbutton, #fastforwardbutton, #nextbutton{height: 30px; width: 30px; border: 10px solid oldlace;}
+#playbutton {height: 45px; width: 45px; border: 12px solid oldlace;}
+
+#prevbutton, #fastbackwardbutton, #playbutton, #fastforwardbutton, #nextbutton {background-image: url(assets/transoldlacepixelbuttons-halfsize.png); display: inline-block;  vertical-align: middle; margin: -2px; margin-top: -12px;}
+#prevbutton {background-position: -90px 0px;}
+#fastbackwardbutton {background-position: -120px 0px;}
+#fastforwardbutton {background-position: -90px -30px;}
+#nextbutton {background-position: -120px -30px;}
+
+.controls:hover {background-color: rgba(255,255,255,0.3);}
+/*fixes this not happening when album ends for some reason*/
+#playbutton:hover {cursor: pointer;background-color: rgba(255,255,255,0.3);} 
+
+
+.buttonpads {background-color: oldlace; width: calc(50% - 130px); height: calc(100% + 2px); position: absolute; top: -1px;}
+.bpright {right: -1px;}
+.bpleft {left: -1px;}
+
+#timereadout {font-family: redaction-bold;font-weight: 100; font-size: 1.2rem; letter-spacing: 0.1em; text-align: center; margin-bottom: 10px; margin: auto; display: none;}
+
+
+#scrubbingcontainer{width: 300px; height: 12px; background-color: ;border: 1px solid black; padding: 2px;  border: papayawhip 1px solid; border-radius: 5px; margin: auto; }
+#scrubbingbar{width: calc(100% - 22px); height: 4px; padding-top:  0px; position: relative; margin-left: 10px; top: 3px;
+    border: solid 1px papayawhip; border-radius: 1px; background-color: white;  
+}
+#scrubbingbarbuffered {background-color: white;}
+#scrubbingbarplayed {background-color: white;}
+#scrubbingbarbuffered, #scrubbingbarplayed {position: absolute; height: 100%; top: 0px; left: 0px;}
+#scrubhead{ width: 0px;height: 10px; }
+#scrubheadhandle{width: 20px;height: 12px; left: -12px; top: -5px;position: relative; 
+    border: rgba(255,255,255,0.5) 1px solid; border-radius: 4px; background-color: white; background-clip: padding-box;}
+  
+
+  
+ .tracklist li span, button, #scrubbingbar {cursor: pointer;}
+ 
+#tracklist1 ol {padding: 0;}
+.tracklist li {list-style-type: none; margin: 0.2em 0; display: inline-block; width: calc(100% - 40px); font-family: redaction-bold;font-weight: 100; font-size: 0.9rem; letter-spacing: 0.05em; color: rgb(40, 36, 40); font-family: monospace; font-size: 1rem; }
+.tracklist li span:hover {font-weight: 700; letter-spacing: 0.06em;}
+.tracklist {text-align: center; position: relative;}
+.tracklistliner {height: 1px; width: 100%;}
+.tracklistlinerinner {height: 1px; width: 100%;  background-image: linear-gradient(to right, oldlace , rgba(252,246,235, 0), rgba(252,246,235, 0), oldlace);}
+
+.lyricdrawer {color: rgb(40, 36, 40); display:none; font-family: monospace; margin:10px 0;padding:1px 0;}
+.lyricdrawerbutton {position: absolute; right: 0;}
+
+.lyricdrawerinner {background-color: oldlace; width: calc(100% - 2px); height: calc(100% - 2px); top: 0px; left: 1px; position: relative; padding: 10px 0; text-align: left;}
+h6 {display: block; font-size: inherit; margin: 0; font-weight: normal; text-align: right; line-height: inherit;}
+.choruslyric {color:transparent;            
+  -webkit-background-clip: text;
+  background-clip: text;}
+  
+.lyricdrawerinnerinner {     width: 48ch;   margin: 1ch auto ; 
+  -webkit-background-clip: text; background-clip: text; background-image: linear-gradient(to right, lightpink , orange, gold, plum, deepskyblue, hotpink, lightpink);
+  background-size: 200% 200%;
+  animation-name: bgflaganim; animation-duration: 15s; animation-direction: normal; animation-iteration-count: infinite; animation-timing-function: linear;}
+
+.rightalign {text-align: right;}
+ 
+#squirl1, #squirl2 {width: 10%; height: 10%; z-index: 6; position: absolute; display: none;}
+#squirl1 {top: 0%; left: 0%;}
+#squirl2 {top: 4%; right: 6%;}
+
+#textbelow {font-family: monospace; text-align:  center; font-size: 1rem;}
+#textthanks {text-align: left;}
+
+#wearlifewindows {height:auto;width: 80%;margin-left:6%;}
+ 
+                   
+@font-face {font-family: redaction-bold; src: url(assets/fonts/Redaction-Bold.otf); font-weight: 100;}       @font-face {font-family: redaction-bold; src: url(assets/fonts/Redaction10-Bold.otf); font-weight: 200;}       @font-face {font-family: redaction-bold; src: url(assets/fonts/Redaction20-Bold.otf); font-weight: 300;}       @font-face {font-family: redaction-bold; src: url(assets/fonts/Redaction35-Bold.otf); font-weight: 400;}     @font-face {font-family: redaction-bold; src: url('assets/fonts/Redaction50-Bold.otf');  font-weight: 500;}     @font-face {font-family: redaction-bold; src: url(assets/fonts/Redaction70-Bold.otf); font-weight: 600;}        @font-face {font-family: redaction-bold; src: url(assets/fonts/Redaction100-Bold.otf);  font-weight: 700;}
+
+
+@keyframes bgflaganim {
+    0% {background-position: 0%}
+    100% {background-position: 200%}
+}
+    
+.bgclipanim {color:transparent; -webkit-background-clip: text; background-clip: text; }
+.bgfadanim, .bgclipanim { background-image: linear-gradient(to right, lightpink , orange, gold, plum, deepskyblue, hotpink, lightpink);background-size: 200% 200%; animation-name: bgflaganim; animation-duration: 15s; animation-direction: normal; animation-iteration-count: infinite; animation-timing-function: linear;}
+
+
+</style>
+
+
+</head>
+<body>
+<div class="bodybgpads bgpadl"></div>
+<div class="bodybgpads bgpadr"></div>
+
+
+
+<div id="maincontain">   
+    <div id="livinmancont">
+        <img id="livinman" src="assets/man1000.png">
+        <div id="livinmanshimmer"></div>
+        <div id="livinurself" class="bgclipanim">Living Yourself</div>
+
+    </div>
+   
+
+<div id="playerdisplay">
+    <div id="audio_player"> 
+        <audio id="audio1" preload="auto"><source src="assets/LY192/01livin.mp3"></audio>
+    </div>
+    <div id="buttons" class="bgfadanim">
+        
+        <div id="prevbutton" class="controls" onclick="prevFunc()"></div>
+        <div id="fastbackwardbutton" class="controls" onmousdown="fastBackwardFunc()"></div>
+        <div id="playbutton" class="controls" onclick="playFunc()"></div>
+        <div id="fastforwardbutton" class="controls" ></div>
+        <div id="nextbutton" class="controls" onclick="skipFunc()"></div>
+        <div class="buttonpads bpleft"></div><div class="buttonpads bpright"></div>
+  
+    </div>
+
+    
+
+    <div id="timereadout"> </div>
+    <div id="scrubbingcontainer" class="bgfadanim">
+        <div id="scrubbingbar">
+            <div id="scrubbingbarbuffered"></div>
+            <div id="scrubbingbarplayed"></div>
+            <div id="scrubhead">
+                <div id="scrubheadhandle"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<br><br>
+
+<!--
+<div id="tester">test</div>
+<button onclick="test()">test</button>
+<button type="button" onclick="testFunction()">Time Test.</button>
+<button type="button" onclick="testFunction2()">Test 2.</button>
+<p id="demo"></p>
+    <div id="audioreadout">audio uninitiated</div>
+    <div>buffered: <span id="bufferedreadout"></span></div>
+-->
+<div class="tracklistliner bgfadanim"><div class="tracklistlinerinner"></div></div>
+<div id="tracklist1" class="tracklist"><ol>
+    <li>Living Yourself</li>
+        <div class="lyricdrawer"></div>
+    <li>i can't keep up with Myself</li>
+        <div class="lyricdrawer"></div>
+    <li>i know how the Earth Feels</li>
+        <div class="lyricdrawer"></div>
+    <li>Magic Leaf</li>
+        <div class="lyricdrawer"></div>
+    <li>Played with the Bugs</li>
+        <div class="lyricdrawer"></div>
+    <li>Crye 4 Help</li>
+        <div class="lyricdrawer"></div>
+    <li>my God is a Wild Animal</li>
+        <div class="lyricdrawer"></div>
+    <li>my Heart explodes like a Dandelion</li>
+        <div class="lyricdrawer"></div>
+    <li>the Primal Principle</li>
+        <div class="lyricdrawer"></div>
+    <li>Heart of Dirt</li>
+        <div class="lyricdrawer"></div>
+    <li>Hopeful Heaves</li>
+        <div class="lyricdrawer"></div>
+    <li>Flower in a Tyre Track</li>
+        <div class="lyricdrawer"></div>
+    <li>new Techniques</li>
+        <div class="lyricdrawer"></div>
+    <li>i'm only going Naked from now on</li>
+        <div class="lyricdrawer"></div>
+    <li>...& then i became Me</li>
+        <div class="lyricdrawer"></div>
+</ol> </div>
+<div class="tracklistliner bgfadanim"><div class="tracklistlinerinner"></div></div>
+
+<div id="textbelow">
+
+    <br><br><a class="downloadlink bgclipanim" style="text-decoration: underline white;" href="https://www.mediafire.com/file/xhkh9hvgbkvo4fl/Living_Yourself_%2528320kpbs%2529.zip/file" target="_blank">download the mp3s @ 320kbps</a>
+    <br><br><br><br><font style="line-height: 1.6em; text-align: left;"><div id="textthanks">&nbsp; &nbsp; i wrote this album while my heart bounced along the bountiful shores of this world, and i felt my body and mind inflate and deflate around it's pleasings, <br>&nbsp; &nbsp; kinda like the tide, <br>&nbsp; &nbsp; kinda like the seasons.
+    <br><br>
+    &nbsp; &nbsp; melodies drifted out of me as i walked paths between the trees of ancient woodlands, and reaffirmed themselves in the bubbling glow of new companionship.
+    <br><br>
+    &nbsp; &nbsp; everyone i've shared time with and everything i've shared space with seeps into me and fills a new part of my being.
+    <br><br>
+    &nbsp; &nbsp; this is my attempt to express the interweaving joy and sorrow that defines my human experience, in the surest terms that i am able.
+    </div></font><br><br><br>
+    <img src="assets/wearlifewindows3.png" id="wearlifewindows"><br>
+
+    <br><br><br>thanks my loves
+</div>
+    
+<font style="display: block; text-align:center; font-family: monospace; margin: auto; font-size: 20px; margin-top: 50px;">†</font>
+
+</div>
+
+<script>
+
+var tracklist = [{
+  title: " ",
+  file: "assets/LY192/01livin.mp3",
+  track: 1,
+  lyrics: " "
+},{
+  title: " ",
+  file: "assets/LY192/02keepup.mp3",
+  track: 2,
+  lyrics: " "
+},{
+  title: " ",
+  file: "assets/LY192/03earthfeel.mp3",
+  track: 3,
+  lyrics: " "
+},{
+  title: " ",
+  file: "assets/LY192/04magicleaf.mp3",
+  track: 4,
+  lyrics: " "
+},{
+  title: " ",
+  file: "assets/LY192/05bugs.mp3",
+  track: 5,
+  lyrics: " "
+},{
+  title: " ",
+  file: "assets/LY192/06crye4help.mp3",
+  track: 6,
+  lyrics: " "
+},{
+  title: " ",
+  file: "assets/LY192/07wildgod.mp3",
+  track: 7,
+  lyrics: " "
+},{
+  title: " ",
+  file: "assets/LY192/08luvlyf.mp3",
+  track: 8,
+  lyrics: " "
+},{
+  title: " ",
+  file: "assets/LY192/09pripri.mp3",
+  track: 9,
+  lyrics: " "
+},{
+  title: " ",
+  file: "assets/LY192/10heartofdirt.mp3",
+  track: 10,
+  lyrics: " "
+},{
+  title: " ",
+  file: "assets/LY192/11heaves.mp3",
+  track: 11,
+  lyrics: " "
+},{
+  title: " ",
+  file: "assets/LY192/12findsum1.mp3",
+  track: 12,
+  lyrics: " "
+},{
+  title: " ",
+  file: "assets/LY192/13newtech.mp3",
+  track: 13,
+  lyrics: " "
+},{
+  title: " ",
+  file: "assets/LY192/14naked.mp3",
+  track: 14,
+  lyrics: " "
+},{
+  title: " ",
+  file: "assets/LY192/15became.mp3",
+  track: 15,
+  lyrics: " "
+}
+];
+
+
+var current = 0;
+
+var currenttrack = tracklist[current].track + ': ' + tracklist[current].title;
+
+
+var loadedaudio = document.getElementById('audio1');
+var playbutton = document.getElementById('playbutton');
+var audioreadout = document.getElementById('audioreadout');
+var bufferedreadout = document.getElementById('bufferedreadout');
+
+var playstate = "unstarted";
+var playing = false;
+
+var originaltitle = document.title;
+
+//changeicon to play/pause
+var tabicon = document.getElementById('tabicon');
+loadedaudio.addEventListener("play", function() {playbutton.style.backgroundPositionX = "-45px"; tabicon.setAttribute('href', 'assets/play-button.png');}, false);
+loadedaudio.addEventListener("pause", function() {playbutton.style.backgroundPositionX = "0px"; tabicon.setAttribute('href', 'assets/pause-button.png');}, false);
+
+
+function playFunc() {     
+    if (loadedaudio.paused) {
+        loadedaudio.play();
+        playing = true;
+    } else {
+        loadedaudio.pause();
+        playing = false;
+    }
+    albumtracklist[current].firstChild.classList.add('bgclipanim');
+    buffUpdate();
+    
+}
+
+function nextFunc() {
+    if (current === tracklist.length - 1) {
+        current = 0;
+        loadedaudio.pause();
+        playing = false;
+        playbutton.style.backgroundPositionX = "0px";
+        albumtracklist[(tracklist.length - 1)].firstChild.classList.remove('bgclipanim');
+    } else {
+        current++;
+        albumtracklist[current].firstChild.classList.add('bgclipanim');
+        albumtracklist[(current - 1)].firstChild.classList.remove('bgclipanim');
+    }
+    loadedaudio.src = tracklist[current].file;
+    
+    
+    if (playing === true) {loadedaudio.play();  } 
+}
+
+function skipFunc() {
+    if (current === tracklist.length - 1) {
+        current = 0;
+        loadedaudio.pause();
+        playing = false;
+        playbutton.style.backgroundPositionX = "0px";
+        albumtracklist[(tracklist.length - 1)].firstChild.classList.remove('bgclipanim');
+        tabicon.setAttribute('href', 'assets/pause-button.png');
+    } else {
+        current++;
+        albumtracklist[current].firstChild.classList.add('bgclipanim');
+        albumtracklist[(current - 1)].firstChild.classList.remove('bgclipanim');
+    }
+    loadedaudio.src = tracklist[current].file;
+    
+    //document.getElementById('tester').innerHTML += current;
+    if (playing === true) {loadedaudio.play();}
+    
+}
+
+function prevFunc() {
+    if (current === 0) {
+        current = current;
+    } else {
+        current--;
+    }
+    loadedaudio.src = tracklist[current].file;
+    albumtracklist[current].firstChild.classList.add('bgclipanim');
+    albumtracklist[(current + 1)].firstChild.classList.remove('bgclipanim');
+    if (playing === true) {loadedaudio.play();} 
+}
+
+
+// when track finishes, starts the next
+document.getElementById('audio1').addEventListener('ended', nextFunc, false);
+
+//var music = document.getElementById('music'); // id for audio element
+var duration = loadedaudio.duration; // Duration of audio clip, calculated here for embedding purposes
+//var pButton = document.getElementById('pButton'); // play button
+var scrubhead = document.getElementById('scrubhead'); // playhead
+var scrubbar = document.getElementById('scrubbingbar'); // timeline
+var scrubbarplayed = document.getElementById('scrubbingbarplayed');
+var scrubbarbuffed = document.getElementById('scrubbingbarbuffered');
+
+var timereadout = document.getElementById('timereadout');
+
+timereadout.innerHTML = "0:00 / 0:00";
+
+loadedaudio.addEventListener('onloadedmetadata', timeUpdate, false);
+
+// timeline width adjusted for playhead
+var scrubbarWidth = scrubbar.offsetWidth - scrubhead.offsetWidth;
+
+// play button event listenter
+//pButton.addEventListener("click", play);
+
+
+
+// timeupdate event listener
+loadedaudio.addEventListener("timeupdate", timeUpdate, false);
+
+// makes timeline clickable
+scrubbar.addEventListener("click", function(event) {
+    movescrubhead(event);
+    loadedaudio.currentTime = duration * clickPercent(event);
+}, false);
+
+// returns click as decimal (.77) of the total timelineWidth
+function clickPercent(event) {
+    return (event.clientX - getPosition(scrubbar)) / scrubbarWidth;
+}
+
+// makes playhead draggable
+scrubhead.addEventListener('mousedown', mouseDown, false);
+window.addEventListener('mouseup', mouseUp, false);
+
+// Boolean value so that audio position is updated only when the playhead is released
+var onscrubhead = false;
+
+// mouseDown EventListener
+function mouseDown() {
+    onscrubhead = true;
+    window.addEventListener('mousemove', movescrubhead, true);
+    loadedaudio.removeEventListener('timeupdate', timeUpdate, false);
+}
+
+// mouseUp EventListener
+// getting input from all mouse clicks
+function mouseUp(event) {
+    if (onscrubhead == true) {
+        movescrubhead(event);
+        window.removeEventListener('mousemove', movescrubhead, true);
+        // change current time
+        loadedaudio.currentTime = duration * clickPercent(event);
+        loadedaudio.addEventListener('timeupdate', timeUpdate, false);
+    }
+    onscrubhead = false;
+}
+// mousemove EventListener
+// Moves playhead as user drags
+function movescrubhead(event) {
+    var newMargLeft = event.clientX - getPosition(scrubbar);
+
+    if (newMargLeft >= 0 && newMargLeft <= scrubbarWidth) {
+        scrubhead.style.marginLeft = newMargLeft + "px";
+        //spinningman.style.transform = "rotate(" + (((newMargLeft / scrubbarWidth) * 100) * 3.6) + "deg)";
+        var converteddragtotime = (newMargLeft / scrubbarWidth) * duration;
+    timereadout.innerHTML = formatDuration(converteddragtotime) + " / " + formatDuration(duration); //update time readout as drag
+        
+    }
+    if (newMargLeft < 0) {
+        scrubhead.style.marginLeft = "0px";
+        
+    }
+    if (newMargLeft > scrubbarWidth) {
+        scrubhead.style.marginLeft = scrubbarWidth + "px";
+    }
+    scrubbarplayed.style.width = scrubhead.style.marginLeft;
+    
+}
+
+// timeUpdate
+// Synchronizes playhead position with current point in audio
+function timeUpdate() {
+    var playPercent = scrubbarWidth * (loadedaudio.currentTime / duration);
+    scrubhead.style.marginLeft = playPercent + "px";
+    if (loadedaudio.currentTime == duration) {
+        playbutton.className = ""; //notsue what these two do
+        playbutton.className = "play";
+    }
+    scrubbarplayed.style.width = playPercent + "px";
+    //bufferupdatecheck
+    if (loadedaudio.buffered.end(0) < duration) {buffUpdate();}
+    
+    //time counter readout
+    timereadout.innerHTML = formatDuration(loadedaudio.currentTime) + " / " + formatDuration(duration); 
+
+}
+
+
+
+function formatDuration(xxxx) {// time formatting function
+    yyyy = Math.floor(xxxx);
+    seconds = yyyy % 60;
+    minutes = (yyyy - seconds) / 60;
+    if (seconds < 10) {seconds = "0" + seconds;}
+    return minutes + ":" + seconds;
+}
+
+//buffering update event listener
+//loadedaudio.addEventListener("canplay", buffUpdate, false);
+
+function buffUpdate() {
+    var buffPercent = scrubbarWidth * (loadedaudio.buffered.end(0) / duration);
+    scrubbarbuffed.style.width = (buffPercent - 2) + "px";
+}
+
+
+// Gets audio file duration
+loadedaudio.addEventListener("canplaythrough", function() {
+    duration = loadedaudio.duration;
+}, false);
+
+// getPosition
+// Returns elements left position relative to top-left of viewport
+function getPosition(el) {
+    return el.getBoundingClientRect().left;
+}
+
+//tracklist setup
+var albumtracklist = document.getElementById("tracklist1").getElementsByTagName("LI");
+//alternatively document.getElementById("tracklist1");
+
+var lyricdrawers = document.getElementsByClassName("lyricdrawer");
+
+//lyric drawer border set-up
+for (i = 0; i < lyricdrawers.length; i++ ) {
+    lyricdrawers[i].classList.add('bgfadanim');
+    lyricdrawers[i].innerHTML = '<div class="lyricdrawerinner"><div class="lyricdrawerinnerinner">' + lyricdrawers[i].innerHTML + '</div></div>';
+}
+
+//lyric drawer open
+for (var i = 0; i < albumtracklist.length; i++) {    
+//    albumtracklist[i].style.color = "white";
+    albumtracklist[i].innerHTML = "<span class='tracktitle'>" + albumtracklist[i].innerHTML + "</span><span class='lyricdrawerbutton' onclick='lyricPanelOpen(" + i + ")'>+</span>";
+    //albumtracklist[i].addEventListener('click', selectFunc, false);
+    }
+    
+var tracktitles = document.getElementsByClassName('tracktitle');
+    
+// track selector    
+for (var i = 0; i < tracktitles.length; i++) {
+    //albumtracklist[i].onclick = function(){
+//        alert(index);
+     (function(index){
+        tracktitles[i].onclick = function(){
+            //alert(index)  ;
+            loadedaudio.src = tracklist[index].file;
+            //if (playing === true) {
+            loadedaudio.play();//}
+            playFunc;//timeUpdate;
+            
+            //add colour highlight for next track
+            for (var i = 0; i < tracktitles.length; i++) {
+                albumtracklist[i].firstChild.classList.remove('bgclipanim');
+            }
+            albumtracklist[index].firstChild.classList.add('bgclipanim');
+            //albumtracklist[index].firstChild.style.color = 'transparent';
+            current = index;
+        }
+    })(i);
+}
+
+var lyricdrawerbuttons = document.getElementsByClassName('lyricdrawerbutton');
+
+function lyricPanelOpen(lyricpanelindex) {
+    
+    if (lyricdrawers[lyricpanelindex].style.display == 'block') {
+        for (var i = 0; i < lyricdrawers.length; i++) {
+            lyricdrawers[i].style.display = 'none';
+            lyricdrawerbuttons[i].innerHTML = '+';
+        }
+        lyricdrawers[lyricpanelindex].style.display = 'none';
+        lyricdrawerbuttons[lyricpanelindex].innerHTML = '+';
+    } else {
+        for (var i = 0; i < lyricdrawers.length; i++) {
+            lyricdrawers[i].style.display = 'none';
+            lyricdrawerbuttons[i].innerHTML = '+';
+        }
+        lyricdrawers[lyricpanelindex].style.display = 'block';
+        lyricdrawerbuttons[lyricpanelindex].innerHTML = '-';
+    }
+
+}
+
+
+function testFunction() {
+  document.getElementById('demo').innerHTML = Date() + albumtracklist[i];
+}
+function testFunction2() {
+  document.getElementById('demo').innerHTML = currenttrack;
+}
+
+document.getElementById('fastforwardbutton').addEventListener('mousedown', fastForwardFunc, false);
+document.getElementById('fastforwardbutton').addEventListener('mouseup', normalSpeedFunc, false);
+document.getElementById('fastforwardbutton').addEventListener('mouseout', normalSpeedFunc, false);
+document.getElementById('fastbackwardbutton').addEventListener('mousedown', fastBackwardFunc, false);
+document.getElementById('fastbackwardbutton').addEventListener('mouseup', normalSpeedFunc, false);
+document.getElementById('fastbackwardbutton').addEventListener('mouseout', normalSpeedFuncFunc, false);
+
+function fastForwardFunc() {
+    loadedaudio.playbackRate = 4.0;
+}
+
+var reverser;
+var reversecount = 0;
+
+function normalSpeedFunc() {
+    loadedaudio.playbackRate = 1.0;
+    clearInterval(reverser)
+}
+
+function fastBackwardFunc() {
+    //loadedaudio.playbackRate = -2.0;
+    reverser = setInterval(function() {
+        loadedaudio.currentTime -= 0.1;
+    }, 20)
+}
+
+
+
+</script>
+
+<script>
+
+var livinurletters = document.getElementById('livinurself').innerHTML.split("");
+document.getElementById('livinurself').innerHTML = ""; //reset
+
+var weightincrement = 1;
+var ascend = true;
+var trueweight = 1; //1 for up, 7 for down
+
+for (i = 0; i < livinurletters.length; i++) {
+    
+    weightincrement = 7 / ((livinurletters.length + 1) / 1); // /1 for one way /2 upndown
+    
+    if (Math.floor(trueweight) <= 1) {ascend = true;}
+    else if (Math.floor(trueweight) == 7) {ascend = false;}    
+    
+    var letterspan = document.createElement("SPAN");
+    letterspan.innerHTML = livinurletters[i];
+    letterspan.style.fontWeight = 800 - (Math.floor(trueweight) * 100); //800- reverses
+    //letterspan.style.color = "hsl(0, 100%, " + Math.floor(95 + (i / 2)) + "%)";
+    document.getElementById('livinurself').appendChild(letterspan);
+    
+    if (ascend == true) {trueweight = trueweight + weightincrement;}
+    else if (ascend == false) {trueweight = trueweight - weightincrement;}
+                                   
+}
+
+var lyricdrawers = document.getElementsByClassName('lyricdrawer');
+
+var lyricsheet = [{trackNo: 1, trackTitle: "livingyourself", fullLyrics: "what’s the opposite of killing yourself?<br>&nbsp; &nbsp; cos’ feeling like you wanna do that<br>&nbsp; &nbsp; is worth enduring the horrible fact<br>&nbsp; &nbsp; that hangs around you and everyone else<br><br>are you still living yourself<br>&nbsp; &nbsp; &nbsp; &nbsp; just by not killing yourself,<br>&nbsp; &nbsp; or are you killing yourself<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; by not living yourself?<br><br>&nbsp; &nbsp; what’s the opposite of killing yourself?<br>is it living like your soul ain’t a pest?<br>is it knowing that your body knows best?<br>is it wearing your heart like a dress?<br><br>what’s the opposite of killing yourself?<br>&nbsp; &nbsp; cos feeling like you wanna do that<br>&nbsp; &nbsp; is worth enduring the balancing act<br>&nbsp; &nbsp; between you, and your hurt, and your health<br><br>are you still living yourself<br>&nbsp; &nbsp; &nbsp; &nbsp; just by not killing yourself?<br>&nbsp; &nbsp; or are you killing yourself<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; by not living yourself?<br><br>is it taking off all of your clothes?<br>is it seeing the sun as it’s born-<br>&nbsp; &nbsp; when it’s new and it’s pink and it’s yours?<br>&nbsp; &nbsp; i’m not sure but i’m trying it all..."},
+{trackNo: 2, trackTitle: "keepupwithmyself", fullLyrics: "short lived planetary sermon <br>preached into the corner of my eye <br>hold me so my fate be steady <br>if only til the moon come back around <h6 class='choruslyric'>i can't even keep up with myself</h6> the lunar cycle keeps me spinning <h6 class='choruslyric'>i can't even keep up with myself </h6> and i'm not sure i should even try <br><br> <h6 class='choruslyric'>i can't even keep up with myself </h6> <h6 class='choruslyric'>i can’t even try</h6> <h6 class='choruslyric'>i can't even keep up with myself</h6> <h6 class='choruslyric'>i can’t even try</h6> <h6 class='choruslyric'>i can't even keep up with myself</h6> <h6 class='choruslyric'>i can’t even try</h6><br>now my vegetable gospel is lost <br>& i’ve blooded my teeth like a wolf <br>i’ve abandoned my dietary health <br>now i feast on the once sacrosanct <br><br> <h6>wrap the carnivore tongue round my heart</h6> <h6>and devour it all bit by bit</h6> <h6>moral fibre never lasted long</h6> <h6>digested and regurgitated as the lust in my eyes</h6> <br> <font class='choruslyric'>i can't even keep up with myself </font> <h6 class='choruslyric'>i can’t even try</h6> <font class='choruslyric'>i can't even keep up with myself </font> <h6 class='choruslyric'>i can’t even try</h6> <font class='choruslyric'>i can't even keep up with myself </font> <h6 class='choruslyric'>i can’t even try</h6> <br> <h6>the gathered crowd throw confetti</h6> <h6>when i’m drunk– parading through town</h6> <h6>until i goad them to anger</h6> <h6>enuff to beat me up and mob me down</h6><br> <h6>and i’m not sure i wanna get back up</h6> <h6>unless i can find a way to face myself</h6> <br> <font class='choruslyric'>i can't even keep up with myself &nbsp; &nbsp;i can’t even try i can't even keep up with myself &nbsp; &nbsp; i can’t even try i can't even keep up with myself &nbsp; &nbsp; &nbsp;i can’t even try&nbsp; &nbsp;can’t even keep up with myself can’t even keep up with myself &nbsp;&nbsp;can’t even keep up with myself &nbsp; &nbsp;can’t even keep up with myself</font>"},
+{trackNo: 3, trackTitle: "earthfeels", fullLyrics: "i have loved you since <br>i saw the first of your 2 feet <br><h6>stepping  out from behind <br>a fruit and veg van parked across the street</h6><br>and the sight of your smile <br>flowering to the flush of your cheeks <br><h6>and the white of your teeth <br>before devouring the flesh of a peach</h6><br>what was i supposed to do? <br><h6>square up to you <br>and declare my burgeoning love? <br>...grown just from lookin at you?</h6><br><span class='choruslyric'>& i could see the feelings <br><h6>but i couldn’t feel the feelings</h6> <br>how’s that supposed to feel? <br><h6>how’s that supposed to feel?</h6></span><br>i put my face to ground <br>&nbsp;& i blinked so hard that i got earth in my eyes <br>like mascara, 'cos i want you to look at me <br><h6>how you look at the earth</h6><br>now i know how the earth feels <br><h6>i feel beautiful <br>i’m forgetting that i feel <br>i don’t know that i feel <br>i feel how the earth feels</h6> <br><span class='choruslyric'>i can know the feeling<h6>but i can’t feel the feeling</h6> <br>how’s that supposed to feel?</span>"},
+{trackNo: 4, trackTitle: "magicleaf", fullLyrics: "i feel the dirt between my teeth <br><h6>clean vegetables torn straight from the earth <br>it reassures me and i feel connected to it all</h6> <span class='choruslyric'> <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; keeps my mouth open<br> <br>&nbsp; reminds me to breath </span><br><br> my mouth massages itself when i speak <br><h6>into shapes forming ancient words<br> i understand them and they understand me</h6><span class='choruslyric'> <br>&nbsp; &nbsp; &nbsp; &nbsp; keeps my mouth open<br> <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; reminds me to breath</span> <br> <br>i keep a roll up of the magic leaf <h6>like a snorkel in the brim of my cap <br>so i can toke on heaven when i want <br>and commune with my god above</h6> <span class='choruslyric'> <br>keeps my mouth open <br> <h6>reminds me to breath</h6></span>"},
+{trackNo: 5, trackTitle: "playedwiththebugs", fullLyrics: "don't believe anyone who says that i was born yesterday <h6>i have danced with the bugs, o'er streams of light where they play</h6> <br>laid down in the crop, smelt the blade turn it to hay <br>i have drunk from the frost as the morning whittles it's shape <br><br><div class='choruslyric'>oowiyaha-uwahyoo! &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;oowiyaha-uwahyoo!<br>i have lived &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ihave lived<br>if only just for a day &nbsp; &nbsp;if only just for a day</div><br>just because i don’t got <br>something held in my mind <br>doesn’t mean that it’s not <br>somewhere deep in my bones<br><br><h6>and i ain’t scared of the loss</h6> <h6>i’m even thankful because</h6> <h6>what’s overgrown now with moss</h6> <h6>still has shape, still has heft</h6><br><div class='choruslyric'>oowiyaha-uwahyoo! &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;oowiyaha-uwahyoo!<br>i have lived &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ihave lived<br>if only just for a day &nbsp; &nbsp;if only just for a day</div><br>all my wildest dreams have up & left<br>they wrestled me and ran away <h6>left me here with the tame ones that didn’t have the guts to grow beyond today</h6> <br>i ain’t scared to bleed, cos what i love can smell the blood of a christian man <h6>smear it all over me, cover my skin, draw out the beast that lies within me</h6><br><div class='choruslyric'>oowiyaha-uwahyoo! &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;oowiyaha-uwahyoo!<br>i have lived &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ihave lived<br>if only just for a day &nbsp; &nbsp;if only just for a day</div>"},
+{trackNo: 6, trackTitle: "cry4help", fullLyrics: "o, fortunes got me thinkin' <br> &nbsp; &nbsp; &nbsp; &nbsp;what it's about <br>each way i turn it over–&nbsp; &nbsp; <br> &nbsp; &nbsp; &nbsp; &nbsp;can’t figure it out <br>bare feet movin’ above me <br> &nbsp; &nbsp; &nbsp; &nbsp;& i barely even dare move <h6>’til i can work it out, &nbsp; &nbsp; &nbsp; &nbsp;</h6> <h6>let em die instead</h6> <br> <br>will i be there tomorrow? <br>will i be there tonight? <br> &nbsp; &nbsp;will i even see the morning? <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;will i see one more... <h6 class='choruslyric'>cry for help? &nbsp; &nbsp; &nbsp; &nbsp;</h6> <h6 class='choruslyric'>cry for help</h6><br>maybe i should start thinkin’ &nbsp; &nbsp; &nbsp; of a way out <br>maybe i should stifle this &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; cry for help <br>maybe i should start thinkin’ <br> &nbsp; &nbsp;that i will be here tomorrow- <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ain’t no easy way out <br><br> <br>will i be there tomorrow? <br>will i be there tonight? <br> &nbsp; &nbsp;will i even see the morning? <br> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;will i see one more... <h6 class='choruslyric'>cry for help? &nbsp; &nbsp; &nbsp; &nbsp;</h6> <h6 class='choruslyric'>cry for help</h6> <br> <h6>maybe i should think again</h6> <h6>maybe i should think again</h6> <h6>maybe i should think again</h6> <h6>maybe i should think again</h6>"},
+{trackNo: 7, trackTitle: "mygodisawildanimal", fullLyrics: "you've got a goddamn sexy look in your eye <br>that defies 2000 years of trying to civilise me <br>you got a crazy taste on your tongue <br>just like the allium that sprouted from <h6>where the devil walked outta heaven</h6><br>you got a wildness showing in your hair <br>	that reminds me my god is a wild animal <h6>not a pet that i can tame</h6> she roams free and i must chase her <br>	track her down when my faith grows complacent <br> <br>we wash our selves in a mountain lake <br>then get out and dry in the sun <h6>and you run your hands through my hair</h6> leave a tuft stuck out of each side <br>so even though i feel baptised it look like <h6>two horns there forever</h6><br>and i attain to a purity <br>so i can present myself naked and unguarded <h6>in front of wild women</h6> baring steak knives held up high <br>but they leave me unscathed after seeing <h6>something reflected in my eye</h6><br>i think that you should embrace me <br>	cos i won't fall apart if i got yer <h6>strong arms around me</h6> the more i see of your wild side <br>the more i want you to be my, and i be your <h6>ever-lovin' bride</h6><br>whatever that means, <h6>because <span class='choruslyric'>you, my god, are a wild animal</span></h6> whatever that means, <h6>because <span class='choruslyric'>you, my god, are a wild animal</span></h6>"},
+{trackNo: 8, trackTitle: "luvthislyf", fullLyrics: "we drove all the way out<h6>past where the houses start to break up</h6>as the road wind its way up<h6>through mountains reaching ever higher</h6>the radio clears up <h6>from the cracklin' static </h6>to the loud rapture<h6>of gospel singing out the ecstasy of life</h6><br><span class='choruslyric'>i love this life</span><br><span class='choruslyric'>&nbsp; &nbsp; &nbsp; &nbsp; and i don't know how</span><br><span class='choruslyric'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  it's only now </span><h6 class='choruslyric'>that i've just started living it!</h6><br>i endow the wildflower<h6>with a soul as real as my own</h6>it endows me right back<h6>with the grace to know it already had one</h6>lit up from the inside–<h6>golden glowing lantern</h6>and my heart it burns hot–<h6>hot enough hair burns clean off of my chest</h6><br><span class='choruslyric'>i love this life and i don't know it's only now </span><h6 class='choruslyric'>that i've just started living it!</h6><br>i’m in total awe <h6>of the field of life around me</h6>a carnival of flowers <h6>celebrates our very presence</h6>my heart explodes <h6>like a dandelion</h6>when i pick myself up <h6>and blow so hard that i scatter into the wind</h6>"},
+{trackNo: 9, trackTitle: "primalprinciple", fullLyrics: "the primal principle lifts me when i'm low ––––– <br>something reliable when i’m lost in the world –– <br>human civility fails and gets me down –––––––––– <br>i can run into the woods and feel worthwhile ––– <br> <br>close to invincible when i run through the trees <br>i feel incredible when i run with the smell –––– <br>––––––––––– of spirit animal that rises up in me <br>––– and reassures me that i have a place ––––––– <br><span class='choruslyric'><br>h &nbsp; ––––––––– &nbsp; o &nbsp; –––––––– &nbsp; w &nbsp; ––––––––– &nbsp; l <br>– &nbsp;i can really – set my teeth – &nbsp;into a howl &nbsp;–</span> <br> <br>the primal principle catch me when i’m thrown –– <br>a sacrificial offering by my own ––––––––––––––– <br>like andromeda ––––––––––––– only wanted to know <br>if there is truly something in us to behold –––– <br> <br>discard the animal –––––––– follow where it goes <br>awake the cannibal –––––– feed it your old bones <br>jam the mechanical –– release it from the throes <br>& you can really set your mind to something pure <br> <span class='choruslyric'><br>howl –––––––––––––––––––––––––––––––––––––––––––<br>–––––––––– i can really set my teeth into a howl</span> <br> <br>–––––––––––––––––––––– [indiscernable grumbling]"},
+{trackNo: 10, trackTitle: "heartofdirt", fullLyrics: "i used to fear that my heart was soiled, and i was scared to parade my love for you in the streets. so i believed you when you said i had a heart of dirt and i was better off underneath your feet. <br><br> you embarass me in front of myself! i'm ashamed to be seen with myself. you degrade me so that you can’t even look me in the eye, lest you lift your foot up. <br><br> from this heart of dirt a fruit will sprout. from this heart of dirt vegetables grow out. from this heart of dirt daisies will grow and i’ll give you something beautiful to wear around your neck. <br><br> i’ll give you something better than gold. better than gold because gold gets sold. and i wanna make you something you can’t pawn when it dawns on you that i am not, and i’ll never be, the one <br><br> you insist that i'm in love with the earth. you tell me that i'm long for the soil, that i'd be better use under the ground so something worthwhile could grow up in my place. <br><br> you make me ashamed to even be alive. like i’m better off giving my self back to the earth, so at least something pretty can grow, and i’ll know i can do something, i can fertilise.<br><br>whatever i am, i am and i'm glad that i be. whether i've a heart of dirt and i leave soil in your sheets. whether i've flowers for lips and i leave pollen on your cheeks. <br><br>whatever i am, i am and i'm glad that i be."},
+{trackNo: 11, trackTitle: "hopefulheaves", fullLyrics: "there i was slumped on the ceramic bowl <br>waiting for the violence in my gut to show <br>all the riches of yesterday 4 what they're worth <br>nothing it seems and i shed a tear <br><br> <h6>i feel the rim pinch my cheek 2 the bone</h6> <h6>the wind calls in from out the open door</h6> <h6>as much as i long to be out in it</h6> <h6>my insides long to be out of me</h6> <br> <font class='choruslyric'>hopeful hea-ea-ea-ea-eaves, &nbsp; &nbsp; &nbsp;hopeful heaves!</font> <font class='choruslyric'>hopeful hea-ea-ea-ea-eaves, &nbsp; &nbsp; &nbsp;hopeful heaves!</font> <br> <br>the moon has done a wretched thing upon me <br>curried my guts with it's tidal pull <br>brought a tautness to my bellyskin <br>so i can feel the anxious rumbling <br><br> <h6>years and months and what's left of my days</h6> <h6>come streaming from me all rearranged</h6> <h6>i try to read something in  how it lays</h6> <h6>some deluded meaning that it weren't a waste</h6> <br> <font class='choruslyric'>hopeful hea- ea- ea- ea- eaves,&nbsp; hopeful heaves!</font> <font class='choruslyric'>hopeful hea- ea- &nbsp;a- &nbsp; - eaves,&nbsp; hopeful heaves!</font><br><br> <font class='choruslyric'>h &nbsp;o &nbsp;p &nbsp;e &nbsp;f &nbsp;u &nbsp;l &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;h &nbsp;e &nbsp;a &nbsp;v &nbsp;e &nbsp;s</font> <br><font class='choruslyric'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; hopeful</font> <br><font class='choruslyric'>h &nbsp;o &nbsp;p &nbsp;e &nbsp;f &nbsp;u &nbsp;l &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;h &nbsp;e &nbsp;a &nbsp;v &nbsp;e &nbsp;s</font> <br><font class='choruslyric'>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; heaves!</font>"},
+{trackNo: 12, trackTitle: "findsum1", fullLyrics: "diesel fumes <br> <h6>surround me like a smoke suit 4 my skin</h6> engine hums <h6>in time with me i’m a simple machine</h6> i’m resigned <br> <h6>to what i am & study the ground at my feet</h6> see a leaf of green <br> <h6>sprouting from a tyre track in the dirt</h6><br><span class='choruslyric'>find someone who loves you for the person you are not the person they thought you could be <br>& if they see in you something you thought was only a scar, then call it beautiful and worth being seen</span> <br><br> i feel glad <h6>just to do honest work with my hands</h6> like growing flowers<h6>thirsty plants drink the sweat of my brow</h6> i’m awful proud <h6>to wear what i cultivate with your help</h6> amplified <h6>to all the green quarters of the green land</h6> <br> <h6 class='choruslyric'>find someone who loves you for the person you are, not the person they thought you could be<br> & if they see in you something you thought was only a scar, then call it beautiful and worth being seen</span>"},
+{trackNo: 13, trackTitle: "newtechniques", fullLyrics: "i been workin on new techniques <h6>with everybody that i meet</h6> try to tell ‘em that i love em with just a smile <br><br>i been pissin’ on fresh concrete<h6>writin golden graffiti<br> spelling out a message from up above </h6> <br>don my ancestral mask and do a kamikazee dance <h6>sing the last rites for my own rebirth </h6> <br>when i’m drunk and rain hits the earth<h6> my nostrils flare and surge<br>all at once i smell the whole universe</h6> <br> <span class='choruslyric'>((((((((i been workin' on new techniques))))))))</span> <br> <br>lost in a new country<br>and i see myself on tv<br> <h6>split into the shards of a broken screen</h6> <br>we’re stars in the sunset<br>film fades as it project <h6>a last picture show on the ancient rock</h6> <br>as night falls on the city<br>headlights cut thru the trees <h6>let the moon decide where we want to be</h6> <br>radio clears through static<br>gospel singing ecstatic <h6>praise for the rapture in our life</h6> <br> <span class='choruslyric'>((((((((i been workin' on new techniques))))))))</span><br> <br>the world spites me with a lust so heavenly <h6>i’m feeding the fires tonight</h6> <br>the world roasts me as i spin like rotisserie <h6>chicken on a meteorite</h6><br>the world smokes me like a hand-rolled cigarette <h6>brain mist evaporates</h6> <br>the world drains me like a glass of grain liquor <h6>white noise drown my sight</h6>"},
+{trackNo: 14, trackTitle: "nakednowon", fullLyrics: "<span class='choruslyric'>i'm only going naked from now on <h6>for the rest of my days</h6> i'm only going to dress up my tongue <h6>in amorous sayings</h6> </span> <br> <h6>i'm gonna wear my fear like badge of pride</h6> <h6>i'm gonna take my sin tattoo it on my hide</h6> <h6>i'm gonna bare my shame like i never tried</h6> <h6>for all these years to keep it covered up inside</h6> <span class='choruslyric'><br><br> no, i ain't what i've got on, my wear is my ways i'll give as good as i get <h6>i'll pray and i'll praise</h6> </span> <br>gonna weave a dress from the words in my throat <br>i’ll cut it with love and with hope <br>and i swear that when i’ve nothing on <br>you will see honesty in the bareness of my bum"},
+{trackNo: 15, trackTitle: "andthenibecameme", fullLyrics: "as i was standing upon the frontier of <h6>a fantasy of my self</h6> i saw a baby boy <br>&nbsp; &nbsp; &nbsp; &nbsp; with a face like mine <br>in a multitude of young cowboys– <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; a constellation of flesh <br>that holds a guiding arm <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; and lights where to go... <br> <br><h6 class='choruslyric'>...and then i became me</h6> <br>	stripping off the coat, <br>	peeling off the skin of my own former self <br> <br>i step toward the horizon <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; long clear of my flock <br>in a cloud of rising  smoke <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; i’m transforming <br>i blew apart the invention <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; peeled the bodywork off <br>to reveal a human form <br>&nbsp; &nbsp; &nbsp; &nbsp; and that’s when i’d grow... <br> <br><h6 class='choruslyric'>...and then i became me</h6> <br>washing off the grime, <br>picking off the dross of my own former self <br> <br>as i carried off my old body <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; buried it in the earth <br>in a grave of blackened soil <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; with no headstone <br>but a simple handmade cross <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; made from my own two bones <br>i took my heart in my hands <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; as a compass i’ll use! <br> <br><h6 class='choruslyric'>(& then i became me)</h6> <br>bury there in the earth, <br>lay it down there to rest– &nbsp; &nbsp; my own fomer self"}
+];
+                  
+
+for (i = 0; i < lyricsheet.length; i++) {
+    lyricdrawers[i].firstChild.firstChild.innerHTML = lyricsheet[i].fullLyrics;
+}
+</script>
+<script src="assets/livinurself-lyrics.js"></script>
+</body>
+</html>
