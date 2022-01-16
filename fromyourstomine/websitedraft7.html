@@ -213,6 +213,7 @@ Your browser does not support the video tag.
     <audio controls style="width: 66%;" class="right">
       <source src="assets/Poem_We.wav" type="audio/wav">
     Your browser does not support the audio element.
+    <caption>"Through material and touch, we connect digitally right now."</caption>
     </audio>
 </div>
 
@@ -287,9 +288,17 @@ if (window.outerWidth >= 600){
     var mobile_view = true;
 }
 
+
+
 function resizeChecker() {
     console.log('resize' + window.outerWidth);
-//    if ()
+//    reload page if changed from or to mobile view
+    if (((window.outerWidth >= 600) && (mobile_view === true)) || 
+    ((window.outerWidth < 600) && (mobile_view === false))) {
+//        setUpColumns(); 
+//        console.log('re-columned');
+        location.reload();
+    }
 }
 
 document.body.onresize = resizeChecker;
@@ -314,9 +323,10 @@ function columnLink(linkToId) {
     console.log('works');
     if (mobile_view == true) {
         
+        //
         if (document.getElementById(linkToId).style.display == 'block') {
             document.getElementById(linkToId).style.display = 'none';
-        } else {
+        } else {    //closes any open
         for (var i = 0; i < rightColumnLinkees.length; i++) {
             if (rightColumnLinkees[i].style.display == 'block') {
                 rightColumnLinkees[i].style.display = 'none';
@@ -327,9 +337,12 @@ function columnLink(linkToId) {
             close_buttons[i].remove();
         }
         
+        //displays linked item
         document.getElementById(linkToId).style.display = 'block';
+        //adds close item by clicking on it
         document.getElementById(linkToId).addEventListener('click', () => {
             document.getElementById(linkToId).style.display = 'none';
+            close_button.remove(); // removes close button too
         }, false);
         }
         

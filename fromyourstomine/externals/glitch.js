@@ -203,7 +203,7 @@ function glitchAnim() {
 }
 
 function skip() {
-    console.log('skipped');
+    console.log('skipped intro as visited in last week');
     document.getElementById('maintimer').style.display = 'none';
     document.getElementById('intro-strips-container').style.display = 'none';
     document.getElementById('intro-squares-container').style.display = 'none';
@@ -213,6 +213,24 @@ function skip() {
     showVideos();
     
 }
+
+// set skipper for a week since visited
+
+const lastVisited = localStorage.getItem('lastvisited');
+var nowVisited = new Date().getTime();
+
+if (lastVisited === null) {
+  
+} else if (lastVisited <= nowVisited + 604800000) {
+  skip();
+} else {
+  
+}
+localStorage.setItem('lastvisited', nowVisited);
+//console.log(lastVisited == null);
+
+
+
 
 function hourlyGlitch() {
     setTimeout(function(){

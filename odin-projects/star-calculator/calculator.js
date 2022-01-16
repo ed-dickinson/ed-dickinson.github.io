@@ -54,6 +54,20 @@ const undoButton = document.querySelector('.undo-button');
 const backspaceButton = document.querySelector('.backspace-button');
 const dotButton = document.querySelector('.dot-button');
 
+//let factor = 1;
+//function screenFit() {
+//    let numberWidth = display.scrollWidth;
+//    let screenWidth = display.offsetWidth;
+//    
+//    factor = screenWidth / (numberWidth/ factor);
+//    console.log(display.scrollWidth + ' x ' + display.offsetWidth + ' + ' + factor);
+//    if (numberWidth/factor > screenWidth) {
+//        display.style.fontSize = factor*2 + 'em';
+//        display.style.padding = 0.25 + ((1 - factor) * 1.5) + 'em 0.25em';
+//    } else {
+//        display.style.fontSize = '2em';
+//    }
+//}
 
 function digitButtonPress(e) {
     
@@ -64,11 +78,13 @@ function digitButtonPress(e) {
         targetVal = e.target.innerText;
     }
 
+    //display update
     if (lastButton == 'operator' || lastButton == 'equals' || lastButton == 'undo') {
         display.innerHTML = targetVal;
     } else {
         display.innerHTML += targetVal;
     }
+    screenFit();
     
     if (num1 != null && operator != null) {
         equalsButton.classList.remove('unselectable');
@@ -97,7 +113,7 @@ function dotButtonPress(e) {
 function operatorButtonPress(e) {
     if (lastOperation == null || lastOperation == 'equals') {
         lastAnswers.push(parseFloat(display.innerText));
-        console.log(lastAnswers + 'operator');
+//        console.log(lastAnswers + 'operator');
     }
         
     let targetVal = null;
@@ -117,6 +133,7 @@ function operatorButtonPress(e) {
 //        console.log(num1, operator, num2);
         let answer = operate(operator, num1, num2);
         display.innerHTML = answer;
+            screenFit();
 //        stateHistory.push({
 //            num1: num1,
 //            operator: operator,
@@ -130,6 +147,7 @@ function operatorButtonPress(e) {
         operator = targetVal;
         num1 = parseFloat(display.innerText);
         display.innerHTML = operator;
+            screenFit();
     }
     lastOperation = 'operator';
     lastButton = 'operator';
@@ -159,14 +177,8 @@ function equalsButtonPress() {
 //        console.log(num1, operator, num2);
         let answer = operate(operator, num1, num2);
         display.innerHTML = answer;
+            screenFit();
         lastAnswers.push(answer);
-        console.log(lastAnswers + 'equals');
-//        stateHistory.push({
-//            num1: parseFloat(num1),
-//            operator: operator,
-//            num2: answer
-//        });
-//        console.log(stateHistory);
         
         num1 = answer;
         
@@ -340,6 +352,8 @@ function buttonPressAnim(e, buttonType) {
 Array.from(allButtons).forEach(allButton => {
     allButton.addEventListener('click', buttonPressAnim);
 });
+
+//display.addEventListener()
 
 const digitKeyArray = ['.','0','1','2','3','4','5','6','7','8','9'];
 const operatorKeyArray = ['+', '-', '*', '/', 'x'];

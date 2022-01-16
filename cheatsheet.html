@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+<title></title>
+<meta charset="UTF-8">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="author" content="Crumb Douglas">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="">
+<style>
+.color-name-box {width: 1.5em; height: 1em; display: inline-block;}
+</style>
+
+</head>
+<body>
+<div class='color-names'>
+nice color/colour names:
+</div>
+
+
+
+<script>
+let colours = 'teal deepskyblue springgreen aqua aquamarine dodgerblue mediumseagreen limegreen turquoise rebeccapurple lightgreen darkorchid mediumpurple orchid palevioletred crimson plum violet sandybrown orangered orange gold papayawhip peachpuff navajowhite';
+const colorNameArray = colours.split(" ");
+console.log(colorNameArray)
+
+colorNameArray.forEach(color => {
+  let cont = document.querySelector('.color-names');
+  let add = document.createElement('div');
+  add.innerHTML = '<span class="color-name-box" style="background-color:'+color+'"></span> ' + color + '';
+  // add.style.backgroundColor = color;
+  // add.style.color = color;
+  cont.appendChild(add);
+
+})
+
+</script>
+</body>
+</html>
