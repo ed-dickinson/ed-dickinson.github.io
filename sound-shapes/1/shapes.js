@@ -330,7 +330,7 @@ const loadTestShapes = () => {
 }
 
 // load_button.addEventListener('click',loadTestShapes);
-loadTestShapes();
+// loadTestShapes();
 
 // document.querySelector('#clear-button').addEventListener('click',()=>{
 //   current_shapes = [];
