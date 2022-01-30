@@ -1,0 +1,253 @@
+@font-face {  font-family: daydream;  src: url(assets/Daydream.ttf); }
+@font-face {font-family: pixelmix; src: url(assets/pixelmix.ttf);}
+@font-face {font-family: dogica; src: url(assets/dogica.otf);}
+
+body {
+  font-family: daydream;
+}
+
+.greeter {
+  text-align: center;
+  top: 50%; position: fixed; width: 100%; left: 0; transform: translateY(-50%);
+  transition: 2s opacity;
+}
+.greeter h1 {
+  font-size: 2.5em;
+  left: 0;
+}
+.greeter p {
+  font-size: 0.75em;
+}
+.greeter.hidden {
+  opacity: 0;
+}
+
+#canvas {
+  /* background-color: papayawhip; */
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0; left: 0;
+  /* z-index: 10; */
+}
+#time-line {
+  width: 3px; height: 100%; position: absolute; background-color: lightgrey;
+}
+
+.shape {
+  height: 20px; display: inline-block; width: 20px; position: absolute;
+}
+.red {
+  /* background-color: tomato; */
+  fill: tomato;
+}
+.yellow {
+  fill: gold;
+}
+.blue {
+  fill: dodgerblue;
+}
+.circle {
+  border-radius: 50%;
+}
+.triangle {
+
+}
+
+
+
+svg.triangle {
+  /* viewBox: */
+}
+svg.triangle path {
+  d: path('M 0 2 L 0 0 L 2 2');
+}
+svg.triangle-sw path {
+  d: path('M 0 2 L 0 0 L 2 2');
+}
+svg.triangle-nw path {
+  d: path('M 0 0 L 2 0 L 0 2');
+}
+svg.triangle-ne path {
+  d: path('M 2 0 L 0 0 L 2 2');
+}
+svg.triangle-se path {
+  d: path('M 2 2 L 2 0 L 0 2');
+}
+
+svg.circle-sw path {
+  d: path('M 0 0 A 2 2 0 0 1 2 2 L 0 2');
+}
+svg.circle-nw path {
+  d: path('M 2 0 A 2 2 0 0 1 0 2 L 0 0');
+}
+svg.circle-ne path {
+  d: path('M 2 2 A 2 2 0 0 1 0 0 L 2 0');
+}
+svg.circle-se path {
+  d: path('M 0 2 A 2 2 0 0 1 2 0 L 2 2');
+}
+
+svg.semicircle-n path {
+  d: path('M 0 2 A 1 2 0 0 1 2 2');
+}
+svg.semicircle-e path {
+  d: path('M 0 0 A 2 1 0 0 1 0 2');
+}
+svg.semicircle-s path {
+  d: path('M 2 0 A 1 2 0 0 1 0 0');
+}
+svg.semicircle-w path {
+  d: path('M 2 2 A 2 1 0 0 1 2 0');
+}
+
+svg.square path {
+  d: path('M 0 0 L 2 0 L 2 2 L 0 2');
+}
+svg.circle path {
+  d: path('M 2 1 A 1 1 0 0 1 0 1 A 1 1 0 0 1 2 1');
+}
+
+#delete {
+  position: fixed; top: 10px; right: 10px;
+  display: block;
+  opacity: 0;
+}
+#delete.red {
+  color: tomato;
+}
+#delete.show {
+  opacity: 1;
+}
+
+/* title */
+h1#main-title {
+  position: relative; left: 50px;
+}
+
+#shape-picker {
+  position: fixed;
+  bottom: 5px; left: 5px;
+  border: 3px solid black; padding: 5px 5px 0;
+  z-index: 4;
+  background-color: white;
+}
+#shape-picker .shape {
+  position: relative;
+}
+
+#cloner {
+  display: none;
+}
+
+.cloner-cont {
+  width: 50px; height: 50px;
+  position: absolute;
+  display: inline-block;
+}
+
+#timer {
+  position: fixed; bottom: 5px; right: 5px;
+}
+
+#function-buttons {
+  position: fixed; bottom: 5px; left: 5px; font-size: 0.7em;
+}
+#function-buttons span {
+  cursor: help;
+}
+
+/* CURSORS */
+
+#canvas {
+  cursor: cell;
+}
+svg {
+  cursor: pointer;
+}
+
+/* log */
+
+#log-display {
+  position: fixed;
+  top: 5px; right: 5px;
+}
+
+#schedule {
+  width: 100%;
+  top: 0;
+  left: 0; position: fixed;
+}
+
+#schedule .row {
+  height: 1px;
+}
+
+#schedule .row .child {
+  height: 1px; background-color: grey; width: 10px; position: absolute; opacity: 0.5;
+}
+
+#play-button {
+  position: fixed;
+  bottom: 2em; left: 50px; cursor: help;
+}
+
+.schedule-info {
+  position: absolute; top: 0;
+  font-size: 0.5em;
+}
+
+/* option box */
+
+h1 span.drop {
+  font-size: 0.5em;
+}
+h1 span.options {
+  font-size: 0.25em;
+  display: none;
+}
+h1 span.drop:hover + h1 span.options {
+  display: inline;
+}
+
+#options {
+  /* display: none; */
+  /* z-index: 20; */
+  position: relative;
+  left: 50px;
+}
+#options .heading {
+  margin-bottom: 0.5em;
+}
+#options div:not(div:first-of-type) {
+  font-size: 0.5em;
+  margin-top: 0.5em;
+}
+
+#options div span.title {
+  color: black;
+  cursor: pointer;
+}
+#options div span.option, #options div span.slash {
+  color: darkgrey;
+  cursor: pointer;
+}
+#options div span.selected {
+  color: black;
+}
+
+#options .second-stage {
+  display: none;
+}
+
+#frequencies {
+  left: 0;
+  position: fixed; top: 0; height: 100%;
+  font-size: 0.5em;
+
+}
+#frequencies div {
+  left: 0;
+  position: absolute;
+
+}
