@@ -16,7 +16,7 @@ header span {
 
 #tiles {
   position: relative;
-  margin-top: 0.1em;
+  margin-top: 0.4em;
 }
 
 #tiles .space {
@@ -27,11 +27,15 @@ header span {
   margin-right: 1px;
   overflow: hidden;
   z-index: 1;
+  position: relative;
+  top: 0;
+  /* line-height: 0; */
 }
 
 #tiles .row {
   margin-bottom: 10px;
   height: 1em;
+  /* line-height: 0; */
 }
 
 #tiles .row.submitted .space {
@@ -62,6 +66,7 @@ header span {
   border-radius: 5px;
   cursor: pointer;
   height: 3em;
+  text-align: center;
 }
 
 #keyboard .key.key-in-word {
