@@ -1,0 +1,85 @@
+body {
+  text-align: center;
+  font-size: 16px;
+}
+header {
+  font-weight: 900;
+  font-size: 1.2em;
+}
+header span {
+  animation: red-green 2s infinite linear alternate;
+}
+@keyframes red-green {
+  from {color: tomato;}
+  to {color: lightgreen;}
+}
+
+#tiles {
+  position: relative;
+}
+
+#tiles .space {
+  height: 1em; width: 1em; border: 2px solid grey;
+  display: inline-block;
+  margin: 1px;
+  overflow: hidden;
+  z-index: 1;
+}
+
+#tiles .row {
+  margin: 6px;
+  height: 1em;
+}
+
+#tiles .row.submitted .space {
+  background-color: darkgrey;
+  color: white;
+}
+
+#tiles .row.submitted .space.wrong-position {
+  background-color: tomato;
+  color: white;
+}
+
+#tiles .row.submitted .space.right-position {
+  background-color: lightgreen;
+  color: white;
+}
+
+
+#keyboard .key {
+  background-color: gainsboro;
+  margin: 2px;
+  width: 2em;
+  /* box-sizing: content-box; */
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#keyboard .key.key-in-word {
+  /* background-color: grey; */
+  color: white;
+}
+
+#keyboard .enter, #keyboard .backspace {
+  width: 3em;
+  background-color: grey;
+}
+
+
+#banner {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  z-index: 100;
+  position: absolute;
+  display: block;
+}
+#banner.hidden {
+  display: none;
+}
+
+#replay {
+  /* text-decoration: underline; */
+
+}
