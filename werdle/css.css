@@ -16,18 +16,21 @@ header span {
 
 #tiles {
   position: relative;
+  margin-top: 0.1em;
 }
 
 #tiles .space {
-  height: 1em; width: 1em; border: 2px solid grey;
+  height: 1.2em; width: 1.2em; border: 2px solid grey;
   display: inline-block;
-  margin: 1px;
+  /* margin: 0px; */
+  margin-left: 2px;
+  margin-right: 1px;
   overflow: hidden;
   z-index: 1;
 }
 
 #tiles .row {
-  margin: 6px;
+  margin-bottom: 10px;
   height: 1em;
 }
 
@@ -47,6 +50,10 @@ header span {
 }
 
 
+#keyboard {
+  margin-top: 1em;
+}
+
 #keyboard .key {
   background-color: gainsboro;
   margin: 2px;
@@ -54,6 +61,7 @@ header span {
   /* box-sizing: content-box; */
   border-radius: 5px;
   cursor: pointer;
+  height: 3em;
 }
 
 #keyboard .key.key-in-word {
