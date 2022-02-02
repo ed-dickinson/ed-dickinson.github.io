@@ -9,6 +9,8 @@ const banner = document.querySelector('#banner');
 const banner_message = document.querySelector('#message');
 const banner_goes = document.querySelector('#goes');
 
+
+
 const keyPress = (letter) => {
   // console.log(letter)
 
@@ -127,6 +129,13 @@ for (let i = 0; i < keyboard_keys.length; i++) {
   })
 }
 
+console.log(keyboard_container.clientWidth / window.innerWidth)
+
+const window_width = window.innerWidth - 10;
+const keyboard_width = keyboard_container.clientWidth;
+const key_window_ratio = window.innerWidth /keyboard_container.clientWidth
+
+keyboard_container.style.transform = 'scale('+key_window_ratio+')'
 
 const tiles_container = document.querySelector('#tiles')
 

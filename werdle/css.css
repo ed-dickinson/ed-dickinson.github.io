@@ -67,6 +67,9 @@ header span {
 #keyboard {
   margin-top: 1em;
   position: relative;
+  position: absolute;
+  bottom: 10px;
+  left: 5px;
 }
 
 #keyboard .key {
