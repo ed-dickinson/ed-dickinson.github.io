@@ -82,6 +82,10 @@ header span {
   height: 4em;
   text-align: center;
   text-transform: uppercase;
+
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #keyboard .key.key-in-word {
@@ -110,5 +114,5 @@ header span {
 
 #replay {
   /* text-decoration: underline; */
-
+  padding: 0.5em;
 }
