@@ -27,7 +27,7 @@ const gameWon = () => {
   console.log('you win!')
   banner.classList.remove('hidden')
   banner_message.innerHTML = 'WIN!';
-  banner_goes.innerHTML = (guess-1) + ' guess' + (guess > 2 ? 'es' : '');
+  banner_goes.innerHTML = (guess) + ' guess' + (guess > 2 ? 'es' : '');
 }
 
 const gameLost = () => {

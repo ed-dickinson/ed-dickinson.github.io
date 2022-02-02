@@ -4,7 +4,7 @@ body {
 }
 header {
   font-weight: 900;
-  font-size: 1.2em;
+  font-size: 2em;
 }
 header span {
   animation: red-green 2s infinite linear alternate;
@@ -20,7 +20,7 @@ header span {
 }
 
 #tiles .space {
-  height: 1.5em; width: 1.5em; border: 2px solid grey;
+  height: 2em; width: 2em; border: 2px solid grey;
   display: inline-block;
   /* margin: 0px; */
   margin-left: 2px;
@@ -29,13 +29,23 @@ header span {
   z-index: 1;
   position: relative;
   top: 0;
-  line-height: 0;
+  /* line-height: 0; */
+  box-sizing: border-box;
+  vertical-align: middle;
+  display: inline-flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
 #tiles .row {
   /* margin-bottom: 10px; */
   /* height: 1em; */
   /* line-height: 0; */
+  height: 2em;
+  margin: 2px 0;
 }
 
 #tiles .row.submitted .space {
@@ -56,6 +66,7 @@ header span {
 
 #keyboard {
   margin-top: 1em;
+  position: relative;
 }
 
 #keyboard .key {
@@ -67,6 +78,7 @@ header span {
   cursor: pointer;
   height: 4em;
   text-align: center;
+  text-transform: uppercase;
 }
 
 #keyboard .key.key-in-word {
@@ -87,6 +99,7 @@ header span {
   z-index: 100;
   position: absolute;
   display: block;
+  top: 0;
 }
 #banner.hidden {
   display: none;
