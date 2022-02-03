@@ -69,21 +69,24 @@ header span {
 
 #keyboard-cont {
   position: fixed;
-  bottom: 0; width: 0;
+  bottom: 0; width: 100%;
+  left: 0;
 }
 #keyboard {
   /* margin-top: 1em; */
   position: relative;
-  position: absolute;
+  /* position: absolute; */
   display: inline-block;
-  /* margin: auto; */
-  bottom: 0px;
-  left: 0;
+  margin: auto;
+  /* bottom: 0px; */
+  /* left: 0; */
+  align-items: center;
+  text-align: center;
 }
 
 #keyboard .key {
   background-color: gainsboro;
-  margin: 2px;
+  margin: 1px;
   width: 2em;
   /* box-sizing: content-box; */
   border-radius: 5px;
@@ -95,6 +98,9 @@ header span {
   display: inline-flex;
   justify-content: center;
   align-items: center;
+
+  font-size: 16px;
+  padding: 0;
 }
 
 #keyboard .key.key-in-word {

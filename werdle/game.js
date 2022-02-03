@@ -136,8 +136,8 @@ const keyboard_width = keyboard_container.clientWidth;
 const key_window_ratio = (window.innerWidth /keyboard_container.clientWidth) * 0.98
 
 keyboard_container.style.transform = 'scale('+(key_window_ratio)+')'
-keyboard_container.style.bottom = keyboard_container.clientHeight / key_window_ratio / 5 + 'px'
-keyboard_container.style.left = window_width / key_window_ratio / 8 + 'px'
+keyboard_container.style.bottom = keyboard_container.clientHeight / key_window_ratio / 10 + 'px'
+// keyboard_container.style.left = window_width / key_window_ratio / 10 + 'px'
 
 const tiles_container = document.querySelector('#tiles')
 
