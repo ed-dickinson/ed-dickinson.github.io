@@ -78,8 +78,6 @@ header span {
   /* position: absolute; */
   display: inline-block;
   margin: auto;
-  /* bottom: 0px; */
-  /* left: 0; */
   align-items: center;
   text-align: center;
 }
@@ -87,13 +85,15 @@ header span {
 #keyboard .key {
   background-color: gainsboro;
   margin: 1px;
-  width: 2em;
-  /* box-sizing: content-box; */
+  width: 1.5em;
+  width: calc(10vw - 2px);
+  box-sizing: border-box;
   border-radius: 5px;
   cursor: pointer;
-  height: 4em;
+  height: 3em;
   text-align: center;
   text-transform: uppercase;
+  border-width: 2px;
 
   display: inline-flex;
   justify-content: center;
@@ -101,6 +101,7 @@ header span {
 
   font-size: 16px;
   padding: 0;
+
 }
 
 #keyboard .key.key-in-word {
@@ -109,7 +110,8 @@ header span {
 }
 
 #keyboard .enter, #keyboard .backspace {
-  width: 3em;
+  width: 2.5em;
+  width: calc(10vw  + 14px);;
   background-color: grey;
 }
 
