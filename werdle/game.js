@@ -46,7 +46,7 @@ const enterPress = () => {
     let valid_guess = valid_guesses.indexOf(current_guess) !== -1 ? true : valid_answers.indexOf(current_guess) !== -1 ? true : false;
     // let valid_answer = valid_answers.indexOf(current_guess) !== -1 ? true : false;
     // valid_guesses.indexOf(current_guess)
-    // console.log(valid_guess)
+    console.log(valid_guess)
 
     if (valid_guess) {
 
@@ -170,8 +170,25 @@ const replayGame = () => {
   target_word = valid_answers[Math.floor(Math.random()*valid_answers.length)]
   guess = 1;
   tile = 1;
+  current_guess = '';
+  banner.classList.add('hidden');
+  rows.forEach(row=>{
+    for (let i = 0; i < 5; i++) {
+      row.children[i].classList.remove('right-position')
+      row.children[i].classList.remove('wrong-position')
+      row.children[i].innerHTML = '';
+    }
+    row.classList.remove('submitted');
+  })
+  document.querySelectorAll('.key').forEach(key=>{
+    key.classList.remove('key-in-word');
+  })
+  console.log(target_word)
 }
 
 const replay_button = document.querySelector('#replay')
 
-replay_button.addEventListener('click',()=>{location.reload()})
+replay_button.addEventListener('click',()=>{
+  // location.reload()
+  replayGame();
+})
