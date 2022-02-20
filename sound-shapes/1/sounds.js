@@ -2,7 +2,11 @@
 // https://incidentnormal.github.io/2014/pitch-shift-calculations/
 // http://techlib.com/reference/musical_note_frequencies.htm
 
-// doesn't always catch very early shapes
+// doesn't always catch very early shapes - SOLVED
+
+// NEW ISSUE! when creating shapes - sometimes shapes being triggered double, triple. 4x, 5x, etc in volume. i beleive this is because the scheduler is shcheduling them and then rescheduling them when getShapes is called by the shape creation as a new array is there?
+// either a shorter look time or a doubling checker could solve it?
+// i think i fixed this? by checking shape id's instead of shape obj's themselves 
 
 let curve = 'frequency'; //filter
 let slope = 'frequency'; //filter
@@ -14,7 +18,7 @@ let tuning = 'Free';
 
 
 //////////
-console.log('webkitAudioContext' in window)
+console.log('safari? -','webkitAudioContext' in window)
 const audioContext = 'webkitAudioContext' in window ? new webkitAudioContext() : new AudioContext();
 
 const SAMPLE_RATE = audioContext.sampleRate;
@@ -79,7 +83,7 @@ const wave3 = audioContext.createPeriodicWave(dynaep_med.real, dynaep_med.imag)
 let canvas_width = canvas.offsetWidth;
 let canvas_height = canvas.offsetHeight;
 
-const loFrqLimit = 20;
+const loFrqLimit = 50;
 const hiFrqLimit = 700;
 
 let tempo = 60.0;
@@ -135,17 +139,17 @@ const yToFrq = (y) => {
 }
 
 const scheduleShape = ({s, c, x, y, w, h}, time) => {
-  // console.log(audioContext.currentTime, ': scheduling...', c, s, time)
+  console.log(audioContext.currentTime, ': scheduling...', c, s, time)
   let shape_length = ((w - x) / 100);
 
   const oscillator1 = audioContext.createOscillator();
   const oscillator2 = audioContext.createOscillator();
   // oscillator.type = s.includes('triangle') ? 'triangle' : s.includes('circle') ? 'sine' : 'square';
 
-  let filter = audioContext.createBiquadFilter();
-  // filter.type = 'bandpass';
-  filter.type = 'highpass';
-  filter.frequency.value = yToFrq(300);
+  // let filter = audioContext.createBiquadFilter();
+  // // filter.type = 'bandpass';
+  // filter.type = 'highpass';
+  // filter.frequency.value = yToFrq(300);
 
   oscillator1.setPeriodicWave(c === 'blue' ? wave3 : c === 'red' ? wave2 : wave1);
   oscillator2.setPeriodicWave(c === 'blue' ? wave3 : c === 'red' ? wave2 : wave1);
@@ -309,6 +313,7 @@ const scheduleShape = ({s, c, x, y, w, h}, time) => {
 let loop = 0;
 let last_schedule = undefined;
 let shapes_scheduled = [];
+let shapes_scheduled_by_id = [];
 
 const scheduler = () => {
 
@@ -319,13 +324,17 @@ const scheduler = () => {
 
   current_shapes.forEach(shape=> {
     // console.log(shapes_scheduled.indexOf(shape));
+    // console.log(shapes_scheduled_by_id)
     if (
+      // (shape.x > playhead && shape.x < playhead + lookahead)
+      // && !shapes_scheduled.includes(shape)
       (shape.x > playhead && shape.x < playhead + lookahead)
-      && !shapes_scheduled.includes(shape)
+      && !shapes_scheduled_by_id.includes(shape.id)
     ) {
       let time = ((shape.x - playhead) / 100) + current_time;
       scheduleShape(shape, time);
       shapes_scheduled.push(shape);
+      shapes_scheduled_by_id.push(shape.id);
       // console.log(shape)
       // debug_dom.sched(time.toFixed(2), shape); // SCHEDULE DEBUGGING
       // debug_dom.shapeCoords(shape); // SCHEDULE DEBUGGING
@@ -339,6 +348,7 @@ const scheduler = () => {
     loop++;
     debug_dom.reset(); // SCHEDULE DEBUGGING
     shapes_scheduled = [];
+    shapes_scheduled_by_id = [];
   }
 
 

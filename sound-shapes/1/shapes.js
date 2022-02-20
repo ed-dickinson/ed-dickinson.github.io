@@ -11,9 +11,12 @@ const initial_size = 20;
 
 const cloner = document.querySelector('#cloner .shape')
 
+let shape_index = 0;
+
 const Shape = (x, y, w, h, colour, shape) => {
 
-
+  let id = shape_index;
+  shape_index++;
   // let shape = 'square';
   // let colour = colours[colours_i];
   // colours_i === colours.length - 1 ? colours_i = 0 : colours_i++;
@@ -209,10 +212,10 @@ const Shape = (x, y, w, h, colour, shape) => {
     clone.style.top = y - (mousedown.y - event.y);
   }
   const getDetails = () => {
-    return {x, y, w, h, c: colour, s: shape}
+    return {x, y, w, h, c: colour, s: shape, id}
   }
   // console.log(shape)
-  return {changeShape, x,y,w,h, changeSize, getDetails, dom}
+  return {changeShape, x,y,w,h, changeSize, getDetails, dom, id}
 }
 
 const createShape = (x, y, w, h, colour, shape) => {
@@ -224,10 +227,8 @@ const createShape = (x, y, w, h, colour, shape) => {
   return new_shape;
 }
 
-canvas.addEventListener('mouseup', () => {
+canvas.addEventListener('mouseup', () => { // end draw shape
   canvas.removeEventListener('mousemove', dragSize);
-
-
 
   if (event.path[1].classList.contains('shape') || event.path[0].classList.contains('shape')) {
     // console.log(event)
@@ -237,6 +238,7 @@ canvas.addEventListener('mouseup', () => {
     if (mousedown.x === event.x || mousedown.y === event.y) {
       selected_shape.changeSize(mousedown.x - 10,mousedown.y - 10,mousedown.x + 10,mousedown.y + 10);
     }
+    getShapes();
     // console.log(rendered_shapes)
   }
 
@@ -249,7 +251,7 @@ let selected_shape = undefined;
 const greeter = document.querySelector('.greeter');
 let greeter_shown = true;
 
-canvas.addEventListener('mousedown', () => {
+canvas.addEventListener('mousedown', () => { //start draw shape
 
   greeter.classList.add('hidden');
 
@@ -278,9 +280,7 @@ const dragSize = () => {
 }
 
 
-
-console.log(canvas.offsetWidth, canvas.offsetHeight)
-
+// console.log(canvas.offsetWidth, canvas.offsetHeight)
 
 
 const log_button = document.querySelector('#log-button');
@@ -314,6 +314,13 @@ let test_shapes = [
   {x:650,y:250,w:750,h:500,s:'triangle-se',c:'red'},
 ];
 
+// for filtering
+// let test_shapes = [
+//   {x:100,y:200,w:250,h:450,s:'triangle-nw',c:'yellow'},
+//   {x:300,y:100,w:500,h:400,s:'triangle-nw',c:'blue'},
+//   {x:550,y:250,w:700,h:350,s:'triangle-nw',c:'red'},
+// ];
+
 // let test_shapes = [
 //   {x:50,y:100,w:200,h:550,s:'semicircle-e',c:'yellow'},
 //   {x:250,y:200,w:390,h:400,s:'semicircle-s',c:'yellow'},
@@ -331,11 +338,14 @@ const loadTestShapes = () => {
 
 // load_button.addEventListener('click',loadTestShapes);
 // loadTestShapes();
+console.log(rendered_shapes)
 
-// document.querySelector('#clear-button').addEventListener('click',()=>{
-//   current_shapes = [];
-//   rendered_shapes = [];
-//   document.querySelectorAll('#canvas svg').forEach(shape=>{
-//     canvas.removeChild(shape);
-//   })
-// });
+clearShapes = () => {
+  current_shapes = [];
+  rendered_shapes = [];
+  document.querySelectorAll('#canvas svg').forEach(shape=>{
+    canvas.removeChild(shape);
+  })
+}
+
+// document.querySelector('#clear-button').addEventListener('click',clearShapes);
