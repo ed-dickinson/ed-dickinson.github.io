@@ -7,11 +7,53 @@ const shapes = ['semicircle-n','semicircle-e','semicircle-s','semicircle-w','squ
 const colours = ['blue','red','yellow']
 let colours_i = 0;
 
+// const delete_button = (() => {
+//   const dom = document.querySelector('#delete');
+//   const show = () => {
+//     dom.classList.add('show');
+//     dom.style.zIndex = 100;
+//     // button.addEventListener('mouseup',moveEnd)
+//   }
+//   const hide = () => {
+//     dom.classList.remove('show');
+//     dom.style.zIndex = 0;
+//     // button.removeEventListener('mouseup',moveEnd)
+//   }
+//   return {show, hide,};
+// })();
+
 const initial_size = 20;
 
 const cloner = document.querySelector('#cloner .shape')
 
 let shape_index = 0;
+
+let delete_mode = false;
+
+
+
+
+const xUnpress = () => {
+  console.log(event, 'unpress x')
+  if (event.code === 'KeyX') {
+    delete_mode = false;
+    window.removeEventListener('keyup', xUnpress);
+    window.addEventListener('keydown', xPress);
+  }
+}
+const xPress = () => {
+  console.log(event, 'press x')
+  if (event.code === 'KeyX') {
+    delete_mode = true;
+    window.addEventListener('keyup', xUnpress);
+    window.removeEventListener('keydown', xPress);
+  }
+  else if (event.code === 'Space') {
+    greeter.classList.remove('hidden');
+    setTimeout(()=>{greeter.classList.add('hidden')}, 500)
+  }
+}
+window.addEventListener('keydown', xPress);
 
 const Shape = (x, y, w, h, colour, shape) => {
 
@@ -44,10 +86,19 @@ const Shape = (x, y, w, h, colour, shape) => {
 
   let click_hold_timer;
   clone.addEventListener('mousedown', ()=>{
+    console.log(event)
     target = event.path[0].nodeName === "svg" ? event.path[0] : event.path[1]; //nodeName or tagName
+    if (delete_mode) {
+      console.log('delete!', id);
+      delete rendered_shapes[id];
+      canvas.removeChild(clone);
+      return;
+    }
+
     click_hold = false;
     clearTimeout(click_hold_timer)
     click_hold_timer = setTimeout(()=>{click_hold = true; clone.style.cursor = 'alias';},300)
+
 
     mousedown = {x: event.x, y: event.y};
     let m = 20;
@@ -72,6 +123,8 @@ const Shape = (x, y, w, h, colour, shape) => {
       canvas.addEventListener('mousemove', moveShape);
       canvas.addEventListener('mouseup', moveEnd);
     }
+
+    // delete_button.show();
 
     clone.removeEventListener('mousemove', changeResizeCursor);
   })
@@ -254,6 +307,7 @@ let greeter_shown = true;
 canvas.addEventListener('mousedown', () => { //start draw shape
 
   greeter.classList.add('hidden');
+  // setTimeout(()=>{greeter.children[0].style.display = 'none'}, 2000)
 
   // click on shape
   if (event.path[1].classList.contains('shape') || event.path[0].classList.contains('shape')) {
