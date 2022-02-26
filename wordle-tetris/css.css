@@ -154,10 +154,12 @@ header span {
   left: 50%;
   transform: translateX(-50%);
   background-color: white;
-  border-top: 2px solid var(--grn);
+  /* border-top: 2px solid var(--grn);
   border-left: 2px solid var(--ylw);
   border-right: 2px solid var(--ylw);
-  border-bottom: 2px solid var(--grn);
+  border-bottom: 2px solid var(--grn); */
+  border: 2px solid var(--ylw);
+  outline: 2px solid var(--grn);
   padding: 10px;
   font-weight: 900;
   text-shadow: 1px 2px 0px var(--ylw);
