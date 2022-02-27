@@ -183,7 +183,6 @@ const gameLost = () => {
   // banner_goes.innerHTML = (guess-1) + ' guess' + (guess > 2 ? 'es' : '');
 }
 
-banner.classList.remove('hidden')
 
 let guess = 1;
 let tile = 1;
