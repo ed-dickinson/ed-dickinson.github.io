@@ -26,21 +26,19 @@ header span {
 
 #next-letter {
   text-transform: uppercase;
-  font-size: 1.5em;
 }
 
 #tiles {
   position: relative;
   margin-top: 0.4em;
-  font-size: 1.5em;
 }
 
 #tiles .space {
   height: 2em; width: 2em; border: 2px solid grey;
   display: inline-block;
   /* margin: 0px; */
-  margin-left: 0.05em;
-  margin-right: 0.05em;
+  margin-left: 2px;
+  margin-right: 1px;
   overflow: hidden;
   z-index: 1;
   position: relative;
@@ -63,7 +61,7 @@ header span {
   /* height: 1em; */
   /* line-height: 0; */
   height: 2em;
-  margin: 0.1em 0;
+  margin: 2px 0;
 }
 
 #tiles .row.submitted .space {
@@ -96,7 +94,53 @@ header span {
   color: white;
 }
 
+#keyboard-cont {
+  position: fixed;
+  bottom: 1px; width: 100%;
+  left: 0;
+}
+#keyboard {
+  /* margin-top: 1em; */
+  position: relative;
+  /* position: absolute; */
+  display: inline-block;
+  margin: auto;
+  align-items: center;
+  text-align: center;
+}
 
+#keyboard .key {
+  background-color: gainsboro;
+  margin: 1px;
+  width: 1.5em;
+  width: calc(10vw - 2px);
+  box-sizing: border-box;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 3.5em;
+  text-align: center;
+  text-transform: uppercase;
+  border-width: 2px;
+
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 16px;
+  padding: 0;
+
+}
+
+#keyboard .key.key-in-word {
+  /* background-color: grey; */
+  color: white;
+}
+
+#keyboard .enter, #keyboard .backspace {
+  width: 2.5em;
+  width: calc(10vw  + 14px);;
+  background-color: grey;
+}
 
 
 #banner {
@@ -106,62 +150,22 @@ header span {
   z-index: 100;
   position: absolute;
   display: block;
-  top: 6em;
+  top: 100px;
   left: 50%;
   transform: translateX(-50%);
   background-color: white;
-  font-size: 1.5em;
   /* border-top: 2px solid var(--grn);
   border-left: 2px solid var(--ylw);
   border-right: 2px solid var(--ylw);
   border-bottom: 2px solid var(--grn); */
-  border: 2px solid var(--grn);
-  /* outline: 2px solid var(--grn); */
-  padding: 0.8em;
+  border: 2px solid var(--ylw);
+  outline: 2px solid var(--grn);
+  padding: 10px;
   font-weight: 900;
   text-shadow: 1px 2px 0px var(--ylw);
-  z-index: 9;
 }
 #banner.hidden {
   display: none;
-}
-#banner::before {
-  border: 2px solid var(--ylw);
-  position: absolute;
-  width: calc(100% - 8px);
-  height: calc(100% - 8px);
-  top: 2px;
-  left: 2px;
-  content: '';
-  background-color: white;
-  z-index: -1;
-}
-
-#buttons {
-  font-size: 16px;
-  margin-top: 0.2em;
-  border-top: 2px solid var(--gry);
-  border-top: 2px solid white;
-  padding-top: 1em;
-}
-#buttons button {
-  height: calc(3em + 3px); width: calc(3em + 3px); border: 2px solid grey;
-  display: inline-block;
-  font-size: 16px;
-  /* margin-left: 18px; */
-  /* color: var(--gry); */
-  font-size: 2em;
-  font-weight: 500;
-  cursor: pointer;
-}
-#buttons button:first-of-type {
-  margin-right: 0.75em;
-}
-#buttons button:nth-of-type(2) {
-  margin-left: 0.75em;
-}
-#buttons button.pressed {
-  color: lightgrey;
 }
 
 #reset {

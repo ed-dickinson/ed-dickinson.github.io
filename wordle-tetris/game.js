@@ -45,67 +45,50 @@ const tiles_container = document.querySelector('#tiles')
 
 let rows = []
 
-const dropLetter = (letter, column) => {
-  let i = 0;
-  // console.log(rows[i].children[column].innerHTML !== '', rows[i].children[column].innerHTML)
-
-  // while (i < 6 && rows[i].children[column].innerHTML === '') {
-  // while (i < 0 && rows[i].children[column].innerHTML === '') {
-  //   let ii = i;
-  //   setTimeout(()=>{
-  //     if (ii === 5 || rows[ii].children[column].innerHTML !== '') {
-  //       console.log('end of row?')
-  //     }
-  //     console.log(ii)
-  //     rows[ii].children[column].innerHTML = letter;
-  //     if (ii > 0) {
-  //       rows[ii-1].children[column].innerHTML = '';
-  //     }
-  //
-  //   },i*200)
-  //   i++;
-  // }
-
-  const triggerRowEnd = (row) => {
-
-    // console.log('row end?', row, rows[row].children[column],letter, target_word_array[column])
-    if (letter === target_word_array[column]) {
-      rows[row].children[column].classList.add('right-position');
-    } else if (target_word.includes(letter)) {
-      rows[row].children[column].classList.add('wrong-position');
-    } else {
-      rows[row].children[column].classList.add('wrong-letter');
-
-      all_letters.splice(all_letters.indexOf(last_letter), 1)
-      console.log(all_letters)
-    }
-    // rows[row];
-
-
-    if (Array.from(rows[row].children).every((child)=>{
-      return child.classList.contains('right-position')
-    })) {
-      gameWon();
-    } else if (goes === 30) {
-      gameLost();
-    }
-  }
-
-  const checkAndDrop = () => {
-    if (i < 6 && rows[i].children[column].innerHTML === '') {
-      rows[i].children[column].innerHTML = letter;
-      if (i > 0) {
-        rows[i-1].children[column].innerHTML = '';
-      }
-    } else {
-      triggerRowEnd(i-1);
-      clearInterval(timed_loop);
-    }
-    i++;
-  }
-  checkAndDrop();
-  let timed_loop = setInterval(checkAndDrop,150);
-}
+// const dropLetter = (letter, column) => {
+//   let i = 0;
+//
+//   const triggerRowEnd = (row) => {
+//
+//     // console.log('row end?', row, rows[row].children[column],letter, target_word_array[column])
+//     if (letter === target_word_array[column]) {
+//       rows[row].children[column].classList.add('right-position');
+//     } else if (target_word.includes(letter)) {
+//       rows[row].children[column].classList.add('wrong-position');
+//     } else {
+//       rows[row].children[column].classList.add('wrong-letter');
+//
+//       all_letters.splice(all_letters.indexOf(last_letter), 1)
+//       console.log(all_letters)
+//     }
+//     // rows[row];
+//
+//
+//     if (Array.from(rows[row].children).every((child)=>{
+//       return child.classList.contains('right-position')
+//     })) {
+//       gameWon();
+//     } else if (goes === 30) {
+//       gameLost();
+//     }
+//   }
+//
+//   const checkAndDrop = (column) => {
+//     console.log(column)
+//     if (i < 6 && rows[i].children[column].innerHTML === '') {
+//       rows[i].children[column].innerHTML = letter;
+//       if (i > 0) {
+//         rows[i-1].children[column].innerHTML = '';
+//       }
+//     } else {
+//       triggerRowEnd(i-1);
+//       clearInterval(timed_loop);
+//     }
+//     i++;
+//   }
+//   checkAndDrop(column);
+//   // let timed_loop = setInterval(checkAndDrop,speed*100);
+// }
 
 const selectColumn = (column) => {
   // console.log(column)
@@ -181,6 +164,7 @@ const gameLost = () => {
   banner.classList.remove('hidden')
   banner_message.innerHTML = 'LOSE...';
   // banner_goes.innerHTML = (guess-1) + ' guess' + (guess > 2 ? 'es' : '');
+  clearInterval(gamePlayLoop)
 }
 
 
@@ -229,3 +213,122 @@ replay_button.addEventListener('click',()=>{
   // replayGame();
   resetGame();
 })
+
+
+
+// buttons
+
+const animateButton = (dom) => {
+  dom.classList.add('pressed');
+  setTimeout(()=>{dom.classList.remove('pressed')},100)
+}
+
+const leftTrigger = () => {
+  console.log('L')
+  changeColumn(column-1)
+  animateButton(left_button)
+}
+const rightTrigger = () => {
+  console.log('R')
+  changeColumn(column+1)
+  animateButton(right_button)
+}
+
+const left_button = document.querySelector('#left');
+const right_button = document.querySelector('#right');
+
+left_button.addEventListener('click', leftTrigger);
+right_button.addEventListener('click', rightTrigger);
+
+const keyboardPress = () => {
+  if (event.code === 'ArrowLeft' || event.code === 'KeyA') {
+    leftTrigger();
+  }
+  else if (event.code === 'ArrowRight' || event.code === 'KeyD') {
+    rightTrigger();
+  }
+}
+window.addEventListener('keydown', keyboardPress);
+
+// button gameplay
+
+let letter, column, row;
+
+let speed = 2;
+
+let letter_in_play = false;
+
+const triggerRowEnd = (row) => {
+
+  if (letter === target_word_array[column]) {
+    rows[row].children[column].classList.add('right-position');
+  } else if (target_word.includes(letter)) {
+    rows[row].children[column].classList.add('wrong-position');
+  } else {
+    rows[row].children[column].classList.add('wrong-letter');
+
+    all_letters.splice(all_letters.indexOf(last_letter), 1)
+    console.log(all_letters)
+  }
+
+
+  if (Array.from(rows[row].children).every((child)=>{
+    return child.classList.contains('right-position')
+  })) {
+    gameWon();
+  } else if (goes === 30) {
+    gameLost();
+  }
+}
+
+const checkAndDrop = (column) => {
+
+  row++;
+  console.log(row, column)
+  if (row === 0 && rows[row].children[column].innerHTML !== '') {
+    gameLost();
+    return;
+  }
+  if (row < 6 && rows[row].children[column].innerHTML === '') {
+    rows[row].children[column].innerHTML = letter;
+    if (row > 0) {
+      rows[row-1].children[column].innerHTML = '';
+    }
+  } else {
+    triggerRowEnd(row-1);
+    // clearInterval(timed_loop);
+    letter_in_play = false;
+  }
+  // i++;
+  // row++;
+}
+
+const changeColumn = (col) => {
+  console.log(column, col)
+  let target_empty = rows[row].children[col].innerHTML === '' ? true : false;
+
+  if (col >= 0 && col < 5 && target_empty) {
+    rows[row].children[col].innerHTML = letter;
+    rows[row].children[column].innerHTML = '';
+    column = col;
+  }
+}
+
+const gamePlay = () => {
+  console.log('loop')
+  if (!letter_in_play) {
+    // selectColumn(2);
+    letter = next_letter;
+    column = 2;
+    row = -1;
+    // dropLetter(next_letter, column)
+    checkAndDrop(column);
+    letter_in_play = true;
+    updateNextLetter();
+  } else {
+    checkAndDrop(column);
+  }
+   // drops a letter
+}
+
+let gamePlayLoop = setInterval(gamePlay, speed*100);
