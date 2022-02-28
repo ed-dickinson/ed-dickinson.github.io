@@ -156,6 +156,7 @@ const gameWon = () => {
   console.log('you win!')
   banner.classList.remove('hidden')
   banner_message.innerHTML = 'WIN!';
+  game_over = true;
   // banner_goes.innerHTML = (guess) + ' guess' + (guess > 2 ? 'es' : '');
 }
 
@@ -164,6 +165,7 @@ const gameLost = () => {
   banner.classList.remove('hidden')
   banner_message.innerHTML = 'LOSE...';
   // banner_goes.innerHTML = (guess-1) + ' guess' + (guess > 2 ? 'es' : '');
+  game_over = true;
   clearInterval(gamePlayLoop)
 }
 
@@ -254,8 +256,9 @@ window.addEventListener('keydown', keyboardPress);
 
 let letter, column, row;
 
-let speed = 2;
+let speed = 5;
 
+let game_over = false;
 let letter_in_play = false;
 
 const triggerRowEnd = (row) => {
@@ -298,12 +301,16 @@ const checkAndDrop = (column) => {
     triggerRowEnd(row-1);
     // clearInterval(timed_loop);
     letter_in_play = false;
+    row = -1;
   }
   // i++;
   // row++;
 }
 
 const changeColumn = (col) => {
+  if (game_over) {
+    return;
+  }
   console.log(column, col)
   let target_empty = rows[row].children[col].innerHTML === '' ? true : false;
 

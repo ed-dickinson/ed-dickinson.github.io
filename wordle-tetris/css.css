@@ -32,15 +32,15 @@ header span {
 #tiles {
   position: relative;
   margin-top: 0.4em;
-  font-size: 1.5em;
+  font-size: 1.25em;
 }
 
 #tiles .space {
   height: 2em; width: 2em; border: 2px solid grey;
   display: inline-block;
   /* margin: 0px; */
-  margin-left: 0.05em;
-  margin-right: 0.05em;
+  margin-left: 1px;
+  margin-right: 1px;
   overflow: hidden;
   z-index: 1;
   position: relative;
@@ -63,7 +63,7 @@ header span {
   /* height: 1em; */
   /* line-height: 0; */
   height: 2em;
-  margin: 0.1em 0;
+  margin: 2px 0;
 }
 
 #tiles .row.submitted .space {
@@ -117,7 +117,7 @@ header span {
   border-bottom: 2px solid var(--grn); */
   border: 2px solid var(--grn);
   /* outline: 2px solid var(--grn); */
-  padding: 0.8em;
+  padding: 1em;
   font-weight: 900;
   text-shadow: 1px 2px 0px var(--ylw);
   z-index: 9;
@@ -142,10 +142,11 @@ header span {
   margin-top: 0.2em;
   border-top: 2px solid var(--gry);
   border-top: 2px solid white;
-  padding-top: 1em;
+  padding-top: 0.5em;
 }
 #buttons button {
-  height: calc(3em + 3px); width: calc(3em + 3px); border: 2px solid grey;
+  --sqr: calc(2.32em + 8px);
+  height: var(--sqr); width: var(--sqr); border: 2px solid grey;
   display: inline-block;
   font-size: 16px;
   /* margin-left: 18px; */
@@ -153,12 +154,13 @@ header span {
   font-size: 2em;
   font-weight: 500;
   cursor: pointer;
+  --mrgn: calc(0.5em + 4px);
 }
 #buttons button:first-of-type {
-  margin-right: 0.75em;
+  margin-right: var(--mrgn);
 }
 #buttons button:nth-of-type(2) {
-  margin-left: 0.75em;
+  margin-left: var(--mrgn);
 }
 #buttons button.pressed {
   color: lightgrey;
@@ -170,4 +172,5 @@ header span {
   padding:  0.4em 0.5em;
   border: 2px solid grey;
   cursor: pointer;
+  display: none;
 }
