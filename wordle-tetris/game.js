@@ -90,12 +90,12 @@ let rows = []
 //   // let timed_loop = setInterval(checkAndDrop,speed*100);
 // }
 
-const selectColumn = (column) => {
-  // console.log(column)
-  dropLetter(next_letter, column)
-  updateNextLetter();
-  goes++;
-}
+// const selectColumn = (column) => {
+//   // console.log(column)
+//   dropLetter(next_letter, column)
+//   updateNextLetter();
+//   goes++;
+// }
 
 for (let i = 0; i < 6; i++) {
   let row = document.createElement('div');
@@ -107,7 +107,7 @@ for (let i = 0; i < 6; i++) {
     let space = document.createElement('span');
     space.classList.add('space')
     row.appendChild(space)
-    space.addEventListener('click', ()=>{selectColumn(j)})
+    // space.addEventListener('click', ()=>{selectColumn(j)})
   }
 
 }
@@ -156,8 +156,10 @@ const gameWon = () => {
   console.log('you win!')
   banner.classList.remove('hidden')
   banner_message.innerHTML = 'WIN!';
+  rows[row-1].classList.add('winning-row');
   game_over = true;
   // banner_goes.innerHTML = (guess) + ' guess' + (guess > 2 ? 'es' : '');
+  clearInterval(gamePlayLoop)
 }
 
 const gameLost = () => {
@@ -227,12 +229,12 @@ const animateButton = (dom) => {
 
 const leftTrigger = () => {
   console.log('L')
-  changeColumn(column-1)
+  letter_in_play ? changeColumn(column-1) : changePreColumn(pre_column-1);
   animateButton(left_button)
 }
 const rightTrigger = () => {
   console.log('R')
-  changeColumn(column+1)
+  letter_in_play ? changeColumn(column+1) : changePreColumn(pre_column+1);
   animateButton(right_button)
 }
 
@@ -255,7 +257,7 @@ window.addEventListener('keydown', keyboardPress);
 // button gameplay
 
 let letter, column, row;
-
+let pre_column = 2;
 let speed = 5;
 
 let game_over = false;
@@ -284,6 +286,12 @@ const triggerRowEnd = (row) => {
   }
 }
 
+const resetPreColumn = () => {
+  rows[0].children[pre_column].classList.remove('pre-row');
+  pre_column = 2;
+  // rows[0].children[pre_column].classList.add('pre-row');
+}
+
 const checkAndDrop = (column) => {
 
   row++;
@@ -300,6 +308,7 @@ const checkAndDrop = (column) => {
   } else {
     triggerRowEnd(row-1);
     // clearInterval(timed_loop);
+
     letter_in_play = false;
     row = -1;
   }
@@ -312,12 +321,24 @@ const changeColumn = (col) => {
     return;
   }
   console.log(column, col)
-  let target_empty = rows[row].children[col].innerHTML === '' ? true : false;
+  // let target_empty = rows[row].children[col].innerHTML === '' ? true : false;
 
-  if (col >= 0 && col < 5 && target_empty) {
+  // if (col >= 0 && col < 5 && target_empty) {
+  if (col >= 0 && col < 5 && rows[row].children[col].innerHTML === '') {
     rows[row].children[col].innerHTML = letter;
     rows[row].children[column].innerHTML = '';
     column = col;
+  }
+}
+
+const changePreColumn = (col) => {
+  if (game_over) {
+    return;
+  }
+  if (col >= 0 && col < 5) {
+    rows[0].children[col].classList.add('pre-row');
+    rows[0].children[pre_column].classList.remove('pre-row');
+    pre_column = col;
   }
 }
 
@@ -326,14 +347,17 @@ const gamePlay = () => {
   if (!letter_in_play) {
     // selectColumn(2);
     letter = next_letter;
-    column = 2;
+    // column = 2;
+    column = pre_column;
     row = -1;
     // dropLetter(next_letter, column)
     checkAndDrop(column);
     letter_in_play = true;
     updateNextLetter();
+    if (pre_column !== 2) {resetPreColumn();}
   } else {
     checkAndDrop(column);
+
   }
    // drops a letter
 }

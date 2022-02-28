@@ -29,6 +29,38 @@ header span {
   font-size: 1.5em;
 }
 
+/* #pre-tiles {
+  position: relative;
+  height: 2px;
+  font-size: 1.25em;
+}
+
+#pre-tiles .pre-space {
+  display: inline-block;
+  width: 2em;
+  height: 2px;
+  background-color: white;
+  margin-left: 1px;
+  margin-right: 1px;
+  display: inline-flex;
+}
+
+#pre-tiles .pre-space.selected {
+  background-color: var(--gry);
+} */
+
+#tiles .space.pre-row::before {
+  background-color: var(--gry);
+  height: 2px;
+  top: -6px;
+  width: calc(100% + 4px);
+  display: inline-block;
+  left: -2px;
+  position: absolute;
+  content: '';
+  z-index: -1;
+}
+
 #tiles {
   position: relative;
   margin-top: 0.4em;
@@ -42,6 +74,7 @@ header span {
   margin-left: 1px;
   margin-right: 1px;
   overflow: hidden;
+  overflow: visible;
   z-index: 1;
   position: relative;
   top: 0;
@@ -96,7 +129,14 @@ header span {
   color: white;
 }
 
+#tiles .winning-row .space {
+  animation: winningrow 1s infinite  linear;
+}
 
+@keyframes winningrow {
+  from {border-color: white;}
+  to {border-color: grey;}
+}
 
 
 #banner {
@@ -145,7 +185,9 @@ header span {
   padding-top: 0.5em;
 }
 #buttons button {
-  --sqr: calc(2.32em + 8px);
+  font-family: inherit;
+  /* --sqr: calc(2.32em + 8px); */
+  --sqr: calc(3em + 8px);
   height: var(--sqr); width: var(--sqr); border: 2px solid grey;
   display: inline-block;
   font-size: 16px;
