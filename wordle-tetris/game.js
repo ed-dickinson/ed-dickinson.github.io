@@ -159,7 +159,7 @@ let current_guess = '';
 const gameWon = () => {
   console.log('you win!')
   banner_message.innerHTML = '<div>YOU</div><div>WIN!</div>';
-  setTimeout(()=>{banner.classList.remove('hidden');},1000)
+  setTimeout(()=>{banner.classList.remove('hidden');},1500)
   rows[row-1].classList.add('winning-row');
   game_over = true;
   // banner_goes.innerHTML = (guess) + ' guess' + (guess > 2 ? 'es' : '');
