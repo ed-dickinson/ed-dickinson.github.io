@@ -1,3 +1,7 @@
+
+// do reply button
+
+
 let target_word, target_word_array, all_letters;
 
 let goes = 0;
@@ -154,8 +158,8 @@ let current_guess = '';
 
 const gameWon = () => {
   console.log('you win!')
-  banner.classList.remove('hidden')
-  banner_message.innerHTML = 'WIN!';
+  banner_message.innerHTML = '<div>YOU</div><div>WIN!</div>';
+  setTimeout(()=>{banner.classList.remove('hidden');},1000)
   rows[row-1].classList.add('winning-row');
   game_over = true;
   // banner_goes.innerHTML = (guess) + ' guess' + (guess > 2 ? 'es' : '');
@@ -165,7 +169,7 @@ const gameWon = () => {
 const gameLost = () => {
   console.log('you lose...')
   banner.classList.remove('hidden')
-  banner_message.innerHTML = 'LOSE...';
+  banner_message.innerHTML = '<div>GAME</div><div>OVER</div>';
   // banner_goes.innerHTML = (guess-1) + ' guess' + (guess > 2 ? 'es' : '');
   game_over = true;
   clearInterval(gamePlayLoop)
@@ -204,10 +208,18 @@ const resetGame = () => {
     space.classList.remove('wrong-position')
     space.classList.remove('wrong-letter')
   })
+  document.querySelectorAll('#tiles .row').forEach(row => {
+    row.classList.remove('winning-row')
+  })
 
   banner.classList.add('hidden');
 
+  game_over = false;
+  letter_in_play = false;
+
   goes = 0;
+
+  gamePlayLoop = setInterval(gamePlay, speed*100);
 }
 
 const replay_button = document.querySelector('#reset')
