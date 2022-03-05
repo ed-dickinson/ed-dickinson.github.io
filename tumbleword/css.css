@@ -17,7 +17,7 @@ header {
   font-size: 2em;
   position: relative;
 }
-header span {
+header span#next-letter {
   animation: red-green 2s infinite linear alternate;
 }
 @keyframes red-green {
@@ -260,7 +260,8 @@ header span {
   transform: translateX(-50%);
   background-color: white;
   height: 100%;
-
+  width: calc(100% - 1em);
+  text-align: center;
 }
 
 #intro-title .letter {
