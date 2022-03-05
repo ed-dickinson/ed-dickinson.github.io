@@ -267,4 +267,5 @@ header span#next-letter {
 #intro-title .letter {
   display: inline-block;
   position: relative;
+  color: gold;
 }
