@@ -1,6 +1,17 @@
 
+//holding drop and clearing row doesnt allow pause to take effect
+
+// 1 wrong letter dropping after clear! more?
+// should it even update?
+
+// from tetris
+const level_speeds = [1,0.793,0.6178,0.4727,0.3551,0.262,0.1896,0.1348,0.0939,0.0642]
+// maybe just change this to level timesing by 0.8?
+                    //        0.779, 0.765, 0.7512
+
 // do reply button
 
+// valid_answers = ['abcde','abcde']
 
 let target_word, target_word_array, all_letters;
 
@@ -18,88 +29,66 @@ const setUp = () => {
     extra_letter_array.push(letter);
   })
 
-  const extra_letters_to_add = 3;
+  let extra_letters_to_add = 3;
+  extra_letters_to_add = 0;
 
   all_letters = target_word.split('');
-
-  while (all_letters.length < 8) {
-    let letter = extra_letter_array.shift();
-    if (!target_word.includes(letter)) {
-      all_letters.push(letter);
+  if (extra_letters_to_add > 0) {
+    while (all_letters.length < target_word + extra_letters_to_add) {
+      let letter = extra_letter_array.shift();
+      if (!target_word.includes(letter)) {
+        all_letters.push(letter);
+      }
     }
   }
+
 }
 setUp();
 
 console.log(all_letters)
 
-// const keyboard_container = document.querySelector('#keyboard');
-//
-// const keyboard_keys = 'qwertyuiopasdfghjkl>zxcvbnm<'
+let letter_iterator = [];
+let max_letters_without_new_line = 3;
+
+const resetLetterIterator = () => {
+  letter_iterator = [];
+  let array = target_word.split('');
+  array.forEach(letter => {
+    for (let i = 0; i < max_letters_without_new_line; i++) {
+      letter_iterator.push(letter);
+    }
+  })
+  // console.log(letter_iterator)
+}
+
+const shuffleLetterIterator = () => {
+  for (let i = letter_iterator.length -1; i > 0; i--) {
+    let j = Math.floor(Math.random() * i)
+    let k = letter_iterator[i]
+    letter_iterator[i] = letter_iterator[j]
+    letter_iterator[j] = k
+  }
+  // console.log(letter_iterator)
+}
+
+resetLetterIterator()
+
 
 const banner = document.querySelector('#banner');
 const banner_message = document.querySelector('#message');
 const banner_goes = document.querySelector('#goes');
+const banner_result = document.querySelector('#result .score-display');
 
 const dom = {
-  next_letter: document.querySelector('#next-letter')
+  next_letter: document.querySelector('#next-letter'),
+  score: document.querySelector('#score')
 }
+
+dom.score.innerHTML = '';
 
 const tiles_container = document.querySelector('#tiles')
 
 let rows = []
-
-// const dropLetter = (letter, column) => {
-//   let i = 0;
-//
-//   const triggerRowEnd = (row) => {
-//
-//     // console.log('row end?', row, rows[row].children[column],letter, target_word_array[column])
-//     if (letter === target_word_array[column]) {
-//       rows[row].children[column].classList.add('right-position');
-//     } else if (target_word.includes(letter)) {
-//       rows[row].children[column].classList.add('wrong-position');
-//     } else {
-//       rows[row].children[column].classList.add('wrong-letter');
-//
-//       all_letters.splice(all_letters.indexOf(last_letter), 1)
-//       console.log(all_letters)
-//     }
-//     // rows[row];
-//
-//
-//     if (Array.from(rows[row].children).every((child)=>{
-//       return child.classList.contains('right-position')
-//     })) {
-//       gameWon();
-//     } else if (goes === 30) {
-//       gameLost();
-//     }
-//   }
-//
-//   const checkAndDrop = (column) => {
-//     console.log(column)
-//     if (i < 6 && rows[i].children[column].innerHTML === '') {
-//       rows[i].children[column].innerHTML = letter;
-//       if (i > 0) {
-//         rows[i-1].children[column].innerHTML = '';
-//       }
-//     } else {
-//       triggerRowEnd(i-1);
-//       clearInterval(timed_loop);
-//     }
-//     i++;
-//   }
-//   checkAndDrop(column);
-//   // let timed_loop = setInterval(checkAndDrop,speed*100);
-// }
-
-// const selectColumn = (column) => {
-//   // console.log(column)
-//   dropLetter(next_letter, column)
-//   updateNextLetter();
-//   goes++;
-// }
 
 for (let i = 0; i < 6; i++) {
   let row = document.createElement('div');
@@ -128,10 +117,14 @@ const updateNextLetter = () => {
 
   let current_letter = next_letter;
   last_letter = next_letter;
-  do {
-    // next_letter = target_word_array[Math.floor(Math.random()*5)];
-    next_letter = all_letters[Math.floor(Math.random()*all_letters.length)];
-  } while (next_letter === current_letter);
+  // do {
+    // next_letter = all_letters[Math.floor(Math.random()*all_letters.length)];
+    if (letter_iterator.length === 0) {
+      resetLetterIterator();
+    }
+    shuffleLetterIterator();
+    next_letter = letter_iterator.pop();
+  // } while (next_letter === current_letter);
 
 
   dom.next_letter.innerHTML = next_letter;
@@ -161,6 +154,10 @@ const gameWon = () => {
   banner_message.innerHTML = '<div>YOU</div><div>WIN!</div>';
   setTimeout(()=>{banner.classList.remove('hidden');},1500)
   rows[row-1].classList.add('winning-row');
+  let target_row = rows[row-1];
+  // setTimeout(()=>{target_row.classList.remove('winning-row');},1000)
+  setTimeout(()=>{target_row.classList.add('with-delay');},600)
+  // setTimeout(()=>{target_row.classList.add('winning-row');},1001)
   game_over = true;
   // banner_goes.innerHTML = (guess) + ' guess' + (guess > 2 ? 'es' : '');
   clearInterval(gamePlayLoop)
@@ -171,6 +168,7 @@ const gameLost = () => {
   banner.classList.remove('hidden')
   banner_message.innerHTML = '<div>GAME</div><div>OVER</div>';
   // banner_goes.innerHTML = (guess-1) + ' guess' + (guess > 2 ? 'es' : '');
+  banner_result.innerHTML = level;
   game_over = true;
   clearInterval(gamePlayLoop)
 }
@@ -179,28 +177,10 @@ const gameLost = () => {
 let guess = 1;
 let tile = 1;
 
-const replayGame = () => {
-  target_word = valid_answers[Math.floor(Math.random()*valid_answers.length)]
-  guess = 1;
-  tile = 1;
-  current_guess = '';
-  banner.classList.add('hidden');
-  rows.forEach(row=>{
-    for (let i = 0; i < 5; i++) {
-      row.children[i].classList.remove('right-position')
-      row.children[i].classList.remove('wrong-position')
-      row.children[i].innerHTML = '';
-    }
-    row.classList.remove('submitted');
-  })
-  document.querySelectorAll('.key').forEach(key=>{
-    key.classList.remove('key-in-word');
-  })
-  console.log(target_word)
-}
 
 const resetGame = () => {
   setUp();
+  updateNextLetter();
   // clearInterval(timed_loop);
   document.querySelectorAll('#tiles .space').forEach(space => {
     space.innerHTML = '';
@@ -218,6 +198,10 @@ const resetGame = () => {
   letter_in_play = false;
 
   goes = 0;
+  level = 0;
+  setSpeed();
+
+  dom.score.innerHTML = '';
 
   gamePlayLoop = setInterval(gamePlay, speed*100);
 }
@@ -240,15 +224,34 @@ const animateButton = (dom) => {
 }
 
 const leftTrigger = () => {
-  console.log('L')
+  // console.log('L')
   letter_in_play ? changeColumn(column-1) : changePreColumn(pre_column-1);
   animateButton(left_button)
 }
 const rightTrigger = () => {
-  console.log('R')
+  // console.log('R')
   letter_in_play ? changeColumn(column+1) : changePreColumn(pre_column+1);
   animateButton(right_button)
 }
+const downTrigger = () => {
+  // console.log('D')
+  if (game_over) {
+    return;
+  }
+
+
+  // console.log('drop letter')
+  if (!fast_drop_mode_on) {
+    clearInterval(gamePlayLoop)
+    gamePlay();
+    gamePlayLoop = setInterval(gamePlay, speed*25) // double speed
+    fast_drop_mode_on = true;
+  }
+
+
+  // animateButton(down_button)
+}
+let fast_drop_mode_on = false;
 
 const left_button = document.querySelector('#left');
 const right_button = document.querySelector('#right');
@@ -263,17 +266,173 @@ const keyboardPress = () => {
   else if (event.code === 'ArrowRight' || event.code === 'KeyD') {
     rightTrigger();
   }
+  else if (event.code === 'ArrowDown' || event.code === 'KeyS') {
+    window.addEventListener('keyup', keyboardRelease);
+    downTrigger();
+  }
+}
+const untriggerDrop = () => {
+  // console.log('fast mode off')
+  window.removeEventListener('keyup', keyboardRelease);
+  clearInterval(gamePlayLoop)
+  if (!game_over) {
+    gamePlayLoop = setInterval(gamePlay, speed*100)
+  }
+  fast_drop_mode_on = false;
+}
+const keyboardRelease = () => {
+  if (event.code === 'ArrowDown' || event.code === 'KeyS') {
+    untriggerDrop();
+  }
 }
 window.addEventListener('keydown', keyboardPress);
+
+let mobile_drop_triggered = false;
+
+const touchDrop = () => {
+
+  // console.log('touch drop!')
+  if (letter_in_play) {
+    downTrigger();
+    mobile_drop_triggered = true;
+  }
+
+}
+
+tiles_container.addEventListener('click', touchDrop);
+
+
 
 // button gameplay
 
 let letter, column, row;
 let pre_column = 2;
-let speed = 5;
+// let speed = 5;
+
+let level = 0;
+let speed = 10;
+const setSpeed = () => {
+  speed = level_speeds[level]*10;
+}
 
 let game_over = false;
 let letter_in_play = false;
+
+
+let used_words = [];
+
+const setNewWord = () => {
+  used_words.push(target_word)
+  target_word = valid_answers[Math.floor(Math.random()*valid_answers.length)]
+  target_word_array = target_word.split('');
+  console.log(target_word)
+}
+
+const removeLetterClasses = (dom) => {
+  dom.classList.remove('right-position')
+  dom.classList.remove('wrong-position')
+  dom.classList.remove('wrong-letter')
+}
+
+const reanalyseClasses = () => {
+  // console.log('reanyl', target_word)
+  console.log(target_word_array)
+  tiles.forEach(node=>{
+    let i = Array.from(tiles).indexOf(node)
+    let col = i % 5
+    node.classList.remove('right-position')
+    node.classList.remove('wrong-position')
+    node.classList.remove('wrong-letter')
+    if (node.innerHTML !== '') {
+      if (node.innerHTML === target_word_array[col]) {
+        node.classList.add('right-position');
+      } else if (target_word.includes(node.innerHTML)) {
+        node.classList.add('wrong-position');
+      } else {
+        node.classList.add('wrong-letter');
+      }
+    }
+    // console.log(col, node.innerHTML, target_word_array[col])
+  })
+}
+
+const clearRow = (r) => {
+  console.log(r)
+
+  rows[r].classList.add('cleared-row');
+  let target_row = rows[r];
+  setTimeout(()=>{target_row.classList.remove('cleared-row');},500)
+  // pause();
+  clearInterval(gamePlayLoop)
+  let rows_to_clear = 6 - r;
+  let delay = 500;
+  let board_2d_array = [];
+  for (let j = 0; j < 6 - rows_to_clear; j++) {
+    let temp_array = []
+    Array.from(rows[r - j - 1].children).forEach(box=>{
+      // box.innerHTML = rows[r - j - 1].children[rows[r-j].children.indexOf(box)]
+      temp_array.push({letter: box.innerHTML, class: box.className.split(' ')})
+      board_2d_array[r-j-1] = temp_array;
+    })
+  }
+
+  for (let i = 0; i < rows_to_clear; i++) { // each row cleared = r + i
+    let iter = 0;
+    Array.from(rows[r + i].children).forEach(box=>{
+      setTimeout(()=>{
+        box.innerHTML = ''
+        box.classList.remove('right-position')
+        box.classList.remove('wrong-position')
+        box.classList.remove('wrong-letter')
+      },delay + (i*500) + (iter*100))
+      // for each cleared row (going down), set a timeout for each row (going up) to copy the row above it
+      iter++;
+    })
+
+
+    setTimeout(()=>{
+      for (let j = 0; j < 6 - rows_to_clear; j++) {
+        // let rr = 5 - j - rows_to_clear
+        // rows[rr]
+        let box_it = 0;
+        Array.from(rows[r - j + i].children).forEach(box=>{
+          removeLetterClasses(rows[r-j+i].children[box_it])
+          box.innerHTML = board_2d_array[r-j-1][box_it].letter
+          if (board_2d_array[r-j-1][box_it].class.length > 1) {
+            box.classList.add(board_2d_array[r-j-1][box_it].class[1])
+          }
+          box_it++;
+        })
+
+
+        // board_2d_array.push(temp_array);
+
+      }
+    },1000 + (rows_to_clear*500) + (i*200))
+    // console.log(board_2d_array)
+    // rows[r + i]
+  }
+  setTimeout(reanalyseClasses,1000 + (rows_to_clear*500) + (rows_to_clear*200))
+  setTimeout(updateNextLetter,1000 + (rows_to_clear*500) + (rows_to_clear*200))
+  setTimeout(resume,1000 + (rows_to_clear*500) + (rows_to_clear*200) + 500)
+  // for (let i = r-1; i > 0; i--) {
+  //   let row_array = [];
+  //   let it = 0;
+  //   Array.from(rows[i].children).forEach(box=>{
+  //     row_array.push(box.innerHTML)
+  //     rows[i+1].children[it].innerHTML = box.innerHTMLdd
+  //     it++;
+  //   })
+  // }
+  // setTimeout(resume,daelay+(rows_to_clear*500));
+
+}
+
+const increaseLevel = () => {
+  console.log('increase LVL:', level, '>',level+1)
+  level++;
+  dom.score.innerHTML = level;
+}
 
 const triggerRowEnd = (row) => {
 
@@ -284,17 +443,28 @@ const triggerRowEnd = (row) => {
   } else {
     rows[row].children[column].classList.add('wrong-letter');
 
-    all_letters.splice(all_letters.indexOf(last_letter), 1)
-    console.log(all_letters)
+    // all_letters.splice(all_letters.indexOf(last_letter), 1)
+    // console.log(all_letters)
   }
 
+  if (mobile_drop_triggered) {
+    untriggerDrop();
+    mobile_drop_triggered = false;
+  }
 
   if (Array.from(rows[row].children).every((child)=>{
     return child.classList.contains('right-position')
   })) {
-    gameWon();
-  } else if (goes === 30) {
-    gameLost();
+    // game_over = true;
+    // gameWon();
+
+    clearRow(row);
+    setNewWord();
+    resetLetterIterator()
+    increaseLevel();
+    setSpeed();
+  // } else if (goes === 30) {
+  //   gameLost();
   }
 }
 
@@ -307,7 +477,7 @@ const resetPreColumn = () => {
 const checkAndDrop = (column) => {
 
   row++;
-  console.log(row, column)
+  // console.log(row, column)
   if (row === 0 && rows[row].children[column].innerHTML !== '') {
     gameLost();
     return;
@@ -332,7 +502,7 @@ const changeColumn = (col) => {
   if (game_over) {
     return;
   }
-  console.log(column, col)
+  // console.log(column, col)
   // let target_empty = rows[row].children[col].innerHTML === '' ? true : false;
 
   // if (col >= 0 && col < 5 && target_empty) {
@@ -355,7 +525,7 @@ const changePreColumn = (col) => {
 }
 
 const gamePlay = () => {
-  console.log('loop')
+  // console.log('loop')
   if (!letter_in_play) {
     // selectColumn(2);
     letter = next_letter;
@@ -374,8 +544,30 @@ const gamePlay = () => {
    // drops a letter
 }
 
-let gamePlayLoop = setInterval(gamePlay, speed*100);
+const pause = () => {
+  clearInterval(gamePlayLoop)
+}
 
+const resume = () => {
+  gamePlayLoop = setInterval(gamePlay, speed*100);
+}
+
+
+let intro_on = true;
+intro_on = false;
+
+let gamePlayLoop;
+
+// account for intro delay
+setTimeout(()=> {
+  gamePlayLoop = setInterval(gamePlay, speed*100);
+},intro_on ? 1800 : 0)
+
+// if (!intro_on) {
+//   title_holder.style.display = 'none'
+// }
+
+!intro_on ? title_holder.style.display = 'none' : ''
 
 // disable double tap
 document.addEventListener("click", event => {

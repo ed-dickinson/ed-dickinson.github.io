@@ -217,6 +217,15 @@ header span#next-letter {
     color: var(--ylw);
   }
 }
+#banner #result {
+  animation: text-shadow 1s infinite alternate -2.5s;
+  /* box-shadow: 1px 2px 2px var(--grn); */
+  background-color: transparent;
+  color: black !important;
+  font-size: 0.7em;
+  font-weight: 600;
+  margin-top: 0.5em;
+}
 
 #buttons {
   font-size: 16px;

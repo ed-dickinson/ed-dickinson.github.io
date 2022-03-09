@@ -15,9 +15,8 @@ body {
 header {
   font-weight: 900;
   font-size: 2em;
-  position: relative;
 }
-header span#next-letter {
+header span {
   animation: red-green 2s infinite linear alternate;
 }
 @keyframes red-green {
@@ -131,20 +130,16 @@ header span#next-letter {
 }
 
 #tiles .winning-row .space {
-  animation: winningrow 1s 2 linear;
+  animation: winningrow 1s infinite  linear;
 }
-#tiles .winning-row.with-delay .space:nth-of-type(4) {animation-delay: -0.1s;}
-#tiles .winning-row.with-delay .space:nth-of-type(3) {animation-delay: -0.2s;}
-#tiles .winning-row.with-delay .space:nth-of-type(2) {animation-delay: -0.3s;}
-#tiles .winning-row.with-delay .space:nth-of-type(1) {animation-delay: -0.4s;}
+#tiles .winning-row .space:nth-of-type(4) {animation-delay: -0.1s;}
+#tiles .winning-row .space:nth-of-type(3) {animation-delay: -0.2s;}
+#tiles .winning-row .space:nth-of-type(2) {animation-delay: -0.3s;}
+#tiles .winning-row .space:nth-of-type(1) {animation-delay: -0.4s;}
 
 @keyframes winningrow {
   from {border-color: white;}
   to {border-color: grey;}
-}
-
-#tiles .cleared-row .space {
-  animation: winningrow 0.5s infinite linear;
 }
 
 
@@ -217,15 +212,6 @@ header span#next-letter {
     color: var(--ylw);
   }
 }
-#banner #result {
-  animation: text-shadow 1s infinite alternate -2.5s;
-  /* box-shadow: 1px 2px 2px var(--grn); */
-  background-color: transparent;
-  color: black !important;
-  font-size: 0.7em;
-  font-weight: 600;
-  margin-top: 0.5em;
-}
 
 #buttons {
   font-size: 16px;
@@ -265,60 +251,4 @@ header span#next-letter {
   border: 2px solid grey;
   cursor: pointer;
   /* display: none; */
-}
-
-#intro-title {
-  position: absolute;
-  left: calc(50% + 0.5em);
-  transform: translateX(-50%);
-  background-color: white;
-  height: 100%;
-  width: calc(100% - 1em);
-  text-align: center;
-}
-
-#intro-title .letter {
-  display: inline-block;
-  position: relative;
-  color: gold;
-}
-
-#tumbleweed-cont {
-  position: absolute;
-  left: 50%;
-  top: 0;
-  transform: translate(-50%);
-}
-
-#tumbleweed {
-  position: absolute;
-  left: 20px;
-  top: 20px;
-  animation: tumble-round 4s infinite linear, tumble-bounce 1s infinite ease-in alternate, tumble-across 4s infinite linear;
-}
-
-@keyframes tumble-round {
-  from {transform: rotate(0deg);}
-    to {transform: rotate(360deg);}
-}
-@keyframes tumble-bounce {
-  from {top: 1em;}
-    to {top: 2em;}
-}
-@keyframes tumble-across {
-  0% {left: -10em; opacity: 0;}
-  50% {left: 0; opacity: 1;}
-    100% {left: 10em; opacity: 0;}
-}
-
-#tumbleweed div {
-  position: absolute;
-}
-
-
-#score {
-  position: absolute;
-  top: 0;
-  right: 0;
-  font-size: 0.75em;
 }

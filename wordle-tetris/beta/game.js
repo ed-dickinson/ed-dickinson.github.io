@@ -2,6 +2,7 @@
 //holding drop and clearing row doesnt allow pause to take effect
 
 // 1 wrong letter dropping after clear! more?
+// should it even update?
 
 // from tetris
 const level_speeds = [1,0.793,0.6178,0.4727,0.3551,0.262,0.1896,0.1348,0.0939,0.0642]
@@ -10,6 +11,7 @@ const level_speeds = [1,0.793,0.6178,0.4727,0.3551,0.262,0.1896,0.1348,0.0939,0.
 
 // do reply button
 
+// valid_answers = ['abcde','abcde']
 
 let target_word, target_word_array, all_letters;
 
@@ -49,12 +51,14 @@ let letter_iterator = [];
 let max_letters_without_new_line = 3;
 
 const resetLetterIterator = () => {
+  letter_iterator = [];
   let array = target_word.split('');
   array.forEach(letter => {
     for (let i = 0; i < max_letters_without_new_line; i++) {
       letter_iterator.push(letter);
     }
   })
+  // console.log(letter_iterator)
 }
 
 const shuffleLetterIterator = () => {
@@ -64,6 +68,7 @@ const shuffleLetterIterator = () => {
     letter_iterator[i] = letter_iterator[j]
     letter_iterator[j] = k
   }
+  // console.log(letter_iterator)
 }
 
 resetLetterIterator()
@@ -72,11 +77,14 @@ resetLetterIterator()
 const banner = document.querySelector('#banner');
 const banner_message = document.querySelector('#message');
 const banner_goes = document.querySelector('#goes');
+const banner_result = document.querySelector('#result .score-display');
 
 const dom = {
   next_letter: document.querySelector('#next-letter'),
   score: document.querySelector('#score')
 }
+
+dom.score.innerHTML = '';
 
 const tiles_container = document.querySelector('#tiles')
 
@@ -109,14 +117,14 @@ const updateNextLetter = () => {
 
   let current_letter = next_letter;
   last_letter = next_letter;
-  do {
+  // do {
     // next_letter = all_letters[Math.floor(Math.random()*all_letters.length)];
     if (letter_iterator.length === 0) {
       resetLetterIterator();
     }
     shuffleLetterIterator();
     next_letter = letter_iterator.pop();
-  } while (next_letter === current_letter);
+  // } while (next_letter === current_letter);
 
 
   dom.next_letter.innerHTML = next_letter;
@@ -160,6 +168,7 @@ const gameLost = () => {
   banner.classList.remove('hidden')
   banner_message.innerHTML = '<div>GAME</div><div>OVER</div>';
   // banner_goes.innerHTML = (guess-1) + ' guess' + (guess > 2 ? 'es' : '');
+  banner_result.innerHTML = level;
   game_over = true;
   clearInterval(gamePlayLoop)
 }
@@ -192,6 +201,8 @@ const resetGame = () => {
   level = 0;
   setSpeed();
 
+  dom.score.innerHTML = '';
+
   gamePlayLoop = setInterval(gamePlay, speed*100);
 }
 
@@ -223,7 +234,7 @@ const rightTrigger = () => {
   animateButton(right_button)
 }
 const downTrigger = () => {
-  console.log('D')
+  // console.log('D')
   if (game_over) {
     return;
   }
@@ -261,7 +272,7 @@ const keyboardPress = () => {
   }
 }
 const untriggerDrop = () => {
-  console.log('fast mode off')
+  // console.log('fast mode off')
   window.removeEventListener('keyup', keyboardRelease);
   clearInterval(gamePlayLoop)
   if (!game_over) {
@@ -280,7 +291,7 @@ let mobile_drop_triggered = false;
 
 const touchDrop = () => {
 
-  console.log('touch drop!')
+  // console.log('touch drop!')
   if (letter_in_play) {
     downTrigger();
     mobile_drop_triggered = true;
@@ -314,6 +325,7 @@ const setNewWord = () => {
   used_words.push(target_word)
   target_word = valid_answers[Math.floor(Math.random()*valid_answers.length)]
   target_word_array = target_word.split('');
+  console.log(target_word)
 }
 
 const removeLetterClasses = (dom) => {
@@ -323,10 +335,11 @@ const removeLetterClasses = (dom) => {
 }
 
 const reanalyseClasses = () => {
-
+  // console.log('reanyl', target_word)
+  console.log(target_word_array)
   tiles.forEach(node=>{
     let i = Array.from(tiles).indexOf(node)
-    let col = i % 6
+    let col = i % 5
     node.classList.remove('right-position')
     node.classList.remove('wrong-position')
     node.classList.remove('wrong-letter')
@@ -339,6 +352,7 @@ const reanalyseClasses = () => {
         node.classList.add('wrong-letter');
       }
     }
+    // console.log(col, node.innerHTML, target_word_array[col])
   })
 }
 
@@ -399,6 +413,7 @@ const clearRow = (r) => {
     // rows[r + i]
   }
   setTimeout(reanalyseClasses,1000 + (rows_to_clear*500) + (rows_to_clear*200))
+  setTimeout(updateNextLetter,1000 + (rows_to_clear*500) + (rows_to_clear*200))
   setTimeout(resume,1000 + (rows_to_clear*500) + (rows_to_clear*200) + 500)
   // for (let i = r-1; i > 0; i--) {
   //   let row_array = [];
@@ -416,7 +431,7 @@ const clearRow = (r) => {
 const increaseLevel = () => {
   console.log('increase LVL:', level, '>',level+1)
   level++;
-
+  dom.score.innerHTML = level;
 }
 
 const triggerRowEnd = (row) => {
@@ -428,8 +443,8 @@ const triggerRowEnd = (row) => {
   } else {
     rows[row].children[column].classList.add('wrong-letter');
 
-    all_letters.splice(all_letters.indexOf(last_letter), 1)
-    console.log(all_letters)
+    // all_letters.splice(all_letters.indexOf(last_letter), 1)
+    // console.log(all_letters)
   }
 
   if (mobile_drop_triggered) {
