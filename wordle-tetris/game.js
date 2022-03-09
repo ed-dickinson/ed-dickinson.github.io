@@ -4,6 +4,8 @@
 // 1 wrong letter dropping after clear! more?
 // should it even update?
 
+// doesn't clear first line on letter drop
+
 // from tetris
 const level_speeds = [1,0.793,0.6178,0.4727,0.3551,0.262,0.1896,0.1348,0.0939,0.0642]
 // maybe just change this to level timesing by 0.8?
@@ -406,8 +408,12 @@ const clearRow = (r) => {
 
 
         // board_2d_array.push(temp_array);
-
+        Array.from(rows[0].children).forEach(box=>{
+          removeLetterClasses(box)
+          box.innerHTML = '';
+        })
       }
+      // and clear first row
     },1000 + (rows_to_clear*500) + (i*200))
     // console.log(board_2d_array)
     // rows[r + i]
