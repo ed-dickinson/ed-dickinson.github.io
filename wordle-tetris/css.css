@@ -69,7 +69,7 @@ header span#next-letter {
 }
 
 #tiles .space {
-  height: 2em; width: 2em; border: 2px solid grey;
+  height: 2em; width: 2em; border: 2px solid var(--gry);
   display: inline-block;
   /* margin: 0px; */
   margin-left: 1px;
@@ -140,7 +140,7 @@ header span#next-letter {
 
 @keyframes winningrow {
   from {border-color: white;}
-  to {border-color: grey;}
+  to {border-color: var(--gry);}
 }
 
 #tiles .cleared-row .space {
@@ -238,7 +238,7 @@ header span#next-letter {
   font-family: inherit;
   /* --sqr: calc(2.32em + 8px); */
   --sqr: calc(3em + 8px);
-  height: var(--sqr); width: var(--sqr); border: 2px solid grey;
+  height: var(--sqr); width: var(--sqr); border: 2px solid var(--gry);
   display: inline-block;
   font-size: 16px;
   /* margin-left: 18px; */
@@ -247,6 +247,8 @@ header span#next-letter {
   font-weight: 500;
   cursor: pointer;
   --mrgn: calc(0.5em + 4px);
+  color: white;
+  background-color: var(--gry);
 }
 #buttons button:first-of-type {
   margin-right: var(--mrgn);
@@ -256,15 +258,27 @@ header span#next-letter {
 }
 #buttons button.pressed {
   color: lightgrey;
+  opacity: 0.75;
 }
 
 #reset {
   /* text-decoration: underline; */
   margin-top: 1em;
   padding:  0.4em 0.5em;
-  border: 2px solid grey;
+  border: 2px solid var(--gry);
   cursor: pointer;
   /* display: none; */
+  color: white;
+  background-color: var(--gry);
+  padding:  0.4em 0.8em;
+}
+
+#share {
+  color: white;
+  border: 2px solid var(--gry);
+  background-color: var(--gry);
+  padding:  0.2em 0.5em;
+  margin-top: 0.5em;
 }
 
 #intro-title {

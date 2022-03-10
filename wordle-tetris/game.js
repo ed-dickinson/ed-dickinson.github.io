@@ -1,20 +1,3 @@
-
-//holding drop and clearing row doesnt allow pause to take effect
-
-// 1 wrong letter dropping after clear! more?
-// should it even update?
-
-// doesn't clear first line on letter drop
-
-// from tetris
-const level_speeds = [1,0.793,0.6178,0.4727,0.3551,0.262,0.1896,0.1348,0.0939,0.0642]
-// maybe just change this to level timesing by 0.8?
-                    //        0.779, 0.765, 0.7512
-
-// do reply button
-
-// valid_answers = ['abcde','abcde']
-
 let target_word, target_word_array, all_letters;
 
 let goes = 0;
@@ -34,6 +17,7 @@ const setUp = () => {
   let extra_letters_to_add = 3;
   extra_letters_to_add = 0;
 
+  // get rid of this bit?
   all_letters = target_word.split('');
   if (extra_letters_to_add > 0) {
     while (all_letters.length < target_word + extra_letters_to_add) {
@@ -47,7 +31,7 @@ const setUp = () => {
 }
 setUp();
 
-console.log(all_letters)
+// LETTER ITERATOR sets up an array of n copies of each letter to select from to ensure regular letter appearance
 
 let letter_iterator = [];
 let max_letters_without_new_line = 3;
@@ -79,7 +63,7 @@ resetLetterIterator()
 const banner = document.querySelector('#banner');
 const banner_message = document.querySelector('#message');
 const banner_goes = document.querySelector('#goes');
-const banner_result = document.querySelector('#result .score-display');
+const banner_result = document.querySelector('#result');
 
 const dom = {
   next_letter: document.querySelector('#next-letter'),
@@ -88,8 +72,9 @@ const dom = {
 
 dom.score.innerHTML = '';
 
-const tiles_container = document.querySelector('#tiles')
+// SETS UP MAIN GRID
 
+const tiles_container = document.querySelector('#tiles')
 let rows = []
 
 for (let i = 0; i < 6; i++) {
@@ -102,14 +87,10 @@ for (let i = 0; i < 6; i++) {
     let space = document.createElement('span');
     space.classList.add('space')
     row.appendChild(space)
-    // space.addEventListener('click', ()=>{selectColumn(j)})
   }
-
 }
 
 const tiles = document.querySelectorAll('.space');
-
-console.log(dom.next_letter)
 
 
 let next_letter;
@@ -128,7 +109,6 @@ const updateNextLetter = () => {
     next_letter = letter_iterator.pop();
   // } while (next_letter === current_letter);
 
-
   dom.next_letter.innerHTML = next_letter;
 
 }
@@ -138,15 +118,11 @@ updateNextLetter();
 
 
 const keyPress = (letter) => {
-  // console.log(letter)
-
   if (tile < 6) {
     rows[guess-1].children[tile-1].innerHTML = letter;
     tile++;
     current_guess = current_guess.concat(letter)
   }
-
-  // console.log(current_guess)
 }
 
 let current_guess = '';
@@ -157,11 +133,8 @@ const gameWon = () => {
   setTimeout(()=>{banner.classList.remove('hidden');},1500)
   rows[row-1].classList.add('winning-row');
   let target_row = rows[row-1];
-  // setTimeout(()=>{target_row.classList.remove('winning-row');},1000)
   setTimeout(()=>{target_row.classList.add('with-delay');},600)
-  // setTimeout(()=>{target_row.classList.add('winning-row');},1001)
   game_over = true;
-  // banner_goes.innerHTML = (guess) + ' guess' + (guess > 2 ? 'es' : '');
   clearInterval(gamePlayLoop)
 }
 
@@ -169,8 +142,7 @@ const gameLost = () => {
   console.log('you lose...')
   banner.classList.remove('hidden')
   banner_message.innerHTML = '<div>GAME</div><div>OVER</div>';
-  // banner_goes.innerHTML = (guess-1) + ' guess' + (guess > 2 ? 'es' : '');
-  banner_result.innerHTML = level;
+  banner_result.innerHTML = `You got ${level} word${level===1?'':'s'}!`;
   game_over = true;
   clearInterval(gamePlayLoop)
 }
@@ -182,8 +154,8 @@ let tile = 1;
 
 const resetGame = () => {
   setUp();
+  resetLetterIterator();
   updateNextLetter();
-  // clearInterval(timed_loop);
   document.querySelectorAll('#tiles .space').forEach(space => {
     space.innerHTML = '';
     space.classList.remove('right-position')
@@ -211,14 +183,12 @@ const resetGame = () => {
 const replay_button = document.querySelector('#reset')
 
 replay_button.addEventListener('click',()=>{
-  // location.reload()
-  // replayGame();
   resetGame();
 })
 
 
 
-// buttons
+// BUTTONS and THEIR FUNCTIONS
 
 const animateButton = (dom) => {
   dom.classList.add('pressed');
@@ -237,12 +207,10 @@ const rightTrigger = () => {
 }
 const downTrigger = () => {
   // console.log('D')
-  if (game_over) {
+  if (game_over || busy) {
     return;
   }
 
-
-  // console.log('drop letter')
   if (!fast_drop_mode_on) {
     clearInterval(gamePlayLoop)
     gamePlay();
@@ -250,9 +218,9 @@ const downTrigger = () => {
     fast_drop_mode_on = true;
   }
 
-
   // animateButton(down_button)
 }
+
 let fast_drop_mode_on = false;
 
 const left_button = document.querySelector('#left');
@@ -274,7 +242,6 @@ const keyboardPress = () => {
   }
 }
 const untriggerDrop = () => {
-  // console.log('fast mode off')
   window.removeEventListener('keyup', keyboardRelease);
   clearInterval(gamePlayLoop)
   if (!game_over) {
@@ -292,34 +259,35 @@ window.addEventListener('keydown', keyboardPress);
 let mobile_drop_triggered = false;
 
 const touchDrop = () => {
-
-  // console.log('touch drop!')
   if (letter_in_play) {
     downTrigger();
     mobile_drop_triggered = true;
   }
-
 }
 
 tiles_container.addEventListener('click', touchDrop);
 
 
-
-// button gameplay
+// GAMEPLAY
 
 let letter, column, row;
 let pre_column = 2;
-// let speed = 5;
 
 let level = 0;
 let speed = 10;
+
 const setSpeed = () => {
-  speed = level_speeds[level]*10;
+  if (level === 0) {
+    speed = 10;
+  } else {
+    speed *= 0.8;
+  }
+  // speed = level_speeds[level]*10;
 }
 
 let game_over = false;
 let letter_in_play = false;
-
+let busy;
 
 let used_words = [];
 
@@ -337,8 +305,6 @@ const removeLetterClasses = (dom) => {
 }
 
 const reanalyseClasses = () => {
-  // console.log('reanyl', target_word)
-  console.log(target_word_array)
   tiles.forEach(node=>{
     let i = Array.from(tiles).indexOf(node)
     let col = i % 5
@@ -354,7 +320,6 @@ const reanalyseClasses = () => {
         node.classList.add('wrong-letter');
       }
     }
-    // console.log(col, node.innerHTML, target_word_array[col])
   })
 }
 
@@ -364,15 +329,14 @@ const clearRow = (r) => {
   rows[r].classList.add('cleared-row');
   let target_row = rows[r];
   setTimeout(()=>{target_row.classList.remove('cleared-row');},500)
-  // pause();
   clearInterval(gamePlayLoop)
+  busy = true;
   let rows_to_clear = 6 - r;
-  let delay = 500;
+  let delay = 500; // sorts timing between clearing and dropping
   let board_2d_array = [];
   for (let j = 0; j < 6 - rows_to_clear; j++) {
     let temp_array = []
     Array.from(rows[r - j - 1].children).forEach(box=>{
-      // box.innerHTML = rows[r - j - 1].children[rows[r-j].children.indexOf(box)]
       temp_array.push({letter: box.innerHTML, class: box.className.split(' ')})
       board_2d_array[r-j-1] = temp_array;
     })
@@ -387,15 +351,15 @@ const clearRow = (r) => {
         box.classList.remove('wrong-position')
         box.classList.remove('wrong-letter')
       },delay + (i*500) + (iter*100))
-      // for each cleared row (going down), set a timeout for each row (going up) to copy the row above it
+
       iter++;
     })
 
-
+    // for each cleared row (going down), set a timeout to copy the row above it
     setTimeout(()=>{
       for (let j = 0; j < 6 - rows_to_clear; j++) {
-        // let rr = 5 - j - rows_to_clear
-        // rows[rr]
+
+        // drops rows
         let box_it = 0;
         Array.from(rows[r - j + i].children).forEach(box=>{
           removeLetterClasses(rows[r-j+i].children[box_it])
@@ -406,31 +370,18 @@ const clearRow = (r) => {
           box_it++;
         })
 
-
-        // board_2d_array.push(temp_array);
+        // clears final row (top)
         Array.from(rows[0].children).forEach(box=>{
           removeLetterClasses(box)
           box.innerHTML = '';
         })
       }
-      // and clear first row
-    },1000 + (rows_to_clear*500) + (i*200))
-    // console.log(board_2d_array)
-    // rows[r + i]
+    },delay + (rows_to_clear*500) + (i*200))
   }
-  setTimeout(reanalyseClasses,1000 + (rows_to_clear*500) + (rows_to_clear*200))
-  setTimeout(updateNextLetter,1000 + (rows_to_clear*500) + (rows_to_clear*200))
-  setTimeout(resume,1000 + (rows_to_clear*500) + (rows_to_clear*200) + 500)
-  // for (let i = r-1; i > 0; i--) {
-  //   let row_array = [];
-  //   let it = 0;
-  //   Array.from(rows[i].children).forEach(box=>{
-  //     row_array.push(box.innerHTML)
-  //     rows[i+1].children[it].innerHTML = box.innerHTMLdd
-  //     it++;
-  //   })
-  // }
-  // setTimeout(resume,daelay+(rows_to_clear*500));
+  //sets timeout to rejig sqaure colours
+  setTimeout(reanalyseClasses,delay + (rows_to_clear*500) + (rows_to_clear*200))
+  setTimeout(updateNextLetter,delay + (rows_to_clear*500) + (rows_to_clear*200))
+  setTimeout(resume,delay + (rows_to_clear*500) + (rows_to_clear*200) + 500)
 
 }
 
@@ -448,9 +399,6 @@ const triggerRowEnd = (row) => {
     rows[row].children[column].classList.add('wrong-position');
   } else {
     rows[row].children[column].classList.add('wrong-letter');
-
-    // all_letters.splice(all_letters.indexOf(last_letter), 1)
-    // console.log(all_letters)
   }
 
   if (mobile_drop_triggered) {
@@ -461,29 +409,23 @@ const triggerRowEnd = (row) => {
   if (Array.from(rows[row].children).every((child)=>{
     return child.classList.contains('right-position')
   })) {
-    // game_over = true;
-    // gameWon();
-
     clearRow(row);
     setNewWord();
     resetLetterIterator()
     increaseLevel();
     setSpeed();
-  // } else if (goes === 30) {
-  //   gameLost();
   }
 }
 
 const resetPreColumn = () => {
   rows[0].children[pre_column].classList.remove('pre-row');
   pre_column = 2;
-  // rows[0].children[pre_column].classList.add('pre-row');
 }
 
 const checkAndDrop = (column) => {
 
   row++;
-  // console.log(row, column)
+
   if (row === 0 && rows[row].children[column].innerHTML !== '') {
     gameLost();
     return;
@@ -495,23 +437,17 @@ const checkAndDrop = (column) => {
     }
   } else {
     triggerRowEnd(row-1);
-    // clearInterval(timed_loop);
 
     letter_in_play = false;
     row = -1;
   }
-  // i++;
-  // row++;
 }
 
 const changeColumn = (col) => {
   if (game_over) {
     return;
   }
-  // console.log(column, col)
-  // let target_empty = rows[row].children[col].innerHTML === '' ? true : false;
 
-  // if (col >= 0 && col < 5 && target_empty) {
   if (col >= 0 && col < 5 && rows[row].children[col].innerHTML === '') {
     rows[row].children[col].innerHTML = letter;
     rows[row].children[column].innerHTML = '';
@@ -531,23 +467,20 @@ const changePreColumn = (col) => {
 }
 
 const gamePlay = () => {
-  // console.log('loop')
+
   if (!letter_in_play) {
-    // selectColumn(2);
+
     letter = next_letter;
-    // column = 2;
     column = pre_column;
     row = -1;
-    // dropLetter(next_letter, column)
+
     checkAndDrop(column);
     letter_in_play = true;
     updateNextLetter();
     if (pre_column !== 2) {resetPreColumn();}
   } else {
     checkAndDrop(column);
-
   }
-   // drops a letter
 }
 
 const pause = () => {
@@ -556,6 +489,7 @@ const pause = () => {
 
 const resume = () => {
   gamePlayLoop = setInterval(gamePlay, speed*100);
+  busy = false;
 }
 
 
