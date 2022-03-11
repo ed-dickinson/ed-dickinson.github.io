@@ -303,7 +303,7 @@ img.greeter-pic::after {content: 'helllooo'; border-radius: 50%; height: 120px; 
 
 @media only screen and (max-width: 400px) {
   .greeter {
-    transform: scale(75%);
+    transform: scale(50%);
   }
 
 }
