@@ -21,11 +21,15 @@ let spacer2 = document.querySelector('.spacer2');
 let window_height = window.innerHeight;
 let hundred_height = bg.clientHeight;
 
+let little_window = window.innerWidth < 500 ? true : false;
+
 let testdisplay = document.querySelector('.test');
 let arrow_scroller = document.querySelector('.arrow-scroller');
 
 let mod = 0;
 let scroll_ratio = 0;
+
+let dev_link_underlined = false;
 
 function scrollSpacer() {
   let scroll = window.pageYOffset;
@@ -50,6 +54,10 @@ function scrollSpacer() {
   greeter_words.style.opacity = scroll_ratio > 0.5 ? 1 : scroll_ratio * 2;
   // greeter opacity and picture
 
+  if (scroll_ratio > 0.9 && !dev_link_underlined) {
+    document.querySelector('.resume-link').classList.add('here');
+    dev_link_underlined = true;
+  }
   // greeter.parentNode.style.top = '-' + (scroll_ratio > 0.5 ? 0 : ((window_height / 2) - scroll)) + 'px';
 
   // greeter.parentNode.style.top = (scroll_ratio > 0.5 ? hundred_height - scroll : hundred_height / 2) + 'px';
@@ -59,9 +67,9 @@ function scrollSpacer() {
   if (scroll_ratio < 0.2) {
     proPic.style.height = 300 + 'px';
   } else if (scroll_ratio > 0.5) {
-    proPic.style.height = 150 + 'px';
+    proPic.style.height = (little_window ? 200 : 150) + 'px';
   } else {
-    proPic.style.height = 300 - (150 * (((scroll_ratio - 0.2)*(0.5/0.3))*2)) + 'px';
+    proPic.style.height = 300 - ((little_window ? 200 : 150) * (((scroll_ratio - 0.2)*(0.5/0.3))*2)) + 'px';
   }
 
   // if (scroll_ratio > 0.5) {
