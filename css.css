@@ -1,3 +1,8 @@
+/* FOR NOW */
+nav {
+  font-size: 0;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 	font-size: 16px;
@@ -36,6 +41,32 @@ h2 {
   color: black;
   border-bottom: 3px solid plum;
   display: inline-block;
+}
+
+nav {
+  position: fixed; top: 10px; left: 0;
+  width: 100%;
+}
+
+menu {
+  /* background-color: red; */
+  text-align: right;
+  font-weight: 700;
+  color: plum;
+}
+menu span {
+  cursor: pointer;
+  margin: 0.25em;
+}
+menu span:hover {
+  opacity: 0.75;
+}
+menu span a {
+  color: inherit;
+  border: inherit;
+}
+menu span.here  {
+  border-bottom: 2px solid plum;
 }
 
 main {
@@ -168,7 +199,7 @@ span.scroll-arrow {
 }
 
 
-.spacer, .spacer1, .spacer2, .greeter {
+.spacer, .spacer1, .spacer2, .greeter, menu {
   width: calc(100% - 100px);
   max-width: 800px;
   margin: auto;
@@ -246,4 +277,33 @@ img.greeter-pic::after {content: 'helllooo'; border-radius: 50%; height: 120px; 
   0%{font-size: 0em;}
   70% {font-size: 1.2em;}
   100% {font-size: 1em;}
+}
+
+@media only screen and (max-width: 600px) {
+  .main-doc {
+    margin-left: 10px;
+    margin-right: 10px;
+    width: calc(100% - 50px);
+    padding-top: 25px;
+  }
+  .main-doc h1:first-of-type {
+    margin-bottom: 1em;
+  }
+  .main-doc h3:first-of-type {
+    top: -0.5em;
+  }
+
+  div.screenshot {
+    top: 0;
+  }
+  div.project img {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .greeter {
+    transform: scale(75%);
+  }
+
 }

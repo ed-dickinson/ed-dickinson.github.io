@@ -324,7 +324,6 @@ const reanalyseClasses = () => {
 }
 
 const clearRow = (r) => {
-  console.log(r)
 
   rows[r].classList.add('cleared-row');
   let target_row = rows[r];

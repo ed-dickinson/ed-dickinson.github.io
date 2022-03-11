@@ -6,8 +6,6 @@ title_holder.innerHTML = '';
 
 const title_text_array = title_text.split('')
 
-console.log(title_text.length)
-
 // limegreen 50, 205, 50
 // gold 255, 215, 0
 

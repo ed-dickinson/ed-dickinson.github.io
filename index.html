@@ -30,6 +30,13 @@
 
   </div> -->
 
+  <nav>
+    <menu>
+      <span class="resume-link">Development</span> /
+      <span class="music-link"><a href="/music">Music</a></span>
+    </menu>
+  </nav>
+
   <div class="spacer">
 
   </div>
@@ -146,7 +153,7 @@
         <em>Multi Mask</em>, a small web-app that lets you make your own pixellated mask on a basic editor, then add it to the collection of masks.
       </p>
       <p>
-        The back-end is an API 🌐 served by node.js and made with express. The front end, including the editor is made with vanilla javascript. 🍦
+        The back-end is an API 🌐 served by node.js and made with express.js. It includes a user storage and log-in as well ask saving all the masksd. The front end, including the editor is made with vanilla javascript. 🍦
       </p>
 
 
@@ -221,7 +228,10 @@
   <script src='scripts/greeter.js'></script>
   <script src='scripts/heroku-wake.js'></script>
   <script>
-
+    document.querySelector('.resume-link').addEventListener('click',()=>{
+      window.scrollTo(0, hundred_height - 25);
+      document.querySelector('.resume-link').classList.add('here');
+    })
   </script>
 
 

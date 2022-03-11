@@ -259,6 +259,8 @@ header span#next-letter {
 #buttons button.pressed {
   color: lightgrey;
   opacity: 0.75;
+  top: 2px;
+  position: relative;
 }
 
 #reset {
@@ -270,7 +272,7 @@ header span#next-letter {
   /* display: none; */
   color: white;
   background-color: var(--gry);
-  padding:  0.4em 0.8em;
+  padding:  0.5em 1.0em;
 }
 
 #share {
