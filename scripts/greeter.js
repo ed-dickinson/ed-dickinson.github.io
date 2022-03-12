@@ -36,7 +36,7 @@ let dev_link_underlined = false;
 
 function scrollSpacer() {
   let scroll = window.pageYOffset;
-  hundred_height = bg.clientHeight;
+  // hundred_height = bg.clientHeight;
   // testdisplay.innerHTML = scroll + ' ' + Math.round(window.innerHeight*0.45)+ ' ' + top_spacer.clientHeight;
   // mod = Math.round(window.innerHeight*0.45);
 
