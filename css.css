@@ -236,7 +236,9 @@ span.scroll-arrow {
 }
 
 
-img.greeter-pic {border-radius: 50%; height: 300px; box-shadow: 0px 0px 5px grey; margin: 20px 0; min-height: 150px; position: absolute; transform:translate(-50%, -50%); z-index: 15; max-height: 300px;}
+img.greeter-pic {border-radius: 50%; height: 300px; box-shadow: 0px 0px 5px grey; margin: 20px 0; min-height: 150px; position: absolute; transform:translate(-50%, -50%); z-index: 15; max-height: 300px;
+  /* font-size: 1px; */
+}
 img.greeter-pic::after {content: 'helllooo'; border-radius: 50%; height: 120px; width: 120px; position: absolute; border: 1px solid black; display: block;}
 
 .howdy-container {color: plum; font-size: 4em; font-weight: bolder; transform: rotate(180deg); animation: introspin 2s 0.2s  ease-in-out; animation-fill-mode: forwards; top: 16px; position: absolute; left: 142px; filter: drop-shadow(1px 1px 1px grey); opacity: 0; left: -8px;}
@@ -301,9 +303,28 @@ img.greeter-pic::after {content: 'helllooo'; border-radius: 50%; height: 120px; 
   }
 }
 
-@media only screen and (max-width: 400px) {
-  .greeter {
+@media only screen and (max-width: 500px) {
+  /* .greeter {
     transform: scale(50%);
+  } */
+  /* img.greeter-pic {
+    font-size: 0.5px;
+  } */
+  .howdy-container {
+    font-size: 2.75em;
   }
-
+  .arrow-scoller {
+    line-height: 0;
+  }
+  .scroll-arrow {
+    line-height: 0;
+    /* margin-top: -1em; */
+    /* padding: 10px; */
+  }
+  .scroll-arrow:nth-of-type(1),.scroll-arrow:nth-of-type(2),.scroll-arrow:nth-of-type(3),.scroll-arrow:nth-of-type(4),
+  .scroll-arrow:nth-of-type(5)
+  /* , .scroll-arrow:nth-of-type(6)  */
+  {
+    display: none;
+  }
 }

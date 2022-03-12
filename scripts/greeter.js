@@ -23,6 +23,9 @@ let hundred_height = bg.clientHeight;
 
 let little_window = window.innerWidth < 500 ? true : false;
 
+let big_pic = (little_window ? 200 : 300);
+let lil_pic = (little_window ? 100 : 150);
+
 let testdisplay = document.querySelector('.test');
 let arrow_scroller = document.querySelector('.arrow-scroller');
 
@@ -65,11 +68,11 @@ function scrollSpacer() {
   scroll < (hundred_height / 2) + 50 ? greeter.parentNode.classList.remove('caught') : greeter.parentNode.classList.add('caught');
 
   if (scroll_ratio < 0.2) {
-    proPic.style.height = 300 + 'px';
+    proPic.style.height = big_pic + 'px';
   } else if (scroll_ratio > 0.5) {
-    proPic.style.height = (little_window ? 200 : 150) + 'px';
+    proPic.style.height = lil_pic + 'px';
   } else {
-    proPic.style.height = 300 - ((little_window ? 200 : 150) * (((scroll_ratio - 0.2)*(0.5/0.3))*2)) + 'px';
+    proPic.style.height = big_pic - (lil_pic * (((scroll_ratio - 0.2)*(0.5/0.3))*2)) + 'px';
   }
 
   // if (scroll_ratio > 0.5) {
