@@ -33,25 +33,6 @@ header span#next-letter {
   font-size: 1.5em;
 }
 
-/* #pre-tiles {
-  position: relative;
-  height: 2px;
-  font-size: 1.25em;
-}
-
-#pre-tiles .pre-space {
-  display: inline-block;
-  width: 2em;
-  height: 2px;
-  background-color: white;
-  margin-left: 1px;
-  margin-right: 1px;
-  display: inline-flex;
-}
-
-#pre-tiles .pre-space.selected {
-  background-color: var(--gry);
-} */
 
 #tiles .space.pre-row::before {
   background-color: var(--gry);
@@ -74,7 +55,6 @@ header span#next-letter {
 #tiles .space {
   height: 2em; width: 2em; border: 2px solid var(--gry);
   display: inline-block;
-  /* margin: 0px; */
   margin-left: 1px;
   margin-right: 1px;
   overflow: hidden;
@@ -90,16 +70,12 @@ header span#next-letter {
   text-align: center;
   justify-content: center;
   text-transform: uppercase;
-  font-weight: bold;
-
+  font-weight: 800;
   cursor: pointer;
   border-radius: 2px;
 }
 
 #tiles .row {
-  /* margin-bottom: 10px; */
-  /* height: 1em; */
-  /* line-height: 0; */
   height: 2em;
   margin: 2px 0;
 }
@@ -153,8 +129,6 @@ header span#next-letter {
 
 
 #banner {
-  /* width: 100%;
-  height: 100%; */
   background-color: white;
   z-index: 100;
   position: absolute;
@@ -165,12 +139,7 @@ header span#next-letter {
   background-color: white;
   background-color: rgba(255,255,255,0.75);
   font-size: 1.5em;
-  /* border-top: 2px solid var(--grn);
-  border-left: 2px solid var(--ylw);
-  border-right: 2px solid var(--ylw);
-  border-bottom: 2px solid var(--grn); */
   border: 2px solid var(--grn);
-  /* outline: 2px solid var(--grn); */
   padding: 1em;
   font-weight: 900;
   text-shadow: 1px 2px 0px var(--ylw);
@@ -225,7 +194,6 @@ header span#next-letter {
 }
 #banner #result {
   animation: text-shadow 1s infinite alternate -2.5s;
-  /* box-shadow: 1px 2px 2px var(--grn); */
   background-color: transparent;
   color: black !important;
   font-size: 0.7em;
@@ -243,13 +211,10 @@ header span#next-letter {
 }
 #buttons button {
   font-family: inherit;
-  /* --sqr: calc(2.32em + 8px); */
   --sqr: calc(3em + 8px);
   height: var(--sqr); width: var(--sqr); border: 2px solid var(--gry);
   display: inline-block;
   font-size: 16px;
-  /* margin-left: 18px; */
-  /* color: var(--gry); */
   font-size: 2em;
   font-weight: 500;
   cursor: pointer;
@@ -276,12 +241,10 @@ header span#next-letter {
 }
 
 #reset {
-  /* text-decoration: underline; */
   margin-top: 1em;
   padding:  0.4em 0.5em;
   border: 2px solid var(--gry);
   cursor: pointer;
-  /* display: none; */
   color: white;
   background-color: var(--gry);
   padding:  0.5em 1.0em;
