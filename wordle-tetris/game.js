@@ -1,3 +1,6 @@
+let debug_mode = false;
+// debug_mode = true;
+
 let target_word, target_word_array, all_letters;
 
 let goes = 0;
@@ -214,7 +217,9 @@ const downTrigger = () => {
   if (!fast_drop_mode_on) {
     clearInterval(gamePlayLoop)
     gamePlay();
-    gamePlayLoop = setInterval(gamePlay, speed*25) // double speed
+    // let sss = debug_mode ? 10 : 25;
+    let sss = level===0 ? 20 : 25;
+    gamePlayLoop = setInterval(gamePlay, speed*sss) // double speed
     fast_drop_mode_on = true;
   }
 
@@ -341,6 +346,7 @@ const clearRow = (r) => {
     })
   }
 
+  // this clears the row completed and rows below
   for (let i = 0; i < rows_to_clear; i++) { // each row cleared = r + i
     let iter = 0;
     Array.from(rows[r + i].children).forEach(box=>{
@@ -354,26 +360,35 @@ const clearRow = (r) => {
       iter++;
     })
 
+    //TOP ROW CLEARING WAS AN ISSUE ABOUT COPYING, if the top row has a letter and it drops, it copies but doesn't delete the last one - is this because the row has no content?
     // for each cleared row (going down), set a timeout to copy the row above it
     setTimeout(()=>{
-      for (let j = 0; j < 6 - rows_to_clear; j++) {
+      for (let j = 0; j < 7 - rows_to_clear; j++) {
 
         // drops rows
         let box_it = 0;
+        // r is row that won, j is rows to drop iterator, i starts with row cleared and counts rows below
+        console.log(r,j,i, r - j + i)
         Array.from(rows[r - j + i].children).forEach(box=>{
           removeLetterClasses(rows[r-j+i].children[box_it])
-          box.innerHTML = board_2d_array[r-j-1][box_it].letter
-          if (board_2d_array[r-j-1][box_it].class.length > 1) {
-            box.classList.add(board_2d_array[r-j-1][box_it].class[1])
+
+          if ((r - j + i) === 0) {
+            box.innerHTML = '';
+          } else {
+            box.innerHTML = board_2d_array[r-j-1][box_it].letter;
+            if (board_2d_array[r-j-1][box_it].class.length > 1) {
+              box.classList.add(board_2d_array[r-j-1][box_it].class[1])
+            }
           }
+
           box_it++;
         })
 
-        // clears final row (top)
-        Array.from(rows[0].children).forEach(box=>{
-          removeLetterClasses(box)
-          box.innerHTML = '';
-        })
+        // clears final row (top) :::: HACK - don't work
+        // Array.from(rows[0].children).forEach(box=>{
+        //   removeLetterClasses(box)
+        //   box.innerHTML = '';
+        // })
       }
     },delay + (rows_to_clear*500) + (i*200))
   }
@@ -492,8 +507,8 @@ const resume = () => {
 }
 
 
-let intro_on = true;
-intro_on = false;
+// let intro_on = true;
+let intro_on = debug_mode ? false : true;
 
 let gamePlayLoop;
 

@@ -1,4 +1,4 @@
-const title_text = 'Tumbleword...';
+const title_text = 'Tumbleword!';
 
 const title_holder = document.querySelector('#intro-title');
 
@@ -21,9 +21,9 @@ for (let i = 0; i < title_text.length; i++) {
   span.classList.add('letter')
   span.style.opacity = 0
   span.style.color = `rgb(${c1[0]-(((c1[0]-c2[0])/t1)*i)},${c1[1]-(((c1[1]-c2[1])/t1)*i)},${c1[2]+(((c2[2]-c1[2])/t1)*i)})`
-  span.style.transform = `rotate(${(i*(i/2))/1.5}deg)`
-  span.style.top = `${i<3?0:((i-2)*(i-2))/2}px`
-  span.style.left = `${(i*i)/200}em`
+  // span.style.transform = `rotate(${(i*(i/2))/1.5}deg)`
+  // span.style.top = `${i<3?0:((i-2)*(i-2))/2}px`
+  // span.style.left = `${(i*i)/200}em`
 
   setTimeout(()=>{span.style.opacity = 1},i*100)
 }

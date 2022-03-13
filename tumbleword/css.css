@@ -5,8 +5,11 @@
 }
 
 main {
-  overflow: hidden;
+  overflow: visible;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
 }
+
+
 
 body {
   text-align: center;
@@ -69,7 +72,7 @@ header span#next-letter {
 }
 
 #tiles .space {
-  height: 2em; width: 2em; border: 2px solid grey;
+  height: 2em; width: 2em; border: 2px solid var(--gry);
   display: inline-block;
   /* margin: 0px; */
   margin-left: 1px;
@@ -79,7 +82,7 @@ header span#next-letter {
   z-index: 1;
   position: relative;
   top: 0;
-  /* line-height: 0; */
+  line-height: 0;
   box-sizing: border-box;
   vertical-align: middle;
   display: inline-flex;
@@ -90,6 +93,7 @@ header span#next-letter {
   font-weight: bold;
 
   cursor: pointer;
+  border-radius: 2px;
 }
 
 #tiles .row {
@@ -140,7 +144,11 @@ header span#next-letter {
 
 @keyframes winningrow {
   from {border-color: white;}
-  to {border-color: grey;}
+  to {border-color: var(--gry);}
+}
+
+#tiles .cleared-row .space {
+  animation: winningrow 0.5s infinite linear;
 }
 
 
@@ -168,6 +176,7 @@ header span#next-letter {
   text-shadow: 1px 2px 0px var(--ylw);
   z-index: 9;
   animation: border-banner 1s infinite alternate;
+  border-radius: 5px;
 }
 
 @keyframes border-banner {
@@ -193,6 +202,7 @@ header span#next-letter {
   background-color: white;
   z-index: -1;
   animation: border-banner 1s infinite alternate-reverse -2s;
+  border-radius: 2px;
 }
 #banner #message {
   font-size: 1.5em;
@@ -213,6 +223,16 @@ header span#next-letter {
     color: var(--ylw);
   }
 }
+#banner #result {
+  animation: text-shadow 1s infinite alternate -2.5s;
+  /* box-shadow: 1px 2px 2px var(--grn); */
+  background-color: transparent;
+  color: black !important;
+  font-size: 0.7em;
+  font-weight: 600;
+  margin-top: 0.5em;
+
+}
 
 #buttons {
   font-size: 16px;
@@ -225,7 +245,7 @@ header span#next-letter {
   font-family: inherit;
   /* --sqr: calc(2.32em + 8px); */
   --sqr: calc(3em + 8px);
-  height: var(--sqr); width: var(--sqr); border: 2px solid grey;
+  height: var(--sqr); width: var(--sqr); border: 2px solid var(--gry);
   display: inline-block;
   font-size: 16px;
   /* margin-left: 18px; */
@@ -234,29 +254,56 @@ header span#next-letter {
   font-weight: 500;
   cursor: pointer;
   --mrgn: calc(0.5em + 4px);
+  color: white;
+  background-color: var(--gry);
+  border: solid 2px var(--gry);
+  background-image: linear-gradient(to left, var(--grn), var(--ylw));
+  background-size: 200%;
+  border-radius: 5px;
 }
 #buttons button:first-of-type {
   margin-right: var(--mrgn);
 }
 #buttons button:nth-of-type(2) {
   margin-left: var(--mrgn);
+  background-position: 100%;
 }
 #buttons button.pressed {
   color: lightgrey;
+  opacity: 0.75;
+  top: 2px;
+  position: relative;
 }
 
 #reset {
   /* text-decoration: underline; */
   margin-top: 1em;
   padding:  0.4em 0.5em;
-  border: 2px solid grey;
+  border: 2px solid var(--gry);
   cursor: pointer;
   /* display: none; */
+  color: white;
+  background-color: var(--gry);
+  padding:  0.5em 1.0em;
+  border-radius: 5px;
+}
+
+button#reset {
+  font-family: inherit;
+}
+
+#share {
+  color: white;
+  border: 2px solid var(--gry);
+  background-color: var(--gry);
+  padding:  0.2em 0.5em;
+  margin-top: 0.5em;
 }
 
 #intro-title {
   position: absolute;
   left: calc(50% + 0.5em);
+  left: 50%;
   transform: translateX(-50%);
   background-color: white;
   height: 100%;
@@ -268,4 +315,45 @@ header span#next-letter {
   display: inline-block;
   position: relative;
   color: gold;
+}
+
+#tumbleweed-cont {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  top: 20px;
+  transform: translate(-50%);
+}
+
+#tumbleweed {
+  position: absolute;
+  left: 20px;
+  top: 0px;
+  animation: tumble-round 4s infinite linear, tumble-bounce 1s infinite ease-in alternate, tumble-across 4s infinite linear;
+}
+
+@keyframes tumble-round {
+  from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
+}
+@keyframes tumble-bounce {
+  from {top: 1em;}
+    to {top: 1.5em;}
+}
+@keyframes tumble-across {
+  0% {left: -10em; opacity: 0;}
+  50% {left: 0; opacity: 1;}
+    100% {left: 10em; opacity: 0;}
+}
+
+#tumbleweed div {
+  position: absolute;
+}
+
+
+#score {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 0.75em;
 }
