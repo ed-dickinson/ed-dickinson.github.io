@@ -27,33 +27,65 @@
     </header>
 
     <div id="tiles">
+      <div id="intro-banner" class="hidden">
+        <div class="contents">
+          <p>
+            A <span class="yellow">yellow</span> letter's in the wrong place, a <span class="green">green</span> one's in the right place.
+          </p>
+          <p>
+            Get the word right to clear the row and the ones below, .
+          </p>
+          <p>
+            Tap the grid to drop a letter quickly.
+          </p>
+          <p>
+            Have fun out there!
+          </p>
+        </div>
+      </div>
 
+      <div id="banner" class="hidden" >
+
+        <div id="game-over" >
+
+          <div id="message">
+            ___.
+          </div>
+          <div id="result">
+            You got <span class="score-display">#</span> words, <br />
+            but didn't get
+            <br /><span class="word-display">_____</span>.
+          </div>
+          <!-- <button id="reset">
+            PLAY AGAIN?
+          </button> -->
+          <!-- <div id="share-container">
+            <button id="share">
+              SHARE
+            </button>
+          </div> -->
+        </div>
+      </div>
+      
     </div>
 
-    <div id="banner" class="hidden">
-      <div id="message">
-        ___.
-      </div>
-      <div id="result">
-        You got <span class="score-display">#</span> words!
-      </div>
-      <button id="reset">
-        PLAY AGAIN?
-      </button>
-      <!-- <div id="share-container">
-        <button id="share">
-          SHARE
-        </button>
-      </div> -->
 
-    </div>
 
-    <div id="buttons">
+    <div id="buttons" class='hidden'>
       <button id="left">
         <
       </button>
+
       <button id="right">
         >
+      </button>
+
+      <button id="big-restart" class="hidden">
+        REPLAY
+      </button>
+
+      <button id="big-start">
+        START
       </button>
     </div>
 

@@ -70,7 +70,10 @@ const banner_result = document.querySelector('#result');
 
 const dom = {
   next_letter: document.querySelector('#next-letter'),
-  score: document.querySelector('#score')
+  score: document.querySelector('#score'),
+  start: document.querySelector('#big-start'),
+  restart: document.querySelector('#big-restart'),
+  intro_banner: document.querySelector('#intro-banner')
 }
 
 dom.score.innerHTML = '';
@@ -145,9 +148,13 @@ const gameLost = () => {
   console.log('you lose...')
   banner.classList.remove('hidden')
   banner_message.innerHTML = '<div>GAME</div><div>OVER</div>';
-  banner_result.innerHTML = `You got ${level} word${level===1?'':'s'}!`;
+  banner_result.innerHTML = `You got ${level===0?'no':level} word${level===1?'':'s'}, <br> ${level>0?'but':'and'} didn't get<br /><span class="word-display">${target_word.toUpperCase()}</span>`;
+  // banner_result.innerHTML = `You got ${level} word${level===1?'':'s'}, <br> ${level>0?'but':'and'} didn't get<br /><span class="word-display">${target_word.toUpperCase()}</span>`;
   game_over = true;
   clearInterval(gamePlayLoop)
+
+  banner.classList.add('fade-in');
+  dom.restart.classList.remove('hidden');
 }
 
 
@@ -183,12 +190,17 @@ const resetGame = () => {
   gamePlayLoop = setInterval(gamePlay, speed*100);
 }
 
-const replay_button = document.querySelector('#reset')
+// const replay_button = document.querySelector('#reset')
+//
+// replay_button.addEventListener('click',()=>{
+//   resetGame();
+// })
 
-replay_button.addEventListener('click',()=>{
+dom.restart.addEventListener('click',()=>{
   resetGame();
+  dom.restart.classList.add('hidden');
+  banner.classList.remove('fade-in');
 })
-
 
 
 // BUTTONS and THEIR FUNCTIONS
@@ -513,9 +525,9 @@ let intro_on = debug_mode ? false : true;
 let gamePlayLoop;
 
 // account for intro delay
-setTimeout(()=> {
-  gamePlayLoop = setInterval(gamePlay, speed*100);
-},intro_on ? 1800 : 0)
+// setTimeout(()=> {
+//   gamePlayLoop = setInterval(gamePlay, speed*100);
+// },intro_on ? 1800 : 0)
 
 // if (!intro_on) {
 //   title_holder.style.display = 'none'
@@ -527,4 +539,14 @@ setTimeout(()=> {
 document.addEventListener("click", event => {
   event.preventDefault()
   event.stopPropagation()
+})
+
+
+//start button!
+dom.start.addEventListener('click', ()=>{
+  gamePlayLoop = setInterval(gamePlay, speed*100);
+  dom.start.classList.add('hidden');
+  hideTitle();
+  dom.intro_banner.classList.add('hidden');
+
 })
