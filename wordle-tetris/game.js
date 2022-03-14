@@ -372,7 +372,7 @@ const clearRow = (r) => {
         Array.from(rows[r - j + i].children).forEach(box=>{
           removeLetterClasses(rows[r-j+i].children[box_it])
 
-          if ((r - j + i) === 0) {
+          if ((r - j - 1) < 0) {
             box.innerHTML = '';
           } else {
             box.innerHTML = board_2d_array[r-j-1][box_it].letter;
