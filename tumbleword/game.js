@@ -71,8 +71,11 @@ const dom = {
   score: document.querySelector('#score'),
   start: document.querySelector('#big-start'),
   restart: document.querySelector('#big-restart'),
-  intro_banner: document.querySelector('#intro-banner')
+  intro_banner: document.querySelector('#intro-banner'),
+  banner_close_button: document.querySelector('#banner-close-button')
 }
+
+dom.banner_close_button.addEventListener('click',()=>{banner.classList.add('hidden')})
 
 dom.score.innerHTML = '';
 
@@ -437,7 +440,6 @@ const resetPreColumn = () => {
 }
 
 const checkAndDrop = (column) => {
-  console.log('checkAndDrop')
 
   row++;
 
@@ -484,7 +486,6 @@ const changePreColumn = (col) => {
 const gamePlay = () => {
 
   if (!letter_in_play) {
-    console.log('!letter_in_play')
 
     letter = next_letter;
     column = pre_column;
@@ -495,7 +496,6 @@ const gamePlay = () => {
     updateNextLetter();
     if (pre_column !== 2) {resetPreColumn();}
   } else {
-    console.log('letter_in_play')
     checkAndDrop(column);
   }
 }
