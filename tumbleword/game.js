@@ -47,7 +47,6 @@ const resetLetterIterator = () => {
       letter_iterator.push(letter);
     }
   })
-  // console.log(letter_iterator)
 }
 
 const shuffleLetterIterator = () => {
@@ -57,7 +56,6 @@ const shuffleLetterIterator = () => {
     letter_iterator[i] = letter_iterator[j]
     letter_iterator[j] = k
   }
-  // console.log(letter_iterator)
 }
 
 resetLetterIterator()
@@ -149,7 +147,7 @@ const gameLost = () => {
   banner.classList.remove('hidden')
   banner_message.innerHTML = '<div>GAME</div><div>OVER</div>';
   banner_result.innerHTML = `You got ${level===0?'no':level} word${level===1?'':'s'}, <br> ${level>0?'but':'and'} didn't get<br /><span class="word-display">${target_word.toUpperCase()}</span>`;
-  // banner_result.innerHTML = `You got ${level} word${level===1?'':'s'}, <br> ${level>0?'but':'and'} didn't get<br /><span class="word-display">${target_word.toUpperCase()}</span>`;
+
   game_over = true;
   clearInterval(gamePlayLoop)
 
@@ -190,12 +188,6 @@ const resetGame = () => {
   gamePlayLoop = setInterval(gamePlay, speed*100);
 }
 
-// const replay_button = document.querySelector('#reset')
-//
-// replay_button.addEventListener('click',()=>{
-//   resetGame();
-// })
-
 dom.restart.addEventListener('click',()=>{
   resetGame();
   dom.restart.classList.add('hidden');
@@ -228,14 +220,13 @@ const downTrigger = () => {
 
   if (!fast_drop_mode_on) {
     clearInterval(gamePlayLoop)
-    gamePlay();
-    // let sss = debug_mode ? 10 : 25;
+    gamePlay(); // do it once to get rid of delay in set interval
+
     let sss = level===0 ? 20 : 25;
     gamePlayLoop = setInterval(gamePlay, speed*sss) // double speed
     fast_drop_mode_on = true;
   }
 
-  // animateButton(down_button)
 }
 
 let fast_drop_mode_on = false;
@@ -276,7 +267,8 @@ window.addEventListener('keydown', keyboardPress);
 let mobile_drop_triggered = false;
 
 const touchDrop = () => {
-  if (letter_in_play) {
+  // if (letter_in_play) {
+  if (game_begun && !game_over) {
     downTrigger();
     mobile_drop_triggered = true;
   }
@@ -302,6 +294,7 @@ const setSpeed = () => {
   // speed = level_speeds[level]*10;
 }
 
+let game_begun = false;
 let game_over = false;
 let letter_in_play = false;
 let busy;
@@ -396,11 +389,6 @@ const clearRow = (r) => {
           box_it++;
         })
 
-        // clears final row (top) :::: HACK - don't work
-        // Array.from(rows[0].children).forEach(box=>{
-        //   removeLetterClasses(box)
-        //   box.innerHTML = '';
-        // })
       }
     },delay + (rows_to_clear*500) + (i*200))
   }
@@ -449,6 +437,7 @@ const resetPreColumn = () => {
 }
 
 const checkAndDrop = (column) => {
+  console.log('checkAndDrop')
 
   row++;
 
@@ -495,6 +484,7 @@ const changePreColumn = (col) => {
 const gamePlay = () => {
 
   if (!letter_in_play) {
+    console.log('!letter_in_play')
 
     letter = next_letter;
     column = pre_column;
@@ -505,6 +495,7 @@ const gamePlay = () => {
     updateNextLetter();
     if (pre_column !== 2) {resetPreColumn();}
   } else {
+    console.log('letter_in_play')
     checkAndDrop(column);
   }
 }
@@ -545,6 +536,7 @@ document.addEventListener("click", event => {
 //start button!
 dom.start.addEventListener('click', ()=>{
   gamePlayLoop = setInterval(gamePlay, speed*100);
+  game_begun = true;
   dom.start.classList.add('hidden');
   hideTitle();
   dom.intro_banner.classList.add('hidden');
