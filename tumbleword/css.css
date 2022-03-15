@@ -263,6 +263,21 @@ header span#next-letter {
   cursor: pointer;
 }
 
+#banner-close-button svg {
+  position: absolute;
+  top: 0.5em;
+  left: 0.5em;
+  stroke: white;
+  height: 1em; width: 1em;
+  stroke-width: 3px;
+  stroke-linecap: round;
+}
+
+#banner-close-button svg path {
+  d: path('M 2 2  L 8 8  M 2 8 L 8 2');
+
+}
+
 #intro-banner {
   position: absolute;
   width: calc(10em - 0px);
