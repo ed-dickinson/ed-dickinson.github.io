@@ -58,6 +58,7 @@ const introShimmer = () => {
       let child_array = Array.from(row.children)
 
       if (i - r < 5 && i - r > -1) {
+        child_array[i - r].classList.remove('unloaded')
         child_array[i - r].classList.add('wrong-position')
       }
       if (i - r < 6 && i - r > 0) {
@@ -82,14 +83,18 @@ const introShimmer = () => {
     // if (i===10) {
     //   document.querySelector('#buttons').classList.remove('hidden');
     // }
+
+    // if (i === 9) {
+    //   dom.intro_banner.classList.remove('hidden');
+    //   dom.intro_banner.classList.add('fade-in');
+    // }
     if (i === 9) {
-      dom.intro_banner.classList.remove('hidden');
-      dom.intro_banner.classList.add('fade-in');
+      document.querySelector('#buttons').classList.remove('hidden');
+      document.querySelector('#big-start').classList.add('loaded');
     }
 
     if (i > 10) {
-      document.querySelector('#buttons').classList.remove('hidden');
-      document.querySelector('#big-start').classList.add('loaded');
+
       // document.querySelector('#big-start').style.backgroundColor = 'grey';
       clearInterval(intro_shimmer)
 

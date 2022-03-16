@@ -72,7 +72,8 @@ const dom = {
   start: document.querySelector('#big-start'),
   restart: document.querySelector('#big-restart'),
   intro_banner: document.querySelector('#intro-banner'),
-  banner_close_button: document.querySelector('#banner-close-button')
+  banner_close_button: document.querySelector('#banner-close-button'),
+  tiles: document.querySelector('#tiles')
 }
 
 dom.banner_close_button.addEventListener('click',()=>{banner.classList.add('hidden')})
@@ -93,6 +94,7 @@ for (let i = 0; i < 6; i++) {
   for (let j = 0; j < 5; j++) {
     let space = document.createElement('span');
     space.classList.add('space')
+    space.classList.add('unloaded')
     row.appendChild(space)
   }
 }
@@ -206,17 +208,14 @@ const animateButton = (dom) => {
 }
 
 const leftTrigger = () => {
-  // console.log('L')
   letter_in_play ? changeColumn(column-1) : changePreColumn(pre_column-1);
   animateButton(left_button)
 }
 const rightTrigger = () => {
-  // console.log('R')
   letter_in_play ? changeColumn(column+1) : changePreColumn(pre_column+1);
   animateButton(right_button)
 }
 const downTrigger = () => {
-  // console.log('D')
   if (game_over || busy) {
     return;
   }
@@ -248,7 +247,6 @@ const keyboardPress = () => {
     rightTrigger();
   }
   else if (event.code === 'ArrowDown' || event.code === 'KeyS') {
-    window.addEventListener('keyup', keyboardRelease);
     downTrigger();
   }
 }
@@ -353,6 +351,7 @@ const clearRow = (r) => {
       board_2d_array[r-j-1] = temp_array;
     })
   }
+  tiles_container.classList.add('clearing');
 
   // this clears the row completed and rows below
   for (let i = 0; i < rows_to_clear; i++) { // each row cleared = r + i
@@ -372,11 +371,9 @@ const clearRow = (r) => {
     // for each cleared row (going down), set a timeout to copy the row above it
     setTimeout(()=>{
       for (let j = 0; j < 7 - rows_to_clear; j++) {
-
         // drops rows
         let box_it = 0;
         // r is row that won, j is rows to drop iterator, i starts with row cleared and counts rows below
-        console.log(r,j,i, r - j + i)
         Array.from(rows[r - j + i].children).forEach(box=>{
           removeLetterClasses(rows[r-j+i].children[box_it])
 
@@ -387,6 +384,7 @@ const clearRow = (r) => {
             if (board_2d_array[r-j-1][box_it].class.length > 1) {
               box.classList.add(board_2d_array[r-j-1][box_it].class[1])
             }
+
           }
 
           box_it++;
@@ -396,9 +394,10 @@ const clearRow = (r) => {
     },delay + (rows_to_clear*500) + (i*200))
   }
   //sets timeout to rejig sqaure colours
-  setTimeout(reanalyseClasses,delay + (rows_to_clear*500) + (rows_to_clear*200))
-  setTimeout(updateNextLetter,delay + (rows_to_clear*500) + (rows_to_clear*200))
-  setTimeout(resume,delay + (rows_to_clear*500) + (rows_to_clear*200) + 500)
+  setTimeout(reanalyseClasses, delay + (rows_to_clear*500) + (rows_to_clear*200))
+  setTimeout(updateNextLetter, delay + (rows_to_clear*500) + (rows_to_clear*200))
+  setTimeout(resume, delay + (rows_to_clear*500) + (rows_to_clear*200) + 500)
+  setTimeout(()=>{tiles_container.classList.remove('clearing');}, delay + (rows_to_clear*500) + (rows_to_clear*200))
 
 }
 
