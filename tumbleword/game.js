@@ -247,7 +247,7 @@ const keyboardPress = () => {
     rightTrigger();
   }
   else if (event.code === 'ArrowDown' || event.code === 'KeyS') {
-    downTrigger();
+    touchDrop();
   }
 }
 const untriggerDrop = () => {
