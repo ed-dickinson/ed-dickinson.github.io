@@ -390,23 +390,29 @@ header span#next-letter {
 
 #buttons #down {
   position: absolute;
-  top: calc(100% + 5px);
+  top: calc(100% + 8px);
   left: 50%;
   transform: translateX(-50%);
   width: calc(7em + 28px);
   color: white;
-  height: 2em;
+  height: 1.25em;
+  border: 2px solid var(--gry);
+  background-color: white;
 }
 #buttons #down::after {
   content: '';
-  top: calc(50% - 0.2em);
+  top: calc(50% - 0.35em);
   position: absolute;
   width: 0;
   height: 0;
   border-left: 0.5em solid transparent;
   border-right: 0.5em solid transparent;
-  border-top: 0.75em solid white;
+  border-top: 0.75em solid var(--gry);
   left: calc(50% - 0.5em);
+  transform: scale(0.75);
+}
+#buttons #down.hidden {
+  display: none;
 }
 
 #buttons #right::after, #buttons #left::after {
@@ -426,11 +432,11 @@ header span#next-letter {
   border-right: 0.75em solid white;
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 350px) {
   #buttons #down {
     top: 0.5em;
     top: 50%;
-    width: 1em;
+    width: 32px;
     height: 1.5em;
     transform: translate(-50%, -50%);
   }
@@ -438,11 +444,8 @@ header span#next-letter {
     border-width: 0.375em 0.25em 0 0.25em;
     left: calc(50% - 0.25em);
     top: calc(50% - 0.125em);
+    transform: scale(1);
   }
-}
-
-#buttons button#big-start {
-  display: none;
 }
 /* #buttons #down::before {
   transform: rotate(135deg);

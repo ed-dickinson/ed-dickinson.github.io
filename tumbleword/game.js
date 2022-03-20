@@ -235,9 +235,11 @@ let fast_drop_mode_on = false;
 
 const left_button = document.querySelector('#left');
 const right_button = document.querySelector('#right');
+const down_button = document.querySelector('#down');
 
 left_button.addEventListener('click', leftTrigger);
 right_button.addEventListener('click', rightTrigger);
+
 
 const keyboardPress = () => {
   if (event.code === 'ArrowLeft' || event.code === 'KeyA') {
@@ -276,7 +278,7 @@ const touchDrop = () => {
 }
 
 tiles_container.addEventListener('click', touchDrop);
-
+down_button.addEventListener('click', touchDrop);
 
 // GAMEPLAY
 
@@ -539,5 +541,5 @@ dom.start.addEventListener('click', ()=>{
   dom.start.classList.add('hidden');
   hideTitle();
   dom.intro_banner.classList.add('hidden');
-
+  down_button.classList.remove('hidden');
 })
