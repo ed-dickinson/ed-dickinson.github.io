@@ -359,6 +359,7 @@ header span#next-letter {
   border-top: 2px solid var(--gry);
   border-top: 2px solid white;
   padding-top: 0.5em;
+  position: relative;
 }
 #buttons button {
   font-family: inherit;
@@ -377,6 +378,7 @@ header span#next-letter {
   /* background-image: linear-gradient(to left, var(--grn), var(--ylw)); */
   background-size: 200%;
   border-radius: 5px;
+  position: relative;
 }
 #buttons button:first-of-type {
   margin-right: var(--mrgn);
@@ -385,6 +387,67 @@ header span#next-letter {
   margin-left: var(--mrgn);
   background-position: 100%;
 }
+
+#buttons #down {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(7em + 28px);
+  color: white;
+  height: 2em;
+}
+#buttons #down::after {
+  content: '';
+  top: calc(50% - 0.2em);
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 0.5em solid transparent;
+  border-right: 0.5em solid transparent;
+  border-top: 0.75em solid white;
+  left: calc(50% - 0.5em);
+}
+
+#buttons #right::after, #buttons #left::after {
+  content: '';
+  position: absolute;
+  top: calc(50% - 0.5em);
+  left: calc(50% - 0.375em);
+  width: 0;
+  height: 0;
+  border-top: 0.5em solid transparent;
+  border-bottom: 0.5em solid transparent;
+}
+#buttons #right::after {
+  border-left: 0.75em solid white;
+}
+#buttons #left::after {
+  border-right: 0.75em solid white;
+}
+
+@media only screen and (max-width: 400px) {
+  #buttons #down {
+    top: 0.5em;
+    top: 50%;
+    width: 1em;
+    height: 1.5em;
+    transform: translate(-50%, -50%);
+  }
+  #buttons #down::after {
+    border-width: 0.375em 0.25em 0 0.25em;
+    left: calc(50% - 0.25em);
+    top: calc(50% - 0.125em);
+  }
+}
+
+#buttons button#big-start {
+  display: none;
+}
+/* #buttons #down::before {
+  transform: rotate(135deg);
+  left: calc(50% - 0.25em);
+} */
 /* #buttons button:first-of-type {
 
 }
@@ -412,6 +475,8 @@ header span#next-letter {
   /* display: none; */
   font-weight: 800;
 }
+
+
 
 #buttons button#big-restart.hidden, #buttons button#big-start.hidden {
   display: none;
