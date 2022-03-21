@@ -1,3 +1,6 @@
+// glitches on loading tile diagonal swipe - first fw either 1, or 2,1, or maybe 3/2/1 freeze on borderless class
+
+
 let debug_mode = false;
 // debug_mode = true;
 
@@ -229,6 +232,7 @@ const downTrigger = () => {
     fast_drop_mode_on = true;
   }
 
+  animateButton(down_button)
 }
 
 let fast_drop_mode_on = false;

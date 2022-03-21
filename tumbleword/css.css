@@ -300,6 +300,18 @@ header span#next-letter {
   transform: rotate(135deg);
 }
 
+#banner #share {
+  position: absolute;
+  left: 50%;
+  border-radius: 5px;
+  box-sizing: border-box;
+  height: 2em;
+  font-size: 0.8em;
+  bottom: -12px;
+  transform: translateX(-50%);
+  font-weight: 600;
+}
+
 #intro-banner {
   position: absolute;
   width: calc(10em - 0px);
@@ -399,6 +411,9 @@ header span#next-letter {
   border: 2px solid var(--gry);
   background-color: white;
 }
+#buttons #down.pressed {
+  top: calc(100% + 10px);
+}
 #buttons #down::after {
   content: '';
   top: calc(50% - 0.35em);
@@ -436,9 +451,13 @@ header span#next-letter {
   #buttons #down {
     top: 0.5em;
     top: 50%;
-    width: 32px;
+    width: 32px !important;
+    box-sizing: border-box;
     height: 1.5em;
     transform: translate(-50%, -50%);
+  }
+  #buttons #down.pressed {
+    top: calc(0.5em + 2px);
   }
   #buttons #down::after {
     border-width: 0.375em 0.25em 0 0.25em;
