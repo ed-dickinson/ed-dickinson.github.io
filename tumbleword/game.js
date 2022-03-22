@@ -40,7 +40,7 @@ setUp();
 // LETTER ITERATOR sets up an array of n copies of each letter to select from to ensure regular letter appearance
 
 let letter_iterator = [];
-let max_letters_without_new_line = 3;
+let max_letters_without_new_line = 2; // was 3 - too annoying?
 
 const resetLetterIterator = () => {
   letter_iterator = [];
@@ -296,7 +296,7 @@ const setSpeed = () => {
   if (level === 0) {
     speed = 10;
   } else {
-    speed *= 0.8;
+    speed *= 0.9; // was 0.8
   }
   // speed = level_speeds[level]*10;
 }

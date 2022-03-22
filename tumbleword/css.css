@@ -448,16 +448,16 @@ header span#next-letter {
 }
 
 @media only screen and (max-width: 350px) {
-  #buttons #down {
+  #buttons button#down {
     top: 0.5em;
     top: 50%;
-    width: 32px !important;
+    width: 32px;
     box-sizing: border-box;
     height: 1.5em;
     transform: translate(-50%, -50%);
   }
-  #buttons #down.pressed {
-    top: calc(0.5em + 2px);
+  #buttons button#down.pressed {
+    top: calc(50% + 2px);
   }
   #buttons #down::after {
     border-width: 0.375em 0.25em 0 0.25em;
@@ -615,10 +615,14 @@ button#reset {
   position: absolute;
 }
 
-
-#score {
+#score, #points {
   position: absolute;
   top: 0;
-  right: 0;
   font-size: 0.75em;
+}
+#score {
+  right: 0;
+}
+#points {
+  left: 0;
 }
