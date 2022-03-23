@@ -1,6 +1,8 @@
 // glitches on loading tile diagonal swipe - first fw either 1, or 2,1, or maybe 3/2/1 freeze on borderless class
 
 
+//share link = I got # words on <a href="https://www.ed-dickinson.net/tumbleword/">Tumbleword</a>. [url=https://www.ed-dickinson.net/tumbleword/]
+
 let debug_mode = false;
 // debug_mode = true;
 
@@ -64,7 +66,7 @@ const shuffleLetterIterator = () => {
 resetLetterIterator()
 
 
-const banner = document.querySelector('#banner');
+var banner = document.querySelector('#banner'); // changed to var for safari
 const banner_message = document.querySelector('#message');
 const banner_goes = document.querySelector('#goes');
 const banner_result = document.querySelector('#result');
@@ -76,7 +78,10 @@ const dom = {
   restart: document.querySelector('#big-restart'),
   intro_banner: document.querySelector('#intro-banner'),
   banner_close_button: document.querySelector('#banner-close-button'),
-  tiles: document.querySelector('#tiles')
+  tiles: document.querySelector('#tiles'),
+  points: document.querySelector('#points'),
+  share: document.querySelector('#share'),
+  share_readout: document.querySelector('#share-readout')
 }
 
 dom.banner_close_button.addEventListener('click',()=>{banner.classList.add('hidden')})
@@ -102,7 +107,7 @@ for (let i = 0; i < 6; i++) {
   }
 }
 
-const tiles = document.querySelectorAll('.space');
+var tiles = document.querySelectorAll('.space');
 
 
 let next_letter;
@@ -154,15 +159,25 @@ const gameLost = () => {
   console.log('you lose...')
   banner.classList.remove('hidden')
   banner_message.innerHTML = '<div>GAME</div><div>OVER</div>';
-  banner_result.innerHTML = `You got ${level===0?'no':level} word${level===1?'':'s'}, <br> ${level>0?'but':'and'} didn't get<br /><span class="word-display">${target_word.toUpperCase()}</span>`;
+  banner_result.innerHTML = `You got ${level===0?'no':level} word${level===1?'':'s'}, <br>${points} points, <br> ${level>0?'but':'and'} didn't get<br /><span class="word-display">${target_word.toUpperCase()}</span>`;
 
   game_over = true;
   clearInterval(gamePlayLoop)
 
   banner.classList.add('fade-in');
   dom.restart.classList.remove('hidden');
+
+  dom.share_readout.value = `I got ${level} word${level===1?'':'s'} and ${points} points in Tumbleword! - https://ed-dickinson.net/tumbleword`
+  dom.share.addEventListener('click',copyShareText)
 }
 
+const copyShareText = () => {
+
+  dom.share_readout.select()
+  dom.share_readout.setSelectionRange(0, 99999)
+  navigator.clipboard.writeText(dom.share_readout.value)
+  dom.share.innerHTML = 'COPIED'
+}
 
 let guess = 1;
 let tile = 1;
@@ -191,9 +206,13 @@ const resetGame = () => {
   level = 0;
   setSpeed();
 
+  points = 0;
+
   dom.score.innerHTML = '';
 
   gamePlayLoop = setInterval(gamePlay, speed*100);
+
+  dom.share.innerHTML = 'SHARE'
 }
 
 dom.restart.addEventListener('click',()=>{
@@ -301,6 +320,13 @@ const setSpeed = () => {
   // speed = level_speeds[level]*10;
 }
 
+var points = 0;
+
+const addPoints = (new_points) => {
+  points += new_points;
+  dom.points.innerHTML = points;
+}
+
 let game_begun = false;
 let game_over = false;
 let letter_in_play = false;
@@ -368,9 +394,11 @@ const clearRow = (r) => {
         box.classList.remove('right-position')
         box.classList.remove('wrong-position')
         box.classList.remove('wrong-letter')
+        addPoints(10);
       },delay + (i*500) + (iter*100))
 
       iter++;
+
     })
 
     //TOP ROW CLEARING WAS AN ISSUE ABOUT COPYING, if the top row has a letter and it drops, it copies but doesn't delete the last one - is this because the row has no content?
@@ -428,6 +456,7 @@ const triggerRowEnd = (row) => {
     mobile_drop_triggered = false;
   }
 
+  // WORD GOT
   if (Array.from(rows[row].children).every((child)=>{
     return child.classList.contains('right-position')
   })) {
@@ -436,6 +465,7 @@ const triggerRowEnd = (row) => {
     resetLetterIterator()
     increaseLevel();
     setSpeed();
+    addPoints(100 + ((level-1) * 20));
   }
 }
 

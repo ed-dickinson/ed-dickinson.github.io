@@ -43,7 +43,7 @@ const hideTitle = () => {
 
 let shimmmer_frame = 0;
 const introShimmer = () => {
-  if (tiles) {
+  if (tiles && tiles.length === 30) {
     let i = shimmmer_frame;
     shimmmer_frame++;
     // let row_array = Array.from(rows[i].children)
