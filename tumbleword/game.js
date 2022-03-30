@@ -1,8 +1,5 @@
 // glitches on loading tile diagonal swipe - first fw either 1, or 2,1, or maybe 3/2/1 freeze on borderless class
 
-
-//share link = I got # words on <a href="https://www.ed-dickinson.net/tumbleword/">Tumbleword</a>. [url=https://www.ed-dickinson.net/tumbleword/]
-
 let debug_mode = false;
 // debug_mode = true;
 
@@ -12,7 +9,7 @@ let goes = 0;
 
 const setUp = () => {
   target_word = valid_answers[Math.floor(Math.random()*valid_answers.length)]
-  console.log(target_word)
+  // console.log(target_word)
   target_word_array = target_word.split('');
 
   let common_extra_letters = 'ear';
@@ -122,14 +119,12 @@ const updateNextLetter = () => {
 
   let current_letter = next_letter;
   last_letter = next_letter;
-  // do {
-    // next_letter = all_letters[Math.floor(Math.random()*all_letters.length)];
-    if (letter_iterator.length === 0) {
-      resetLetterIterator();
-    }
-    shuffleLetterIterator();
-    next_letter = letter_iterator.pop();
-  // } while (next_letter === current_letter);
+
+  if (letter_iterator.length === 0) {
+    resetLetterIterator();
+  }
+  shuffleLetterIterator();
+  next_letter = letter_iterator.pop();
 
   dom.next_letter.innerHTML = next_letter;
 
@@ -164,11 +159,10 @@ const gameLost = () => {
   console.log('you lose...')
   banner.classList.remove('hidden')
 
-  let high_score = (leaderboard.length && points > leaderboard[leaderboard.length-1].points) ? true : false;
+  console.log(level)
+  let high_score = (leaderboard.length && points > leaderboard[leaderboard.length-1].points) ? true : false; // leaderboard.length is for safari - to check leaderboard variable is a fetched array, not an automatically generated dom variable
 
-  // high_score = true;
-  // points = 10;
-  // words = 2;
+  let words = level;
 
   banner_message.innerHTML = high_score
     ? '<div>HIGH</div><div>SCORE!</div>'
@@ -180,8 +174,6 @@ const gameLost = () => {
   if (high_score) {
     banner_result.classList.add('hidden')
     dom.share.classList.add('hidden')
-    // dom.leaderboard.classList.remove('hidden')
-    // banner_result.innerHTML += `<br>You got a high score!<br><button id="leaderboard-button">Leaderboard</button>`
 
     dom.result_leaderboard.innerHTML = '<div class="message">You made the leaderboard:</div>'
 
@@ -621,19 +613,11 @@ const resume = () => {
 }
 
 
-// let intro_on = true;
 let intro_on = debug_mode ? false : true;
 
 let gamePlayLoop;
 
-// account for intro delay
-// setTimeout(()=> {
-//   gamePlayLoop = setInterval(gamePlay, speed*100);
-// },intro_on ? 1800 : 0)
 
-// if (!intro_on) {
-//   title_holder.style.display = 'none'
-// }
 
 !intro_on ? title_holder.style.display = 'none' : ''
 

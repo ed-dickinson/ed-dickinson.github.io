@@ -44,7 +44,6 @@ const getLeaderboard = () => {
 
   get(domain + '/scores')
     .then(data => {
-      console.log(data)
       leaderboard = data
       fillLeaderboard(leaderboard)
     })

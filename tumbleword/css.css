@@ -585,11 +585,6 @@ button#reset {
 /* LEADERBOARD */
 
 #leaderboard {
-  /* position: absolute; */
-  /* position: relative; */
-  /* left: 0; */
-  /* top: 40px; */
-  /* font-size: 0.8em; */
   background-color: white;
   border: 2px solid var(--gry);
   border-radius: 5px;
@@ -610,43 +605,22 @@ button#reset {
 #leaderboard table {
   font-size: 0.85em;
 }
-#result-leaderboard {
-  font-size: 0.8em;
-
-}
-#result-leaderboard .message {
-  margin: 5px 0;
-}
-#result-leaderboard table {
-  border: 2px solid var(--gry);
-  border-radius: 5px;
-  background-color: white;
-}
-#result-leaderboard tr input {
-  width: calc(100% - 4px);
-  /* background-color: var(--ylw); */
-  border-top: 0 !important;
-  border-left: 0 !important;
-  border-right: 0 !important;
-  border-bottom: 2px solid var(--grn);
-  font-family: inherit;
-  /* border-radius: 5px; */
-  animation: border-banner 1s infinite alternate;
-  font-weight: 700;
-  font-size: inherit;
-}
-#result-leaderboard tr.achieved-score   {
-  /* background-color: var(--ylw); */
-  /* font-weight: 800; */
-  animation: text-shadow 1s infinite alternate -2.5s;
-}
-
 #leaderboard tr {
   line-height: 1;
 }
-#result-leaderboard tr {
-  line-height: 0.8;
-  font-weight: 500;
+#leaderboard tr td:first-of-type, #result-leaderboard tr td:first-of-type {
+  text-align: right;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 6em;
+  overflow: hidden;
+}
+#leaderboard tr td:nth-of-type(2) {
+  text-align: right;
+  font-weight: 700;
+}
+#leaderboard tr td:nth-of-type(3), #result-leaderboard tr td:nth-of-type(3) {
+  text-align: left;
 }
 
 #leaderboard-button {
@@ -664,25 +638,38 @@ button#reset {
   font-weight: 500;
 }
 
-#leaderboard tr td:first-of-type, #result-leaderboard tr td:first-of-type {
-  text-align: right;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  max-width: 6em;
-  overflow: hidden;
+#result-leaderboard {
+  font-size: 0.8em;
 }
-#leaderboard tr td:nth-of-type(2) {
-  text-align: right;
+#result-leaderboard .message {
+  margin: 5px 0;
+}
+#result-leaderboard table {
+  border: 2px solid var(--gry);
+  border-radius: 5px;
+  background-color: white;
+}
+#result-leaderboard tr input {
+  width: calc(100% - 4px);
+  border-top: 0 !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  border-bottom: 2px solid var(--grn);
+  font-family: inherit;
+  animation: border-banner 1s infinite alternate;
   font-weight: 700;
-  /* padding-left: 0.5em; */
+  font-size: inherit;
+}
+#result-leaderboard tr.achieved-score   {
+  animation: text-shadow 1s infinite alternate -2.5s;
+}
+#result-leaderboard tr {
+  line-height: 0.8;
+  font-weight: 500;
 }
 #result-leaderboard tr td:nth-of-type(2) {
   text-align: right;
 }
-#leaderboard tr td:nth-of-type(3), #result-leaderboard tr td:nth-of-type(3) {
-  text-align: left;
-}
-
 #result-leaderboard button {
   border-radius: 5px;
   background-color: var(--gry);
