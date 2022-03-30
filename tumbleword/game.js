@@ -9,7 +9,7 @@ let goes = 0;
 
 const setUp = () => {
   target_word = valid_answers[Math.floor(Math.random()*valid_answers.length)]
-  // console.log(target_word)
+  console.log(target_word)
   target_word_array = target_word.split('');
 
   let common_extra_letters = 'ear';
@@ -145,7 +145,6 @@ const keyPress = (letter) => {
 let current_guess = '';
 
 const gameWon = () => {
-  console.log('you win!')
   banner_message.innerHTML = '<div>YOU</div><div>WIN!</div>';
   setTimeout(()=>{banner.classList.remove('hidden');},1500)
   rows[row-1].classList.add('winning-row');
@@ -156,10 +155,8 @@ const gameWon = () => {
 }
 
 const gameLost = () => {
-  console.log('you lose...')
   banner.classList.remove('hidden')
 
-  console.log(level)
   let high_score = (leaderboard.length && points > leaderboard[leaderboard.length-1].points) ? true : false; // leaderboard.length is for safari - to check leaderboard variable is a fetched array, not an automatically generated dom variable
 
   let words = level;
@@ -174,6 +171,7 @@ const gameLost = () => {
   if (high_score) {
     banner_result.classList.add('hidden')
     dom.share.classList.add('hidden')
+    dom.show_leaderboard.classList.add('hidden')
 
     dom.result_leaderboard.innerHTML = '<div class="message">You made the leaderboard:</div>'
 
@@ -218,6 +216,7 @@ const gameLost = () => {
       dom.result_leaderboard.innerHTML = '';
       banner_result.classList.remove('hidden')
       dom.share.classList.remove('hidden')
+      dom.show_leaderboard.classList.remove('hidden')
     }
     leaderboard_submit_button.addEventListener('click', submitFunction)
     dom.result_leaderboard.appendChild(leaderboard_submit_button)

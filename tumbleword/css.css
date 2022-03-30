@@ -589,6 +589,7 @@ button#reset {
   border: 2px solid var(--gry);
   border-radius: 5px;
   width: inherit;
+  min-width: calc(10em + 16px);
 }
 #leaderboard.hidden {
   display: none;
@@ -604,6 +605,7 @@ button#reset {
 }
 #leaderboard table {
   font-size: 0.85em;
+  margin: auto;
 }
 #leaderboard tr {
   line-height: 1;
@@ -651,17 +653,36 @@ button#reset {
 }
 #result-leaderboard tr input {
   width: calc(100% - 4px);
-  border-top: 0 !important;
-  border-left: 0 !important;
-  border-right: 0 !important;
-  border-bottom: 2px solid var(--grn);
+  border: 0 !important;
   font-family: inherit;
-  animation: border-banner 1s infinite alternate;
   font-weight: 700;
   font-size: inherit;
+  padding: 0 2px;
+  background-color: white;
+}
+#result-leaderboard tr.achieved-score td:first-of-type {
+  position: relative;
+  overflow: visible !important;
+}
+#result-leaderboard tr.achieved-score td:first-of-type::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  border-bottom: 2px solid var(--ylw);
+  display: block;
+  height: 0px;
+  background-color: var(--ylw);
 }
 #result-leaderboard tr.achieved-score   {
   animation: text-shadow 1s infinite alternate -2.5s;
+  line-height: 0.8;
+  height: 0.8em;
+}
+#result-leaderboard tr.achieved-score  td {
+  vertical-align: top;
+  padding: 0;
 }
 #result-leaderboard tr {
   line-height: 0.8;
