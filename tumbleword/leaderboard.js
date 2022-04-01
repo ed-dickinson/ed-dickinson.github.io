@@ -35,7 +35,7 @@ const fillLeaderboard = (scores) => {
   parent.innerHTML = ''
   scores.forEach(score => {
     let child = document.createElement('tr')
-    child.innerHTML = `<td>${score.name} -</td> <td>${score.words}</td> / <td>${score.points}</td>`
+    child.innerHTML = `<td>${score.name} -</td> <td>${score.words}</td> <td>(${score.points})</td>`
     parent.appendChild(child)
   })
 }
@@ -70,6 +70,12 @@ dom.show_leaderboard.addEventListener('click', () => {
 })
 
 dom.leaderboard_close_button.addEventListener('click', () => {
-  dom.banner.classList.remove('hidden')
+  if (game_over) {
+    dom.banner.classList.remove('hidden')
+  }
   dom.leaderboard.classList.add('hidden')
 });
+
+dom.start_leaderboard_button.addEventListener('click', () => {
+  dom.leaderboard.classList.remove('hidden')
+})

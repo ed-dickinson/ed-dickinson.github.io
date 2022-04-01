@@ -149,12 +149,8 @@ header span#next-letter {
   z-index: 100;
   position: absolute;
   display: block;
-  /* top: 4em; */
 
-  /* top: 4px; */
   width: calc(10em - 0px);
-  /* height: calc(100% - 8px); */
-
 
   left: 50%;
   transform: translateX(-50%);
@@ -164,19 +160,15 @@ header span#next-letter {
   border: 2px solid var(--grn);
   padding: 1em;
   font-weight: 900;
-  /* text-shadow: 1px 2px 0px var(--ylw); */
   z-index: 9;
   animation: border-banner 1s infinite alternate;
   border-radius: 5px;
   transition: opacity 5s;
   box-sizing: border-box;
 
-  /* top: calc(-1em - 12px); */
-  /* top: calc(-1em - 12px); */
   width: calc(10em + 16px);
   top: 20px;
   font-size: 1.25em;
-  /* height: calc(100% + 1em + 16px); */
 }
 
 .opaque {
@@ -287,14 +279,9 @@ header span#next-letter {
 }
 
 #banner #share {
-  /* position: absolute; */
-  /* left: 50%; */
   border-radius: 5px;
   box-sizing: border-box;
-  /* height: 2em; */
   font-size: 0.8em;
-  /* bottom: -12px; */
-  /* transform: translateX(-50%); */
   font-weight: 600;
   margin-top: 1em;
   margin-bottom: 0em;
@@ -373,6 +360,10 @@ header span#next-letter {
   background-position: 100%;
 }
 
+#buttons button.hidden {
+  display: none;
+}
+
 #buttons #down {
   position: absolute;
   top: calc(100% + 8px);
@@ -439,6 +430,7 @@ header span#next-letter {
     top: calc(50% - 0.125em);
     transform: scale(1);
   }
+
 }
 
 #buttons button.pressed {
@@ -488,6 +480,25 @@ header span#next-letter {
   to {background-position: 00%;}
 }
 
+
+#buttons button#start-leaderboard {
+
+  left: 0;
+  margin-left: 0 !important;
+  background-color: var(--ylw) !important;
+  border: 0 !important;
+
+  top: calc(100% + 8px);
+  height: auto !important;
+  position: absolute;
+  left: 50%;
+  width: calc(11.7em + 28px);
+  transform: translate(-50%);
+  font-weight: 800;
+  font-size: 1.2em;
+  padding: 0.5em 0.5em;
+}
+
 #reset {
   margin-top: 1em;
   padding:  0.4em 0.5em;
@@ -501,6 +512,27 @@ header span#next-letter {
 
 button#reset {
   font-family: inherit;
+}
+
+@media only screen and (max-width: 350px) {
+
+
+  #buttons button#start-leaderboard {
+
+    font-size: 1em;
+    position: absolute;
+    padding: 0.2em 0.7em;
+    width: auto;
+
+    transform: rotate(270deg);
+    background-color: var(--ylw);
+    position: fixed;
+
+    left: -50px;
+    top: 182px;
+    bottom: auto;
+
+  }
 }
 
 #share {
@@ -586,6 +618,7 @@ button#reset {
 
 #leaderboard {
   background-color: white;
+  background-color: var(--ylw);
   border: 2px solid var(--gry);
   border-radius: 5px;
   width: inherit;
@@ -619,7 +652,12 @@ button#reset {
 }
 #leaderboard tr td:nth-of-type(2) {
   text-align: right;
-  font-weight: 700;
+  font-weight: 900;
+}
+#leaderboard tr td:nth-of-type(3) {
+  font-weight: 600;
+  font-size: 0.9em;
+  vertical-align: top;
 }
 #leaderboard tr td:nth-of-type(3), #result-leaderboard tr td:nth-of-type(3) {
   text-align: left;

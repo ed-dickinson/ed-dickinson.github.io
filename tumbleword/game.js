@@ -83,7 +83,8 @@ const dom = {
   leaderboard: document.querySelector('#leaderboard'),
   result_leaderboard: document.querySelector('#result-leaderboard'),
   show_leaderboard: document.querySelector('#show-leaderboard'),
-  leaderboard_close_button: document.querySelector('#leaderboard-close-button')
+  leaderboard_close_button: document.querySelector('#leaderboard-close-button'),
+  start_leaderboard_button: document.querySelector('#start-leaderboard')
 }
 
 dom.banner_close_button.addEventListener('click',()=>{banner.classList.add('hidden')})
@@ -230,6 +231,8 @@ const gameLost = () => {
   banner.classList.add('fade-in');
   dom.restart.classList.remove('hidden');
 
+  dom.start_leaderboard_button.classList.remove('hidden');
+
   dom.share_readout.value = `I got ${level} word${level===1?'':'s'} and ${points} points in Tumbleword${high_score?', and made the Leaderboard':''}! - https://ed-dickinson.net/tumbleword`
   dom.share.addEventListener('click',copyShareText)
 }
@@ -261,6 +264,7 @@ const resetGame = () => {
   })
 
   banner.classList.add('hidden');
+  dom.start_leaderboard_button.classList.add('hidden')
 
   game_over = false;
   letter_in_play = false;
@@ -635,4 +639,5 @@ dom.start.addEventListener('click', ()=>{
   hideTitle();
   dom.intro_banner.classList.add('hidden');
   down_button.classList.remove('hidden');
+  dom.start_leaderboard_button.classList.add('hidden')
 })
