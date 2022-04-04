@@ -26,6 +26,17 @@ async function post(term, data) {
   return response_data
 }
 
+const rudeWordReplacer = (rude_word) => {
+  rude_word = rude_word.replace(/cum/i, "***");
+  rude_word = rude_word.replace(/fuck/i, "****");
+  rude_word = rude_word.replace(/cunt/i, "****");
+  rude_word = rude_word.replace(/dick/i, "****");
+  rude_word = rude_word.replace(/shit/i, "****");
+  rude_word = rude_word.replace(/cock/i, "****");
+  rude_word = rude_word.replace(/twat/i, "****");
+  return rude_word;
+}
+
 let leaderboard;
 
 const domain = 'https://tumbleword-leaderboard.herokuapp.com'
@@ -35,7 +46,9 @@ const fillLeaderboard = (scores) => {
   parent.innerHTML = ''
   scores.forEach(score => {
     let child = document.createElement('tr')
-    child.innerHTML = `<td>${score.name} -</td> <td>${score.words}</td> <td>(${score.points})</td>`
+    // child.innerHTML = `<td>${score.name} -</td> <td>${score.words}</td> <td>(${score.points})</td>`
+    score.name = rudeWordReplacer(score.name)
+    child.innerHTML = `<td>${score.name} <span style="font-weight: 500;">-</span></td> <td>${score.words}</td> <td>word${score.words===1?'':'s'}</td>`
     parent.appendChild(child)
   })
 }
@@ -46,6 +59,7 @@ const getLeaderboard = () => {
     .then(data => {
       leaderboard = data
       fillLeaderboard(leaderboard)
+      document.querySelector('#leaderboard #loading-dots').classList.add('hidden')
     })
     .catch(e => console.log(e))
 }

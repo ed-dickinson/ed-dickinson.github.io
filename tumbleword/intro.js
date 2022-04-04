@@ -68,7 +68,8 @@ const introShimmer = () => {
       document.querySelector('#buttons').classList.remove('hidden');
       document.querySelector('#big-start').classList.add('loaded');
       setTimeout(()=>{
-        if (!game_over) {
+
+      if (!game_begun) {
           document.querySelector('#start-leaderboard').classList.remove('hidden');
         }
       },800)
