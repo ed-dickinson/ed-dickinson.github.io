@@ -682,9 +682,7 @@ button#reset {
 #banner {
   min-width: calc(11.8em + 16px);
 }
-#result-leaderboard table {
-  width: 100%;
-}
+
 #result-leaderboard {
   font-size: 0.8em;
   /* min-width: calc(11.8em + 16px); */
@@ -693,6 +691,7 @@ button#reset {
   margin: 5px 0;
 }
 #result-leaderboard table {
+  width: 100%;
   border: 2px solid var(--grn);
   border-radius: 5px;
   background-color: white;
@@ -733,7 +732,7 @@ button#reset {
   overflow: visible !important;
 }
 
-#result-leaderboard tr.achieved-score   {
+#result-leaderboard tr.achieved-score {
   /* animation: text-shadow 1s infinite alternate -2.5s; */
   line-height: 0.8;
   height: 0.8em;
@@ -742,13 +741,17 @@ button#reset {
   z-index: 1;
   color: white;
 }
-#result-leaderboard tr.achieved-score  td {
+#result-leaderboard tr.achieved-score td {
   /* vertical-align: top; */
   padding: 0;
 }
 #result-leaderboard tr {
+  position: relative;
   line-height: 0.9;
   font-weight: 500;
+}
+#result-leaderboard tr td:first-of-type {
+  overflow: visible;
 }
 #result-leaderboard tr td:nth-of-type(2) {
   text-align: right;
@@ -782,32 +785,17 @@ button#show-leaderboard {
 
 
 #loading-dots span:first-of-type {
-  /* animation: dot1 1s infinite; */
   animation: dot1 2s infinite;
 }
 #loading-dots span:nth-of-type(2) {
-  /* animation: dot2 1s infinite 0.25s; */
   animation: dot2 2s infinite;
 }
 #loading-dots span:nth-of-type(3) {
-  /* animation: dot3 1s infinite 0.5s; */
   animation: dot3 2s infinite;
 }
 #loading-dots {
   animation-timing-function: step-start;
-  /* animation-timing-function: linear; */
 }
-
-/* from {color: white;} to {color: black;} */
-/* @keyframes dot1 {
-  0% {color: white;} 25%, 100% {color: black;}
-}
-@keyframes dot2 {
-  0%{color: white;} 50%, 100% {color: black;}
-}
-@keyframes dot3 {
-  0% {color: white;} 75%, 100% {color: black;}
-} */
 
 @keyframes dot1 {
   0%, 12.5%, 100%{color: white;} 25%, 50% {color: black;}

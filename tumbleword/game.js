@@ -169,6 +169,9 @@ const gameLost = () => {
   banner_result.innerHTML = `You got ${level===0?'no':level} word${level===1?'':'s'}, <br>${points} points, <br> ${level>0?'but':'and'} didn't get<br /><span class="word-display">${target_word.toUpperCase()}</span>`;
 
 
+  // high_score = true;
+
+
   if (high_score) {
     banner_result.classList.add('hidden')
     dom.share.classList.add('hidden')

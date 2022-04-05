@@ -93,3 +93,5 @@ dom.leaderboard_close_button.addEventListener('click', () => {
 dom.start_leaderboard_button.addEventListener('click', () => {
   dom.leaderboard.classList.remove('hidden')
 })
+
+leaderboard = [{name: 'test', points: 0, words: 0}]
