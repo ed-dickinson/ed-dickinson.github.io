@@ -692,14 +692,22 @@ button#reset {
 }
 #result-leaderboard table {
   width: 100%;
-  border: 2px solid var(--grn);
-  border-radius: 5px;
+  /* border: 2px solid var(--grn); */
+  border-radius: 3px;
   background-color: white;
   background-color: var(--ylw);
+  border-collapse: collapse;
+  position: relative;
+  margin-top: 0.5em;
 }
 #result-leaderboard table tr {
   border-width: 20px 0;
-
+  margin: 2px 0;
+  line-height: 1;
+  vertical-align: baseline;
+}
+#result-leaderboard tr td {
+  padding: 2px 2px;
 }
 #result-leaderboard tr input {
   width: calc(100% - 4px);
@@ -715,7 +723,7 @@ button#reset {
   color: white;
 }
 #result-leaderboard tr.achieved-score::after {
-  content: '';
+  /* content: ''; */
   height: calc(100% + 0px);
   background-color: var(--grn);
   width: calc(100% + 4px);
@@ -727,9 +735,22 @@ button#reset {
   z-index: -1;
 }
 
+#result-leaderboard table::after {
+  content: '';
+  height: calc(100% + 4px);
+  background-color: var(--grn);
+  width: calc(100% + 4px);
+  top: -2px;
+
+  border-radius: 5px;
+  left: -2px;
+  position: absolute;
+  z-index: -1;
+}
+
 #result-leaderboard tr.achieved-score td:first-of-type {
   position: relative;
-  overflow: visible !important;
+  /* overflow: visible !important; */
 }
 
 #result-leaderboard tr.achieved-score {
@@ -743,7 +764,7 @@ button#reset {
 }
 #result-leaderboard tr.achieved-score td {
   /* vertical-align: top; */
-  padding: 0;
+  /* padding: 0; */
 }
 #result-leaderboard tr {
   position: relative;
@@ -752,10 +773,15 @@ button#reset {
 }
 #result-leaderboard tr td:first-of-type {
   overflow: visible;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 #result-leaderboard tr td:nth-of-type(2) {
   text-align: right;
   font-weight: 800;
+}
+#result-leaderboard tr td:nth-of-type(3) {
+  padding-right: 5px;
 }
 #result-leaderboard button {
   border-radius: 5px;
