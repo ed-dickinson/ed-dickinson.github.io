@@ -1,7 +1,7 @@
 // glitches on loading tile diagonal swipe - first fw either 1, or 2,1, or maybe 3/2/1 freeze on borderless class
 
 let debug_mode = false;
-debug_mode = true;
+// debug_mode = true;
 
 let target_word, target_word_array, all_letters;
 
