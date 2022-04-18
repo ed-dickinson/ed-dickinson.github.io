@@ -117,6 +117,7 @@ h3 {
 div.project {
   border-bottom: 2px solid plum;
   position: relative;
+  margin-bottom: 2em;
 }
 
 div.project img {
