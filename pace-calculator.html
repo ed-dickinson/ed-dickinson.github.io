@@ -1,0 +1,183 @@
+<!doctype html>
+<html>
+<head>
+<title>Running Pace Calculator</title>
+<meta charset="UTF-8">
+<meta name="keywords" content="running, pace, calculator, chart">
+<meta name="description" content="">
+<meta name="author" content="Ed Dickinson">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="">
+<style>
+input {
+  width: 12em;
+  margin-top: 5em;
+  margin-bottom: 2em;
+}
+body {
+  font-family: monospace;
+  text-align: center;
+}
+#input-pace, #output-pace {
+  display: inline-block;
+  text-align: left;
+  font-size: 1.5em;
+}
+#input-cont, #output-cont {
+  display: inline-block;
+}
+#divider {
+  font-size: 3.5em;
+}
+table {
+  margin: auto;
+  padding-left: 3em;
+}
+tr td:nth-of-type(1) {
+  text-align: right;
+  padding-right: 1em;
+}
+tr td:nth-of-type(2) {
+  text-align: left;
+}
+</style>
+
+</head>
+<body>
+
+  <h1>Running Pace Calculator</h1>
+
+<input id="slider" type="range" min="3" max="7" value="5" step="0.01" />
+<br />
+
+<span id="input-cont">
+  <div id="input-pace">
+
+  </div>
+  <div id="input-unit">
+    min/km
+  </div>
+</span>
+<span id="divider">/</span>
+<span id="output-cont">
+  <div id="output-pace">
+
+  </div>
+  <div id="output-unit">
+    min/mile
+  </div>
+</span>
+
+<div style="margin-top: 1em;">
+  <table>
+    <tr>
+      <td id="output-5k">
+
+      </td>
+      <td>
+        5k
+      </td>
+    </tr>
+    <tr>
+      <td id="output-10k">
+
+      </td>
+      <td>
+        10k
+      </td>
+    </tr>
+    <tr>
+      <td id="output-half">
+
+      </td>
+      <td>
+        half marathon
+      </td>
+    </tr>
+    <tr>
+      <td id="output-marathon">
+
+      </td>
+      <td>
+        marathon
+      </td>
+    </tr>
+  </table>
+</div>
+
+<script>
+dom = {
+  slider : document.querySelector('#slider'),
+  input_pace : document.querySelector('#input-pace'),
+  output_pace : document.querySelector('#output-pace'),
+  output_time : {
+    '5k' : document.querySelector('#output-5k'),
+    '10k' : document.querySelector('#output-10k'),
+    half : document.querySelector('#output-half'),
+    marathon : document.querySelector('#output-marathon'),
+  },
+  title : document.querySelector('h1'),
+}
+
+const convertToMins = (time) => {
+  let whole = Math.floor(time)
+  let output = ''
+  if (time > 60) {
+    let hours = (time - (time % 60)) / 60
+    let mins = time % 60
+    let whole_mins = Math.floor(mins)
+    let secs = ((mins - whole_mins) * 0.6).toFixed(2).slice(2,4)
+
+    output = hours + ':' + (whole_mins < 10 ? '0' + whole_mins : whole_mins) + '.' + secs
+  } else {
+
+    output = `${whole}.${((time - whole)*0.6).toFixed(2).slice(2,4)}`
+  }
+
+  return output
+}
+
+const convertDecimalToSeconds = (value) => {
+  return Math.floor(value)
+}
+
+const doConversion = () => {
+
+  dom.input_pace.innerHTML = convertToMins(slider.value * 1)
+  dom.output_pace.innerHTML = convertToMins(slider.value / 0.6213712)
+
+  dom.output_time['5k'].innerHTML = convertToMins(slider.value * 4)
+  dom.output_time['10k'].innerHTML = convertToMins(slider.value * 8)
+  dom.output_time['half'].innerHTML = convertToMins(slider.value * 21.0975)
+  dom.output_time['marathon'].innerHTML = convertToMins(slider.value * 42.195)
+}
+doConversion()
+
+
+dom.slider.addEventListener('input', ()=> {
+  doConversion()
+})
+
+let title_letters = dom.title.innerHTML
+
+title_letters = title_letters.split('')
+
+dom.title.innerHTML = ''
+
+let color_i = 0
+title_letters.forEach(letter => {
+  let element = document.createElement('span')
+  element.innerHTML = letter
+  dom.title.appendChild(element)
+  element.style.color = `hsl(${color_i}, 100%, 50%)`
+  color_i += 10
+  if (color_i === 360) {color_i = 0}
+})
+
+
+
+</script>
+
+
+</body>
+</html>
