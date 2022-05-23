@@ -10,9 +10,9 @@
 <link rel="icon" href="">
 <style>
 input {
-  width: 12em;
-  margin-top: 5em;
-  margin-bottom: 2em;
+  width: 90%;
+  margin-top: 2em;
+  max-width: 20em;
 }
 body {
   font-family: monospace;
@@ -25,6 +25,9 @@ body {
 }
 #input-cont, #output-cont {
   display: inline-block;
+}
+#input-cont {
+  margin-top: 2em;
 }
 #divider {
   font-size: 3.5em;
@@ -47,8 +50,7 @@ tr td:nth-of-type(2) {
 
   <h1>Running Pace Calculator</h1>
 
-<input id="slider" type="range" min="3" max="7" value="5" step="0.01" />
-<br />
+
 
 <span id="input-cont">
   <div id="input-pace">
@@ -103,6 +105,8 @@ tr td:nth-of-type(2) {
       </td>
     </tr>
   </table>
+
+  <input id="slider" type="range" min="3" max="7" value="5" step="0.01" />
 </div>
 
 <script>
