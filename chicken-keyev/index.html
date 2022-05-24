@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Chicken Chords</title>
+<meta charset="UTF-8">
+<meta name="keywords" content="chicken, chord, key, chords, keys, c, c#, d, d#, e, f, f#, g, g#, a, a#, b, major, minor, maj, min">
+<meta name="description" content="A tool to find chords in a key">
+<meta name="author" content="Crumb Douglas">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="assets/lewis-chicken.png">
+<style>
+body {font-family: monospace;}
+.slidecontainer {
+  width: 150px; /* Width of the outside containerposition:relative; */ 
+}
+
+/* The slider itself */
+.slider {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  width: 100%; /* Full-width */
+  height: 20px; /* Specified height */
+  background: black; /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 1; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+  border: 1px solid black;
+  border-radius: 11px;
+  z-index: 1;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+.slideline {height: 1px; width: 130px; background: #d3d3d3; position:absolute; top: 11px; left: 11px; overflow:visible; z-index: 0;}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 20px; /* Set a specific slider handle width */
+  height: 20px; /* Slider handle height */
+  background: white; /* Green background */
+  border: 0px solid black;
+  cursor: pointer; /* Cursor on hover */
+  border-radius: 10px; z-index: 2;
+}
+
+.slider::-moz-range-thumb {
+  width: 20px; /* Set a specific slider handle width */
+  height: 20px; /* Slider handle height */
+  background: dodgerblue; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+  z-index: 2;
+}
+
+#readoutnote {font-size: 30pt;}
+
+#chicken {transform: rotate(0deg); z-index: -1; transition: 0s;}
+
+.bodybgpads {position: fixed; top: -10vh; height: 120vh; width: calc(60vw - 26ch); min-width: 0; z-index: -200; opacity: 0.5;} 
+.bgpadl {left: -10vw; background-image: linear-gradient(to left, white, oldlace); } /*antiquewhite, blanchedalmond, bisque, PapayaWhip*/
+.bgpadr {right: -10vw; background-image: linear-gradient(to right, white, oldlace); }
+
+#inner-chicken-clicker1, #inner-chicken-clicker2 {width: 50%; height: 100%; position: absolute;}
+#inner-chicken-clicker1 {left: 0;}
+#inner-chicken-clicker2 {right: 0;}
+
+</style>
+</head>
+<body>
+<div class="bodybgpads bgpadl"></div>
+<div class="bodybgpads bgpadr"></div>
+<center>
+<!--Chicken Decides Everything--><br>
+<div id="chicken" style="background-image: url(assets/lewis-chicken.png); height: 200px; width: 200px; background-size: 100%; background-repeat: no-repeat; background-position: center; ">
+    <div id="inner-chicken-clicker1"></div>
+    <div id="inner-chicken-clicker2"></div>
+</div>
+
+<br>
+<div class="slidecontainer">
+  <input type="range" min="1" max="12" value="1" class="slider" id="myRange" oninput="chordChange()">
+<!--  -->
+</div>
+<span id="readout" style="color:red;">&nbsp;<span id="readoutnote">C</span><span id="readoutsharp" style="position:relative;top:-2ch;">&nbsp;</span></span>
+<br>maj
+<br>(<span id="minorreadoutnote">A</span>min)
+<!--<br><span id="noteline">C D E F G A B</span>-->
+
+<br><br><span id="noteline2">C D E F G A B</span>
+<br>
+<br><span id="chordline2">C Am G Em F Dm</span>
+<br>
+
+<br><span id="gridline1"><span class="Idash">-</span> <span class="vispace">&nbsp;&nbsp;</span> <span id="Vchord">G</span> <span class="iiidash">--</span> <span class="IVspace">&nbsp;</span> <span class="iispace">&nbsp;&nbsp;</span>
+
+<br><span id="gridline2"><span class="Idash">-</span> <span class="vidash">--</span> <span class="Vspace">&nbsp;</span> <span id="iiichord">E</span>m <span class="IVspace">&nbsp;</span> <span class="iispace">&nbsp;&nbsp;</span>
+
+<br><span id="gridline3"><span id="Ichord">C</span> <span class="vidash">--</span> <span class="Vspace">&nbsp;</span> <span class="iiispace">&nbsp;&nbsp;</span> <span class="IVdash">-</span> <span class="iispace">&nbsp;&nbsp;</span>
+
+<br><span id="gridline4"><span class="Ispace">&nbsp;</span> <span id="vichord">A</span>m <span class="Vspace">&nbsp;</span> <span class="iiispace">&nbsp;&nbsp;</span> <span class="IVdash">-</span> <span class="iidash">--</span>
+
+<br><span id="gridline5"><span class="Ispace">&nbsp;</span> <span class="vispace">&nbsp;&nbsp;</span> <span class="Vdash">-</span> <span class="iiispace">&nbsp;&nbsp;</span> <span id="IVchord">F</span> <span class="iidash">--</span>
+
+<br><span id="gridline6"><span class="Ispace">&nbsp;</span> <span class="vispace">&nbsp;&nbsp;</span> <span class="Vdash">-</span> <span class="iiidash">--</span> <span class="IVspace">&nbsp;</span> <span id="iichord">D</span>m
+
+<br><br>
+
+</center>
+</body>
+<script>
+var slider = document.getElementById("myRange");
+var output = document.getElementById("readout");
+//readout.innerHTML = slider.value; // Display the default slider value
+var chromatic = ['O','C','C#','D','D#','E','F','F#','G','G#','A','A#','B','C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+var I = 1;
+var x = 1;
+var vi = 7;
+
+//for rotating the chicken
+var rota = 0;
+var rota2 = 0;
+var chicki = document.getElementById("readout");
+
+//slider.oninput = function () {
+function chordChange() {
+
+//for rotating the chicken
+//rota2 = ((this.value - 1) * 1) / 5;
+rota2 = ((slider.value - 1) * 1) / 5;
+rota = "rotate(" + (rota2) + "deg)";
+document.getElementById('chicken').style.transform = rota;
+
+//I = Number(this.value);
+I = Number(slider.value);
+ii = I + 2;
+iii = I + 4;
+IV = I + 5;
+V = I + 7;
+vi = I + 9;
+note7 = I + 11;
+
+var sharporno = chromatic[I].length;
+
+if (sharporno==2) {readoutsharp.innerHTML = "#";}
+if (sharporno==1) {readoutsharp.innerHTML = "&nbsp;";}
+
+if (I > 11) {readoutnote.innerHTML = "B";}
+else if (I > 9) {readoutnote.innerHTML = "A";}
+else if (I > 7) {readoutnote.innerHTML = "G";}
+else if (I > 5) {readoutnote.innerHTML = "F";}
+else if (I > 4) {readoutnote.innerHTML = "E";}
+else if (I > 2) {readoutnote.innerHTML = "D";}
+else {readoutnote.innerHTML = "C";}
+
+
+minorreadoutnote.innerHTML = chromatic[vi];
+
+noteline2.innerHTML = chromatic[I] + " " + chromatic[ii] + " " + chromatic[iii] + " " + chromatic[IV] + " " + chromatic[V] + " " + chromatic[vi] + " " + chromatic[note7] + " ";
+chordline2.innerHTML = chromatic[I] + " " + chromatic[vi] + "m " + chromatic[V] + " " + chromatic[iii] + "m " + chromatic[IV] + " " + chromatic[ii] + "m ";
+
+Ichord.innerHTML = chromatic[I];
+iichord.innerHTML = chromatic[ii];
+iiichord.innerHTML = chromatic[iii];
+IVchord.innerHTML = chromatic[IV];
+Vchord.innerHTML = chromatic[V];
+vichord.innerHTML = chromatic[vi];
+  
+var Ispaces = document.getElementsByClassName("Ispace");
+var Idashes = document.getElementsByClassName("Idash");
+var vispaces = document.getElementsByClassName("vispace");
+var vidashes = document.getElementsByClassName("vidash");
+
+var Vspaces = document.getElementsByClassName("Vspace");
+var Vdashes = document.getElementsByClassName("Vdash");
+var iiispaces = document.getElementsByClassName("iiispace");
+var iiidashes = document.getElementsByClassName("iiidash");
+
+var IVspaces = document.getElementsByClassName("IVspace");
+var IVdashes = document.getElementsByClassName("IVdash");
+var iispaces = document.getElementsByClassName("iispace");
+var iidashes = document.getElementsByClassName("iidash");
+
+
+  
+if (chromatic[I].length == 2) {
+  for (var i = 0; i < Ispaces.length; i++) {
+  Ispaces[i].innerHTML = "&nbsp;&nbsp;";}
+  for (var i = 0; i < Idashes.length; i++) {
+  Idashes[i].innerHTML = "--";}}
+if (chromatic[I].length == 1) {
+  for (var i = 0; i < Ispaces.length; i++) {
+  Ispaces[i].innerHTML = "&nbsp;";}
+  for (var i = 0; i < Idashes.length; i++) {
+  Idashes[i].innerHTML = "-";}}
+  
+if (chromatic[vi].length == 2) {
+  for (var i = 0; i < vispaces.length; i++) {
+  vispaces[i].innerHTML = "&nbsp;&nbsp;&nbsp;";}
+  for (var i = 0; i < vidashes.length; i++) {
+  vidashes[i].innerHTML = "---";}}
+if (chromatic[vi].length == 1) {
+  for (var i = 0; i < vispaces.length; i++) {
+  vispaces[i].innerHTML = "&nbsp;&nbsp;";}
+  for (var i = 0; i < vidashes.length; i++) {
+  vidashes[i].innerHTML = "--";}}
+  
+  
+  if (chromatic[V].length == 2) {
+  for (var i = 0; i < Vspaces.length; i++) {
+  Vspaces[i].innerHTML = "&nbsp;&nbsp;";}
+  for (var i = 0; i < Vdashes.length; i++) {
+  Vdashes[i].innerHTML = "--";}}
+if (chromatic[V].length == 1) {
+  for (var i = 0; i < Vspaces.length; i++) {
+  Vspaces[i].innerHTML = "&nbsp;";}
+  for (var i = 0; i < Vdashes.length; i++) {
+  Vdashes[i].innerHTML = "-";}}
+  
+if (chromatic[iii].length == 2) {
+  for (var i = 0; i < iiispaces.length; i++) {
+  iiispaces[i].innerHTML = "&nbsp;&nbsp;&nbsp;";}
+  for (var i = 0; i < iiidashes.length; i++) {
+  iiidashes[i].innerHTML = "---";}}
+if (chromatic[iii].length == 1) {
+  for (var i = 0; i < iiispaces.length; i++) {
+  iiispaces[i].innerHTML = "&nbsp;&nbsp;";}
+  for (var i = 0; i < iiidashes.length; i++) {
+  iiidashes[i].innerHTML = "--";}}
+  
+  
+  if (chromatic[IV].length == 2) {
+  for (var i = 0; i < IVspaces.length; i++) {
+  IVspaces[i].innerHTML = "&nbsp;&nbsp;";}
+  for (var i = 0; i < IVdashes.length; i++) {
+  IVdashes[i].innerHTML = "--";}}
+if (chromatic[IV].length == 1) {
+  for (var i = 0; i < IVspaces.length; i++) {
+  IVspaces[i].innerHTML = "&nbsp;";}
+  for (var i = 0; i < IVdashes.length; i++) {
+  IVdashes[i].innerHTML = "-";}}
+  
+if (chromatic[ii].length == 2) {
+  for (var i = 0; i < iispaces.length; i++) {
+  iispaces[i].innerHTML = "&nbsp;&nbsp;&nbsp;";}
+  for (var i = 0; i < iidashes.length; i++) {
+  iidashes[i].innerHTML = "---";}}
+if (chromatic[ii].length == 1) {
+  for (var i = 0; i < iispaces.length; i++) {
+  iispaces[i].innerHTML = "&nbsp;&nbsp;";}
+  for (var i = 0; i < iidashes.length; i++) {
+  iidashes[i].innerHTML = "--";}}
+  
+  
+  }
+  
+//slider.addEventListener('input', chordChange());
+  
+  
+document.getElementById('inner-chicken-clicker1').addEventListener('click', function() {
+    slider.focus(); 
+    slider.value -= 1; 
+    console.log(slider.value); 
+    chordChange();
+    });
+    
+document.getElementById('inner-chicken-clicker2').addEventListener('click', function() {
+    slider.readOnly = false; 
+    slider.focus(); 
+    slider.value = Number(slider.value) + 1; 
+    console.log(slider.value); 
+    chordChange();
+    });
+</script>
+</html>
