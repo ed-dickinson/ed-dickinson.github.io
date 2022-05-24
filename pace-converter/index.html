@@ -202,6 +202,7 @@ doConversion()
 
 
 dom.slider.addEventListener('input', ()=> {
+  event.preventDefault()
   doConversion()
   // changeColor(dom.slider)
 })
