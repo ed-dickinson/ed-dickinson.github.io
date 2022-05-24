@@ -12,7 +12,7 @@
 input {
   width: 90%;
   margin-top: 2em;
-  max-width: 20em;
+  max-width: 22em;
 }
 body {
   font-family: monospace;
@@ -42,6 +42,49 @@ tr td:nth-of-type(1) {
 }
 tr td:nth-of-type(2) {
   text-align: left;
+}
+/* .slidecontainer {
+  width: 150px;
+} */
+
+/* The slider itself */
+#slider {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  height: 20px; /* Specified height */
+  background: black;
+  outline: none; /* Remove outline */
+  opacity: 1; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+  border: 1px solid black;
+  border-radius: 11px;
+  z-index: 1;
+}
+
+/* Mouse-over effects */
+#slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+#slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 20px; /* Set a specific slider handle width */
+  height: 20px; /* Slider handle height */
+  background: white; /* Green background */
+  border: 0px solid black;
+  cursor: pointer; /* Cursor on hover */
+  border-radius: 10px; z-index: 2;
+}
+
+#slider::-moz-range-thumb {
+  width: 20px; /* Set a specific slider handle width */
+  height: 20px; /* Slider handle height */
+  /* background: dodgerblue; */
+  cursor: pointer; /* Cursor on hover */
+  z-index: 2;
 }
 </style>
 
@@ -160,6 +203,7 @@ doConversion()
 
 dom.slider.addEventListener('input', ()=> {
   doConversion()
+  // changeColor(dom.slider)
 })
 
 let title_letters = dom.title.innerHTML
@@ -167,6 +211,19 @@ let title_letters = dom.title.innerHTML
 title_letters = title_letters.split('')
 
 dom.title.innerHTML = ''
+
+const changeColor = (element) => {
+  let range = element.getAttribute('max') - element.getAttribute('min')
+  let min = element.getAttribute('min')
+  element.value
+  let percentage = ((parseFloat(element.value) - min) / range ) * 100
+  console.log(percentage)
+
+  let hsl_color = `hsl(${percentage*2.5}, 100%, 50%)`
+  element.style.backgroundColor = hsl_color
+  element.style.borderColor = hsl_color
+}
+// changeColor(dom.slider)
 
 let color_i = 0
 title_letters.forEach(letter => {
