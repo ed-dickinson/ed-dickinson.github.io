@@ -51,14 +51,14 @@ tr td:nth-of-type(2) {
 #slider {
   -webkit-appearance: none;  /* Override default CSS styles */
   appearance: none;
-  height: 20px; /* Specified height */
+  height: 40px; /* Specified height */
   background: black;
   outline: none; /* Remove outline */
   opacity: 1; /* Set transparency (for mouse-over effects on hover) */
   -webkit-transition: .2s; /* 0.2 seconds transition on hover */
   transition: opacity .2s;
   border: 1px solid black;
-  border-radius: 11px;
+  border-radius: 22px;
   z-index: 1;
 }
 
@@ -71,20 +71,37 @@ tr td:nth-of-type(2) {
 #slider::-webkit-slider-thumb {
   -webkit-appearance: none; /* Override default look */
   appearance: none;
-  width: 20px; /* Set a specific slider handle width */
-  height: 20px; /* Slider handle height */
+  width: 40px; /* Set a specific slider handle width */
+  height: 40px; /* Slider handle height */
   background: white; /* Green background */
   border: 0px solid black;
   cursor: pointer; /* Cursor on hover */
-  border-radius: 10px; z-index: 2;
+  border-radius: 20px; z-index: 2;
 }
 
 #slider::-moz-range-thumb {
-  width: 20px; /* Set a specific slider handle width */
-  height: 20px; /* Slider handle height */
+  width: 40px; /* Set a specific slider handle width */
+  height: 40px; /* Slider handle height */
   /* background: dodgerblue; */
   cursor: pointer; /* Cursor on hover */
   z-index: 2;
+}
+
+@media only screen and (min-width: 800px) {
+  #slider {
+    height: 20px; /* Specified height */
+    border-radius: 11px;
+    z-index: 1;
+  }
+  #slider::-moz-range-thumb {
+    width: 20px; /* Set a specific slider handle width */
+    height: 20px;
+  }
+  #slider::-webkit-slider-thumb {
+    width: 20px; /* Set a specific slider handle width */
+    height: 20px; /* Slider handle height */
+    border-radius: 10px;
+  }
 }
 </style>
 
