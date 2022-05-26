@@ -208,8 +208,8 @@ const doConversion = () => {
   dom.input_pace.innerHTML = convertToMins(slider.value * 1)
   dom.output_pace.innerHTML = convertToMins(slider.value / 0.6213712)
 
-  dom.output_time['5k'].innerHTML = convertToMins(slider.value * 4)
-  dom.output_time['10k'].innerHTML = convertToMins(slider.value * 8)
+  dom.output_time['5k'].innerHTML = convertToMins(slider.value * 5)
+  dom.output_time['10k'].innerHTML = convertToMins(slider.value * 10)
   dom.output_time['half'].innerHTML = convertToMins(slider.value * 21.0975)
   dom.output_time['marathon'].innerHTML = convertToMins(slider.value * 42.195)
 }
