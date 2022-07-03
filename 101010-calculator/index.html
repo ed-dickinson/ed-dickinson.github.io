@@ -1,0 +1,379 @@
+<!doctype html>
+<html>
+<head>
+<title>10/10/10 Marathon Pace Calculator</title>
+<meta charset="UTF-8">
+<meta name="keywords" content="10, 10-10-10, 10 10 10, marathon, calculator, rule, pace, running">
+<meta name="description" content="A tool to calculator pacing for running a marathon using the 10/10/10 rule.">
+<meta name="author" content="Ed Dickinson">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="">
+<style>
+body {
+  font-family: monospace;
+}
+
+input[type=range] {
+  /* width: 90%; */
+  /* margin-top: 4em; */
+  /* max-width: 26em; */
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  height: 40px; /* Specified height */
+  background: black;
+  outline: none; /* Remove outline */
+  opacity: 1; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+  border: 1px solid black;
+  border-radius: 22px;
+  z-index: 1;
+}
+
+/* Mouse-over effects */
+input[type=range]:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 40px; /* Set a specific slider handle width */
+  height: 40px; /* Slider handle height */
+  background: white; /* Green background */
+  border: 0px solid black;
+  cursor: pointer; /* Cursor on hover */
+  border-radius: 20px; z-index: 2;
+}
+
+input[type=range]::-moz-range-thumb {
+  width: 40px; /* Set a specific slider handle width */
+  height: 40px; /* Slider handle height */
+  /* background: dodgerblue; */
+  cursor: pointer; /* Cursor on hover */
+  z-index: 2;
+}
+
+@media only screen and (min-width: 800px) {
+  input[type=range] {
+    height: 20px; /* Specified height */
+    border-radius: 11px;
+    z-index: 1;
+  }
+  input[type=range]::-moz-range-thumb {
+    width: 20px; /* Set a specific slider handle width */
+    height: 20px;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    width: 20px; /* Set a specific slider handle width */
+    height: 20px; /* Slider handle height */
+    border-radius: 10px;
+  }
+}
+
+label, output {
+  display: block;
+}
+
+.input-cont output {
+  position: absolute; top: 0; right: 0;
+}
+
+#target, #margin, #offset {
+  display: block;
+  position: relative;
+  margin-bottom: 0.5em;
+}
+
+input {
+  width: 100%;
+}
+
+.input-cont label {
+  margin-bottom: 0.25em;
+}
+
+header, main {
+  margin: auto;
+  max-width: 20em;
+}
+
+header {
+  position: relative;
+  margin-bottom: 1em;
+  margin-top: 2em;
+  font-weight: bold;
+}
+header > div:nth-of-type(2) {
+  position: absolute; top: 0;
+   right: 0;
+}
+#header-underline {
+  margin-top: 0.5em;
+  height: 2px;
+}
+
+#header-underline, a::after {
+  background: linear-gradient(to right, hsl(0, 100%, 50%), hsl(50, 100%, 50%), hsl(100, 100%, 50%), hsl(150, 100%, 50%), hsl(200, 100%, 50%), hsl(250, 100%, 50%));
+}
+
+#see-also {
+  position: fixed;
+  right: 0.5em;
+  bottom: 0.5em;
+}
+
+a {
+  position: relative;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+a::after {
+  content: '';
+  height: 2px;
+  width: 100%;
+  position: absolute;
+  left: 0; top: 100%;
+}
+
+#result {
+  position: relative;
+  height: 3em;
+}
+#result > div {
+  position: absolute;
+  margin: 0.5em 0;
+  display: inline-block;
+  width: 100%;
+  padding: 0;
+}
+#first10 {
+  text-align: left;
+}
+#next10 {
+  text-align: center;
+}
+#last10 {
+  text-align: right;
+}
+
+#result > div > label {
+  display: none;
+}
+#result > div > output {
+  /* display: block; */
+  width: 100%;
+}
+
+#result #unit {
+  padding-top: 2em;
+  text-align: center;
+}
+
+#tooltip {
+  margin-top: 1em;
+  cursor: pointer;
+}
+
+
+</style>
+
+</head>
+<body>
+
+  <header>
+    <div>
+      10-10-10
+    </div>
+    <div>
+      Marathon Pace Calculator
+    </div>
+    <div id="header-underline">
+
+    </div>
+  </header>
+
+  <main>
+
+    <div id="target" class="input-cont">
+      <label>Time:</label>
+      <input type="range" min="120" max="300" value="180" step="1" />
+      <output class="readout">
+        #
+      </output>
+    </div>
+
+    <div id="margin" class="input-cont">
+      <label>Margin:</label>
+      <input id="target-time" type="range" min="0" max="10" value="5" />
+      <output class="readout">
+        #
+      </output>
+    </div>
+
+    <div id="offset" class="input-cont">
+      <label>Offset:</label>
+      <input id="target-time" type="range" min="0" max="10" value="5" step="0.2"/>
+      <output class="readout">
+        #
+      </output>
+    </div>
+
+    <div id="result">
+      <div id="first10">
+        <label>10:</label>
+        <output>
+          #
+        </output>
+      </div>
+
+      <div id="next10">
+        <label>10:</label>
+        <output>
+          #
+        </output>
+      </div>
+
+      <div id="last10">
+        <label>10:</label>
+        <output>
+          #
+        </output>
+      </div>
+
+      <label id="unit">min/mile</label>
+    </div>
+
+    <div id="tooltip">
+
+    </div>
+
+  </main>
+
+  <div id="see-also">
+    See also: <a href="../pace-converter">Pace converter</a>
+  </div>
+
+<script>
+const dom = {
+  target : {
+    input : document.querySelector('#target input'),
+    output : document.querySelector('#target output')
+  },
+  margin : {
+    input : document.querySelector('#margin input'),
+    output : document.querySelector('#margin output')
+  },
+  offset : {
+    input : document.querySelector('#offset input'),
+    output : document.querySelector('#offset output')
+  },
+  result : {
+    first : document.querySelector('#first10 output'),
+    next : document.querySelector('#next10 output'),
+    last : document.querySelector('#last10 output')
+  },
+  tooltip : document.querySelector('#tooltip'),
+  header : document.querySelector('header'),
+  unit : document.querySelector('#unit')
+
+
+}
+
+const convertToMins = (time) => {
+  let whole = Math.floor(time)
+  let output = ''
+  if (time > 60) {
+    let hours = (time - (time % 60)) / 60
+    let mins = time % 60
+    let whole_mins = Math.floor(mins)
+    let secs = ((mins - whole_mins) * 0.6).toFixed(2).slice(2,4)
+
+    output = hours + ':' + (whole_mins < 10 ? '0' + whole_mins : whole_mins) + '.' + secs
+  } else {
+
+    output = `${whole}.${((time - whole)*0.6).toFixed(2).slice(2,4)}`
+  }
+
+  return output
+}
+
+// console.log(dom.input.target_time)
+// last 10k is 16.21875
+
+let metric = false
+
+const changeUnit = () => {
+  metric = !metric
+  dom.unit.textContent = 'min/' + (metric ? 'km' : 'mile')
+  update()
+}
+
+dom.unit.addEventListener('click', changeUnit)
+
+const update = () => {
+  let target = dom.target.input.value
+  let margin = dom.margin.input.value
+  let offset = dom.offset.input.value
+  dom.target.output.innerHTML = convertToMins(target) + ' hr'
+  dom.margin.output.innerHTML = margin + ' min'
+  dom.offset.output.innerHTML = offset + '%'
+
+  let adjusted_target = target - margin
+  let overall_pace = adjusted_target / 26.21875
+
+  dom.result.next.innerHTML = convertToMins(overall_pace * (metric ? 0.6213712 : 1))
+
+  let start_pace = overall_pace * (1 + (offset / 100))
+
+  dom.result.first.innerHTML = convertToMins(start_pace * (metric ? 0.6213712 : 1))
+
+  let first_20_time = (start_pace * 10) + (overall_pace * 10)
+  let end_pace = (adjusted_target - first_20_time) /  6.21875
+
+  dom.result.last.innerHTML = convertToMins(end_pace * (metric ? 0.6213712 : 1))
+
+}
+
+update()
+document.querySelectorAll('input').forEach(slider => {
+
+  slider.addEventListener('input', ()=>{
+    event.preventDefault()
+    update()
+  })
+})
+
+
+dom.target.input.addEventListener('mouseover', ()=>{
+  dom.tooltip.textContent = 'Your target time you want to achieve when running the marathon.'
+})
+dom.offset.input.addEventListener('mouseover', ()=>{
+  dom.tooltip.textContent = 'How much deviation you want from average pace during the first 10 miles and the last 10k.'
+})
+dom.margin.input.addEventListener('mouseover', ()=>{
+  dom.tooltip.textContent = 'The buffer you want to add to your time to make up for any running delays, eg. water stations, congestion, and corners.'
+})
+dom.header.addEventListener('mouseover', ()=>{
+  dom.tooltip.textContent = 'This is a tool to work out the pacings if you\'re following the 10/10/10 rule for running a marathon. Wherein your run the first 10 miles at a pace slower than your target, the next 10 miles at your marathon pace, and then the last 10k quicker.'
+})
+dom.unit.addEventListener('mouseover', ()=>{
+  dom.tooltip.textContent = 'Hit this to switch between minutes per mile and minutes per kilometer.'
+})
+
+Array.from([dom.target.input, dom.margin.input, dom.offset.input, dom.header, dom.unit]).forEach(element => {
+  element.addEventListener('mouseout', ()=>{
+    dom.tooltip.textContent = ''
+  })
+})
+
+
+
+
+</script>
+
+
+</body>
+</html>
