@@ -390,9 +390,14 @@ span.fbb.address {
 
 .client-logos {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   justify-content: space-around;
 }
+/* .client-logos img {
+  width: auto;
+  height: 120px;
+} */
 
 .tech-icon {
   height: 1em;
