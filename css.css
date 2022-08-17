@@ -140,7 +140,7 @@ nav {
   font-family: monospace;
   color: white;
   font-size: 16px;
-
+  position: fixed;
 }
 nav span {
   border: 2px solid white;
@@ -191,11 +191,14 @@ nav strong {
 } */
 
 /* MOBILE */
-/* @media only screen and (max-width: 500px) {
-  nav {
+@media only screen and (max-width: 500px) {
+  /* nav {
     top: 1.2em;
+  } */
+  header {
+    top: 5px;
   }
-} */
+}
 
 /* nav bar */
 

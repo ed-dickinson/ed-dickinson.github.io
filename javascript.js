@@ -44,14 +44,14 @@ const changeSection = (new_section, color) => {
 header_text.addEventListener('click', () => {
   console.log('hello')
   changeSection(sections[0], 'pink')
-})
+}, true)
 
 nav_links[2].addEventListener('click', ()=> {
   changeSection(sections[1], 'khaki')
-})
+}, false)
 nav_links[1].addEventListener('click', ()=> {
   changeSection(sections[2], 'mediumaquamarine')
-})
+}, true)
 
 // mediumturquoise , mediumaquamarine , aquamarine , mediumseagreen , lightseagreen , paleturquoise , powderblue
 
@@ -62,6 +62,6 @@ nav_links[1].addEventListener('click', ()=> {
 // MOBILE
 
 if (window.innerWidth < 500) {
-  dom.nav.style.top = (header_text.offsetHeight * 0.7) + 10 + 'px'
-  dom.inner.style.marginTop = (header_text.offsetHeight * 0.7) + dom.nav.clientHeight + 5 + 'px'
+  dom.nav.style.top = (header_text.offsetHeight * 0.7) + 15 + 'px'
+  dom.inner.style.marginTop = (header_text.offsetHeight * 0.7) + dom.nav.clientHeight + 10 + 'px'
 }
