@@ -190,6 +190,13 @@ nav strong {
   }
 } */
 
+/* MOBILE */
+/* @media only screen and (max-width: 500px) {
+  nav {
+    top: 1.2em;
+  }
+} */
+
 /* nav bar */
 
 nav span:first-of-type {
@@ -258,16 +265,19 @@ section:first-of-type {
 /* z indexes */
 
 #left {
-  z-index: 30;
-}
-#right {
   z-index: 20;
 }
+#right {
+  z-index: 10;
+}
 header {
-  z-index: 25;
+  z-index: 15;
 }
 nav {
-  z-index: 35;
+  z-index: 15;
+}
+.inner {
+  z-index: 40;
 }
 
 img.video-screen {
