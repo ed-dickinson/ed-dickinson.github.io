@@ -11,6 +11,8 @@ header {
   width: 100%;
   position: absolute;
   z-index: 100;
+  font-family: georgia;
+  /* letter-spacing: 0.2em; */
 }
 
 header span {
