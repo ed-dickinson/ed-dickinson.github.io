@@ -62,6 +62,6 @@ nav_links[1].addEventListener('click', ()=> {
 // MOBILE
 
 if (window.innerWidth < 500) {
-  dom.nav.style.top = (header_text.offsetHeight * 0.7) + 15 + 'px'
-  dom.inner.style.marginTop = (header_text.offsetHeight * 0.7) + dom.nav.clientHeight + 10 + 'px'
+  dom.nav.style.top = (header_text.offsetHeight * 0.7) + 20 + 'px'
+  dom.inner.style.marginTop = (header_text.offsetHeight * 0.7) + dom.nav.clientHeight + 15 + 'px'
 }
