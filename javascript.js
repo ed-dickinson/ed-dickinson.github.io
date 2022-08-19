@@ -16,7 +16,7 @@ header_text.style.fontSize = header_text.parentNode.offsetWidth / header_text.of
 
 // dom.intro_spacer.style.height = (header_text.offsetHeight * 0.7) + 'px'
 // dom.intro_spacer.style.marginTop = (header_text.offsetHeight * 0.7) + 'px'
-dom.inner.style.marginTop = (header_text.offsetHeight * 0.7) + 'px'
+dom.inner.style.marginTop = (header_text.offsetHeight * 0.7) + 20 + 'px'
 
 
 
@@ -41,16 +41,28 @@ const changeSection = (new_section, color) => {
 // nav_links[0].addEventListener('click', () => {
 //   changeSection(sections[0], 'pink')
 // })
+
+const clearMenuSelection = () => {
+  nav_links.forEach(item => {
+    item.classList.remove('selected')
+  })
+}
+
 header_text.addEventListener('click', () => {
   console.log('hello')
   changeSection(sections[0], 'pink')
+  clearMenuSelection()
 }, true)
 
 nav_links[2].addEventListener('click', ()=> {
   changeSection(sections[1], 'khaki')
+  clearMenuSelection()
+  nav_links[2].classList.add('selected')
 }, false)
 nav_links[1].addEventListener('click', ()=> {
   changeSection(sections[2], 'mediumaquamarine')
+  clearMenuSelection()
+  nav_links[1].classList.add('selected')
 }, true)
 
 // mediumturquoise , mediumaquamarine , aquamarine , mediumseagreen , lightseagreen , paleturquoise , powderblue
@@ -63,5 +75,5 @@ nav_links[1].addEventListener('click', ()=> {
 
 if (window.innerWidth < 500) {
   dom.nav.style.top = (header_text.offsetHeight * 0.7) + 20 + 'px'
-  dom.inner.style.marginTop = (header_text.offsetHeight * 0.7) + dom.nav.clientHeight + 15 + 'px'
+  dom.inner.style.marginTop = (header_text.offsetHeight * 0.7) + dom.nav.clientHeight + 15 + 20 + 'px'
 }

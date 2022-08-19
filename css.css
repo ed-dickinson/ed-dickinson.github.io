@@ -100,6 +100,7 @@ main {
   max-width: 800px;
   margin: auto;
   padding: 20px;
+  padding-top: 0px;
 }
 
 #left::-webkit-scrollbar {
@@ -137,12 +138,12 @@ nav {
   color: white;
   position: absolute;
   top: 5px;
-  top: 10px;
+  /* top: 10px; */
   right: 5px;
   z-index: 10;
   font-family: monospace;
   color: white;
-  font-size: 16px;
+  font-size: 1rem;
   position: fixed;
 }
 nav span {
@@ -151,16 +152,13 @@ nav span {
   cursor: pointer;
   /* transition: 0.5s; */
 }
-nav span:hover {
-  background-color: white;
-  color: black;
+nav span:hover, nav span.selected {
+  /* background-color: white; */
+
+  /* color: black; */
+  color: rgba(255,255,255,0.5)
 }
-nav strong {
-  font-weight: normal;
-  font-size: 1.5em;
-  display: inline-block;
-  line-height: 0;
-}
+
 
 @media only screen and (min-width: 800px) {
   nav span {
@@ -169,13 +167,28 @@ nav strong {
 }
 @media only screen and (min-width: 1000px) {
   nav span {
-    font-size: 1.4em;
+    /* font-size: 1.4em; */
   }
   nav {
-    top: 15px;
+    top: 10px;
     right: 10px;
   }
 }
+/* nav svg {
+  height: calc(1.25em + 4px);
+  width: 1em;
+  display: inline-block;
+  top: 0;
+  position: absolute;
+  left: 100%;
+  height: 100%;
+}
+nav svg path {
+  height: 100%;
+  width: 100%;
+
+} */
+
 /* @media only screen and (min-width: 1200px) {
   nav span {
     font-size: 1.6em;
@@ -184,14 +197,14 @@ nav strong {
     top: 10px;
   }
 } */
-/* @media only screen and (min-width: 1400px) {
+@media only screen and (min-width: 1400px) {
   nav span {
-    font-size: 1.8em;
+    font-size: 1.4em;
   }
   nav {
     top: 15px;
   }
-} */
+}
 
 /* MOBILE */
 @media only screen and (max-width: 500px) {
@@ -201,10 +214,7 @@ nav strong {
   header {
     top: 10px;
   }
-  /* slash */
-  nav span:nth-of-type(2)::after {
-    right: -0.6em !important;
-  }
+
 }
 
 /* nav bar */
@@ -215,17 +225,20 @@ nav span:first-of-type {
 nav span:nth-of-type(2) {
   position: relative;
   margin-right: 0.5em;
+  border-width: 0 2px 2px 0;
 }
-nav span:nth-of-type(2)::after {
-  content: '/';
-  /* transform: rotate(10deg); */
-  /* height: 100%; */
-  width: 4px;
-  /* background-color: white; */
-  position: absolute;
-  right: -0.5em;
-  color: white !important;
+/* nav span:nth-of-type(2).selected {
+  border-width: 2px 2px 2px 0;
+} */
+nav span:nth-of-type(3) {
+  position: relative;
+  margin-right: 0.5em;
+  border-width: 2px 0 0 2px;
 }
+/* nav span:nth-of-type(3).selected {
+  border-width: 2px 0 2px 2px;
+} */
+
 /* nav span:nth-of-type(2) {
   transform: rotate(5deg);
   display: inline-block;
@@ -264,6 +277,7 @@ p.h2 {
 section {
   display: none;
   background-color: white;
+  /* background-color: rgba(255,255,255,0.9); */
   color: black;
   padding: 20px;
   /* box-shadow: 0px 0px 5px grey; */
