@@ -12,7 +12,7 @@ const setUpButton = (button, target, name) => {
 
   button.addEventListener('click', () => {
     title = name === 'Home' ? 'Ed Dickinson' : name
-    document.querySelector('.selected').classList.remove('selected')
+    document.querySelector('article.selected').classList.remove('selected')
     document.querySelector(target).classList.add('selected')
   })
   button.addEventListener('mouseenter', () => {
