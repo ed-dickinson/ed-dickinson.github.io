@@ -17,120 +17,63 @@
 </head>
 <body>
 
+  <div id="background">
 
-  <main>
-    <div id="left">
+  </div>
 
-      <header>
-        <span id="named-header">
-          Ed Dickinson
-        </span>
-      </header>
+<div class="h1" id="main-title">
+Ed Dickinson
+</div>
 
-      <nav>
-        <span>Info</span>
-        <span>Development</span><span>Design</span>
+<main>
 
-        <!-- <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 10 6">
-            <path style="fill: none; stroke: white; stroke-width: 2" d="M 0 10 L 6 0"/>
-          </svg> -->
-
-        <!-- <span>Music</span> -->
-      </nav>
-
-      <div class="inner">
-        <div class="intro-spacer" style="height: 0px;"        >
-
-        </div>
-        <section id="intro">
-
-          <img src="public/assets/caravan.png" id="caravan-img" width="500"/>
-          <br /><br />
-          <article>
-            <p>
-              Hi there –
-            </p>
-            <p>
-              I'm a Glasgow-based javascript developer and general web enthusiast. I'm a big believer in the power of the web and it's technologies to connect individuals in beautiful ways.
-            </p>
-            <p>
-              I'm a freelance, web-hand for hire – so if you'd like a handmade website, or have some general webbery that needs doing, then hit me up.
-            </p>
-            <p>
-              Whatever it is, don't be shy.
-            </p>
-          </article>
-          <footer>
+  <nav>
+    <menu>
+      <button id="home-link" class="selected">Home</button>
+      <button id="laptop">Projects</button>
+      <button id="spanner">Tools</button>
+    </menu>
+  </nav>
+  <article id="about" class="selected">
 
 
-          <p>
-            email: <a href='mailto:hello@ed-dickinson.net'>hello@ed-dickinson.net</a>
-          </p>
-
-          </footer>
-        </section>
 
 
-        <section id="design">
-          <p class="h">
-            Web Design
-          </p>
-          <p>
-            I'd like nothing more than to create a bespoke website from the ground up using CSS and HTML and any custom Javascript functionality you desire – but I'm happy to work with wordpress or any content management system you already use – whether I'm familiar with it or not...
-          </p>
-          <br />
-          <article>
-            <!-- <p class="h2">
-              Clients:
-            </p> -->
-            <p>
-              These are some of my previous clientelle:
-              <br /><br />
-            </p>
-            <p class="client-logos">
-              <a href="https://stilllife.earth/"><img src="/public/assets/logos/stilllife.png" height="120" /></a>
-              <a href="https://telegramgallery.com/"><img src="/public/assets/logos/telegram-gallery.png" height="120" /></a>
-              <a href="https://www.ginibean.com/"><img src="/public/assets/logos/ginibean-sml.png" height="120"/></a>
-            </p>
-          </article>
-          <footer>
-            <p>
-              email: <a href='mailto:hello@ed-dickinson.net'>hello@ed-dickinson.net</a>
-            </p>
-          </footer>
-        </section>
+    <img src="public/assets/caravan.png" style="filter: grayscale(1);"/>
+
+    <p style="padding-top: 0.5em;">
+      <span class="fancy-capital" style="top: -0.5em;">H</span>ello, I'm a cobbler of code and I ply my trade from the dreich realm of Glasgow.
+    </p>
+    <p>
+      I strive to use web technology to connect human experience in new and delightful ways.
+    </p>
+    <p>
+      I'm a freelance web-hand for hire – so if you'd like a custom, handmade website, or just have some general programming that needs doing, then hit me up.
+    </p>
+
+    <p class="break">
+      –
+    </p>
+    <p>
+      <span class="fancy-capital" style="width: 1rem;">I</span> work primarily with Javascript, favouring vanilla JS for it's playfullness and creativity, but using the React framework for front-end flexibility and speed of use, and node and express on the back-end.
+    </p>
+    <p>
+      I tend to use MongoDB for a database and either AWS or Heroku for hosting, and Git with GitHub for versioning.
+    </p>
+    <p>
+      I'm no Wordpress master, but I know my way around it, and find it a good way to give customer's a blog-based website, as a bespoke CMS takes time.
+    </p>
+    <p>
+      I also have some basic experience in Java, C# and Python.
+    </p>
+  </article>
 
 
-        <section id="programming">
-          <p class="h">
-            Web Development
-          </p>
-          <p>
 
-            I work primarily with <img class="tech-icon" src='../public/assets/icons/javascript-rnd.png' name='Javascript'/><strong>Javascript</strong>, favouring vanilla JS for it's playfullness and creativity, but using the <img class="tech-icon" src='../public/assets/icons/react.png' name='React'/><strong>React</strong> framework for front-end flexibility and speed of use, and <img class="tech-icon" src='../public/assets/icons/nodejs.png' name='node.js'/><strong>node</strong> and <strong>express</strong> on the back-end.
-          </p>
 
-          <p>
-            I tend to use <img class="tech-icon" src='../public/assets/icons/mongoleaf.png' name='MongoDB'/><strong>MongoDB</strong> for a database and either <img class="tech-icon" src='../public/assets/icons/aws.png' name='AWS'/><strong>AWS</strong>
-            or <img class="tech-icon" src='../public/assets/icons/heroku.png' name='Heroku'/><strong>Heroku</strong> for hosting, and <img class="tech-icon" src='../public/assets/icons/git.png' name='Git'/><strong>Git</strong> with <img class="tech-icon" src='../public/assets/icons/github.png' name='GitHub'/><strong>GitHub</strong> for versioning.
-          </p>
+  <article id="projects">
 
-          <p>
-            <img class="tech-icon" src='../public/assets/icons/wordpress.png' name='Wordpress'/>
-            I'm no <strong>Wordpress</strong> master, but I know my way around it, and find it a good way to give customer's a blog-based website, as a bespoke CMS takes <em>time</em>.
-          </p>
-          <p>
-            <img class="tech-icon" src='../public/assets/icons/java.png' name='Java'/>
-            <img class="tech-icon" src='../public/assets/icons/csharp.png' name='C#'/>
-            <img class="tech-icon" src='../public/assets/icons/python.png' name='Python'/>
-            I also have some basic experience in <strong>Java</strong>, <strong>C#</strong> and <strong>Python</strong>.
-          </p>
-          <article>
-            <p class="h2">
-              Projects:
-            </p>
-
-            <div class="project" for='jog-log'>
+    <div class="project" for='jog-log'>
               <h3>Jog Log <a class='go-there' href='https://jog-log.netlify.app'>LINK</a></h3>
 
               <div class="screenshot">
@@ -146,6 +89,8 @@
               </p>
 
             </div>
+
+            <hr />
 
             <div class="project">
               <h3>Tumbleword <a class='go-there' href='https://jog-log.netlify.app'>LINK</a></h3>
@@ -164,6 +109,25 @@
               </p>
             </div>
 
+            <hr />
+
+            <div class="project">
+              <h3>Still Life<a class='go-there' href='https://stilllife.earth/'>LINK</a></h3>
+              <p>
+                <div class="screenshot">
+                  <span class="fbb close"></span><span class="fbb minimise"></span><span class="fbb expand"></span><span class="fbb address"></span>
+                  <a class="img-link" href='https://stilllife.earth/'><img class="screenshot" src='../public/assets/still-life.gif' /></a>
+                </div>
+              </p>
+
+              <p>
+                A website and online shop <i>Still Life</i>, a local company who make furniture out of recycled plastic.
+              </p>
+
+            </div>
+
+            <hr />
+
             <div class="project" for='multi-mask'>
               <h3>Multi Mask <a class='go-there' href='https://multi-mask.netlify.app'>LINK</a></h3>
 
@@ -180,77 +144,37 @@
               </p>
 
             </div>
+  </article>
 
-          </article>
+  <article id="tools">
+    <p>
+      These are some tools that I've made and have found to be pretty useful. To me, at least.
+    </p>
+    <h3>
+      Running Tools
+    </h3>
+    <p>
+      👟 <a href="/pace-calculator"><i>Running Pace Converter</i></a>, which converts pace between min/mile and km/mile.
+    </p>
+    <p>
+      🏃‍♂️ <a href="/101010-calculator"><i>Marathon Pace Calculator</i></a>, which calculates the running paces necessary to achieve a target marathon time while using the 10/10/10 rule.
+    </p>
+    <h3>
+      Musical Tools
+    </h3>
+    <p>
+      🍤 <a href="/prawn-tempora"><i>Prawn Tempo-ra</i></a>, a tempo tapper and delay time calculator.
+    </p>
+    <p>
+      🐓 <a href="/chicken-keyev"><i>Chicken Key-ev</i></a>, a key transposer and chord finder.
+    </p>
+  </article>
 
+</main>
 
-          <article>
-            <p class="h2">
-              Tools:
-            </p>
-            <p>
-              These are some tools that I've made and have found to be pretty useful. To me, at least.
-            </p>
-            <p>
-              🏃‍♂️ <a href="/pace-calculator"><i>Running Pace Converter</i></a> & <a href="/101010-calculator"><i>Marathon Pace Calculator</i></a>.
-            </p>
-            <p>
-              🍤 <a href="/prawn-tempora"><i>Prawn Tempo-ra</i></a>, a tempo tapper and delay time calculator.
-            </p>
-            <p>
-              🐓 <a href="/chicken-keyev"><i>Chicken Key-ev</i></a>, a musical key transposer and chord finder.
-            </p>
-          </article>
-          <footer>
-            <p>
-              email: <a href='mailto:hello@ed-dickinson.net'>hello@ed-dickinson.net</a>
-            </p>
-            <p>
-              <a href='https://github.com/ed-dickinson'>GitHub</a> / <a href="https://www.linkedin.com/in/-ed-dickinson/">LinkedIn</a>
-            </p>
-          </footer>
-        </section>
-
-
-        <section id="music">
-          <p class="h">
-            Music:
-          </p>
-          <article>
-            <p class="h2">Living Yourself</p>
-            <p align="center">
-              <img src="public/assets/livin-man.png" style="width: 100%; max-width: 500px;"/>
-            </p>
-            <p>
-
-              <i>Living Yourself</i>, was an album of music I made in 2020, featuring this hot vid for the title track:
-            </p>
-            <p>
-              <a href="https://www.youtube.com/watch?v=2_qhqSqSbqk" class="img-link"><img src="public/assets/livin-vid1.jpg" style="width: 100%;" class="video-screen"></a>
-            </p>
-          </article>
-          <footer>
-            <p>
-              email: <a href='mailto:hello@ed-dickinson.net'>hello@ed-dickinson.net</a>
-            </p>
-            <p>
-              <a href='https://crumbdouglas.bandcamp.com/'>bandcamp</a> / <a href="https://www.youtube.com/user/eddead123">youtube</a>
-            </p>
-          </footer>
-        </section>
-
-      </div>
-
-    </div>
-
-
-  </main>
-
-  <div id="right">
-    <div class="inner">
-
-    </div>
-  </div>
+<footer>
+  You can send emails to: <a href="mailto:hello@ed-dickinson.net">hello@ed-dickinson.net</a>, or find me on <a href="https://github.com/ed-dickinson">GitHub</a> or <a href="https://www.linkedin.com/in/-ed-dickinson/">LinkedIn</a>.
+</footer>
 
 
 

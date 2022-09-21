@@ -1,79 +1,28 @@
-let header_text = document.querySelector('#named-header')
+let title = 'Ed Dickinson'
 
-const dom = {
-  body : document.querySelector('body'),
-  main : document.querySelector('main'),
-  intro_spacer : document.querySelector('.intro-spacer'),
-  nav : document.querySelector('nav'),
-  inner : document.querySelector('.inner')
+let dom = {
+  title : document.querySelector('#main-title')
 }
 
-console.log(header_text, header_text.offsetWidth, header_text.parentNode.offsetWidth)
-console.log(header_text.offsetWidth / header_text.parentNode.offsetWidth)
+const unselectAllArticles = () => {
+  document.querySelector('.selected').classList.remove('selected')
+}
 
-header_text.style.fontSize = header_text.parentNode.offsetWidth / header_text.offsetWidth * 1 + 'em'
+const setUpButton = (button, target, name) => {
 
-
-// dom.intro_spacer.style.height = (header_text.offsetHeight * 0.7) + 'px'
-// dom.intro_spacer.style.marginTop = (header_text.offsetHeight * 0.7) + 'px'
-dom.inner.style.marginTop = (header_text.offsetHeight * 0.7) + 20 + 'px'
-
-
-
-
-
-let sections = Array.from(document.querySelectorAll('section'))
-
-
-let nav_links = Array.from(document.querySelector('nav').children)
-
-console.log(sections, nav_links)
-
-const changeSection = (new_section, color) => {
-  sections.forEach(section => {
-    section.style.display = 'none'
+  button.addEventListener('click', () => {
+    title = name === 'Home' ? 'Ed Dickinson' : name
+    document.querySelector('.selected').classList.remove('selected')
+    document.querySelector(target).classList.add('selected')
   })
-  new_section.style.display = 'block'
-  dom.main.style.backgroundColor = color
-  console.log(color)
-}
-
-// nav_links[0].addEventListener('click', () => {
-//   changeSection(sections[0], 'pink')
-// })
-
-const clearMenuSelection = () => {
-  nav_links.forEach(item => {
-    item.classList.remove('selected')
+  button.addEventListener('mouseenter', () => {
+    dom.title.textContent = name
+  })
+  document.querySelector('menu').addEventListener('mouseleave', () => {
+    dom.title.textContent = title
   })
 }
 
-header_text.addEventListener('click', () => {
-  console.log('hello')
-  changeSection(sections[0], 'pink')
-  clearMenuSelection()
-}, true)
-
-nav_links[2].addEventListener('click', ()=> {
-  changeSection(sections[1], 'khaki')
-  clearMenuSelection()
-  nav_links[2].classList.add('selected')
-}, false)
-nav_links[1].addEventListener('click', ()=> {
-  changeSection(sections[2], 'mediumaquamarine')
-  clearMenuSelection()
-  nav_links[1].classList.add('selected')
-}, true)
-
-// mediumturquoise , mediumaquamarine , aquamarine , mediumseagreen , lightseagreen , paleturquoise , powderblue
-
-// sandybrown , khaki , burlywood
-
-// cadetblue
-
-// MOBILE
-
-if (window.innerWidth < 500) {
-  dom.nav.style.top = (header_text.offsetHeight * 0.7) + 20 + 'px'
-  dom.inner.style.marginTop = (header_text.offsetHeight * 0.7) + dom.nav.clientHeight + 15 + 20 + 'px'
-}
+setUpButton(document.querySelector('button#home-link'), '#about', 'Home')
+setUpButton(document.querySelector('button#laptop'), '#projects', 'Projects')
+setUpButton(document.querySelector('button#spanner'), '#tools', 'Tools')
