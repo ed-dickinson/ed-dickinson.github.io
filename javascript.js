@@ -11,9 +11,12 @@ const unselectAllArticles = () => {
 const setUpButton = (button, target, name) => {
 
   button.addEventListener('click', () => {
+    console.log('fire', name)
     title = name === 'Home' ? 'Ed Dickinson' : name
     document.querySelector('article.selected').classList.remove('selected')
     document.querySelector(target).classList.add('selected')
+    dom.title.textContent = name === 'Home' ? 'Ed Dickinson' : name // is this nec? for mob
+    console.log('complete')
   })
   button.addEventListener('mouseenter', () => {
     dom.title.textContent = name
