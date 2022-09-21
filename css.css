@@ -155,6 +155,7 @@ article.selected {
   }
   body {
     margin: 10px 0px;
+    margin-right: 0;
   }
   footer {
     padding-right: 10px;
@@ -163,10 +164,11 @@ article.selected {
   article {
     padding-left: 10px;
     padding-right: 10px;
+    margin-right: 0; /* mob fix */
   }
   .h1 {
     display: block;
-    font-size: 2em;
+    font-size: 2.8em;
     /* margin-left: 10px; */
   }
   menu {
@@ -180,9 +182,9 @@ article.selected {
 
   }
   nav button {
-    height: 30px;
-    width: 30px;
-    background-size: 30px;
+    height: 40px;
+    width: 40px;
+    background-size: 40px;
   }
   .h1 {
     text-align: center;
@@ -246,6 +248,9 @@ article.selected {
 
   overflow: auto;
   padding-bottom: 0.5em;
+}
+article {
+  overflow-x: hidden;
 }
 hr {
   height: 0px;
