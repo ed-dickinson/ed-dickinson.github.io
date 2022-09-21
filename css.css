@@ -146,6 +146,28 @@ article.selected {
   margin: 0.5em 0;
 }
 
+#extra-text {
+  position: relative;
+  height: 5em;
+  overflow: hidden;
+  margin-bottom: 1em;
+}
+#read-more {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-weight: bold;
+  cursor: pointer;
+  border-bottom: 1px solid black;
+}
+#extra-text.expanded {
+  height: auto;
+  margin-bottom: 0em;
+}
+#extra-text.expanded #read-more {
+  display: none;
+}
+
 
 #projects .go-there {
   display: none;

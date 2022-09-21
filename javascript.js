@@ -26,3 +26,7 @@ const setUpButton = (button, target, name) => {
 setUpButton(document.querySelector('button#home-link'), '#about', 'Home')
 setUpButton(document.querySelector('button#laptop'), '#projects', 'Projects')
 setUpButton(document.querySelector('button#spanner'), '#tools', 'Tools')
+
+document.querySelector('#read-more').addEventListener('click', () => {
+  document.querySelector('#extra-text').classList.add('expanded')
+})
