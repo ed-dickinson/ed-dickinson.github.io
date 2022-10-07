@@ -11,7 +11,7 @@
 <style>
 body {font-family: monospace;}
 .slidecontainer {
-  width: 150px; /* Width of the outside containerposition:relative; */ 
+  width: 150px; /* Width of the outside containerposition:relative; */
 }
 
 /* The slider itself */
@@ -55,13 +55,16 @@ body {font-family: monospace;}
   background: dodgerblue; /* Green background */
   cursor: pointer; /* Cursor on hover */
   z-index: 2;
+  border-radius: 50%;
+  border: 0;
+  background: white;
 }
 
 #readoutnote {font-size: 30pt;}
 
 #chicken {transform: rotate(0deg); z-index: -1; transition: 0s;}
 
-.bodybgpads {position: fixed; top: -10vh; height: 120vh; width: calc(60vw - 26ch); min-width: 0; z-index: -200; opacity: 0.5;} 
+.bodybgpads {position: fixed; top: -10vh; height: 120vh; width: calc(60vw - 26ch); min-width: 0; z-index: -200; opacity: 0.5;}
 .bgpadl {left: -10vw; background-image: linear-gradient(to left, white, oldlace); } /*antiquewhite, blanchedalmond, bisque, PapayaWhip*/
 .bgpadr {right: -10vw; background-image: linear-gradient(to right, white, oldlace); }
 
@@ -169,7 +172,7 @@ iiichord.innerHTML = chromatic[iii];
 IVchord.innerHTML = chromatic[IV];
 Vchord.innerHTML = chromatic[V];
 vichord.innerHTML = chromatic[vi];
-  
+
 var Ispaces = document.getElementsByClassName("Ispace");
 var Idashes = document.getElementsByClassName("Idash");
 var vispaces = document.getElementsByClassName("vispace");
@@ -186,7 +189,7 @@ var iispaces = document.getElementsByClassName("iispace");
 var iidashes = document.getElementsByClassName("iidash");
 
 
-  
+
 if (chromatic[I].length == 2) {
   for (var i = 0; i < Ispaces.length; i++) {
   Ispaces[i].innerHTML = "&nbsp;&nbsp;";}
@@ -197,7 +200,7 @@ if (chromatic[I].length == 1) {
   Ispaces[i].innerHTML = "&nbsp;";}
   for (var i = 0; i < Idashes.length; i++) {
   Idashes[i].innerHTML = "-";}}
-  
+
 if (chromatic[vi].length == 2) {
   for (var i = 0; i < vispaces.length; i++) {
   vispaces[i].innerHTML = "&nbsp;&nbsp;&nbsp;";}
@@ -208,8 +211,8 @@ if (chromatic[vi].length == 1) {
   vispaces[i].innerHTML = "&nbsp;&nbsp;";}
   for (var i = 0; i < vidashes.length; i++) {
   vidashes[i].innerHTML = "--";}}
-  
-  
+
+
   if (chromatic[V].length == 2) {
   for (var i = 0; i < Vspaces.length; i++) {
   Vspaces[i].innerHTML = "&nbsp;&nbsp;";}
@@ -220,7 +223,7 @@ if (chromatic[V].length == 1) {
   Vspaces[i].innerHTML = "&nbsp;";}
   for (var i = 0; i < Vdashes.length; i++) {
   Vdashes[i].innerHTML = "-";}}
-  
+
 if (chromatic[iii].length == 2) {
   for (var i = 0; i < iiispaces.length; i++) {
   iiispaces[i].innerHTML = "&nbsp;&nbsp;&nbsp;";}
@@ -231,8 +234,8 @@ if (chromatic[iii].length == 1) {
   iiispaces[i].innerHTML = "&nbsp;&nbsp;";}
   for (var i = 0; i < iiidashes.length; i++) {
   iiidashes[i].innerHTML = "--";}}
-  
-  
+
+
   if (chromatic[IV].length == 2) {
   for (var i = 0; i < IVspaces.length; i++) {
   IVspaces[i].innerHTML = "&nbsp;&nbsp;";}
@@ -243,7 +246,7 @@ if (chromatic[IV].length == 1) {
   IVspaces[i].innerHTML = "&nbsp;";}
   for (var i = 0; i < IVdashes.length; i++) {
   IVdashes[i].innerHTML = "-";}}
-  
+
 if (chromatic[ii].length == 2) {
   for (var i = 0; i < iispaces.length; i++) {
   iispaces[i].innerHTML = "&nbsp;&nbsp;&nbsp;";}
@@ -254,25 +257,25 @@ if (chromatic[ii].length == 1) {
   iispaces[i].innerHTML = "&nbsp;&nbsp;";}
   for (var i = 0; i < iidashes.length; i++) {
   iidashes[i].innerHTML = "--";}}
-  
-  
+
+
   }
-  
+
 //slider.addEventListener('input', chordChange());
-  
-  
+
+
 document.getElementById('inner-chicken-clicker1').addEventListener('click', function() {
-    slider.focus(); 
-    slider.value -= 1; 
-    console.log(slider.value); 
+    slider.focus();
+    slider.value -= 1;
+    console.log(slider.value);
     chordChange();
     });
-    
+
 document.getElementById('inner-chicken-clicker2').addEventListener('click', function() {
-    slider.readOnly = false; 
-    slider.focus(); 
-    slider.value = Number(slider.value) + 1; 
-    console.log(slider.value); 
+    slider.readOnly = false;
+    slider.focus();
+    slider.value = Number(slider.value) + 1;
+    console.log(slider.value);
     chordChange();
     });
 </script>

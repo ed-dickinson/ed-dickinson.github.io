@@ -65,8 +65,10 @@ h2 {
   border: 2px solid black;
   margin: 0;
   margin-top: 0.3em;
-  padding: 0.1em 0.3em;
+  padding: 0em 0.3em 0.2em;
+
 }
+
 
 ul.sub-list {
   border: 2px solid black;
@@ -74,7 +76,7 @@ ul.sub-list {
   list-style-type: none;
   margin: 0;
   padding-left: 0em;
-  border-left-width: 1.4ch;
+  border-left-width: 0.85em;
 }
 ul.sub-list.open {
   border-top-width: 0 ;
@@ -99,6 +101,13 @@ h2 .number::after {
   content: ' '
 }
 
+.number {
+  font-weight: bold;
+}
+.label {
+  font-weight: normal;
+}
+
 li.sub-list-item {
   border: inherit;
   border-left-width: 0ch;
@@ -113,11 +122,51 @@ ul.deep-list {
   list-style-position: inside;
   list-style-type: none;
   margin: 0;
-  padding-left: 2.3ch;
+  padding-left: 0.55em;
   border-right: 0;
 }
 
 ul.deep-list.open {
   border-top-width: 0;
   border-bottom-width: 0;
+}
+
+h2, .mw-parser-output ul, .mw-parser-output li {
+  cursor: pointer;
+}
+
+li.sub-list-item b  {
+  padding: 0.2em 0em;
+  display:  block;
+}
+li.deep-list-item {
+  padding: 0.2em 0;
+}
+
+.deep-list-item {
+  position: relative;
+  border-bottom-color: inherit;
+}
+.deep-list {
+  border-color: inherit;
+}
+.deep-list-item::before {
+  width: 1em;
+  height: 0em;
+  border: inherit;
+  border-width: 2px;
+  border-bottom-color: inherit;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  content: '';
+  position: absolute;
+  left: -1.4em;
+  top: 0em;
+}
+
+
+
+footer {
+  margin-top: 1em;
+  text-align: center;
 }

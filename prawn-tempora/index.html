@@ -17,7 +17,7 @@ body {font-family: monospace;}
 button:focus { outline: none; }
 
 .slidecontainer {
-  width: 300px; /* Width of the outside containerposition:relative; */ 
+  width: 300px; /* Width of the outside containerposition:relative; */
 }
 
 /* The slider itself */
@@ -58,6 +58,9 @@ button:focus { outline: none; }
   background: dodgerblue; /* Green background */
   cursor: pointer; /* Cursor on hover */
   z-index: 2;
+  border-radius: 50%;
+  border: 0;
+  background: white;
 }
 
 #demo {
@@ -83,13 +86,13 @@ text-align: center;
 <input type="range" min="40" max="160" value="100" class="slider" id="myRange">
 </div>
 <div class="textcontainer">
-  
+
   <br><span id="demo"></span><br>BPM<br><br>
   bar length: <span id="longreverb"></span>s
   <br><br>
-  <span id="msec2"></span>ms <span id="msec4"></span>ms <span id="msec8"></span>ms <span id="msec16"></span>ms <span id="msec32"></span>ms <span id="msec64"></span>ms <span id="msec128"></span>ms 
+  <span id="msec2"></span>ms <span id="msec4"></span>ms <span id="msec8"></span>ms <span id="msec16"></span>ms <span id="msec32"></span>ms <span id="msec64"></span>ms <span id="msec128"></span>ms
   <br><br><span id="freq3"></span>hz <span id="freq2"></span>hz <span id="freq"></span>hz
-   
+
 <!-- <br>debug: taps:<span id="taps">x</span>
             <br>msecs:<span id="msecs">x</span>-->
 <!--<p></p><br><br>tapper readout:<span id="tapperreadout"></span>
@@ -107,10 +110,10 @@ output.innerHTML = slider.value; // Display the default slider value
 
 
 // Update the current slider value (each time you drag the slider handle)
-//slider.oninput = 
+//slider.oninput =
 function ValueUpdater() {
   output.innerHTML = slider.value;
-  
+
   msec2.innerHTML = Math.round(120000 / slider.value);
   //if (msec2.innerHTML.length == 3) {msec2.innerHTML = "0" + msec2.innerHTML;}
   msec4.innerHTML = Math.round(60000 / slider.value);
@@ -120,17 +123,17 @@ function ValueUpdater() {
   msec32.innerHTML = Math.round(7500 / slider.value);
   msec64.innerHTML = Math.round(3750 / slider.value);
   msec128.innerHTML = Math.round(1875 / slider.value);
-  
+
   var hertz1 = Math.round(slider.value / 15 * 1000) / 1000;
   freq.innerHTML = hertz1.toFixed(3);
   var hertz2 = Math.round(slider.value / 60 * 1000) / 1000;
   freq2.innerHTML = hertz2.toFixed(3);
   var hertz3 = Math.round(slider.value / 240 * 1000) / 1000;
   freq3.innerHTML = hertz3.toFixed(3);
-  
+
   var longverb = Math.round(24000 / slider.value) / 100;
   longreverb.innerHTML = longverb.toFixed(2);
-  
+
 }
 
 slider.oninput = ValueUpdater;
@@ -197,7 +200,7 @@ function TapForBPMx(e)
   msecsPrevious = msecs;
   //return true;
   }
-  
+
   function TapForBPM(e)
   {
   //document.T_WAIT.blur();
@@ -214,8 +217,8 @@ function TapForBPMx(e)
     {
     msecsFirst = msecs;
     count = 1;
-    //demo.style.color = "deeppink"; 
-    demo.style.opacity = 0.65; 
+    //demo.style.color = "deeppink";
+    demo.style.opacity = 0.65;
     }
 
   //count++;
@@ -227,29 +230,29 @@ function TapForBPMx(e)
     bpmAvg = 60000 * count / (msecs - msecsFirst);
     slider.value = Math.round(bpmAvg);
     count++;
-    
+
         if (count > maxCount) // average over maxCount
         {
             bpmAvg = 60000 * maxCount / (msecs - times[next]);
             slider.value = Math.round(bpmAvg);
         }
-        
+
     //document.getElementById('taps').innerHTML = count;//debug
     ValueUpdater();
     }
     //document.getElementById('msecs').innerHTML = msecs - msecsPrevious;//debug
   msecsPrevious = msecs;
   times[next] = msecs;
-  
+
   next++;
     if (next >= maxCount) {next = 0;}
   //return true;
   }
-  
-  
-  
-  
-  
+
+
+
+
+
   function ReleaseButton() {
     if (window.innerWidth <= 500) {
         document.getElementById("shrimpbutton").style.backgroundSize = "95%";
@@ -260,7 +263,7 @@ function TapForBPMx(e)
         document.getElementById("shrimpbutton").style.backgroundSize = "100%";
     }
   }
-  
+
 document.onkeypress = TapForBPM;
 document.onkeyup = ReleaseButton;
 
