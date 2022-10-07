@@ -62,11 +62,13 @@ body {
   background-color: NavajoWhite;
 
   font-family: Inconsolata;
+
+  background-color: white;
 }
 
 
 
-#background {
+/* #background {
   height: 120%;
   width: 120%;
   position: fixed;
@@ -74,6 +76,29 @@ body {
   left: -10%;
   background-image: linear-gradient(NavajoWhite, Tan);
   z-index: -1000;
+} */
+
+#background {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  background-image: url("public/assets/gaussian-wisteria.jpg");
+  background-position: 50% 50%;
+  background-size: cover;
+  background-attachment: fixed;
+
+  z-index: -1;
+  filter: hue-rotate(200deg);
+  opacity: 0;
+  animation: load-bg 2s ease-in-out 0s 1 normal forwards;
+}
+
+@keyframes load-bg {
+  from {opacity: 0;}
+  to {opacity: 1;}
 }
 
 img {
@@ -150,8 +175,9 @@ nav button {
   background-blend-mode: multiply;
 }
 article {
-  background-color: white;
-  padding: 0px 20px;
+  /* background-color: white; */
+  /* padding: 0px 20px; */
+  padding: 0;
   border-top: 1px solid black;
   border-bottom: 1px solid black;
   padding-top: 1em;
@@ -171,7 +197,7 @@ article.selected {
 
 @media only screen and (max-width: 600px) {
   #background {
-    display: none;
+    /* display: none; */
   }
   body {
     margin: 10px 0px;
@@ -304,8 +330,16 @@ div.screenshot {
     margin-right: 0em;
   }
 }
+a.img-link {
+  padding-bottom: -3px;
+  margin-bottom: 0;
+  display: block;
+}
 img.screenshot {
   border-top: 1px solid black;
+  padding-bottom: 0;
+  margin-bottom: -4px;
+  border-radius: 0 0 4px 4px ;
 }
 
 .fbb {
@@ -329,3 +363,40 @@ img.screenshot {
 .fbb.address {
   display: none;
 }
+
+img.social {
+  height: 1.5em;
+}
+a.social {
+  text-decoration: none;
+  border-bottom: 0;
+}
+footer .socials {
+  float: right;
+}
+
+
+
+article {
+  position: relative;
+}
+.left {
+  position: relative;
+  width: 50%;
+}
+
+img#caravan {
+  mix-blend-mode: multiply;
+  filter: grayscale(1);
+}
+
+/* @media only screen and (min-width: 601px) {
+  img#caravan {
+    width: 50%;
+    float: left;
+  }
+} */
+
+/* article {
+  padding: 0;
+} */
