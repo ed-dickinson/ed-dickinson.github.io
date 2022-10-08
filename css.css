@@ -111,7 +111,9 @@ main {
 }
 
 
-
+header {
+  padding: 1em 0;
+}
 
 main, footer, header {
   margin: auto;
@@ -121,6 +123,7 @@ main, footer, header {
 footer {
   margin-top: 1em;
   margin-bottom: 1em;
+  padding-bottom: 2em;
 }
 
 menu {
@@ -340,6 +343,14 @@ img.screenshot {
   padding-bottom: 0;
   margin-bottom: -4px;
   border-radius: 0 0 4px 4px ;
+  filter: grayscale(1);
+  mix-blend-mode: multiply;
+  transition: 0.5s;
+}
+img.screenshot:hover {
+
+  filter: grayscale(0);
+  mix-blend-mode: normal;
 }
 
 .fbb {
