@@ -63,12 +63,12 @@ body {
 
   font-family: Inconsolata;
 
-  background-color: white;
+  /* background-color: white; */
 }
 
 
 
-/* #background {
+#background {
   height: 120%;
   width: 120%;
   position: fixed;
@@ -76,9 +76,9 @@ body {
   left: -10%;
   background-image: linear-gradient(NavajoWhite, Tan);
   z-index: -1000;
-} */
+}
 
-#background {
+/* #background {
   position: fixed;
   left: 0;
   top: 0;
@@ -94,7 +94,7 @@ body {
   filter: hue-rotate(200deg);
   opacity: 0;
   animation: load-bg 2s ease-in-out 0s 1 normal forwards;
-}
+} */
 
 @keyframes load-bg {
   from {opacity: 0;}
@@ -112,7 +112,7 @@ main {
 
 
 header {
-  padding: 1em 0;
+  padding: 0.5em 0;
 }
 
 main, footer, header {
@@ -198,50 +198,7 @@ article.selected {
   margin: 0.5em 0;
 }
 
-@media only screen and (max-width: 600px) {
-  #background {
-    /* display: none; */
-  }
-  body {
-    margin: 10px 0px;
-    margin-right: 0;
-  }
-  footer {
-    padding-right: 10px;
-    padding-left: 10px;
-  }
-  article {
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-right: 0; /* mob fix */
-  }
-  .h1 {
-    display: block;
-    font-size: 2.8em;
-    /* margin-left: 10px; */
-  }
-  menu {
-    display: block;
-    /* margin-right: 10px; */
-    margin-bottom: 10px;
-    padding-left: 0;
-  }
-  nav {
-    margin-top: -1em;
 
-  }
-  nav button {
-    height: 40px;
-    width: 40px;
-    background-size: 50px;
-  }
-  .h1 {
-    text-align: center;
-  }
-  nav {
-    text-align: center;
-  }
-}
 
 #extra-text {
   position: relative;
@@ -308,6 +265,58 @@ hr {
   width: calc(100% + 39px);
   left: -20px;
   position: relative;
+}
+
+@media only screen and (max-width: 600px) {
+  #background {
+    display: none;
+  }
+  body {
+    margin: 10px 0px;
+    margin-right: 0;
+  }
+  footer {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+  article {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-right: 0; /* mob fix */
+    background-color: white;
+  }
+  .h1 {
+    display: block;
+    font-size: 2.8em;
+    /* margin-left: 10px; */
+  }
+  menu {
+    display: block;
+    /* margin-right: 10px; */
+    margin-bottom: 10px;
+    padding-left: 0;
+  }
+  nav {
+    margin-top: -1em;
+
+  }
+  nav button {
+    height: 40px;
+    width: 40px;
+    background-size: 50px;
+  }
+  .h1 {
+    text-align: center;
+  }
+  nav {
+    text-align: center;
+  }
+  hr {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    background-color: NavajoWhite;
+    height: 1.5em;
+  }
 }
 
 .project p {
