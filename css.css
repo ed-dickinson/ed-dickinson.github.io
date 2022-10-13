@@ -178,9 +178,9 @@ nav button {
   background-blend-mode: multiply;
 }
 article {
-  /* background-color: white; */
-  /* padding: 0px 20px; */
-  padding: 0;
+  background-color: white;
+  padding: 0px 20px;
+  /* padding: 0; */
   border-top: 1px solid black;
   border-bottom: 1px solid black;
   padding-top: 1em;
@@ -420,3 +420,13 @@ img#caravan {
 /* article {
   padding: 0;
 } */
+div#lyrics-box {
+  background-color: red;
+}
+#lyrics-box::after {
+  content: '>';
+  color: white;
+  bottom: 10px;
+  right: 10px;
+  position: absolute;
+}
