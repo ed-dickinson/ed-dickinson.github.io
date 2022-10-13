@@ -1,3 +1,23 @@
+// document.cookie = 'last-visited=' + new Date().getTime()
+// const checkForAnim = () => {
+//   if (localStorage.getItem('last-visited') === null) {
+//     return true
+//   }
+//   // if over 24 hours ago
+//   if ((parseInt(localStorage.getItem('last-visited')) + (1000 * 60 * 60 * 24)) > new Date().getTime()) {
+//     return false
+//   } else {
+//     return true
+//   }
+// }
+//
+// console.log(localStorage.getItem('last-visited'), new Date().getTime())
+//
+// let do_intro_anim = checkForAnim()
+// localStorage.setItem('last-visited', new Date().getTime());
+//
+// console.log(do_intro_anim)
+
 // let header_dom = document.querySelector('header')
 //
 // header_dom.style.marginTop = (window.innerHeight / 2) - (header_dom.offsetHeight / 2) + 'px'
@@ -5,14 +25,28 @@
 let header_dom = document.querySelector('header')
 let spacer = document.querySelector('#intro-spacer')
 
-console.log(window.innerHeight, window.innerHeight /2 , header_dom.offsetHeight)
+// if (do_intro_anim) {
+//   let spacer_height = (window.innerHeight / 2) - (header_dom.offsetHeight / 1) - 20 + 'px'
+//
+//   spacer.style.height = spacer_height
+//
+//   // sets root value for smooth animation - only way of js affecting css keyframes
+//   document.documentElement.style.setProperty('--spacer-height', spacer_height);
+// }
 
-let spacer_height = (window.innerHeight / 2) - (header_dom.offsetHeight / 1) - 20 + 'px'
+let mobile_check = window.innerWidth < 600
+let spacer_height = (window.innerHeight / 2) - (header_dom.offsetHeight / (mobile_check ? 1.5 : 1)) - 20 + 'px'
+
+
 
 spacer.style.height = spacer_height
 
 // sets root value for smooth animation - only way of js affecting css keyframes
 document.documentElement.style.setProperty('--spacer-height', spacer_height);
+
+
+
+
 
 
 
@@ -83,6 +117,8 @@ const setUpButton = (button, target, name) => {
     dom.title.textContent = name === 'Home' ? 'Ed Dickinson' : name // is this nesc? for mob
 
     // if (!first_open) dom.main.style.height = article_heights[button_i] + 'px'
+
+    localStorage.setItem('last-article', button_i)
 
   })
   button.addEventListener('mouseenter', () => {

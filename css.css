@@ -333,6 +333,10 @@ hr {
     background-color: NavajoWhite;
     height: 1.5em;
   }
+
+  #main-title.h1 {
+    padding-bottom: 0.18em;
+  }
 }
 
 .project p {
