@@ -12,13 +12,22 @@
   src: local('Luminari'), url('public/Luminari-Regular.woff') format('woff');
 }
 
+@font-face {
+  font-family: 'Blackletter';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Blackletter'), url('/public/fonts/Elfreth-Bold.woff') format('woff');
+}
+
 
 body {
   font-family: Inconsolata;
 }
 
 #firstHeading {
-  font-family: Luminari;
+  font-family: Blackletter;
+  font-size: 2.5em;
+  padding-bottom: 0.25em;
   letter-spacing: 0.05em;
   text-align: center;
   margin-bottom: 0;
