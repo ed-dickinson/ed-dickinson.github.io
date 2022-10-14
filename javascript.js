@@ -1,5 +1,5 @@
 
-let redirect_url = localStorage.getItem('last-url')
+let redirect_url = sessionStorage.getItem('last-url')
 
 
 let title = 'Ed Dickinson'
@@ -43,12 +43,9 @@ const checkForAnim = () => {
   }
 }
 
-console.log(localStorage.getItem('last-visited'), new Date().getTime())
-
 let do_intro_anim = checkForAnim()
 localStorage.setItem('last-visited', new Date().getTime());
 
-console.log(do_intro_anim)
 
 // let header_dom = document.querySelector('header')
 //
@@ -142,7 +139,7 @@ const setUpButton = (button, target, name) => {
 
     // if (!first_open) dom.main.style.height = article_heights[button_i] + 'px'
 
-    localStorage.setItem('last-url', name.toLowerCase())
+    sessionStorage.setItem('last-url', name.toLowerCase())
     // window.lastPage = name
 
     // console.log(window.lastPage)
