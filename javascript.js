@@ -1,53 +1,5 @@
-// document.cookie = 'last-visited=' + new Date().getTime()
-// const checkForAnim = () => {
-//   if (localStorage.getItem('last-visited') === null) {
-//     return true
-//   }
-//   // if over 24 hours ago
-//   if ((parseInt(localStorage.getItem('last-visited')) + (1000 * 60 * 60 * 24)) > new Date().getTime()) {
-//     return false
-//   } else {
-//     return true
-//   }
-// }
-//
-// console.log(localStorage.getItem('last-visited'), new Date().getTime())
-//
-// let do_intro_anim = checkForAnim()
-// localStorage.setItem('last-visited', new Date().getTime());
-//
-// console.log(do_intro_anim)
 
-// let header_dom = document.querySelector('header')
-//
-// header_dom.style.marginTop = (window.innerHeight / 2) - (header_dom.offsetHeight / 2) + 'px'
-
-let header_dom = document.querySelector('header')
-let spacer = document.querySelector('#intro-spacer')
-
-// if (do_intro_anim) {
-//   let spacer_height = (window.innerHeight / 2) - (header_dom.offsetHeight / 1) - 20 + 'px'
-//
-//   spacer.style.height = spacer_height
-//
-//   // sets root value for smooth animation - only way of js affecting css keyframes
-//   document.documentElement.style.setProperty('--spacer-height', spacer_height);
-// }
-
-let mobile_check = window.innerWidth < 600
-let spacer_height = (window.innerHeight / 2) - (header_dom.offsetHeight / (mobile_check ? 1.5 : 1)) - 20 + 'px'
-
-
-
-spacer.style.height = spacer_height
-
-// sets root value for smooth animation - only way of js affecting css keyframes
-document.documentElement.style.setProperty('--spacer-height', spacer_height);
-
-
-
-
-
+let redirect_url = localStorage.getItem('last-url')
 
 
 let title = 'Ed Dickinson'
@@ -58,6 +10,78 @@ let dom = {
   footer : document.querySelector('footer')
 }
 
+const titleStuff = (target, name) => {
+  title = name === 'About' ? 'Ed Dickinson' : name
+  document.querySelector('article.selected').classList.remove('selected')
+  document.querySelector(target).classList.add('selected')
+  dom.title.textContent = name === 'About' ? 'Ed Dickinson' : name // is this nesc? for mob
+}
+
+if (redirect_url !== null) {
+  // redirect address bar
+  let first_cap = redirect_url.charAt(0).toUpperCase() + redirect_url.slice(1)
+  window.history.pushState(redirect_url, first_cap, redirect_url)
+
+  document.querySelector('body').classList.add('no-intro')
+
+  titleStuff(`#${redirect_url}`, first_cap)
+}
+
+// document.cookie = 'last-visited=' + new Date().getTime()
+const checkForAnim = () => {
+  if (redirect_url !== null) {
+    return false
+  }
+  if (localStorage.getItem('last-visited') === null) {
+    return true
+  }
+  // if over 24 hours ago
+  if ((parseInt(localStorage.getItem('last-visited')) + (1000 * 60 * 60 * 24)) > new Date().getTime()) {
+    return false
+  } else {
+    return true
+  }
+}
+
+console.log(localStorage.getItem('last-visited'), new Date().getTime())
+
+let do_intro_anim = checkForAnim()
+localStorage.setItem('last-visited', new Date().getTime());
+
+console.log(do_intro_anim)
+
+// let header_dom = document.querySelector('header')
+//
+// header_dom.style.marginTop = (window.innerHeight / 2) - (header_dom.offsetHeight / 2) + 'px'
+
+let header_dom = document.querySelector('header')
+let spacer = document.querySelector('#intro-spacer')
+
+if (do_intro_anim) {
+  let mobile_check = window.innerWidth < 600
+  let spacer_height = (window.innerHeight / 2) - (header_dom.offsetHeight / (mobile_check ? 1.5 : 1)) - 20 + 'px'
+
+  spacer.style.height = spacer_height
+
+  // sets root value for smooth animation - only way of js affecting css keyframes
+  document.documentElement.style.setProperty('--spacer-height', spacer_height);
+}
+
+// let mobile_check = window.innerWidth < 600
+// let spacer_height = (window.innerHeight / 2) - (header_dom.offsetHeight / (mobile_check ? 1.5 : 1)) - 20 + 'px'
+//
+// spacer.style.height = spacer_height
+//
+// // sets root value for smooth animation - only way of js affecting css keyframes
+// document.documentElement.style.setProperty('--spacer-height', spacer_height);
+
+
+
+
+
+
+
+
 const unselectAllArticles = () => {
   document.querySelector('.selected').classList.remove('selected')
 }
@@ -66,6 +90,7 @@ let articles = document.querySelectorAll('article')
 let article_heights = []
 
 let first_open = true
+if (!do_intro_anim) first_open = false
 const firstOpen = (button_i) => {
 
   spacer.classList.add('shrink-spacer')
@@ -87,6 +112,8 @@ const firstOpen = (button_i) => {
 
   first_open = false
 }
+
+
 
 const setUpButton = (button, target, name) => {
 
@@ -111,14 +138,16 @@ const setUpButton = (button, target, name) => {
     //   // document.querySelector(target)
     // }
 
-    title = name === 'Home' ? 'Ed Dickinson' : name
-    document.querySelector('article.selected').classList.remove('selected')
-    document.querySelector(target).classList.add('selected')
-    dom.title.textContent = name === 'Home' ? 'Ed Dickinson' : name // is this nesc? for mob
+    titleStuff(target, name)
 
     // if (!first_open) dom.main.style.height = article_heights[button_i] + 'px'
 
-    localStorage.setItem('last-article', button_i)
+    localStorage.setItem('last-url', name.toLowerCase())
+    // window.lastPage = name
+
+    // console.log(window.lastPage)
+
+    window.history.pushState(name.toLowerCase(), name, `/${name.toLowerCase()}`)
 
   })
   button.addEventListener('mouseenter', () => {
@@ -129,12 +158,12 @@ const setUpButton = (button, target, name) => {
   })
 }
 
-setUpButton(document.querySelector('button#home-link'), '#about', 'Home')
+setUpButton(document.querySelector('button#home-link'), '#about', 'About')
 setUpButton(document.querySelector('button#laptop'), '#projects', 'Projects')
 setUpButton(document.querySelector('button#spanner'), '#tools', 'Tools')
 
 dom.title.addEventListener('click', ()=> {
-  if (first_open) firsOpen(0)
+  if (first_open) firstOpen(0)
 })
 
 document.querySelector('#read-more').addEventListener('click', () => {

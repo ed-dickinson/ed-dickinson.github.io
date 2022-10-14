@@ -442,7 +442,7 @@ img#caravan {
 } */
 
 
-main.collapsed {
+body:not(.no-intro) main.collapsed {
   /* display: none; */
   height: 0px;
   overflow-y: hidden;
@@ -495,11 +495,19 @@ header::after {
 @keyframes load-line {
   from {width: 0%;} to {width: 100%;}
 }
+.no-intro header::after {
+  animation: none;
+  width: 100%;
+}
 
-footer {
+body:not(.no-intro) footer {
   opacity: 0;
   animation: footer-appear 1.5s 2s forwards 1 normal ease-in-out;
 }
+/* .no-intro footer {
+  opacity: 1;
+  animation: none;
+} */
 @keyframes footer-appear {
   from {opacity: 0} to {opacity: 1}
 }
@@ -557,6 +565,13 @@ main.add-bottom-border {
   from {height: var(--article-height-1);} to {height: 0px;}
 }
 
-article.initial-load {
+body:not(.no-intro) article.initial-load {
   display: block;
+}
+article {
+  overflow-y: hidden;
+}
+
+body.no-intro main {
+  border-bottom: 4px solid black;
 }
