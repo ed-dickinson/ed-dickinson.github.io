@@ -6,7 +6,7 @@ let redirected_ago = sessionStorage.getItem('redirect-time') === null ? null : n
 console.log('redirect landing:', redirected_ago, 'ms ago')
 
 // redirect timer under 2s
-let was_redirect = (redirected_ago < 2000)
+let was_redirect = redirected_ago === null ? false : (redirected_ago < 2000)
 
 console.log('redirect', was_redirect)
 
