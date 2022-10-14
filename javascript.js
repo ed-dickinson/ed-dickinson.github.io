@@ -1,6 +1,14 @@
 
 let redirect_url = sessionStorage.getItem('last-url')
 
+let redirected_ago = sessionStorage.getItem('redirect-time') === null ? null : new Date().getTime() - sessionStorage.getItem('redirect-time')
+
+console.log('redirect landing:', redirected_ago, 'ms ago')
+
+// redirect timer under 2s
+let was_redirect = (redirected_ago < 2000)
+
+console.log('redirect', was_redirect)
 
 let title = 'Ed Dickinson'
 
@@ -17,7 +25,9 @@ const titleStuff = (target, name) => {
   dom.title.textContent = name === 'About' ? 'Ed Dickinson' : name // is this nesc? for mob
 }
 
-if (redirect_url !== null) {
+// if (redirect_url !== null) {
+if (was_redirect) {
+  // all redirect stuff
   // redirect address bar
   let first_cap = redirect_url.charAt(0).toUpperCase() + redirect_url.slice(1)
   window.history.pushState(redirect_url, first_cap, redirect_url)
@@ -29,7 +39,8 @@ if (redirect_url !== null) {
 
 // document.cookie = 'last-visited=' + new Date().getTime()
 const checkForAnim = () => {
-  if (redirect_url !== null) {
+  // if (redirect_url !== null) {
+  if (was_redirect) {
     return false
   }
   if (localStorage.getItem('last-visited') === null) {
@@ -62,6 +73,8 @@ if (do_intro_anim) {
 
   // sets root value for smooth animation - only way of js affecting css keyframes
   document.documentElement.style.setProperty('--spacer-height', spacer_height);
+} else {
+  document.querySelector('body').classList.add('no-intro')
 }
 
 // let mobile_check = window.innerWidth < 600
