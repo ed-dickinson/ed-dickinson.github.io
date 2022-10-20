@@ -65,7 +65,7 @@ h3 {
 
 a {
   text-decoration: none;
-  border-bottom: 1px solid black;
+  border-bottom: 2px solid black;
   color: black;
 }
 
@@ -228,7 +228,7 @@ article.selected {
   right: 0;
   font-weight: bold;
   cursor: pointer;
-  border-bottom: 1px solid black;
+  border-bottom: 2px solid black;
 }
 #extra-text.expanded {
   /* height: auto; */
@@ -276,7 +276,7 @@ article {
 }
 hr {
   height: 0px;
-  border-bottom: 1px solid black;
+  border-bottom: 2px solid black;
   border-top: 0;
   width: calc(100% + 39px);
   left: -20px;
@@ -523,6 +523,10 @@ nav button {
   animation: pop-up 0.75s 1.4s forwards normal 1 ease-in-out;
   position: relative;
   top: 100px;
+}
+
+.no-intro nav button {
+  animation-delay: 0s;
 }
 
 @keyframes pop-up {
