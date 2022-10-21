@@ -265,6 +265,8 @@ article.selected {
 }
 .project img {
   max-width: 100%;
+  width: 400px;
+  height: auto;
 }
 .project {
 
@@ -428,18 +430,9 @@ article {
 img#caravan {
   mix-blend-mode: multiply;
   filter: grayscale(1);
+  height: auto;
+  width: 100%;
 }
-
-/* @media only screen and (min-width: 601px) {
-  img#caravan {
-    width: 50%;
-    float: left;
-  }
-} */
-
-/* article {
-  padding: 0;
-} */
 
 
 body:not(.no-intro) main.collapsed {
