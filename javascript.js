@@ -99,12 +99,14 @@ const unselectAllArticles = () => {
 let articles = document.querySelectorAll('article')
 let article_heights = []
 
+
 let first_open = true
 if (!do_intro_anim) first_open = false
 const firstOpen = (button_i) => {
 
   spacer.classList.add('shrink-spacer')
 
+  // set up article heights
   articles.forEach(article => {
     article_heights.push(article.offsetHeight)
   })
@@ -136,8 +138,26 @@ const setUpButton = (button, target, name) => {
 
       firstOpen(button_i)
     } else {
-      dom.main.classList.remove('article-open')
-      dom.main.style.height = article_heights[button_i] + 'px'
+      console.log('hello')
+      // dom.main.classList.remove('article-open')
+      // dom.main.style.height = article_heights[button_i] + 'px'
+
+
+
+
+      dom.main.style.height = document.querySelector('article.selected').offsetHeight + 'px'
+      dom.main.style.transition = 'height 0.75s'
+      setTimeout(()=>{dom.main.style.height = 0 + 'px'},1)
+      setTimeout(()=>{
+        titleStuff(target, name)
+        let new_height = document.querySelector(target).offsetHeight
+        setTimeout(()=>{
+
+          dom.main.style.transition = 'height ' + (new_height / 1000) + 's'
+          dom.main.style.height = new_height + 'px'
+        }, 1) // changes delay time to
+      },750)
+
       // dom.main.classList.add('article-close')
     }
     // else {
@@ -148,14 +168,9 @@ const setUpButton = (button, target, name) => {
     //   // document.querySelector(target)
     // }
 
-    titleStuff(target, name)
-
-    // if (!first_open) dom.main.style.height = article_heights[button_i] + 'px'
+    // titleStuff(target, name)
 
     sessionStorage.setItem('last-url', name.toLowerCase())
-    // window.lastPage = name
-
-    // console.log(window.lastPage)
 
     window.history.pushState(name.toLowerCase(), name, `/${name.toLowerCase()}`)
 

@@ -572,3 +572,9 @@ article {
 body.no-intro main {
   border-bottom: 4px solid black;
 }
+
+
+main {
+  transition: height 0.75s;
+  overflow: hidden;
+}
