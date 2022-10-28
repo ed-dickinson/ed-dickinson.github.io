@@ -101,7 +101,9 @@ let article_heights = []
 
 
 let first_open = true
+
 if (!do_intro_anim) first_open = false
+
 const firstOpen = (button_i) => {
 
   spacer.classList.add('shrink-spacer')
@@ -137,15 +139,17 @@ const setUpButton = (button, target, name) => {
     if (first_open) {
 
       firstOpen(button_i)
+      titleStuff(target, name)
     } else {
       console.log('hello')
-      // dom.main.classList.remove('article-open')
+
       // dom.main.style.height = article_heights[button_i] + 'px'
 
 
 
 
       dom.main.style.height = document.querySelector('article.selected').offsetHeight + 'px'
+      dom.main.classList.remove('article-open')
       dom.main.style.transition = 'height 0.75s'
       setTimeout(()=>{dom.main.style.height = 0 + 'px'},1)
       setTimeout(()=>{
