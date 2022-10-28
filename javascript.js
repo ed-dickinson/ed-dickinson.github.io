@@ -57,11 +57,6 @@ const checkForAnim = () => {
 let do_intro_anim = checkForAnim()
 localStorage.setItem('last-visited', new Date().getTime());
 
-
-// let header_dom = document.querySelector('header')
-//
-// header_dom.style.marginTop = (window.innerHeight / 2) - (header_dom.offsetHeight / 2) + 'px'
-
 let header_dom = document.querySelector('header')
 let spacer = document.querySelector('#intro-spacer')
 
@@ -76,20 +71,6 @@ if (do_intro_anim) {
 } else {
   document.querySelector('body').classList.add('no-intro')
 }
-
-// let mobile_check = window.innerWidth < 600
-// let spacer_height = (window.innerHeight / 2) - (header_dom.offsetHeight / (mobile_check ? 1.5 : 1)) - 20 + 'px'
-//
-// spacer.style.height = spacer_height
-//
-// // sets root value for smooth animation - only way of js affecting css keyframes
-// document.documentElement.style.setProperty('--spacer-height', spacer_height);
-
-
-
-
-
-
 
 
 const unselectAllArticles = () => {
@@ -141,12 +122,6 @@ const setUpButton = (button, target, name) => {
       firstOpen(button_i)
       titleStuff(target, name)
     } else {
-      console.log('hello')
-
-      // dom.main.style.height = article_heights[button_i] + 'px'
-
-
-
 
       dom.main.style.height = document.querySelector('article.selected').offsetHeight + 'px'
       dom.main.classList.remove('article-open')
@@ -162,17 +137,7 @@ const setUpButton = (button, target, name) => {
         }, 1) // changes delay time to
       },750)
 
-      // dom.main.classList.add('article-close')
     }
-    // else {
-    //
-    //   dom.main.classList.add('article-close')
-    //   document.querySelector('article.selected')
-    //
-    //   // document.querySelector(target)
-    // }
-
-    // titleStuff(target, name)
 
     sessionStorage.setItem('last-url', name.toLowerCase())
 
