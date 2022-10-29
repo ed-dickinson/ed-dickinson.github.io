@@ -72,7 +72,6 @@ li:last-child::after {
 li:last-child::before {
   height: 0.5em;
   width: 0.5em;
-
   border-left: 1px solid var(--spaghetti-color);
   border-bottom: 1px solid var(--spaghetti-color);
   border-bottom-right-radius: 0;
