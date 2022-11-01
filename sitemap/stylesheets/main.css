@@ -83,12 +83,18 @@ li:last-child::before {
   top: 0.1em;
   left: -1em;
 }
-.folder.collapsed, .folder:hover {
+/* .folder.collapsed,  */
+.folder:hover
+ {
   color: gray;
 }
-.folder.collapsed:hover {
+/* .folder.collapsed:hover {
   color: darkgray;
-}
+} */
 .folder.collapsed + ul {
   display: none;
+}
+.folder.collapsed::after {
+  content: ' /';
+  color: var(--spaghetti-color);
 }

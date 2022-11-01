@@ -1,0 +1,105 @@
+#venn {
+  position: relative;
+  margin: auto;
+  max-width: 600px;
+  width: 100%;
+  margin-top: 3em;
+}
+
+#venn::after, #venn section::after {
+  content: '';
+  display: block;
+  padding-bottom: 100%;
+}
+
+#venn section {
+  border-radius: 50%;
+  width: 66%;
+  position: absolute;
+  border: 1px dashed black;
+}
+
+#venn section:first-of-type {
+  left: 17%;
+}
+#venn section:nth-of-type(2) {
+  right: 0%;
+}
+#venn section:nth-of-type(3) {
+  left: 0;
+}
+#venn section:nth-of-type(2), #venn section:nth-of-type(3) {
+  bottom: 0;
+}
+
+#venn a {
+  color: var(--spaghetti-color);
+  text-decoration-color: var(--spaghetti-color);
+}
+
+/* move labels to edge of diagram? */
+#venn section label {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  color: black;
+}
+#venn section:first-of-type label {
+  /* top: 33%;
+  left: 50%; */
+  top: -2em;
+  left: 50%;
+}
+#venn section:nth-of-type(2) label {
+  /* top: 57%;
+  left: 73%; */
+  top: 80%;
+  left: 105%;
+}
+#venn section:nth-of-type(3) label {
+  /* top: 57%;
+  left: 27%; */
+  top: 80%;
+  left: -05%;
+}
+#venn aside {
+  position: absolute;
+  bottom: -2em;
+  right: 0;
+  color: grey;
+}
+#venn a {
+  position: absolute;
+}
+#venn a sup {
+  position: absolute;
+  left: 100%;
+  top: -0.2em;
+}
+
+#venn #links {
+  /* z-index: -1; */
+  position: absolute;
+  /* left: 50%;
+  top: 50%; */
+
+  width: 100%;
+  height: 100%;
+}
+#venn #links a {
+  z-index: 100;
+  position: absolute;
+  white-space: nowrap;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+
+#links a:nth-of-type(1) {
+      top: 70.00%; left: 83.00%;
+    }
+#links a:nth-of-type(2) {
+      top: 19.67%; left: 50.17%;
+    }
+#links a:nth-of-type(3) {
+      top: 69.17%; left: 18.17%;
+    }
