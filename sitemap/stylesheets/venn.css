@@ -75,6 +75,15 @@
     left: 10%;
   }
 }
+
+/* #venn section {
+  animation: rotate 120s infinite 0s linear;
+}
+@keyframes rotate {
+  from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
+} */
+
 #venn aside {
   position: absolute;
   bottom: -2em;

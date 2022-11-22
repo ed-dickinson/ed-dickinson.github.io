@@ -3,12 +3,12 @@ let redirect_url = sessionStorage.getItem('last-url')
 
 let redirected_ago = sessionStorage.getItem('redirect-time') === null ? null : new Date().getTime() - sessionStorage.getItem('redirect-time')
 
-console.log('redirect landing:', redirected_ago, 'ms ago')
+// console.log('redirect landing:', redirected_ago, 'ms ago')
 
 // redirect timer under 2s
 let was_redirect = redirected_ago === null ? false : (redirected_ago < 2000)
 
-console.log('redirect', was_redirect)
+// console.log('redirect', was_redirect)
 
 let title = 'Ed Dickinson'
 
@@ -160,6 +160,7 @@ dom.title.addEventListener('click', ()=> {
   if (first_open) firstOpen(0)
 })
 
-document.querySelector('#read-more').addEventListener('click', () => {
-  document.querySelector('#extra-text').classList.add('expanded')
-})
+// below is for the defunct read-more thing on the front page
+// document.querySelector('#read-more').addEventListener('click', () => {
+//   document.querySelector('#extra-text').classList.add('expanded')
+// })

@@ -237,13 +237,14 @@ article.selected {
 #extra-text.expanded #read-more {
   display: none;
 }
-#extra-text p {
+/* this below is all for the defunct read-more thing on the front page */
+/* #extra-text p {
   display: none;
 }
 #extra-text p:first-of-type {
   margin-top: 0.25em;
   display: block;
-}
+} */
 #extra-text.expanded p {
   display: block;
 }
