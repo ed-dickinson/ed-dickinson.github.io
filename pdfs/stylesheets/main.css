@@ -1,0 +1,100 @@
+
+:root {
+  --spaghetti-color: dodgerblue;
+}
+
+@font-face {
+  font-family: 'Inconsolata';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Inconsolata'), url('../../public/fonts/inconsolata-v31-latin-regular.woff') format('woff');
+}
+
+html {
+  font-family: 'Inconsolata';
+}
+
+header, main #top {
+  display: inline-block;
+  margin: auto;
+}
+
+a {
+  color: var(--spaghetti-color);
+  text-decoration-color: var(--spaghetti-color);
+}
+a:hover {
+  opacity: 0.75;
+}
+
+header span {
+  display: inline-block;
+  text-align: right;
+}
+header span sup {
+  position: relative;
+  margin-right: 2em;
+}
+
+ul {
+  cursor: pointer;
+  position: relative;
+  padding-left: 1.5em;
+}
+
+ul, li {
+  list-style-type: none;
+}
+
+li {
+  position: relative;
+}
+
+li::before {
+  content: '';
+  position: absolute;
+  height: 0.5em;
+  width: 0.5em;
+  border-bottom: 1px solid var(--spaghetti-color);
+  top: 0.1em;
+  left: -1em;
+}
+li::after {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 0.5em;
+  border-left: 1px solid var(--spaghetti-color);
+  top: 0.1em;
+  left: -1em;
+}
+li:last-child::after {
+  height: 0;
+}
+
+li:last-child::before {
+  height: 0.5em;
+  width: 0.5em;
+  border-left: 1px solid var(--spaghetti-color);
+  border-bottom: 1px solid var(--spaghetti-color);
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0.325em;
+  border-top-left-radius: 0;
+  top: 0.1em;
+  left: -1em;
+}
+/* .folder.collapsed,  */
+.folder:hover
+ {
+  color: gray;
+}
+/* .folder.collapsed:hover {
+  color: darkgray;
+} */
+.folder.collapsed + ul {
+  display: none;
+}
+.folder.collapsed::after {
+  content: ' /';
+  color: var(--spaghetti-color);
+}
