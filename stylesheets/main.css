@@ -241,6 +241,12 @@ menu a.current-page {
   animation: colorfade 2.5s -1s infinite linear alternate;
 }
 
+main img.album-art {
+  float: left;
+  width: 34%;
+  margin-right: 1em;
+}
+
 @media only screen and (max-width: 600px) {
   nav {
     margin-top: 6em;
@@ -250,5 +256,8 @@ menu a.current-page {
   }
   #loader {
     left: calc(100% - 3.5em);
+  }
+  main img.album-art {
+    width: 50%;
   }
 }

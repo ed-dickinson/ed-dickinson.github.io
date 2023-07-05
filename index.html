@@ -65,6 +65,12 @@
 
     <script src='scripts/main.js'></script>
     <script>
+    let today = new Date()
+    let birthDate = new Date('1990-03-19')
+    let age = today.getFullYear() - birthDate.getFullYear()
+    let m = today.getMonth() - birthDate.getMonth()
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) age--
+    document.querySelector('#age').textContent = age
     </script>
 
   </body>
