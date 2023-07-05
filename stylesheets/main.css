@@ -1,0 +1,254 @@
+@font-face {
+  font-family: 'Inconsolata';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Inconsolata'), url('../public/fonts/inconsolata-v31-latin-regular.woff') format('woff');
+}
+#loader {
+  font-size: 2em;
+}
+#loader .text {
+  font-size: 2em;
+  position: absolute;
+}
+
+body {
+  font-family: inconsolata;
+}
+body.yellow-red {
+  --color1: gold;
+  --color2: tomato;
+}
+body.green-blue {
+  --color1: springgreen;
+  --color2: dodgerblue;
+}
+body.pink-purple {
+  --color1: hotpink;
+  --color2: darkviolet;
+}
+
+main img {
+  max-width: 100%;
+}
+
+h3 {
+  margin-top: 2em;
+}
+
+#circular > span {
+  display: inline-block;
+  width: 1em;
+  height: 3.3em;
+  text-align: center;
+  left: -0.5em;
+  position: absolute;
+  /* background-color: red; */
+  font-family: inconsolata;
+  font-weight: 100;
+  font-size: 0.75em;
+
+}
+#circular > span > span, #sun {
+  opacity: 0;
+  color: white;
+}
+#circular > span > span.appear, #sun.appear {
+  transition: opacity 0.25s, color 0.25s, transform 0.25s;
+  opacity: 1;
+  color: black;
+}
+#circular > span > span {
+  font-size: 1em;
+  left: -0.5em;
+  display: inline-block;
+}
+#circular {
+  left: 1.3em;
+  position: absolute;
+  color: white;
+}
+#circular.pre-load {
+
+}
+#sun {
+  top: 0.7em; left: 0.8em;
+  font-size: 1em;
+  position: absolute;
+  transform: scale(1.0);
+  text-align: center;
+  width: 1em;
+}
+#sun, #sun span {
+  transition: transform 0.5s;
+}
+
+#loader {
+  width: 2.5em;
+  height: 2.5em;
+  position: absolute;
+  left: 0.45em;
+  top: 0.5em;
+  border-radius: 50%;
+  transform: rotate(-35deg);
+}
+#loader:hover {
+  cursor: pointer;
+}
+#loader:hover #sun {
+  transform: scale(1.05);
+}
+#loader:hover #circular > span > span {
+  animation: shake 2s 0s infinite ease-in-out;
+}
+@keyframes shake {
+  0%, 20%, 40%, 100% {transform: scaleY(-1) rotate(0deg);}
+  5% {transform: scaleY(-1) rotate(6deg);}
+  15% {transform: scaleY(-1) rotate(-12deg);}
+  25% {transform: scaleY(-1) rotate(12deg);}
+  35% {transform: scaleY(-1) rotate(-6deg);}
+}
+
+.color-anim {
+  animation: color 1s 1 linear forwards;
+}
+@keyframes color {
+  0% {color: var(--color1);}
+  50% {color: var(--color2);}
+  100% {color: black;}
+}
+
+#sun span.pulse-anim {
+  animation: pulse 0.5s 2 ease-in-out alternate forwards;
+  /* color: black; */
+  display: inline-block;
+}
+@keyframes pulse {
+  from {transform: scale(1);}
+  to {transform: scale(1.05);}
+}
+
+/* #loader.shrinkout-anim {
+animation: shrinkout 0.25s 1 linear forwards;
+}
+@keyframes shrinkout {
+from {transform:  rotate(-35deg) scale(2);}
+to {transform: rotate(-35deg) scale(0);}
+} */
+
+#loader.spin-anim {
+  animation: spin 1s 1 ease-in-out forwards;
+}
+@keyframes spin {
+  from {transform:  rotate(-35deg);}
+  /* to {transform: rotate(1045deg);} */
+  to {transform: rotate(685deg);}
+}
+
+#decoration-line {
+  overflow-x: hidden;
+}
+.intro #decoration-line {
+  display: inline-block;
+  width: 0%;
+  animation: uncover 1s 1.5s 1 ease-in-out forwards;
+} @keyframes uncover {
+from {width: 0%}
+  to {width: 100%}
+}
+
+#decoration-line div {
+  width: 300%;
+  height: 2px;
+  top: 0;
+
+  display: inline-block;
+  background: linear-gradient(to right, var(--color2), var(--color1), var(--color2), var(--color1));
+  animation: slide 5s infinite linear;
+} @keyframes slide {
+  from {transform: translateX(0%);}
+  to {transform: translateX(-66.67%);}
+}
+
+nav, main, footer {
+  margin: auto;
+  width: calc(100% - 14em);
+  max-width: 600px;
+}
+nav {
+  margin-top: 2.25em;
+}
+menu {
+  padding-left: 0.5em;
+  margin: 0;
+}
+
+main {
+  padding: 0.5em;
+  margin-top: 2em;
+  box-sizing: border-box;
+  position: relative;
+}
+
+main a {
+  animation: colorfade 2.5s -1s infinite linear alternate;
+}
+
+.intro main {
+  animation: main-appear 1s 2s 1 ease-out forwards;
+  transform: translateY(100vh);
+} @keyframes main-appear {
+  /* from {top: 100vh;}
+  to {top: 0vh;} */
+  from {transform: translateY(100vh);}
+  to {transform: translateY(0vh);}
+}
+
+menu a {
+  text-decoration: none;
+  color: black;
+  position: relative;
+  margin-right: 0.5em;
+}
+
+.intro menu a {
+  opacity: 0;
+  animation: appear 1s 2s 1 linear forwards;
+} @keyframes appear {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+menu a::after {
+  content: '•';
+  content: '^';
+  transform: rotate(180deg) scale(1.25);
+  position: absolute;
+  left: calc(50% - 0.5ch);
+  top: -100%;
+  animation: colorfade 2.5s -1s infinite linear alternate;
+  /* filter:drop-shadow(0px 1px 0px black); */
+  opacity: 0;
+  transition: opacity 0.25s;
+} @keyframes colorfade {
+  from {color: var(--color1);}
+  to {color: var(--color2);}
+}
+menu a:hover::after {
+  opacity: 1;
+}
+menu a.current-page {
+  animation: colorfade 2.5s -1s infinite linear alternate;
+}
+
+@media only screen and (max-width: 600px) {
+  nav {
+    margin-top: 6em;
+  }
+  nav, main, footer {
+    width: calc(100% - 1em);
+  }
+  #loader {
+    left: calc(100% - 3.5em);
+  }
+}

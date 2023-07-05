@@ -164,3 +164,18 @@ dom.title.addEventListener('click', ()=> {
 // document.querySelector('#read-more').addEventListener('click', () => {
 //   document.querySelector('#extra-text').classList.add('expanded')
 // })
+
+const linkToMusic = () => {
+  window.location.href = '/music'
+}
+
+document.querySelector('img#caravan').addEventListener('mousemove', () => {
+  // console.log(event.x - event.target.offsetLeft)
+  if ((event.x > 637 && event.x < 675 && event.y > 272 && event.y < 305) || (event.x > 674 && event.x < 701 && event.y > 272 && event.y < 284)) {
+    document.querySelector('img#caravan').style.cursor = 'pointer'
+    document.querySelector('img#caravan').addEventListener('click', linkToMusic)
+  } else {
+    document.querySelector('img#caravan').style.cursor = 'default'
+    document.querySelector('img#caravan').removeEventListener('click', linkToMusic)
+  }
+})

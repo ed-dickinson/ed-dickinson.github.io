@@ -1,10 +1,74 @@
+<!doctype html>
 <html>
+  <head>
+  <title></title>
+  <meta charset="UTF-8">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="author" content="Ed Dickinson">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="public/icon-peace-hand.png">
+  <link rel="stylesheet" type="text/css" href="../stylesheets/main.css"/>
+  <style>
 
-<head>
-  <script>
-    sessionStorage.setItem('last-url', 'about')
-    sessionStorage.setItem('redirect-time', new Date().getTime())
-  </script>
-  <meta http-equiv="Refresh" content="0; url=/" />
-</head>
+  </style>
+
+  </head>
+  <body class="yellow-red">
+    <header>
+      <div id="loader">
+
+        <span id="circular">ED NIKCID</span>
+        <div id="sun"><span>☼</span></div>
+      </div>
+    </header>
+
+    <nav>
+      <menu>
+        <a href="../about" class="current-page">About</a>
+        <a href="../music">Music</a>
+        <a href="../tools">Tools</a>
+      </menu>
+
+      <div id="decoration-line">
+        <div>
+
+        </div>
+      </div>
+
+    </nav>
+
+    <main>
+      <p>
+        "Each of us has a unique and necessary gift to the world, and the purpose of our lives is to express this gift."
+        <span style="text-align:right; display:block;">
+          — Somebody else
+        </span>
+      </p>
+
+      <img src="../public/assets/caravan.jpg" width="600" style="margin: 1em 0;"/>
+      <p>
+        I'm a <span id="age">??</span> year old man, who lives in Dorset.
+      </p>
+      <p>
+        I have lived in other places, and they have all left their impression upon me. Like a hermit crab, I have taken little pieces and adorned the shell of my spirit with them.
+      </p>
+      <p>
+        I am a Pisces, and I wonder if this explains my constant swimming and switching, always looking for something new. A little piece of me thinks whatever I'm searching for lies outside of the water. But that's fine, because I enjoy the swimming, and sometimes I'm lucky enough to catch glimpses of what's above refracting through the surface.
+      </p>
+
+    </main>
+
+    <script src='../scripts/main.js'></script>
+    <script>
+      let today = new Date()
+      let birthDate = new Date('1990-03-19')
+      let age = today.getFullYear() - birthDate.getFullYear()
+      let m = today.getMonth() - birthDate.getMonth()
+      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) age--
+      document.querySelector('#age').textContent = age
+    </script>
+
+  </body>
+
 </html>

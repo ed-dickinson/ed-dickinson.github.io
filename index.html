@@ -1,240 +1,72 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-<title>Ed Dickinson</title>
-<meta charset="UTF-8">
-<meta name="keywords" content="ed, dickinson, ed dickinson, web design, web development, coding, programming, code">
-<meta name="description" content="A portfolio website for Ed Dickinson.">
-<meta name="author" content="Ed Dickinson">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="public/icon-peace-hand.png">
-<link rel="stylesheet" type="text/css" href="css.css"/>
-<style>
+  <head>
+  <title></title>
+  <meta charset="UTF-8">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="author" content="Ed Dickinson">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="public/icon-peace-hand.png">
+  <link rel="stylesheet" type="text/css" href="stylesheets/main.css"/>
+  <style>
 
+  </style>
 
-</style>
+  </head>
+  <body class="yellow-red">
+    <header>
+      <div id="loader">
 
-</head>
-<body>
+        <span id="circular">ED NIKCID</span>
+        <div id="sun"><span>☼</span></div>
+      </div>
+    </header>
 
-  <div id="background">
-
-  </div>
-  <div id="intro-spacer">
-
-  </div>
-  <header>
-
-    <div class="h1" id="main-title">
-    Ed Dickinson
-    </div>
     <nav>
       <menu>
-        <button id="home-link" class="selected">Home</button>
-        <button id="laptop">Projects</button>
-        <button id="spanner">Tools</button>
+        <a href="/about" class="current-page">About</a>
+        <a href="/music">Music</a>
+        <a href="/tools">Tools</a>
       </menu>
+
+      <div id="decoration-line">
+        <div>
+
+        </div>
+      </div>
+
     </nav>
-  </header>
 
+    <main>
+      <p>
+        "Each of us has a unique and necessary gift to the world, and the purpose of our lives is to express this gift."
+        <span style="text-align:right; display:block;">
+          — Somebody else
+        </span>
+      </p>
 
-<main class="collapsed">
+      <img src="../public/assets/caravan.jpg" width="600" style="margin: 1em 0;"/>
+      <p>
+        I'm a <span id="age">??</span> year old man, who lives in Dorset.
+      </p>
+      <p>
+        I have lived in other places, and they have all left their impression upon me. Like a hermit crab, I have taken little pieces and adorned the shell of my spirit with them.
+      </p>
+      <p>
+        I am a Pisces, and I wonder if this explains my constant swimming and switching, always looking for something new. A little piece of me thinks whatever I'm searching for lies outside of the water. But that's fine, because I enjoy the swimming, and sometimes I'm lucky enough to catch glimpses of what's above refracting through the surface.
+      </p>
 
+    </main>
 
-  <article id="about" class="selected initial-load">
+    <!-- <footer>
+      &#x1F4E7;
+    </footer> -->
 
+    <script src='scripts/main.js'></script>
+    <script>
+    </script>
 
+  </body>
 
-
-    <img src="public/assets/caravan.jpg" id="caravan" />
-
-    <p style="padding-top: 0.5em;">
-      <span class="fancy-capital" style="top: -0.5em;">H</span>ello, I'm a code cobbler who plys his trade from the sun-splashed realm of Glasgow.
-    </p>
-    <p>
-      I strive to use web technology to connect human experience in new and delightful ways.
-    </p>
-    <p>
-      I'm freelance – a web-hand for hire – so if you'd like a custom, handmade website, or just have some general programming that needs doing, then don't be shy.
-    </p>
-
-    <p class="break">
-      –
-    </p>
-    <div id="extra-text" >
-
-
-    <p>
-      <span class="fancy-capital" style="width: 1.5rem;">I</span> work primarily with JavaScript, favouring vanilla JS for it's playfullness and creativity, but also the React framework for it's speediness and front-end flexibility. While on the back-end I like to use Node.js with express.js.
-    </p>
-    <!-- <p>
-      I tend to use MongoDB for a database and either AWS or Heroku for hosting, and Git with GitHub for versioning.
-    </p> -->
-    <p>
-      I'm happy to create a custom Content Management System (CMS), but I also know my way around Wordpress, and find it to be a good way of providing a client with a blog-based website.
-    </p>
-    <!-- <p>
-      I also have some basic experience in Java, C# and Python.
-    </p> -->
-    <!-- <div id="read-more">
-      ...READ MORE
-    </div> -->
-    </div>
-  </article>
-
-
-
-
-  <article id="projects" class="initial-load">
-
-    <div class="project" for='jog-log'>
-              <h3>Jog Log <a class='go-there' href='https://jog-log.netlify.app'>LINK</a></h3>
-
-              <div class="screenshot">
-                <span class="fbb close"></span><span class="fbb minimise"></span><span class="fbb expand"></span><span class="fbb address"></span>
-                <a class="img-link" href='https://jog-log.netlify.app'><img class="screenshot" src='../public/assets/jog-log.gif' /></a>
-              </div>
-
-              <p>
-                I made a web-app called <em>Jog Log</em> that would log personal running activity because, for a few reasons, I was tired of using Strava to track my runs. So I experimented with the idea of an alternative that would encourage the more poetic, and reflective side of running. To focus more on thoughts & feelings than data & tracking.
-              </p>
-              <p>
-                For the front-end I used the React framework, and the back-end is a REST API 🌐 served by Node.js, utilising express. It features user creation and verification, as well as run & shoe creation.
-              </p>
-
-            </div>
-
-            <hr />
-
-            <div class="project">
-              <h3>Tumbleword <a class='go-there' href='https://jog-log.netlify.app'>LINK</a></h3>
-              <p>
-                <div class="screenshot">
-                  <span class="fbb close"></span><span class="fbb minimise"></span><span class="fbb expand"></span><span class="fbb address"></span>
-                  <a class="img-link" href='https://ed-dickinson.net/tumbleword'><img class="screenshot" src='../public/assets/tumbleword.gif' /></a>
-                </div>
-              </p>
-
-              <p>
-                <i>Tumbleword</i> is a web game I made that combines elements of <i>Tetris</i> and <i>Wordle</i>. You place falling letters to find a 5-letter word pre-selected by the computer. The speed increases as you successfully find words and clear previous letters. There is a leaderboard impemented that logs the 10 highest scores across all users.
-              </p>
-              <p>
-                The front-end is made with vanilla JS, and the leaderboard is an API 🌐 served by Node.js and express.js.
-              </p>
-            </div>
-
-            <hr />
-
-            <div class="project">
-              <h3>Still Life<a class='go-there' href='https://stilllife.earth/'>LINK</a></h3>
-              <p>
-                <div class="screenshot">
-                  <span class="fbb close"></span><span class="fbb minimise"></span><span class="fbb expand"></span><span class="fbb address"></span>
-                  <a class="img-link" href='https://stilllife.earth/'><img class="screenshot" src='../public/assets/still-life.gif' /></a>
-                </div>
-              </p>
-
-              <p>
-                A website and online shop <i>Still Life</i>, a local company who make furniture out of recycled plastic.
-              </p>
-
-            </div>
-
-            <hr />
-
-            <div class="project">
-              <h3>Living Yourself<a class='go-there' href='/living-yourself'>LINK</a></h3>
-              <p>
-                <div class="screenshot">
-                  <span class="fbb close"></span><span class="fbb minimise"></span><span class="fbb expand"></span><span class="fbb address"></span>
-                  <a class="img-link" href='/living-yourself'><img class="screenshot" src='../public/assets/livin-urself.gif' width='400'/></a>
-                </div>
-              </p>
-
-              <p>
-                An album-player website that features a custom playlisting script. The click-able tracks are presented in a non-linear format across the page using SVG's to respond to user-actions and playlist progression.
-              </p>
-              <p>
-                The player itself allows skipping through the track via clicking in the play bar. There is also a lyric box that changes with the track.
-              </p>
-
-            </div>
-
-            <hr />
-
-            <div class="project" for='multi-mask'>
-              <h3>Multi Mask <a class='go-there' href='https://multi-mask.netlify.app'>LINK</a></h3>
-
-              <div class="screenshot">
-                <span class="fbb close"></span><span class="fbb minimise"></span><span class="fbb expand"></span><span class="fbb address"></span>
-                <a class="img-link" href='https://multi-mask.netlify.app'><img class="screenshot" src='../public/assets/multi-mask.gif' /></a>
-              </div>
-
-              <p>
-                <em>Multi Mask</em>, a small web-app that lets you make your own pixellated mask on a basic editor, then add it to the collection of masks.
-              </p>
-              <p>
-                The back-end is an API 🌐 served by Node.js and made with express.js. It includes a user storage and log-in, as well as mask storage. The front end, including an editor with draw, erase and fill functions with 20 pre-chosen colours, is built from the ground up with vanilla javascript. 🍦
-              </p>
-
-            </div>
-  </article>
-
-  <article id="tools" class="initial-load">
-    <p class="break" style="margin-top: 0.1em;">
-      –
-    </p>
-    <p>
-      These are some tools that I've made and have found to be pretty useful. To me, at least.
-    </p>
-    <h3>
-      Running Tools
-    </h3>
-    <p>
-      👟 <a href="/pace-converter"><i>Running Pace Converter</i></a>, which converts pace between min/mile and km/mile.
-    </p>
-    <p>
-      🏃‍♂️ <a href="/101010-calculator"><i>Marathon Pace Calculator</i></a>, which calculates the running paces necessary to achieve a target marathon time while using the 10/10/10 rule.
-    </p>
-
-    <h3>
-      Musical Tools
-    </h3>
-    <p>
-      🍤 <a href="/prawn-tempora"><i>Prawn Tempo-ra</i></a>, a tempo tapper and delay time calculator.
-    </p>
-    <p>
-      🐓 <a href="/chicken-keyev"><i>Chicken Key-ev</i></a>, a key transposer and chord finder.
-    </p>
-
-    <h3>
-      Other Tools
-    </h3>
-    <p>
-      📚 <a href="/dewey"><i>Dewey Decimal Explorer</i></a>, an interactive reference to explore of the Dewey Decimal Classification system.
-    </p>
-    <p class="break">
-      –
-    </p>
-  </article>
-
-</main>
-
-
-<footer>
-  <a href="mailto:hello@ed-dickinson.net">hello@ed-dickinson.net</a>
-
-  <span class="socials"><a class='social' href="https://github.com/ed-dickinson"><img class='social' src='public/assets/GitHub-Mark.png' /></a> <a class='social' href="https://www.linkedin.com/in/-ed-dickinson/"><img class='social' src="public/assets/linkedin-logo.png" /></a></span>
-</footer>
-
-
-
-<script src='javascript.js'></script>
-
-<script>
-
-</script>
-
-
-</body>
 </html>
