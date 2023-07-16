@@ -14,7 +14,6 @@ caravan_subtitles.forEach(val => {
   if (val[1]) {
     val[1] = convertTimestampToSecs(val[1])
   }
-  console.log(val)
 })
 
 let clear_subtitle_at = caravan_subtitles[caravan_subtitles.length - 1][1] + 5
@@ -67,5 +66,19 @@ dom.container.addEventListener('click', ()=>{
     dom.video.pause()
     dom.container.classList.remove('playing')
     subtitler.pause()
+  }
+})
+
+let space_paused
+
+document.addEventListener('keydown', () => {
+  if (event.keyCode === 32) {
+    if (dom.video.paused === false) {
+      dom.video.pause()
+      space_paused = true
+    } else if (space_paused === true) {
+      dom.video.play()
+      space_paused = false
+    }
   }
 })

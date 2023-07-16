@@ -57,13 +57,11 @@ if (navigator.userAgent.includes('Safari')) {
 // }
 
 for (let i in array) {
-  console.log(array[i])
   // setTimeout(()=>array[i].classList.add('appear'), i*150)
   if (i === 9) {
     setTimeout(()=> array[i].classList.add('appear'), i*150)
     setTimeout(()=>array[i].classList.add('color-anim'), (i*150))
   } else {
-    console.log(array[i])
     setTimeout(()=> array[i].classList.add('appear'), i*150)
     setTimeout(()=>array[i].classList.add('color-anim'), (i*150))
   }
