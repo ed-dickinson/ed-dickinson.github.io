@@ -6,6 +6,8 @@
 }
 #loader {
   font-size: 2em;
+  width: 0;
+  height: 0;
 }
 #loader .text {
   font-size: 2em;
@@ -28,9 +30,7 @@ body.pink-purple {
   --color2: darkviolet;
 }
 
-main img {
-  max-width: 100%;
-}
+
 
 h3 {
   margin-top: 2em;
@@ -49,11 +49,11 @@ h3 {
   font-size: 0.75em;
 
 }
-#circular > span > span, #sun {
+#circular > span > span > span, #sun {
   opacity: 0;
-  color: white;
+  /* color: white; */
 }
-#circular > span > span.appear, #sun.appear {
+#circular > span > span > span.appear, #sun.appear {
   transition: opacity 0.25s, color 0.25s, transform 0.25s;
   opacity: 1;
   color: black;
@@ -71,6 +71,9 @@ h3 {
 #circular.pre-load {
 
 }
+/* #circular > span > span > span {
+  display: inline-block;
+} */
 #sun {
   top: 0.7em; left: 0.8em;
   font-size: 1em;
@@ -82,6 +85,12 @@ h3 {
 #sun, #sun span {
   transition: transform 0.5s;
 }
+#sun.safari {
+  transform: scale(1.4);
+}
+#loader:hover #sun.safari {
+  transform: scale(1.5);
+}
 
 #loader {
   width: 2.5em;
@@ -91,6 +100,9 @@ h3 {
   top: 0.5em;
   border-radius: 50%;
   transform: rotate(-35deg);
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none;
 }
 #loader:hover {
   cursor: pointer;
@@ -98,7 +110,10 @@ h3 {
 #loader:hover #sun {
   transform: scale(1.05);
 }
-#loader:hover #circular > span > span {
+/* #loader:hover #circular > span > span {
+  animation: shake 2s 0s infinite ease-in-out;
+} */
+#loader:hover #circular > span > span  {
   animation: shake 2s 0s infinite ease-in-out;
 }
 @keyframes shake {
@@ -110,9 +125,9 @@ h3 {
 }
 
 .color-anim {
-  animation: color 1s 1 linear forwards;
+  animation: color-in 1s 1 linear forwards;
 }
-@keyframes color {
+@keyframes color-in {
   0% {color: var(--color1);}
   50% {color: var(--color2);}
   100% {color: black;}
@@ -128,21 +143,21 @@ h3 {
   to {transform: scale(1.05);}
 }
 
-/* #loader.shrinkout-anim {
-animation: shrinkout 0.25s 1 linear forwards;
-}
-@keyframes shrinkout {
-from {transform:  rotate(-35deg) scale(2);}
-to {transform: rotate(-35deg) scale(0);}
-} */
-
 #loader.spin-anim {
   animation: spin 1s 1 ease-in-out forwards;
+}
+#loader.spin-anim #circular span.appear, #loader.spin-anim #sun span {
+  animation: color-spin 1s 1 linear;
 }
 @keyframes spin {
   from {transform:  rotate(-35deg);}
   /* to {transform: rotate(1045deg);} */
   to {transform: rotate(685deg);}
+}
+@keyframes color-spin {
+  50% {color: var(--color1);}
+  25%, 75% {color: var(--color2);}
+  0%, 100% {color: black;}
 }
 
 #decoration-line {
@@ -170,7 +185,9 @@ from {width: 0%}
   to {transform: translateX(-66.67%);}
 }
 
-nav, main, footer {
+nav, main
+/* , footer */
+ {
   margin: auto;
   width: calc(100% - 14em);
   max-width: 600px;
@@ -185,6 +202,7 @@ menu {
 
 main {
   padding: 0.5em;
+  padding-bottom: 2em;
   margin-top: 2em;
   box-sizing: border-box;
   position: relative;
@@ -247,12 +265,117 @@ main img.album-art {
   margin-right: 1em;
 }
 
+
+
+
+
+/* CARAVAN */
+
+main img, main video {
+  max-width: 100%;
+  height: auto;
+}
+
+
+#caravan video {
+  position: absolute;
+  left: 0; top: 0;
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+#caravan.playing video {
+  opacity: 1;
+}
+
+#caravan {
+  position: relative;
+  cursor: pointer;
+  margin: 2em 0;
+}
+#caravan::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-left: 15px solid white;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+#caravan:hover::after {
+  opacity: 1;
+}
+#caravan.playing:hover::after {
+  opacity: 0;
+}
+
+#caravan #subtitles {
+  position: absolute;
+  bottom: 1em;
+  background-color: black;
+  color: white;
+  left: 1em;
+  padding: 0 0.5em;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+footer {
+  bottom: 1.5em;
+  right: 0;
+  /* z-index: -99; */
+  position: absolute;
+  transform: rotate(270deg);
+}
+footer .links {
+  /* position: absolute; */
+  right: 0;
+  /* bottom: 1.5em; */
+  /* bottom: 0em; */
+  line-height: 1.25;
+}
+footer a {
+  display: block;
+  text-decoration: none;
+  color: black;
+  animation: colorfade 2.5s -1s infinite linear alternate;
+  position: relative;
+}
+footer a::after {
+  content: '<';
+  position: absolute;
+  color: black;
+  font-size: 0.9em;
+  bottom: 0;
+  right: -0.9em;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+footer a:hover::after {
+  opacity: 1;
+}
+
+
+
+  /* MOBILE */
+
 @media only screen and (max-width: 600px) {
   nav {
     margin-top: 6em;
   }
   nav, main, footer {
     width: calc(100% - 1em);
+  }
+  footer {
+    position: relative;
+    transform: none;
+    text-align: right;
+    margin-top: 2em;
+
   }
   #loader {
     left: calc(100% - 3.5em);

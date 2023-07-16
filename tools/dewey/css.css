@@ -1,0 +1,181 @@
+@font-face {
+  font-family: 'Inconsolata';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Inconsolata'), url('public/Inconsolata.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Luminari';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Luminari'), url('public/Luminari-Regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Blackletter';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Blackletter'), url('/public/fonts/Elfreth-Bold.woff') format('woff');
+}
+
+
+body {
+  font-family: Inconsolata;
+}
+
+#firstHeading {
+  font-family: Blackletter;
+  font-size: 2.5em;
+  padding-bottom: 0.25em;
+  letter-spacing: 0.05em;
+  text-align: center;
+  margin-bottom: 0;
+}
+.mw-parser-output p:first-of-type {
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  padding: 0.5em 0.5em;
+  margin-bottom: 0;
+}
+
+/* h1, h2 {
+  font-family: Luminari;
+  letter-spacing: 0.02em;
+} */
+
+div#toc, .mw-editsection, .reference {
+  display: none;
+}
+a {
+  color: black;
+}
+
+
+/* opening info */
+ul.sub-list {
+  display: none;
+}
+ul.sub-list.open {
+  display: block;
+}
+
+ul.deep-list {
+  display: none;
+}
+ul.deep-list.open {
+  display: block;
+}
+
+
+/* styling */
+
+h2 {
+  border: 2px solid black;
+  margin: 0;
+  margin-top: 0.3em;
+  padding: 0em 0.3em 0.2em;
+
+}
+
+
+ul.sub-list {
+  border: 2px solid black;
+  list-style-position: inside;
+  list-style-type: none;
+  margin: 0;
+  padding-left: 0em;
+  border-left-width: 0.85em;
+}
+ul.sub-list.open {
+  border-top-width: 0 ;
+  border-bottom-width: 0px;
+}
+
+h2 .number{
+  display: block;
+  font-size: 2em;
+}
+h2 .label {
+  display: block;
+  font-size: 1rem;
+}
+
+h2 .number,
+h2 .label {
+  display: inline;
+  font-size: 1rem;
+}
+h2 .number::after {
+  content: ' '
+}
+
+.number {
+  font-weight: bold;
+}
+.label {
+  font-weight: normal;
+}
+
+li.sub-list-item {
+  border: inherit;
+  border-left-width: 0ch;
+  /* margin: 0; */
+  border-right: 0;
+  border-bottom-width: 2px;
+  padding: 0.1em 0.3em;
+}
+
+ul.deep-list {
+  border: inherit;
+  list-style-position: inside;
+  list-style-type: none;
+  margin: 0;
+  padding-left: 0.55em;
+  border-right: 0;
+}
+
+ul.deep-list.open {
+  border-top-width: 0;
+  border-bottom-width: 0;
+}
+
+h2, .mw-parser-output ul, .mw-parser-output li {
+  cursor: pointer;
+}
+
+li.sub-list-item b  {
+  padding: 0.2em 0em;
+  display:  block;
+}
+li.deep-list-item {
+  padding: 0.2em 0;
+}
+
+.deep-list-item {
+  position: relative;
+  border-bottom-color: inherit;
+}
+.deep-list {
+  border-color: inherit;
+}
+.deep-list-item::before {
+  width: 1em;
+  height: 0em;
+  border: inherit;
+  border-width: 2px;
+  border-bottom-color: inherit;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  content: '';
+  position: absolute;
+  left: -1.4em;
+  top: 0em;
+}
+
+
+
+footer {
+  margin-top: 1em;
+  text-align: center;
+}

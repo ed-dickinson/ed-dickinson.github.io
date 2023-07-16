@@ -1,0 +1,296 @@
+<!doctype html>
+<html>
+<head>
+<title>Running Pace Converter</title>
+<meta charset="UTF-8">
+<meta name="keywords" content="running, pace, converter, miles, km, min/mile, min/km, calculator, chart, time, run">
+<meta name="description" content="A tool to convert running pace between min/mile and min/km.">
+<meta name="author" content="Ed Dickinson">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="icon.png">
+<style>
+body {
+  font-family: monospace;
+  text-align: center;
+}
+#input-pace, #output-pace {
+  display: inline-block;
+  text-align: left;
+  font-size: 1.5em;
+}
+#input-cont, #output-cont {
+  display: inline-block;
+}
+#input-cont {
+  margin-top: 2em;
+}
+#divider {
+  font-size: 3.5em;
+}
+table {
+  margin: auto;
+  padding-left: 3em;
+}
+tr td:nth-of-type(1) {
+  text-align: right;
+  padding-right: 1em;
+}
+tr td:nth-of-type(2) {
+  text-align: left;
+}
+/* .slidecontainer {
+  width: 150px;
+} */
+
+/* The slider itself */
+#slider {
+  width: 90%;
+  margin-top: 4em;
+  max-width: 26em;
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  height: 40px; /* Specified height */
+  background: black;
+  outline: none; /* Remove outline */
+  opacity: 1; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+  border: 1px solid black;
+  border-radius: 22px;
+  z-index: 1;
+}
+
+/* Mouse-over effects */
+#slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+#slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 40px; /* Set a specific slider handle width */
+  height: 40px; /* Slider handle height */
+  background: white; /* Green background */
+  border: 0px solid black;
+  cursor: pointer; /* Cursor on hover */
+  border-radius: 20px; z-index: 2;
+}
+
+#slider::-moz-range-thumb {
+  width: 40px; /* Set a specific slider handle width */
+  height: 40px; /* Slider handle height */
+  /* background: dodgerblue; */
+  cursor: pointer; /* Cursor on hover */
+  z-index: 2;
+  border-radius: 20px;
+  border: 0px solid black;
+}
+
+@media only screen and (min-width: 800px) {
+  #slider {
+    height: 20px; /* Specified height */
+    border-radius: 11px;
+    z-index: 1;
+  }
+  #slider::-moz-range-thumb {
+    width: 20px; /* Set a specific slider handle width */
+    height: 20px;
+  }
+  #slider::-webkit-slider-thumb {
+    width: 20px; /* Set a specific slider handle width */
+    height: 20px; /* Slider handle height */
+    border-radius: 10px;
+    border: 0px solid black;
+  }
+}
+
+#see-also {
+  position: fixed;
+  right: 0.5em;
+  bottom: 0.5em;
+}
+
+a {
+  position: relative;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+a::after {
+  content: '';
+  height: 2px;
+  width: 100%;
+  position: absolute;
+  left: 0; top: 100%;
+  background: linear-gradient(to right, hsl(0, 100%, 50%), hsl(50, 100%, 50%), hsl(100, 100%, 50%), hsl(150, 100%, 50%), hsl(200, 100%, 50%), hsl(250, 100%, 50%));
+}
+
+footer {
+  padding-top: 4em;
+}
+</style>
+
+</head>
+<body>
+
+  <h1>Running Pace Converter</h1>
+
+
+
+<span id="input-cont">
+  <div id="input-pace">
+
+  </div>
+  <div id="input-unit">
+    min/km
+  </div>
+</span>
+<span id="divider">/</span>
+<span id="output-cont">
+  <div id="output-pace">
+
+  </div>
+  <div id="output-unit">
+    min/mile
+  </div>
+</span>
+
+<div style="margin-top: 1em;">
+  <table>
+    <tr>
+      <td id="output-5k">
+
+      </td>
+      <td>
+        5k
+      </td>
+    </tr>
+    <tr>
+      <td id="output-10k">
+
+      </td>
+      <td>
+        10k
+      </td>
+    </tr>
+    <tr>
+      <td id="output-half">
+
+      </td>
+      <td>
+        half marathon
+      </td>
+    </tr>
+    <tr>
+      <td id="output-marathon">
+
+      </td>
+      <td>
+        marathon
+      </td>
+    </tr>
+  </table>
+
+  <input id="slider" type="range" min="3" max="7" value="5" step="0.01" />
+</div>
+
+<footer>
+  by <a href='https://ed-dickinson.net' ><b>Ed Dickinson</a></b>
+</footer>
+
+<div id="see-also">
+    See also: <a href="../101010-calculator">10-10-10 calculator</a>
+  </div>
+
+<script>
+dom = {
+  slider : document.querySelector('#slider'),
+  input_pace : document.querySelector('#input-pace'),
+  output_pace : document.querySelector('#output-pace'),
+  output_time : {
+    '5k' : document.querySelector('#output-5k'),
+    '10k' : document.querySelector('#output-10k'),
+    half : document.querySelector('#output-half'),
+    marathon : document.querySelector('#output-marathon'),
+  },
+  title : document.querySelector('h1'),
+}
+
+const convertToMins = (time) => {
+  let whole = Math.floor(time)
+  let output = ''
+  if (time > 60) {
+    let hours = (time - (time % 60)) / 60
+    let mins = time % 60
+    let whole_mins = Math.floor(mins)
+    let secs = ((mins - whole_mins) * 0.6).toFixed(2).slice(2,4)
+
+    output = hours + ':' + (whole_mins < 10 ? '0' + whole_mins : whole_mins) + '.' + secs
+  } else {
+
+    output = `${whole}.${((time - whole)*0.6).toFixed(2).slice(2,4)}`
+  }
+
+  return output
+}
+
+const convertDecimalToSeconds = (value) => {
+  return Math.floor(value)
+}
+
+const doConversion = () => {
+
+  dom.input_pace.innerHTML = convertToMins(slider.value * 1)
+  dom.output_pace.innerHTML = convertToMins(slider.value / 0.6213712)
+
+  dom.output_time['5k'].innerHTML = convertToMins(slider.value * 5)
+  dom.output_time['10k'].innerHTML = convertToMins(slider.value * 10)
+  dom.output_time['half'].innerHTML = convertToMins(slider.value * 21.0975)
+  dom.output_time['marathon'].innerHTML = convertToMins(slider.value * 42.195)
+}
+doConversion()
+
+
+dom.slider.addEventListener('input', ()=> {
+  event.preventDefault()
+  doConversion()
+  // changeColor(dom.slider)
+})
+
+let title_letters = dom.title.innerHTML
+
+title_letters = title_letters.split('')
+
+dom.title.innerHTML = ''
+
+const changeColor = (element) => {
+  let range = element.getAttribute('max') - element.getAttribute('min')
+  let min = element.getAttribute('min')
+  element.value
+  let percentage = ((parseFloat(element.value) - min) / range ) * 100
+  console.log(percentage)
+
+  let hsl_color = `hsl(${percentage*2.5}, 100%, 50%)`
+  element.style.backgroundColor = hsl_color
+  element.style.borderColor = hsl_color
+}
+// changeColor(dom.slider)
+
+let color_i = 0
+title_letters.forEach(letter => {
+  let element = document.createElement('span')
+  element.innerHTML = letter
+  dom.title.appendChild(element)
+  element.style.color = `hsl(${color_i}, 100%, 50%)`
+  color_i += 10
+  if (color_i === 360) {color_i = 0}
+})
+
+
+
+</script>
+
+
+</body>
+</html>
