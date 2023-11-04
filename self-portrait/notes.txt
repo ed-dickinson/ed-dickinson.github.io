@@ -1,0 +1,1 @@
+would require a fair bit of work - but would it be good to have an effect when changing era, that the songs fade and move down visibly rather than jumping to the new setup? currently the titles and the songforms are erased and repopulated each time, the new way would require them to be moved and reordered as required.
