@@ -39,7 +39,7 @@ async function api(type, url, data) {
     const result = await response.json()
     return result
   } catch {
-    console.log("Error:", error)
+    console.log("Error, caught promise")
   }
 }
 
@@ -117,7 +117,6 @@ const makeLyrics = (lines, song) => {
   let ol = n('lyrics')
 
   for (let i in lines) {
-  // lines.forEach(line => {
     let line = lines[i]
     let el = n('line', line)
     let timestamp
@@ -237,9 +236,8 @@ const updateTitles = (songlist) => {
   }
 }
 
-const fillInDOM = (song) => {
-  // song.song, song.data
-  // console.log(song)
+const fillInDOM = (song) => { // song.song, song.data
+  
   let title = $('.contents-title.' + song.song)
   title.textContent = song.data.title || song.data.extended_title
 

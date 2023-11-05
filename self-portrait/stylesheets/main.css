@@ -34,7 +34,7 @@
   src: url('../assets/fonts/rotunda.otf');
 }
 
-@font-face {
+/* @font-face {
   font-family: capraia;
   font-weight: 500;
   src: url('../assets/fonts/Capraia-Regular-Test.woff') format('woff');
@@ -54,7 +54,7 @@
   font-family: capraia;
   font-weight: 600;
   src: url('../assets/fonts/Capraia-SemiBold-Test.woff') format('woff');
-}
+} */
 
 
 a, a:visited {
@@ -289,8 +289,8 @@ main {
   /* transform: rotate(180deg); */
 }
 #songforms .title {
-  font-family: capraia;
-  font-weight: 700;
+  /* font-family: capraia; */
+  /* font-weight: 700; */
   margin-top: 0.5em;
   margin-bottom: 1.5em;
 
