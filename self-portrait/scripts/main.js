@@ -87,7 +87,7 @@ const domStuff = {
 
 const audioStuff = {
   loadSong : (song) => {
-    let audio_location = `${url}/songs/${song.song}/${song.data.file}`
+    let audio_location = `${url}songs/${song.song}/${song.data.file}`
     console.log('loc', url)
     $('audio').src = audio_location
     $('audio').song = song.song // used in update()
@@ -125,7 +125,7 @@ const makeLyrics = (lines, song) => {
       el.classList.add('has-timestamp')
       el.addEventListener('click', () => {
         domStuff.checkForHighlightedLyric()
-        if ($('audio').src !== `${url}/songs/${song.song}/${song.data.file}`) {
+        if ($('audio').src !== `${url}songs/${song.song}/${song.data.file}`) {
           audioStuff.loadSong(song)
           domStuff.updateTrackTitle(song.data.extended_title ? song.data.extended_title : song.data.title)
         }
@@ -237,7 +237,7 @@ const updateTitles = (songlist) => {
 }
 
 const fillInDOM = (song) => { // song.song, song.data
-  
+
   let title = $('.contents-title.' + song.song)
   title.textContent = song.data.title || song.data.extended_title
 
@@ -272,7 +272,7 @@ const updateSongList = (era, type) => { // this is a physical dom thing
     let found_song = globals.loaded_songs.find(a => a.song === s)
     if (!found_song) {
       // let call = api('GET', url + '/songs/' + s + '/json')
-      let call = api('GET', url + '/songs/' + s + '/info.json')
+      let call = api('GET', url + 'songs/' + s + '/info.json')
       call.s = s
       promises.push(call)
       electrons.push(s)
@@ -292,7 +292,7 @@ const updateSongList = (era, type) => { // this is a physical dom thing
   // when fulfilled, fill them out in the DOM
   // Promise.all(promises).then((values) => {
   Promise.all(electrons.map(function(file) {
-    return api('GET', url + '/songs/' + file + '/info.json').then(function(content) {
+    return api('GET', url + 'songs/' + file + '/info.json').then(function(content) {
       return {data: content, song: file}
     })
   })).then((values) => {
@@ -438,7 +438,11 @@ $('#goforeintime').addEventListener('click', ()=>{
 
 // let url = 'http://localhost:8080'
 
-let url = electron_env ? path.resolve( os.homedir(), 'Documents/self-portrait/' ) : window.location.origin
+console.log(window.location)
+
+let url = electron_env ? path.resolve( os.homedir(), 'Documents/self-portrait' ) + '/' : window.location.href
+
+// if (electron_env && url.charAt(url.length-1) === '/') url = url.slice(0,-1)
 
 // console.log(url)
 //
@@ -449,7 +453,7 @@ let url = electron_env ? path.resolve( os.homedir(), 'Documents/self-portrait/' 
 // if (url[-1])
 
 // this gets the era json file, MAIN function
-api('GET', url + '/songs/eras.json').then(response => {
+api('GET', url + 'songs/eras.json').then(response => {
   response.reverse()
   // globals.latest_era = response[0].era
   // globals.eras = response
