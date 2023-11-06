@@ -9,6 +9,13 @@
   font-family: monospace;
 }
 
+.electron {
+  display: none;
+}
+.electron.show {
+  display: block;
+}
+
 /* ^^^ ELECTRON ^^^ */
 
 

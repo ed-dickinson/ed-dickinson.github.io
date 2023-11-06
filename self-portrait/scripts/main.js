@@ -7,7 +7,7 @@ const $$ = sel => document.querySelectorAll(sel);
 // checks if running on electron
 let electron_env = window.process && window.process.argv.includes('electron-daddy')
 
-!electron_env && $$('.electron').forEach(e => e.style.display = 'none')
+electron_env && $$('.electron').forEach(e => e.classList.add('show'))
 
 const path = electron_env ? require('path') : null
 const os = electron_env ? require('os') : null
