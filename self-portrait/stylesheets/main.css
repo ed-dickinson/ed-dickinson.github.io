@@ -41,34 +41,10 @@
   src: url('../assets/fonts/rotunda.otf');
 }
 
-/* @font-face {
-  font-family: capraia;
-  font-weight: 500;
-  src: url('../assets/fonts/Capraia-Regular-Test.woff') format('woff');
-}
-
-@font-face {
-  font-family: capraia;
-  font-weight: 400;
-  src: url('../assets/fonts/Capraia-Light-Test.woff') format('woff');
-}
-@font-face {
-  font-family: capraia;
-  font-weight: 700;
-  src: url('../assets/fonts/Capraia-Bold-Test.woff') format('woff');
-}
-@font-face {
-  font-family: capraia;
-  font-weight: 600;
-  src: url('../assets/fonts/Capraia-SemiBold-Test.woff') format('woff');
-} */
-
-
 a, a:visited {
   /* color: var(--angel-blue); */
   color: dodgerblue;
 }
-
 
 html, button {
   font-family: pixel;
@@ -86,15 +62,17 @@ main {
   margin: 0 auto 6em;
   padding-top: 8em;
   overflow: hidden;
+  position: relative;
 }
 img#walt {
   width: 500px;
+  max-width: 100%;
 }
 #img-header::after, #img-header::before {
   content: '';
   position: absolute;
   width: 500px;
-  height: 250px;
+  height: 100%;
   display: inline-block;
 }
 #img-header::after {
@@ -248,11 +226,6 @@ main {
   transform: rotate(180deg);
 }
 .songform-wrapper::before {
-
-  /* content: '* * *'; */
-  /* padding-top: 10em; */
-  /* position: absolute; */
-  /* bottom: -3em; */
   content: '❧';
   top: -3em;
   left: 50%;
@@ -292,18 +265,13 @@ main {
 .songform-wrapper:nth-of-type(4n+3)::before {
   transform: rotate(180deg) scaleX(-1);
 }
-.songform-wrapper:nth-of-type(4n+4)::before {
-  /* transform: rotate(180deg); */
-}
+/* .songform-wrapper:nth-of-type(4n+4)::before {
+  transform: rotate(180deg);
+} */
 #songforms .title {
-  /* font-family: capraia; */
-  /* font-weight: 700; */
   margin-top: 0.5em;
   margin-bottom: 1.5em;
-
-  /* border-bottom: 1px solid lightgrey; */
   padding-bottom: 0.5em;
-
   font-family: bembo;
   text-transform: uppercase;
   font-weight: 500;
@@ -487,4 +455,85 @@ main.erafadein {
 }
 .notes-visible #songforms .notes {
   opacity: 1;
+}
+
+/* MOBILE */
+
+@media only screen and (max-width: 600px) {
+  body {
+    /* background-color: red; */
+    margin: 8px;
+  }
+  #img-header {
+    padding-top: 4em;
+    margin-bottom: 3em;
+  }
+
+  #songforms {
+    max-width: 100%;
+  }
+  #songforms .songform-wrapper {
+    font-size: 0.95rem;
+    max-width: 100%;
+  }
+  #songforms .songform-wrapper .songform {
+    max-width: 100%;
+    font-size: 0.95rem;
+    /* font-size: 16px; */
+    /* this is whack for some reason, i think on the wide onesed */
+  }
+  #songforms .songform-wrapper .songform .line {
+    white-space: break-spaces;
+    white-space: pre-wrap;
+  }
+  /* #player {
+    bottom: 0px;
+    position: fixed;
+    left: 0px;
+    width: 100px;
+    border-top: 1px solid grey;
+    width: 100%;
+    height: 20px;
+    opacity: 1;
+    background-color: white;
+  }
+  #player #title-playing {
+    transform: rotate(0deg);
+    height: 100%;
+    width: calc(100% - 20px);
+    right: 0px;
+    top: 1px;
+    text-align: right;
+    position: absolute;
+    left: 15px;
+  }
+  #player #play, #player #pause {
+    position: absolute;
+    top: -6px;
+
+  } */
+  #player {
+    bottom: 0px;
+    position: fixed;
+    right: 0px;
+    left: calc(100% - 40px);
+    width: 40px;
+    height: 40px;
+    opacity: 1;
+    background: radial-gradient(white, rgba(255,255,255,0));
+  }
+  #player #title-playing {
+    display: none;
+  }
+  #player #play, #player #pause {
+    /* position: absolute;
+    top: -16px;
+    right: 5px; */
+    height: 40px;
+    width: 40px;
+    opacity: 0.5;
+    right: 0px;
+    position: absolute;
+    transform: scale(1.5);
+  }
 }
