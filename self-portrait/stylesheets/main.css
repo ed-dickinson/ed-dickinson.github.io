@@ -68,6 +68,9 @@ main {
   width: 500px;
   max-width: 100%;
 }
+#walt-mobile {
+  display: none;
+}
 #img-header::after, #img-header::before {
   content: '';
   position: absolute;
