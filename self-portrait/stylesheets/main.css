@@ -64,7 +64,7 @@ main {
   overflow: hidden;
   position: relative;
 }
-img#walt {
+#img-header img {
   width: 500px;
   max-width: 100%;
 }
@@ -535,5 +535,11 @@ main.erafadein {
     right: 0px;
     position: absolute;
     transform: scale(1.5);
+  }
+  #walt-mobile {
+    display: block;
+  }
+  #walt {
+    display: none;
   }
 }
