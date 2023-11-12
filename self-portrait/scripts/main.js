@@ -530,6 +530,15 @@ const songEnd = () => {
 
 $('audio').addEventListener('ended', songEnd)
 
+$('#img-header').addEventListener('click', () => {
+  domStuff.checkForHighlightedLyric()
+  let found_song = globals.loaded_songs.find(a => a.song === 'wear_life')
+  audioStuff.loadSong(found_song)
+  $('audio').play()
+  domStuff.updatePlayState($('audio'))
+  domStuff.updateTrackTitle(found_song.data.extended_title || found_song.data.title)
+})
+
 // $('#songend').addEventListener('click', songEnd)
 
 // this highlights lyrics
