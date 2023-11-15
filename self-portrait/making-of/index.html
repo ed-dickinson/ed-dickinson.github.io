@@ -1,0 +1,191 @@
+<!doctype html>
+<html>
+  <head>
+  <title></title>
+  <meta charset="UTF-8">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="author" content="Ed Dickinson">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="">
+  <link rel="stylesheet" type="text/css" href="../stylesheets/main.css"/>
+  <!-- http://127.0.0.1:3000/making-of/ -->
+  <style>
+figure img {
+  border: 1px solid grey;
+  max-width: 100%;
+  /* box-shadow: 1px 1px 2px grey; */
+}
+#subtitle {
+  /* transform: skewY(-2deg); */
+  transform: matrix(1, -0.1, -0.1, 1, 0, 0);
+  color: red;
+  /* filter: drop-shadow(0px 5px 0px hsl(0,100%,80%)) drop-shadow(0px 10px 0px hsl(0,100%,90%)); */
+  text-shadow: 0px 5px 0px hsl(0,100%,80%), 0px 10px 0px hsl(0,100%,90%);
+  position: relative;
+  top: -0.25em;
+  font-size: 1.2em;
+  /* animation: fadeybum infinite alternate ease-in-out 2s 0s; */
+}
+/* @keyframes fadeybum {
+  from {
+    text-shadow: 0px 5px 0px hsl(0,100%,80%), 0px 10px 0px hsl(0,100%,90%);
+  }
+  to {
+    text-shadow: 0px 0px 0px hsl(0,100%,80%), 0px 0px 0px hsl(0,100%,90%);
+  }
+} */
+
+body {
+  overflow-x: hidden;
+}
+section {
+  text-align: left;
+  position: relative;
+}
+section::before {
+  content: '';
+  position: absolute;
+  width: 2000%;
+  top: -1em;
+  right: 100%;
+  height: 0;
+  border-top: 1px solid grey;
+}
+figure {
+  margin: 0;
+  position: relative;
+  cursor: default;
+}
+figure.show-caption {
+  cursor: help;
+}
+figure.show-caption figcaption {
+  display: block;
+}
+figcaption {
+  position: absolute;
+  width: 50%;
+  /* background-color: gainsboro; */
+  /* background-color: rgba(255,0,0,0.1); */
+  background-color: hsl(0,100%,95%);
+  margin: 1em;
+  padding: 0.5em 0.75em;
+  border: 1px solid red;
+  display: none;
+}
+
+.top-left {
+  top: 10px;
+  left: 10px;
+}
+.top-right {
+  top: 10px;
+  right: 10px;
+}
+.bottom-left {
+  bottom: 10px;
+  left: 10px;
+}
+.bottom-right {
+  bottom: 10px;
+  right: 10px;
+}
+
+main {
+  padding-left: 0;
+  max-width: 1000px;
+  margin: auto;
+}
+
+
+
+  </style>
+
+  </head>
+  <body>
+    <main>
+      <!-- <h1>Self-Portrait on a Summer's Day</h1> -->
+      <h2><div class="h2-1">
+        Self-Portrait
+      </div><div class="h2-2">
+        in
+        <!-- on -->
+      </div><div class="h2-3">
+        a
+      </div><div class="h2-4">
+        <!-- Changing Light -->
+        <!-- Diaphonous Light -->
+        <!-- Transient Light -->
+        <!-- Fluctuant Light -->
+        Wavering Light
+
+        <!-- Given Day -->
+        <!-- Lifelong Day -->
+        <!-- Boundless Day -->
+        <!-- Everlasting Day -->
+        <!-- Perennial Day/Light -->
+        <!-- Ever-Changing -->
+        <!--Leaf Changing, Unsteady Light, Fickle Light, Fluid Light, Blossoming Light, Fluctuant Light, Wavering Light, Vacillant Light, Vacillating -->
+        <!-- Ongoing Day [Unbroken?] -->
+      </div>
+      <div id="subtitle">
+        HOW IT'S MADE!
+      </div>
+      <!-- <div class="decoration">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div> -->
+
+    </h2>
+    <section>
+      <p>
+        First, I made a way to track which songs were included in each iteration of the album. Iterations which I refer to as <i>eras</i>.
+      </p>
+      <p>
+        I made a cool custom marquee tool to allow me to select multiple tickboxes at a time. This was under the guise of "saving time", but naturally it took me way more time to implement than I'd ever save from even ticking a thousand tickboxes.
+      </p>
+      <figure>
+        <img src="images/eras.png" id="eras-img" width="420"/>
+        <figcaption>
+
+        </figcaption>
+      </figure>
+      <p>
+        Then, the grunt work started.
+      </p>
+      <figure>
+        <img src="images/editor.png" id="editor-img" width="839"/>
+        <figcaption>
+
+        </figcaption>
+      </figure>
+
+
+    </section>
+
+
+
+
+      <div id="gobackintime">
+        <img src="assets/PokemonGSCurseIconF.png" />
+        <span>current era <span class="readout">_</span><br />(debug)</span>
+      </div>
+      <div id="goforeintime">
+        <img src="assets/PokemonGSSweetKissIconF.png" />
+      </div>
+
+      <footer>
+        <a href="/making-of">Listen to the allbum.</a>
+      </footer>
+    </main>
+    <script src='scripts/main.js' type='module'></script>
+    <script>
+
+    </script>
+
+  </body>
+</html>
