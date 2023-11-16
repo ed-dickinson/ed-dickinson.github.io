@@ -460,6 +460,21 @@ main.erafadein {
   opacity: 1;
 }
 
+#website-home {
+  position: fixed;
+  top: 2px;
+  left: 50%;
+  /* transform: translate(-50%, -100%); */
+  transform: translate(-50%, 0%);
+  opacity: 0;
+  transition: 0.5s;
+  font-family: monospace;
+}
+#website-home.show {
+  transform: translate(-50%, 0%);
+  opacity: 1;
+}
+
 /* MOBILE */
 
 @media only screen and (max-width: 600px) {
