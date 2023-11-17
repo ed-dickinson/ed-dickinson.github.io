@@ -40,6 +40,10 @@
   font-family: rotunda;
   src: url('../assets/fonts/rotunda.otf');
 }
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url('../public/fonts/inconsolata-v31-latin-regular.woff') format('woff');
+}
 
 a, a:visited {
   /* color: var(--angel-blue); */
@@ -468,7 +472,8 @@ main.erafadein {
   transform: translate(-50%, 0%);
   opacity: 0;
   transition: 0.5s;
-  font-family: monospace;
+  font-family: 'Inconsolata', monospace;
+  font-size: 0.75em;
 }
 #website-home.show {
   transform: translate(-50%, 0%);
