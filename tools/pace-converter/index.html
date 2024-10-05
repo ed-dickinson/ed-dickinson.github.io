@@ -8,9 +8,11 @@
 <meta name="author" content="Ed Dickinson">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="icon.png">
+<link rel="stylesheet" type="text/css" href="../../stylesheets/running-tools.css"/>
 <style>
+
+
 body {
-  font-family: monospace;
   text-align: center;
 }
 #input-pace, #output-pace {
@@ -44,9 +46,9 @@ tr td:nth-of-type(2) {
 
 /* The slider itself */
 #slider {
-  width: 90%;
+  width: 40em;
   margin-top: 4em;
-  max-width: 26em;
+  /* max-width: 26em; */
   -webkit-appearance: none;  /* Override default CSS styles */
   appearance: none;
   height: 40px; /* Specified height */
@@ -105,13 +107,9 @@ tr td:nth-of-type(2) {
   }
 }
 
-#see-also {
-  position: fixed;
-  right: 0.5em;
-  bottom: 0.5em;
-}
 
-a {
+
+/* a {
   position: relative;
   text-decoration: none;
   color: black;
@@ -124,15 +122,13 @@ a::after {
   position: absolute;
   left: 0; top: 100%;
   background: linear-gradient(to right, hsl(0, 100%, 50%), hsl(50, 100%, 50%), hsl(100, 100%, 50%), hsl(150, 100%, 50%), hsl(200, 100%, 50%), hsl(250, 100%, 50%));
-}
+} */
 
-footer {
-  padding-top: 4em;
-}
+
 </style>
 
 </head>
-<body>
+<body class="pink-purple">
 
   <h1>Running Pace Converter</h1>
 
@@ -143,7 +139,7 @@ footer {
 
   </div>
   <div id="input-unit">
-    min/km
+    min/mile
   </div>
 </span>
 <span id="divider">/</span>
@@ -152,7 +148,7 @@ footer {
 
   </div>
   <div id="output-unit">
-    min/mile
+    min/km
   </div>
 </span>
 
@@ -192,16 +188,18 @@ footer {
     </tr>
   </table>
 
-  <input id="slider" type="range" min="3" max="7" value="5" step="0.01" />
+  <input id="slider" type="range" min="240" max="600" value="420" step="1" />
 </div>
 
 <footer>
-  by <a href='https://ed-dickinson.net' ><b>Ed Dickinson</a></b>
+  <div id="see-also">
+    <a href='https://ed-dickinson.net' >Home</a>
+    <a href="../lthr-calculator">LTHR</a>
+    <a href="../101010-calculator">10-10-10</a>
+  </div>
 </footer>
 
-<div id="see-also">
-    See also: <a href="../101010-calculator">10-10-10 calculator</a>
-  </div>
+
 
 <script>
 dom = {
@@ -217,19 +215,25 @@ dom = {
   title : document.querySelector('h1'),
 }
 
-const convertToMins = (time) => {
-  let whole = Math.floor(time)
-  let output = ''
-  if (time > 60) {
-    let hours = (time - (time % 60)) / 60
-    let mins = time % 60
-    let whole_mins = Math.floor(mins)
-    let secs = ((mins - whole_mins) * 0.6).toFixed(2).slice(2,4)
+const convertToMins = (s, option) => {
 
-    output = hours + ':' + (whole_mins < 10 ? '0' + whole_mins : whole_mins) + '.' + secs
+  let mins = Math.floor(s / 60)
+  let secs = Math.round(s % 60)
+
+  if (secs < 10) {
+    secs = '0' + secs
+  }
+  let output
+  let time_limit = (option && option === 'half') ? 70 : 60
+  if (mins >= time_limit) {
+    let hours = Math.floor(mins / 60)
+    mins = mins % 60
+    if (mins < 10) {
+      mins = '0' + mins
+    }
+    output = hours + ':' + mins + '.' + secs
   } else {
-
-    output = `${whole}.${((time - whole)*0.6).toFixed(2).slice(2,4)}`
+    output = mins + '.' + secs
   }
 
   return output
@@ -241,13 +245,15 @@ const convertDecimalToSeconds = (value) => {
 
 const doConversion = () => {
 
-  dom.input_pace.innerHTML = convertToMins(slider.value * 1)
-  dom.output_pace.innerHTML = convertToMins(slider.value / 0.6213712)
+  let mi = 0.6213712
 
-  dom.output_time['5k'].innerHTML = convertToMins(slider.value * 5)
-  dom.output_time['10k'].innerHTML = convertToMins(slider.value * 10)
-  dom.output_time['half'].innerHTML = convertToMins(slider.value * 21.0975)
-  dom.output_time['marathon'].innerHTML = convertToMins(slider.value * 42.195)
+  dom.input_pace.innerHTML = convertToMins(slider.value * 1)
+  dom.output_pace.innerHTML = convertToMins(slider.value / 1.609344)
+
+  dom.output_time['5k'].innerHTML = convertToMins(slider.value * 5 * mi)
+  dom.output_time['10k'].innerHTML = convertToMins(slider.value * 10 * mi)
+  dom.output_time['half'].innerHTML = convertToMins(slider.value * 21.0975 * mi, 'half')
+  dom.output_time['marathon'].innerHTML = convertToMins(slider.value * 42.195 * mi)
 }
 doConversion()
 
@@ -258,34 +264,34 @@ dom.slider.addEventListener('input', ()=> {
   // changeColor(dom.slider)
 })
 
-let title_letters = dom.title.innerHTML
-
-title_letters = title_letters.split('')
-
-dom.title.innerHTML = ''
-
-const changeColor = (element) => {
-  let range = element.getAttribute('max') - element.getAttribute('min')
-  let min = element.getAttribute('min')
-  element.value
-  let percentage = ((parseFloat(element.value) - min) / range ) * 100
-  console.log(percentage)
-
-  let hsl_color = `hsl(${percentage*2.5}, 100%, 50%)`
-  element.style.backgroundColor = hsl_color
-  element.style.borderColor = hsl_color
-}
-// changeColor(dom.slider)
-
-let color_i = 0
-title_letters.forEach(letter => {
-  let element = document.createElement('span')
-  element.innerHTML = letter
-  dom.title.appendChild(element)
-  element.style.color = `hsl(${color_i}, 100%, 50%)`
-  color_i += 10
-  if (color_i === 360) {color_i = 0}
-})
+// let title_letters = dom.title.innerHTML
+//
+// title_letters = title_letters.split('')
+//
+// dom.title.innerHTML = ''
+//
+// const changeColor = (element) => {
+//   let range = element.getAttribute('max') - element.getAttribute('min')
+//   let min = element.getAttribute('min')
+//   element.value
+//   let percentage = ((parseFloat(element.value) - min) / range ) * 100
+//   console.log(percentage)
+//
+//   let hsl_color = `hsl(${percentage*2.5}, 100%, 50%)`
+//   element.style.backgroundColor = hsl_color
+//   element.style.borderColor = hsl_color
+// }
+// // changeColor(dom.slider)
+//
+// let color_i = 0
+// title_letters.forEach(letter => {
+//   let element = document.createElement('span')
+//   element.innerHTML = letter
+//   dom.title.appendChild(element)
+//   element.style.color = `hsl(${color_i}, 100%, 50%)`
+//   color_i += 10
+//   if (color_i === 360) {color_i = 0}
+// })
 
 
 

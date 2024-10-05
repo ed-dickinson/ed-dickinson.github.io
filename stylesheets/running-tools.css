@@ -1,0 +1,221 @@
+@font-face {
+  font-family: 'Inconsolata';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Inconsolata'), url('../public/fonts/inconsolata-v31-latin-regular.woff') format('woff');
+}
+
+
+body {
+  font-family: inconsolata;
+}
+body.yellow-red {
+  --color1: gold;
+  --color2: tomato;
+}
+body.green-blue {
+  --color1: springgreen;
+  --color2: dodgerblue;
+}
+body.pink-purple {
+  --color1: hotpink;
+  --color2: darkviolet;
+}
+
+
+
+h3 {
+  margin-top: 2em;
+}
+
+
+
+
+.color-anim {
+  animation: color-in 1s 1 linear forwards;
+}
+@keyframes color-in {
+  0% {color: var(--color1);}
+  50% {color: var(--color2);}
+  100% {color: black;}
+}
+
+
+
+
+#decoration-line {
+  overflow-x: hidden;
+}
+.intro #decoration-line {
+  display: inline-block;
+  width: 0%;
+  animation: uncover 1s 1.5s 1 ease-in-out forwards;
+} @keyframes uncover {
+from {width: 0%}
+  to {width: 100%}
+}
+
+#decoration-line div {
+  width: 300%;
+  height: 2px;
+  top: 0;
+
+  display: inline-block;
+  background: linear-gradient(to right, var(--color2), var(--color1), var(--color2), var(--color1));
+  animation: slide 5s infinite linear;
+} @keyframes slide {
+  from {transform: translateX(0%);}
+  to {transform: translateX(-66.67%);}
+}
+
+nav, main
+/* , footer */
+ {
+  margin: auto;
+  width: calc(100% - 14em);
+  max-width: 600px;
+}
+nav {
+  margin-top: 2.25em;
+}
+menu {
+  padding-left: 0.5em;
+  margin: 0;
+}
+
+h1, #divider {
+  animation: colorfade 2.5s -1s infinite linear alternate;
+}
+
+main {
+  padding: 0.5em;
+  padding-bottom: 2em;
+  margin-top: 1em;
+  box-sizing: border-box;
+  position: relative;
+}
+
+
+menu a {
+  text-decoration: none;
+  color: black;
+  position: relative;
+  margin-right: 0.5em;
+}
+
+menu a::after {
+  content: '•';
+  content: '^';
+  transform: rotate(180deg) scale(1.25);
+  position: absolute;
+  left: calc(50% - 0.5ch);
+  top: -100%;
+  animation: colorfade 2.5s -1s infinite linear alternate;
+  /* filter:drop-shadow(0px 1px 0px black); */
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+@keyframes colorfade {
+  from {color: var(--color1);}
+  to {color: var(--color2);}
+}
+/* @keyframes colorfadebg {
+  from {
+    background-color: var(--color1);
+    border-color: var(--color1);
+  }
+  to {
+    background-color: var(--color2);
+    border-color: var(--color2);
+  }
+}
+
+#slider {
+  animation: colorfadebg 2.5s -1s infinite linear alternate;
+} */
+
+menu a:hover::after {
+  opacity: 1;
+}
+menu a.current-page {
+  animation: colorfade 2.5s -1s infinite linear alternate;
+}
+
+main img.album-art {
+  float: left;
+  width: 34%;
+  margin-right: 1em;
+}
+
+
+
+
+
+
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+footer {
+  bottom: 1em;
+  right: 0.5em;
+  /* z-index: -99; */
+  position: absolute;
+  transform: rotate(270deg);
+  text-align: left;
+}
+footer a {
+  right: 0;
+  line-height: 1.25;
+}
+footer a {
+  display: block;
+  text-decoration: none;
+  color: black;
+  animation: colorfade 2.5s -1s infinite linear alternate;
+  position: relative;
+}
+footer a::after {
+  content: '<';
+  position: absolute;
+  color: black;
+  font-size: 0.9em;
+  bottom: 0;
+  right: -0.9em;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+footer a:hover::after {
+  opacity: 1;
+}
+
+@keyframes colorfade {
+  from {color: var(--color1);}
+  to {color: var(--color2);}
+}
+
+/* #see-also {
+  position: fixed;
+  right: 1em;
+  bottom: 1em;
+} */
+
+  /* MOBILE */
+
+@media only screen and (max-width: 600px) {
+  nav {
+    margin-top: 6em;
+  }
+  nav, main, footer {
+    width: calc(100% - 1em);
+  }
+  footer {
+    position: relative;
+    transform: none;
+    text-align: right;
+    margin-top: 2em;
+
+  }å
+}

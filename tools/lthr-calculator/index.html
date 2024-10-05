@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+  <head>
+  <title>LTHR</title>
+  <meta charset="UTF-8">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="author" content="Ed Dickinson">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="../../public/assets/running-icon.png">
+  <link rel="stylesheet" type="text/css" href="stylesheets/main.css"/>
+  <link rel="stylesheet" type="text/css" href="../../stylesheets/running-tools.css"/>
+  <style>
+
+
+  </style>
+
+  </head>
+  <body class="pink-purple">
+    <main>
+      <h1>Lactate Threshold Heart Rate</h1>
+      <div>
+        Joe Friel: “Do a 30-minute time trial all by yourself (no training partners and not in a race). Again, it should be done as if it was a race for the entire 30 minutes. But at 10 minutes into the test, click the lap button on your heart rate monitor. When done, look to see what your average heart rate was for the last 20 minutes.”
+      </div>
+      <div id="lthr-out-cont">
+        <output id="lthr-out"></output>
+      </div>
+
+      <div id="slider">
+        <input type="range" id="lthr" name="lthr" min="150" max="190" value="170" step="1" class="slider"/>
+      </div>
+
+      <div id="zones">
+        <div id="zone1" class="zone">
+          Zone 1
+        </div>
+        <div id="zone2" class="zone">
+          <output></output>
+          Zone 2
+        </div>
+        <div id="zone3" class="zone">
+          <output></output>
+          Zone 3
+        </div>
+        <div id="zone4" class="zone">
+          <output></output>
+          Zone 4
+        </div>
+        <div id="zone5" class="zone">
+          <output></output>
+          Zone 5
+        </div>
+      </div>
+      <div id="zone-info">
+        <div id="zone1-info">
+          <strong>1:</strong> Purely easy/recovery/regeneration, burning primarily fat, with little lactate production. Athletes can talk in full conversations and go almost all day with appropriate fueling/hydration and training.
+        </div>
+        <div id="zone2-info">
+          <strong>2:</strong> Easy to up to steady, capped on the top end by LT1, where the body begins to produce more lactate and ventilation rate increases. The top end of Zone 2 can be sustained for many hours, with variance based on athlete training.
+        </div>
+        <div id="zone3-info">
+          <strong>3:</strong> Moderate up to moderately hard, sometimes called tempo. Athletes can talk in sentences, and often it feels relaxed, sometimes sustainable for up to a few hours with plenty of fueling.
+          <p><i>
+            (Easy/hard models exclude this zone as a transition zone between easy and hard efforts. Instead they start zone 3 where this zone 4 starts, then split zone 5 into 4 & 5.)
+          </i></p>
+        </div>
+        <div id="zone4-info">
+          <strong>4:</strong> Moderately hard threshold training. <!--For our purposes, the top end of Zone four is capped by LT2, though some approaches have it occurring lower.--> Athletes can talk in clipped sentences and sustain the top-end effort for around 30-60 minutes, depending on the exact approach to setting the zone.
+        </div>
+        <div id="zone5-info">
+          <strong>5:</strong> Hard or fast intervals, often termed VO2 max or repetitions. This is a broad zone consisting of most intense intervals and harder pushes, and it’s broken down into more zones in some approaches.
+        </div>
+      </div>
+
+    </main>
+
+    <footer>
+      <div id="see-also">
+        <a href='https://ed-dickinson.net' >Home</a>
+        <a href="../pace-converter">Pace</a>
+        <a href="../101010-calculator">10-10-10</a>
+      </div>
+    </footer>
+
+    <script type='module' src='scripts/main.js'></script>
+    <script>
+
+    </script>
+
+  </body>
+</html>

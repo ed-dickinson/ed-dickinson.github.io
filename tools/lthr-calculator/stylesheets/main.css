@@ -1,0 +1,214 @@
+:root {
+  --moon: #fff7e2;
+  --color2: #ab6a8c;
+  --border-width: 3px;
+}
+
+@font-face {
+  font-family: pixel;
+  src: url('../assets/fonts/pixelmix.woff') format('woff');
+}
+
+html, button {
+  font-family: monospace;
+  text-align: center;
+}
+
+#title {
+  font-size: 1.5em;
+  margin: 1em 0 0.5em;
+  font-weight: bold;
+}
+#title span {
+  font-weight: bold;
+}
+
+h1 {
+  font-size: 1.6em !important;
+}
+
+/* input#lthr {
+  -webkit-appearance: slider-vertical;
+  writing-mode: bt-lr;
+} */
+
+#zones {
+  display: inline-block;
+  width: 10ch;
+  border: 2px solid black;
+  border-radius: 1.2ch;
+  text-align: center;
+  margin-top: 1em;
+  cursor: pointer;
+}
+
+
+#lthr-out-cont {
+  margin-top: 0.5em;
+  text-align: center;
+  font-size: 4ch;
+}
+
+.zone {
+  display: block;
+  /* line-height: 2; */
+  padding-top: 0.8ch;
+  height: 3.1ch;
+  position: relative;
+  /* border: 1px solid grey; */
+  color: white;
+}
+.zone:nth-of-type(1) {
+  /* background-color: rgb(0, 213, 255);
+  background-color: rgb(0, 255, 213); */
+
+  background-color: darksalmon;
+  background-color: indianred;
+  background-color: lightcoral;
+  background-color: lightpink;
+  border-radius: 1ch 1ch 0 0;
+}
+.zone:nth-of-type(2) {
+  /* background-color: rgb(0, 255, 43);
+  background-color: rgb(128, 255, 0); */
+  background-color: hotpink;
+}
+.zone:nth-of-type(3) {
+  /* background-color: rgb(255, 234, 0); */
+  background-color: MediumVioletRed;
+  /* background-color: orchid; */
+  /* background-color: plum; */
+}
+.zone:nth-of-type(4) {
+  /* background-color: rgb(255, 170, 0); */
+  /* background-color: darkmagenta; */
+  background-color: rebeccapurple;
+  background-color: purple;
+}
+.zone:nth-of-type(5) {
+  /* background-color: rgb(255, 0, 0); */
+  background-color: darkviolet;
+  border-radius: 0 0 1ch 1ch;
+}
+.zone:nth-of-type(1n+2)::after, .zone:nth-of-type(1n+2)::before {
+  content: '';
+  position: absolute;
+  width: calc(50% - 2ch);
+  display: inline-block;
+  border-bottom: 2px solid black;
+  top: -1px;
+  height: 0ch;
+}
+.zone:nth-of-type(1n+2)::after {
+  left: 0;
+}
+.zone:nth-of-type(1n+2)::before {
+  right: 0;
+}
+
+.zone output {
+  position: absolute;
+  left: 0;
+  top: -1ch;
+  width: 100%;
+  text-align: center;
+  color: black;
+  font-size: 2ch;
+  /* background-color: white; */
+}
+#zone-info {
+  text-align: center;
+}
+#zone-info > div {
+  /* display: inline-block; */
+  margin-top: 1em;
+  display: none;
+  max-width: 36em;
+}
+
+#slider {
+  margin-top: 1em;
+}
+
+/* The slider itself */
+.slider {
+  width: 32ch;
+  max-width: 26em;
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  height: 40px; /* Specified height */
+  background: black;
+  outline: none; /* Remove outline */
+  opacity: 1; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+  border: 2px solid black;
+  border-radius: 26px;
+  z-index: 1;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 40px; /* Set a specific slider handle width */
+  height: 40px; /* Slider handle height */
+  background: white; /* Green background */
+  border: 0px solid black;
+  cursor: pointer; /* Cursor on hover */
+  border-radius: 20px; z-index: 2;
+}
+
+.slider::-moz-range-thumb {
+  width: 40px; /* Set a specific slider handle width */
+  height: 40px; /* Slider handle height */
+  /* background: dodgerblue; */
+  cursor: pointer; /* Cursor on hover */
+  z-index: 2;
+  border-radius: 20px;
+  border: 0px solid black;
+}
+
+@media only screen and (min-width: 800px) {
+  .slider {
+    height: 20px; /* Specified height */
+    border-radius: 11px;
+    z-index: 1;
+  }
+  .slider::-moz-range-thumb {
+    width: 20px; /* Set a specific slider handle width */
+    height: 20px;
+  }
+  .slider::-webkit-slider-thumb {
+    width: 20px; /* Set a specific slider handle width */
+    height: 20px; /* Slider handle height */
+    border-radius: 10px;
+    border: 0px solid black;
+  }
+}
+
+/* footer {
+    position: fixed;
+    right: 1em;
+    bottom: 1em;
+} */
+
+/* a {
+  position: relative;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+} */
+/* a::after {
+  content: '';
+  height: 2px;
+  width: 100%;
+  position: absolute;
+  left: 0; top: 100%;
+  background: linear-gradient(to right, hsl(0, 100%, 50%), hsl(50, 100%, 50%), hsl(100, 100%, 50%), hsl(150, 100%, 50%), hsl(200, 100%, 50%), hsl(250, 100%, 50%));
+} */
