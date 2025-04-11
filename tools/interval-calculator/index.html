@@ -1,0 +1,290 @@
+<!doctype html>
+<html>
+<head>
+<title>Interval Calculator</title>
+<meta charset="UTF-8">
+<meta name="keywords" content="running, pace, converter, miles, km, min/mile, min/km, calculator, chart, time, run">
+<meta name="description" content="A tool to work out the length & distance of your intervals.">
+<meta name="author" content="Ed Dickinson">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="icon.png">
+<link rel="stylesheet" type="text/css" href="../../stylesheets/running-tools.css"/>
+<style>
+
+
+body {
+  text-align: center;
+}
+#input-pace, #output-pace {
+  display: inline-block;
+  text-align: left;
+
+}
+.big {
+  font-size: 1.5em;
+}
+#input-cont, #output-cont {
+  display: inline-block;
+}
+#input-cont {
+  margin-top: 2em;
+}
+#divider {
+  font-size: 3.5em;
+}
+table {
+  margin: auto;
+  padding-left: 3em;
+}
+tr td:nth-of-type(1) {
+  text-align: right;
+  padding-right: 1em;
+}
+tr td:nth-of-type(2) {
+  text-align: left;
+}
+/* .slidecontainer {
+  width: 150px;
+} */
+
+/* The slider itself */
+.slider {
+  width: 20em;
+  /* margin-top: 4em; */
+  /* max-width: 26em; */
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  height: 40px; /* Specified height */
+  background: black;
+  outline: none; /* Remove outline */
+  opacity: 1; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+  border: 1px solid black;
+  border-radius: 22px;
+  z-index: 1;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 40px; /* Set a specific slider handle width */
+  height: 40px; /* Slider handle height */
+  background: white; /* Green background */
+  border: 0px solid black;
+  cursor: pointer; /* Cursor on hover */
+  border-radius: 20px; z-index: 2;
+}
+
+.slider::-moz-range-thumb {
+  width: 40px; /* Set a specific slider handle width */
+  height: 40px; /* Slider handle height */
+  /* background: dodgerblue; */
+  cursor: pointer; /* Cursor on hover */
+  z-index: 2;
+  border-radius: 20px;
+  border: 0px solid black;
+}
+
+@media only screen and (min-width: 800px) {
+  .slider {
+    height: 20px; /* Specified height */
+    border-radius: 11px;
+    z-index: 1;
+  }
+  .slider::-moz-range-thumb {
+    width: 20px; /* Set a specific slider handle width */
+    height: 20px;
+  }
+  .slider::-webkit-slider-thumb {
+    width: 20px; /* Set a specific slider handle width */
+    height: 20px; /* Slider handle height */
+    border-radius: 10px;
+    border: 0px solid black;
+  }
+}
+
+
+
+
+
+
+</style>
+
+</head>
+<body class="pink-purple">
+
+  <h1>Interval Calculator</h1>
+
+<input id="input-intervals" class="slider" type="range" min="1" max="20" value="10" step="1" /><br />Intervals: <span id="output-intervals">#</span><br />
+<br />
+
+
+<input id="input-distance" class="slider" type="range" min="0" max="6" value="3" step="1" />
+<br />
+Distance: <span id="output-distance">#</span>mi<br />
+<br />
+
+<input id="input-float" class="slider" type="range" min="0" max="3" value="0" step="1" />
+<br />
+Float: <span id="output-float">#</span><br />
+<br />
+
+<input id="input-pace" class="slider" type="range" min="240" max="360" value="300" step="1" />
+<br />
+Est. pace: <span id="output-pace" class="big">#</span> min/mile<br />
+<br />
+
+<br />
+Total:
+<div id="output-total">#</div>
+
+
+
+
+<footer>
+  <div id="see-also">
+    <a href='https://ed-dickinson.net' >Home</a>
+    <a href="../pace-converter">Pace</a>
+    <a href="../week-planner">Week Plan</a>
+    <a href="../lthr-calculator">LTHR</a>
+  </div>
+</footer>
+
+
+
+<script>
+dom = {
+  input_int : document.querySelector('#input-intervals'),
+  output_int : document.querySelector('#output-intervals'),
+  input_distance : document.querySelector('#input-distance'),
+  output_distance : document.querySelector('#output-distance'),
+  input_float : document.querySelector('#input-float'),
+  output_float : document.querySelector('#output-float'),
+  input_pace : document.querySelector('#input-pace'),
+  output_pace : document.querySelector('#output-pace'),
+
+  output_total : document.querySelector('#output-total'),
+}
+
+const convertToMins = (s, option) => {
+
+  let mins = Math.floor(s / 60)
+  let secs = Math.round(s % 60)
+
+  if (secs < 10) {
+    secs = '0' + secs
+  }
+  let output
+  let time_limit = (option && option === 'half') ? 70 : 60
+  if (mins >= time_limit) {
+    let hours = Math.floor(mins / 60)
+    mins = mins % 60
+    if (mins < 10) {
+      mins = '0' + mins
+    }
+    output = hours + ':' + mins + '.' + secs
+  } else {
+    output = mins + '.' + secs
+  }
+
+  return output
+}
+
+const convertDecimalToSeconds = (value) => {
+  return Math.floor(value)
+}
+
+const floatCalc = (value) => {
+  return [0.25, 0.5, 1, 2][value]
+}
+
+const calcMins = (s, option) => {
+
+  let mins = Math.floor(s / 60)
+  let secs = Math.round(s % 60)
+
+  if (secs < 10) {
+    secs = '0' + secs
+  }
+  if (option) {
+    if (option === 'mins') {
+      return Math.round(mins)
+
+      // return mins > 60 ? `${Math.floor(60/mins)+1}hr ${mins%60}mins`: mins
+    }
+  }
+  return mins + ':' + secs
+}
+
+const doCalc = () => {
+
+  let mi = 0.6213712
+
+  dom.output_int.innerHTML = dom.input_int.value
+
+  let distance = [0.25, 0.5, 1, 2, 3, 4, 5][dom.input_distance.value]
+  dom.output_distance.innerHTML = distance
+
+  let float = floatCalc(dom.input_float.value)
+  dom.output_float.innerHTML = 'x' + float
+
+  let pace = dom.input_pace.value
+  dom.output_pace.innerHTML = calcMins(pace)
+
+  let float_pace = 600
+
+  let on_dist = dom.input_int.value * distance
+  let off_dist = dom.input_int.value * distance * float
+
+  let tm = calcMins((on_dist * pace) + (off_dist * float_pace), 'mins')
+
+
+  dom.output_total.innerHTML = `<span class="big">${(on_dist + off_dist)}</span>mi, in ~`
+
+  if (tm > 60) {
+    dom.output_total.innerHTML += `<span class="big">${Math.floor(60/tm)+1}</span>hr<span class="big">${Math.floor(tm%60)}</span>mins`
+  } else {
+    dom.output_total.innerHTML += `<span class="big">${tm}</span>mins`
+  }
+  // dom.input_pace.innerHTML = convertToMins(slider.value * 1)
+  // dom.output_pace.innerHTML = convertToMins(slider.value / 1.609344)
+  //
+  // dom.output_time['5k'].innerHTML = convertToMins(slider.value * 5 * mi)
+  // dom.output_time['10k'].innerHTML = convertToMins(slider.value * 10 * mi)
+  // dom.output_time['half'].innerHTML = convertToMins(slider.value * 21.0975 * mi, 'half')
+  // dom.output_time['marathon'].innerHTML = convertToMins(slider.value * 42.195 * mi)
+}
+doCalc()
+
+
+dom.input_int.addEventListener('input', ()=> {
+  event.preventDefault()
+  doCalc()
+})
+dom.input_distance.addEventListener('input', ()=> {
+  event.preventDefault()
+  doCalc()
+})
+dom.input_float.addEventListener('input', ()=> {
+  event.preventDefault()
+  doCalc()
+})
+dom.input_pace.addEventListener('input', ()=> {
+  event.preventDefault()
+  doCalc()
+})
+
+
+
+</script>
+
+
+</body>
+</html>

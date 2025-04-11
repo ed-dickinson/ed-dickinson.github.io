@@ -160,7 +160,7 @@ h3 {
   0%, 100% {color: black;}
 }
 
-#decoration-line {
+#decoration-line, .decoration-border {
   overflow-x: hidden;
 }
 .intro #decoration-line {
@@ -172,7 +172,7 @@ from {width: 0%}
   to {width: 100%}
 }
 
-#decoration-line div {
+#decoration-line div, .decoration-box .decoration-slider {
   width: 300%;
   height: 2px;
   top: 0;
@@ -183,6 +183,53 @@ from {width: 0%}
 } @keyframes slide {
   from {transform: translateX(0%);}
   to {transform: translateX(-66.67%);}
+}
+
+.decoration-box {
+  width: 100%;
+  display: inline-block;
+  position: relative;
+  margin-top: 1em;
+
+}
+.decoration-box p:last-of-type {
+  margin-bottom: 0;
+}
+.decoration-box + h3 {
+  margin-top: 3em;
+}
+.decoration-border {
+  width: calc(100% + 2em);
+  height: calc(100% + 0.5em);
+  position: absolute;
+  left: calc(-1em - 2px);
+  top: 0.5rem;
+  background-color: grey;
+  overflow: hidden;
+  z-index: -1;
+}
+.decoration-border .decoration-slider {
+  width: 300%;
+  height: 100%;
+}
+.decoration-border::after {
+  content: '';
+  background-color: white;
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  height: calc(100% - 4px);
+  width: calc(100% - 4px);
+}
+.decoration-box h3 {
+  margin-top: 0;
+  /* top: -0.5rem; */
+  background-color: white;
+  display: inline-block;
+  left: -1rem;
+  position: relative;
+  padding: 0 1em;
+  margin-bottom: 0;
 }
 
 nav, main

@@ -116,6 +116,10 @@ menu a::after {
   transition: opacity 0.25s;
 }
 
+.colorfade-animated {
+  animation: colorfade 2.5s -1s infinite linear alternate;
+}
+
 @keyframes colorfade {
   from {color: var(--color1);}
   to {color: var(--color2);}
@@ -160,7 +164,7 @@ html {
 }
 footer {
   bottom: 1em;
-  right: 0.5em;
+  right: 1em;
   /* z-index: -99; */
   position: absolute;
   transform: rotate(270deg);
@@ -217,5 +221,69 @@ footer a:hover::after {
     text-align: right;
     margin-top: 2em;
 
+  }
+}
+
+
+
+
+/* SLIDER */
+
+/* The slider itself */
+input[type=range] {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  height: 40px; /* Specified height */
+  background: black;
+  outline: none; /* Remove outline */
+  opacity: 1; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+  border: 1px solid black;
+  border-radius: 22px;
+  z-index: 1;
+}
+
+/* Mouse-over effects */
+input[type=range]:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 40px; /* Set a specific slider handle width */
+  height: 40px; /* Slider handle height */
+  background: white; /* Green background */
+  border: 0px solid black;
+  cursor: pointer; /* Cursor on hover */
+  border-radius: 20px; z-index: 2;
+}
+
+input[type=range]::-moz-range-thumb {
+  width: 40px; /* Set a specific slider handle width */
+  height: 40px; /* Slider handle height */
+  cursor: pointer; /* Cursor on hover */
+  z-index: 2;
+  border-radius: 20px;
+  border: 0px solid black;
+}
+
+@media only screen and (min-width: 800px) {
+  input[type=range] {
+    height: 20px; /* Specified height */
+    border-radius: 11px;
+    z-index: 1;
+  }
+  input[type=range]::-moz-range-thumb {
+    width: 20px; /* Set a specific slider handle width */
+    height: 20px;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    width: 20px; /* Set a specific slider handle width */
+    height: 20px; /* Slider handle height */
+    border-radius: 10px;
+    border: 0px solid black;
   }
 }

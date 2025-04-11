@@ -133,7 +133,6 @@ a::after {
   <h1>Running Pace Converter</h1>
 
 
-
 <span id="input-cont">
   <div id="input-pace">
 
@@ -153,40 +152,9 @@ a::after {
 </span>
 
 <div style="margin-top: 1em;">
-  <table>
-    <tr>
-      <td id="output-5k">
+  <div id="output-races">
 
-      </td>
-      <td>
-        5k
-      </td>
-    </tr>
-    <tr>
-      <td id="output-10k">
-
-      </td>
-      <td>
-        10k
-      </td>
-    </tr>
-    <tr>
-      <td id="output-half">
-
-      </td>
-      <td>
-        half marathon
-      </td>
-    </tr>
-    <tr>
-      <td id="output-marathon">
-
-      </td>
-      <td>
-        marathon
-      </td>
-    </tr>
-  </table>
+  </div>
 
   <input id="slider" type="range" min="240" max="600" value="420" step="1" />
 </div>
@@ -194,8 +162,9 @@ a::after {
 <footer>
   <div id="see-also">
     <a href='https://ed-dickinson.net' >Home</a>
+    <a href="../week-planner">Week Plan</a>
+    <a href="../interval-calculator">Intervals</a>
     <a href="../lthr-calculator">LTHR</a>
-    <a href="../101010-calculator">10-10-10</a>
   </div>
 </footer>
 
@@ -206,12 +175,7 @@ dom = {
   slider : document.querySelector('#slider'),
   input_pace : document.querySelector('#input-pace'),
   output_pace : document.querySelector('#output-pace'),
-  output_time : {
-    '5k' : document.querySelector('#output-5k'),
-    '10k' : document.querySelector('#output-10k'),
-    half : document.querySelector('#output-half'),
-    marathon : document.querySelector('#output-marathon'),
-  },
+  output_races : document.querySelector('#output-races'),
   title : document.querySelector('h1'),
 }
 
@@ -250,10 +214,19 @@ const doConversion = () => {
   dom.input_pace.innerHTML = convertToMins(slider.value * 1)
   dom.output_pace.innerHTML = convertToMins(slider.value / 1.609344)
 
-  dom.output_time['5k'].innerHTML = convertToMins(slider.value * 5 * mi)
-  dom.output_time['10k'].innerHTML = convertToMins(slider.value * 10 * mi)
-  dom.output_time['half'].innerHTML = convertToMins(slider.value * 21.0975 * mi, 'half')
-  dom.output_time['marathon'].innerHTML = convertToMins(slider.value * 42.195 * mi)
+  dom.output_races.innerHTML = `<table><tr><td>
+        ${convertToMins(slider.value * 5 * mi)}
+      </td><td>5k</td></tr>
+    <tr><td>
+        ${convertToMins(slider.value * 10 * mi)}
+      </td><td>10k</td></tr>
+    <tr><td>
+        ${convertToMins(slider.value * 21.0975 * mi)}
+      </td><td>half marathon</td></tr>
+    <tr><td>
+        ${convertToMins(slider.value * 42.195 * mi)}
+      </td><td>marathon</td></tr>
+  </table>`
 }
 doConversion()
 
@@ -296,6 +269,8 @@ dom.slider.addEventListener('input', ()=> {
 
 
 </script>
+
+<script type='module' src='../../scripts/running-tools/pace-converter.js'></script>
 
 
 </body>

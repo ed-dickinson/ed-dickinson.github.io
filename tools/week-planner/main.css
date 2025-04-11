@@ -1,0 +1,125 @@
+:root {
+  --color1: dodgerblue;
+}
+
+
+html, button {
+  font-family: 'Inconsolata', monospace;
+}
+#title {
+  text-align: center;
+  margin: 2em 0 1em;
+}
+#pre-title {
+  color: var(--color1);
+  font-size: 2em;
+  font-weight: bold;
+}
+#main-title {
+  font-size: 2em;
+  font-style: italic;
+  /* font-weight: bold; */
+}
+
+main {
+  text-align: center;
+}
+
+/* #week-planner {
+  border: 2px solid var(--color1);
+  display: inline-block;
+  margin: auto;
+  padding: 0px 2px;
+}
+.total {
+  text-align: center;
+  padding: 0px 0px 5px;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: var(--color1);
+}
+
+.day {
+  border: 2px solid white;
+  display: inline-block;
+  width: 24px;
+  position: relative;
+}
+.day button {
+  margin: 2px 0px;
+  width: 100%;
+  color: var(--color1);
+  background-color: white;
+  cursor: pointer;
+  border-left: 2px solid lightblue;
+  border-top: 2px solid lightblue;
+  border-right: 2px solid dodgerblue;
+  border-bottom: 2px solid dodgerblue;
+}
+.day button:active {
+  border-left: 2px solid dodgerblue;
+  border-top: 2px solid dodgerblue;
+  border-right: 2px solid lightblue;
+  border-bottom: 2px solid lightblue;
+}
+.day .counter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform:translate(-50%, -50%);
+}
+
+.graph {
+  height: 100px;
+  position: relative;
+  margin: 2px 0px;
+}
+
+.graph-bar {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: var(--color1);
+} */
+
+#week-planner {
+  --color: dodgerblue;
+  border-color: var(--color);
+
+  display: inline-block;
+}
+
+#week-planner > div.day {
+  padding: 1px;
+  height: 25px;
+}
+#week-planner > div.day span {
+  position: relative;
+  display: inline-block;
+  top: -8px;
+}
+/* #week-planner .total {
+  text-align: right;
+  width: 30px;
+  font-size: 1.8em;
+  position: relative;
+  left: calc(100% - 32px);
+  top: 2px;
+  color: var(--color);
+} */
+#week-planner .total {
+  text-align: center;
+  font-size: 2em;
+  position: relative;
+  top: 5px;
+  color: var(--color);
+}
+#week-planner .label {
+  text-align: left;
+  width: 16px;
+}
+#week-planner .output {
+  text-align: left;
+  width: 20px;
+  left: 8px;
+}

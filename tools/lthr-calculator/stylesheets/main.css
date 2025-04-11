@@ -49,6 +49,14 @@ h1 {
   font-size: 4ch;
 }
 
+button {
+  border: 2px solid black;
+  border-radius: 1.2ch;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  margin-top: 0.75em;
+}
+
 .zone {
   display: block;
   /* line-height: 2; */
@@ -66,28 +74,33 @@ h1 {
   background-color: indianred;
   background-color: lightcoral;
   background-color: lightpink;
+  background-color: rgba(255, 182, 193, 0.5);
   border-radius: 1ch 1ch 0 0;
 }
 .zone:nth-of-type(2) {
   /* background-color: rgb(0, 255, 43);
   background-color: rgb(128, 255, 0); */
   background-color: hotpink;
+  background-color: rgba(255, 105, 180, 0.5);
 }
 .zone:nth-of-type(3) {
   /* background-color: rgb(255, 234, 0); */
   background-color: MediumVioletRed;
   /* background-color: orchid; */
   /* background-color: plum; */
+  background-color:	rgba(199, 21, 133, 0.5);
 }
 .zone:nth-of-type(4) {
   /* background-color: rgb(255, 170, 0); */
   /* background-color: darkmagenta; */
   background-color: rebeccapurple;
   background-color: purple;
+  background-color: rgba(128, 0, 128, 0.5);
 }
 .zone:nth-of-type(5) {
   /* background-color: rgb(255, 0, 0); */
   background-color: darkviolet;
+  background-color: rgba(148, 0, 211, 0.5);
   border-radius: 0 0 1ch 1ch;
 }
 .zone:nth-of-type(1n+2)::after, .zone:nth-of-type(1n+2)::before {
@@ -110,12 +123,27 @@ h1 {
   position: absolute;
   left: 0;
   top: -1ch;
-  width: 100%;
+  height: 2ch;
+  /* width: 2ch; */
+  left: calc(50% - 1.5ch);
   text-align: center;
   color: black;
   font-size: 2ch;
+  /* background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100% 100%);
+  z-index: 1; */
   /* background-color: white; */
+  /* border-radius: 0.5ch; */
+  /* border: 2px solid white; */
 }
+/* .zone output::before {
+  position: absolute;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  content: ' ';
+  background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 50% 100%);
+  z-index: 0;
+} */
 #zone-info {
   text-align: center;
 }

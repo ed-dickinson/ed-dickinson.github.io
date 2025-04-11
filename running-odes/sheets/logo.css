@@ -1,0 +1,156 @@
+#loader {
+  font-size: 2em;
+  width: 0;
+  height: 0;
+}
+#loader .text {
+  font-size: 2em;
+  position: absolute;
+}
+
+body {
+  font-family: inconsolata;
+}
+body.yellow-red {
+  --color1: gold;
+  --color2: tomato;
+}
+body.green-blue {
+  --color1: springgreen;
+  --color2: dodgerblue;
+}
+body.pink-purple {
+  --color1: hotpink;
+  --color2: darkviolet;
+}
+
+
+
+h3 {
+  margin-top: 2em;
+}
+
+#circular > span {
+  display: inline-block;
+  width: 1em;
+  height: 3.3em;
+  text-align: center;
+  left: -0.5em;
+  position: absolute;
+  /* background-color: red; */
+  font-family: inconsolata;
+  font-weight: 100;
+  font-size: 0.75em;
+
+}
+#circular > span > span > span, #sun {
+  opacity: 0;
+  /* color: white; */
+}
+#circular > span > span > span.appear, #sun.appear {
+  transition: opacity 0.25s, color 0.25s, transform 0.25s;
+  opacity: 1;
+  color: black;
+}
+#circular > span > span {
+  font-size: 1em;
+  left: -0.5em;
+  display: inline-block;
+}
+#circular {
+  left: 1.3em;
+  position: absolute;
+  color: white;
+}
+#circular.pre-load {
+
+}
+/* #circular > span > span > span {
+  display: inline-block;
+} */
+#sun {
+  top: 0.7em; left: 0.8em;
+  font-size: 1em;
+  position: absolute;
+  transform: scale(1.0);
+  text-align: center;
+  width: 1em;
+}
+#sun, #sun span {
+  transition: transform 0.5s;
+}
+#sun.safari {
+  transform: scale(1.4);
+}
+#loader:hover #sun.safari {
+  transform: scale(1.5);
+}
+
+#loader {
+  width: 2.5em;
+  height: 2.5em;
+  position: absolute;
+  left: 0.45em;
+  /* right: 0.45em; */
+  top: 0.5em;
+  border-radius: 50%;
+  transform: rotate(-35deg);
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none;
+}
+#loader:hover {
+  cursor: pointer;
+}
+#loader:hover #sun {
+  transform: scale(1.05);
+}
+/* #loader:hover #circular > span > span {
+  animation: shake 2s 0s infinite ease-in-out;
+} */
+#loader:hover #circular > span > span  {
+  animation: shake 2s 0s infinite ease-in-out;
+}
+@keyframes shake {
+  0%, 20%, 40%, 100% {transform: scaleY(-1) rotate(0deg);}
+  5% {transform: scaleY(-1) rotate(6deg);}
+  15% {transform: scaleY(-1) rotate(-12deg);}
+  25% {transform: scaleY(-1) rotate(12deg);}
+  35% {transform: scaleY(-1) rotate(-6deg);}
+}
+
+.color-anim {
+  animation: color-in 1s 1 linear forwards;
+}
+@keyframes color-in {
+  0% {color: var(--color1);}
+  50% {color: var(--color2);}
+  100% {color: black;}
+}
+
+#sun span.pulse-anim {
+  animation: pulse 0.5s 2 ease-in-out alternate forwards;
+  /* color: black; */
+  display: inline-block;
+}
+@keyframes pulse {
+  from {transform: scale(1);}
+  to {transform: scale(1.05);}
+}
+
+#loader.spin-anim {
+  animation: spin 1s 1 ease-in-out forwards;
+}
+#loader.spin-anim #circular span.appear, #loader.spin-anim #sun span {
+  animation: color-spin 1s 1 linear;
+}
+@keyframes spin {
+  from {transform:  rotate(-35deg);}
+  /* to {transform: rotate(1045deg);} */
+  to {transform: rotate(685deg);}
+}
+@keyframes color-spin {
+  50% {color: var(--color1);}
+  25%, 75% {color: var(--color2);}
+  0%, 100% {color: black;}
+}

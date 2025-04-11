@@ -1,0 +1,318 @@
+@font-face {
+  font-family: 'Inconsolata';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Inconsolata'), url('/../public/fonts/inconsolata-v31-latin-regular.woff') format('woff');
+}
+
+header {
+  position: fixed;
+  top: 0.45rem;
+}
+
+body {
+  font-family: 'Inconsolata', inconsolata, monospace;
+  font-size: 0.9;
+}
+
+#contents {
+  /* font-size: 0.8rem; */
+}
+
+#main-container {
+  max-width: 100%;
+  /* background-color: beige; */
+  transition: max-width 0.5s;
+}
+
+main {
+  margin: auto;
+  max-width: 600px;
+
+  /* max-width: calc(100% - 52ch - 4rem); */
+  transition: max-width 0.5s;
+  /* font-size: 0.8rem; */
+  /* background-color: beige; */
+}
+
+.contents-open #main-container {
+  max-width: calc(100% - 42ch + 12rem);
+  /* margin-right: 1em; */
+
+}
+
+#contents-container {
+  /* opacity: 0.5; */
+}
+
+
+@media only screen and (max-width: 970px) {
+
+}
+
+#contents-opener,  #contents-closer {
+  position: fixed;
+  color: #fc5200;
+  cursor: pointer;
+  height: 20px;
+  width: 5ch;
+  text-align: right;
+  top: 3.5rem;
+  right: 2rem;
+  z-index: 20;
+  transform: rotate(270deg);
+  display: inline-block;
+  /* background-color: red; */
+  transition: opacity 0.5s;
+  /* overflow-y: visible; */
+}
+#contents-opener {
+  opacity: 1;
+}
+.contents-open #contents-opener  {
+  opacity: 0;
+}
+
+#contents-closer {
+  opacity: 0;
+}
+.contents-open #contents-closer {
+  opacity: 1;
+}
+
+#contents-container {
+  position: fixed;
+  max-height: 8ch;
+  height: 8ch;
+  width: 0;
+  top: 2rem;
+  background-color: white;
+  z-index: 10;
+  transition: 0.5s;
+  right: 2rem;
+  border: 2px solid #fc5200;
+  overflow-x: hidden;
+  /* overflow-y: visible; */
+  border-left-width: 0;
+  box-sizing: border-box;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;
+}
+#contents-container::-webkit-scrollbar {
+  display: none;
+}
+.contents-open #contents-container {
+  max-height: calc(100vh - 3rem);
+  height: calc(100vh - 3rem);
+  width: 52ch;
+  border-left-width: 2px;
+}
+
+#contents {
+  overflow-x: hidden;
+  box-sizing: content-box;
+  margin: 1rem;
+  max-width: 0;
+}
+.contents-open #contents {
+  top: 0em;
+  color: #fc5200;
+  line-height: 1.4;
+  z-index: 10;
+  left: 0;
+  max-width: 100%;
+}
+
+#contents > * {
+  cursor: pointer;
+  text-overflow: ellipsis ellipsis;
+}
+#contents > *:hover {
+  opacity: 0.5;
+}
+
+#contents .current {
+  color: black;
+}
+
+
+
+
+
+
+#title {
+  text-align: left;
+  font-size: 2em;
+  margin: 3rem 1rem 1rem;
+  height: 4rem;
+  background: url('../assets/Running Odes.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  color: transparent;
+}
+#subtitle {
+  text-align: left;
+  margin: 1em;
+  box-sizing: border-box;
+}
+
+main div#divider {
+  width: 100%;
+  height: 2px;
+  /* left: 0; */
+  position: relative;
+  background-color: #fc5200;
+  /* display: inline-block; */
+  /* overflow: visible; */
+}
+
+#poems {
+  text-align: left;
+  margin-bottom: 3em;
+  z-index: 1;
+  position: relative;
+  margin: 1rem auto 3em;
+  padding: 1rem;
+}
+
+.poem {
+  text-align: left;
+  margin: 2em auto;
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  min-width: 51%;
+  scroll-margin: 4em;
+  z-index: 1;
+}
+
+.poem .title {
+  margin-bottom: 1em;
+  /* text-decoration: underline; */
+  padding-bottom: 0.5em;
+  border-bottom: 2px solid #fc5200;
+  padding: 0 0.5em 0.5em;
+  left: -0.5em;
+  position: relative;
+}
+.poem .title, .distance, .date {
+  display: inline-block;
+  text-align: right;
+}
+.poem .body {
+  white-space: pre;
+  line-height: 1.4;
+}
+.foot {
+  text-align: right;
+  margin-top: 1em;
+}
+.poem .distance::before {
+  content: '';
+}
+.poem .distance::after {
+  content: ' - ';
+}
+
+/* .poem::after {
+  content: '* * *';
+  text-align: center;
+  display: block;
+  width: 100%;
+  margin: 4em 0 0;
+  color: #fc5200;
+} */
+/* ꩜ */
+.poem-divider {
+  color: #fc5200;
+  text-align: center;
+  margin: 2em 0;
+}
+
+.poem:has(+hr)::after, .poem:last-of-type::after {
+  display: none;
+  background-color: red;
+}
+
+hr {
+  border-top: 2px solid #fc5200;
+  height: 0px;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 0px solid #fc5200;
+  margin: 4em -1rem;
+
+}
+
+
+#blurb {
+  border-top: 2px solid #fc5200;
+  box-sizing: border-box;
+  padding: 1em;
+}
+
+footer {
+  /* max-width: 60ch; */
+  margin: 2em auto 4em;
+  text-align: right;
+  box-sizing: border-box;
+}
+/* footer .box {
+  border: 2px solid #fc5200;
+  border-top: 0;
+  padding: 0.75em 1em 1em;
+  display: inline-block;
+} */
+a {
+  color: dodgerblue;
+  border-bottom: 2px solid dodgerblue;
+  text-decoration: none;
+}
+a:hover {
+  opacity: 0.5;
+}
+a:visited {
+  color: darkmagenta;
+  border-color: darkmagenta;
+}
+footer a:visited {
+  color: #fc5200;
+  border-color: #fc5200;
+}
+/* svg path {
+  stroke: dodgerblue;
+  stroke-width: 10px;
+}
+svg {
+  max-width: 100%;
+  max-width: 300px;
+  height: 300px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate3d(0px, 0px, 0px) !important;
+} */
+
+@media only screen and (max-width: 500px) {
+  main {
+
+  }
+  #poems > * {
+
+  }
+  #title {
+    margin-top: 4em;
+  }
+  .poem .body {
+    overflow-x: scroll;
+    position:
+  }
+  #contents-container {
+    top: 1em;
+    right: 1em;
+  }
+  #contents-opener,  #contents-closer {
+    top: 2.5em;
+    right: 1em;
+  }
+}

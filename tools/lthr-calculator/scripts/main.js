@@ -4,25 +4,33 @@ console.log('main.js')
 
 dom.function()
 
+let method = 'roche'
+
 const $ = sel => document.querySelector(sel)
 // const $$ = sel => document.querySelectorAll(sel)
 
 const changeLTHR = () => {
-  console.log($('#lthr').value)
+
   let lthr = $('#lthr').value
   $('#lthr-out').textContent = lthr
 
   // david roche
-  $('#zone2 output').textContent = (lthr * 0.8).toFixed(0)
-  $('#zone3 output').textContent = (lthr * 0.88).toFixed(0)
-  $('#zone4 output').textContent = (lthr * 0.94).toFixed(0)
-  $('#zone5 output').textContent = (lthr * 1).toFixed(0)
+  if (method === 'roche') {
+    $('#zone2 output').textContent = (lthr * 0.8).toFixed(0)
+    $('#zone3 output').textContent = (lthr * 0.88).toFixed(0)
+    $('#zone4 output').textContent = (lthr * 0.94).toFixed(0)
+    $('#zone5 output').textContent = (lthr * 1).toFixed(0)
+  } else {
+      // joe friel
+    $('#zone2 output').textContent = (lthr * 0.85).toFixed(0)
+    $('#zone3 output').textContent = (lthr * 0.90).toFixed(0)
+    $('#zone4 output').textContent = (lthr * 0.95).toFixed(0)
+    $('#zone5 output').textContent = (lthr * 1).toFixed(0)
+  }
 
-  // joe friel
-  // $('#zone2 output').textContent = (lthr * 0.85).toFixed(0)
-  // $('#zone3 output').textContent = (lthr * 0.90).toFixed(0)
-  // $('#zone4 output').textContent = (lthr * 0.95).toFixed(0)
-  // $('#zone5 output').textContent = (lthr * 1).toFixed(0)
+
+
+  //
 
   // garmin
   // $('#zone2 output').textContent = (lthr * 0.79).toFixed(0)
@@ -53,3 +61,14 @@ for (let i = 0; i < 5; i++) {
     showZoneInfo(i)
   })
 }
+
+$('#method button').addEventListener('click', () => {
+  if (method === 'roche') {
+    method = 'friel'
+    $('#method button').textContent = 'Friel'
+  } else {
+    method = 'roche'
+    $('#method button').textContent = 'Roche'
+  }
+  changeLTHR()
+})
