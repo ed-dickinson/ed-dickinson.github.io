@@ -135,4 +135,7 @@ main {
     display: inline-block;
     top: -18px;
   }
+  .day input {
+    width: 220px;
+  }
 }
