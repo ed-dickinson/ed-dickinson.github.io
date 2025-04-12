@@ -222,6 +222,9 @@ footer a:hover::after {
     margin-top: 2em;
 
   }
+  h1, #title {
+    margin-top: 1em;
+  }
 }
 
 

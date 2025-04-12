@@ -43,6 +43,10 @@ tr td:nth-of-type(1) {
 tr td:nth-of-type(2) {
   text-align: left;
 }
+
+.output {
+  margin-bottom: 1em;
+}
 /* .slidecontainer {
   width: 150px;
 } */
@@ -110,6 +114,22 @@ tr td:nth-of-type(2) {
   }
 }
 
+/* mobile */
+@media only screen and (max-width: 600px) {
+
+  input {
+    position: relative;
+    top: 20px;
+  }
+  input + .output {
+    position: relative;
+    top: -50px;
+    height: 1em;
+  }
+  input + .output .big {
+    font-size: 1em;
+  }
+}
 
 
 
@@ -122,26 +142,27 @@ tr td:nth-of-type(2) {
 
   <h1>Interval Calculator</h1>
 
-<input id="input-intervals" class="slider" type="range" min="1" max="20" value="10" step="1" /><br />Intervals: <span id="output-intervals">#</span><br />
-<br />
+<input id="input-intervals" class="slider" type="range" min="1" max="20" value="10" step="1" /><div class="output">
+  Intervals: <span id="output-intervals">#</span>
+</div>
 
 
 <input id="input-distance" class="slider" type="range" min="0" max="6" value="3" step="1" />
-<br />
-Distance: <span id="output-distance">#</span>mi<br />
-<br />
+<div class="output">
+Distance: <span id="output-distance">#</span>mi
+</div>
 
 <input id="input-float" class="slider" type="range" min="0" max="3" value="0" step="1" />
-<br />
-Float: <span id="output-float">#</span><br />
-<br />
+<div class="output">
+Float: <span id="output-float">#</span>
+</div>
 
 <input id="input-pace" class="slider" type="range" min="240" max="360" value="300" step="1" />
-<br />
-Est. pace: <span id="output-pace" class="big">#</span> min/mile<br />
-<br />
+<div class="output">
+Est. pace: <span id="output-pace" class="big">#</span> min/mile
+</div>
 
-<br />
+
 Total:
 <div id="output-total">#</div>
 
@@ -253,13 +274,7 @@ const doCalc = () => {
   } else {
     dom.output_total.innerHTML += `<span class="big">${tm}</span>mins`
   }
-  // dom.input_pace.innerHTML = convertToMins(slider.value * 1)
-  // dom.output_pace.innerHTML = convertToMins(slider.value / 1.609344)
-  //
-  // dom.output_time['5k'].innerHTML = convertToMins(slider.value * 5 * mi)
-  // dom.output_time['10k'].innerHTML = convertToMins(slider.value * 10 * mi)
-  // dom.output_time['half'].innerHTML = convertToMins(slider.value * 21.0975 * mi, 'half')
-  // dom.output_time['marathon'].innerHTML = convertToMins(slider.value * 42.195 * mi)
+
 }
 doCalc()
 

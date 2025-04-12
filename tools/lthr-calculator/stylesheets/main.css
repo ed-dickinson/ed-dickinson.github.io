@@ -55,6 +55,7 @@ button {
   padding: 0.5em 1em;
   cursor: pointer;
   margin-top: 0.75em;
+  color: black;
 }
 
 .zone {
@@ -103,10 +104,11 @@ button {
   background-color: rgba(148, 0, 211, 0.5);
   border-radius: 0 0 1ch 1ch;
 }
+/* lines */
 .zone:nth-of-type(1n+2)::after, .zone:nth-of-type(1n+2)::before {
   content: '';
   position: absolute;
-  width: calc(50% - 2ch);
+  width: calc(50% - 2.2ch);
   display: inline-block;
   border-bottom: 2px solid black;
   top: -1px;
@@ -124,16 +126,11 @@ button {
   left: 0;
   top: -1ch;
   height: 2ch;
-  /* width: 2ch; */
-  left: calc(50% - 1.5ch);
+  left: calc(50% - 2ch);
   text-align: center;
   color: black;
-  font-size: 2ch;
-  /* background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100% 100%);
-  z-index: 1; */
-  /* background-color: white; */
-  /* border-radius: 0.5ch; */
-  /* border: 2px solid white; */
+  font-size: 2.5ch;
+  width: 4ch;
 }
 /* .zone output::before {
   position: absolute;
@@ -218,6 +215,30 @@ button {
     height: 20px; /* Slider handle height */
     border-radius: 10px;
     border: 0px solid black;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  button {
+    font-size: 1.25em;
+  }
+  .zone:nth-of-type(1n+2)::after, .zone:nth-of-type(1n+2)::before {
+    content: '';
+    position: absolute;
+    width: calc(50% - 2.5ch);
+    display: inline-block;
+    border-bottom: 2px solid black;
+    top: -1px;
+    height: 0ch;
+  }
+  .zone output {
+    font-size: 3ch;
+    width: 5ch;
+    left: calc(50% - 2.6ch);
+  }
+  .zone {
+    height: 3.4ch;
+    padding-top: 1.2ch;
   }
 }
 

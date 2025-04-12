@@ -37,10 +37,6 @@ const sumTotal = () => {
 }
 
 
-const changeDay = () => {
-
-}
-
 const dom = () => {
   let i = 0
   let container = $('#week-planner')
@@ -58,7 +54,7 @@ const dom = () => {
     container.appendChild(row)
     row.appendChild(day)
     row.appendChild(input)
-    let display = el('span', {class: 'output', content: mileage[i]})
+    let display = el('span', {class: 'output', content: mileage[i] || '0'})
     row.appendChild(display)
 
     input.addEventListener('input', () => {
