@@ -28,22 +28,19 @@ body {
 main {
   margin: auto;
   max-width: 600px;
-
-  /* max-width: calc(100% - 52ch - 4rem); */
   transition: max-width 0.5s;
-  /* font-size: 0.8rem; */
-  /* background-color: beige; */
 }
+
+/*
+    when OPEN
+      body.contents-open
+*/
 
 .contents-open #main-container {
   max-width: calc(100% - 42ch + 12rem);
-  /* margin-right: 1em; */
-
+  max-width: calc(100% - 52ch + 2rem);
 }
 
-#contents-container {
-  /* opacity: 0.5; */
-}
 
 
 @media only screen and (max-width: 970px) {
@@ -103,7 +100,7 @@ main {
 }
 .contents-open #contents-container {
   max-height: calc(100vh - 3rem);
-  height: calc(100vh - 3rem);
+  height: calc(100vh - 4rem);
   width: 52ch;
   border-left-width: 2px;
 }
@@ -135,7 +132,10 @@ main {
   color: black;
 }
 
-
+#contents > div {
+  line-height: 1;
+  margin-bottom: 0.4em;
+}
 
 
 
@@ -257,12 +257,7 @@ footer {
   text-align: right;
   box-sizing: border-box;
 }
-/* footer .box {
-  border: 2px solid #fc5200;
-  border-top: 0;
-  padding: 0.75em 1em 1em;
-  display: inline-block;
-} */
+
 a {
   color: dodgerblue;
   border-bottom: 2px solid dodgerblue;
@@ -279,19 +274,7 @@ footer a:visited {
   color: #fc5200;
   border-color: #fc5200;
 }
-/* svg path {
-  stroke: dodgerblue;
-  stroke-width: 10px;
-}
-svg {
-  max-width: 100%;
-  max-width: 300px;
-  height: 300px;
-  position: absolute;
-  top: 0;
-  right: 0;
-  transform: translate3d(0px, 0px, 0px) !important;
-} */
+
 
 @media only screen and (max-width: 500px) {
   main {
@@ -314,5 +297,64 @@ svg {
   #contents-opener,  #contents-closer {
     top: 2.5em;
     right: 1em;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    margin: 0px;
+  }
+  header {
+    position: absolute;
+    width: 100%;
+  }
+  header #loader {
+    /* left: calc(100% - 3.5em); */
+    left: calc(50% - 1.25em);
+    top: 2em;
+    top: 1.75em;
+  }
+  #title {
+    margin-bottom: 1em;
+    margin-top: 5.5em;
+    /* margin-top: 6em; */
+  }
+  #contents-container {
+    /* position: relative; */
+    width: 2.5em;
+    width: 4em;
+    height: 2.5em;
+    right: 0;
+    top: 1em;
+    /* left: 0; */
+    top: 0;
+    border-left-width: 2px;
+  }
+  #main-container {
+    width: 100%;
+    max-width: 100%;
+
+  }
+  .contents-open #contents-container {
+    max-height: 100vh;
+    height: 100vh;
+    width: 100%;
+  }
+  .contents-open #main-container {
+
+    max-width: 100%;
+  }
+  .poem .title {
+    left: calc(-0.5em - 8px);
+    padding-left: calc(0.5em + 8px);
+    padding-right: calc(0.5em + 8px);
+  }
+  #contents-opener, #contents-closer {
+    /* position: relative; */
+    top: 2.5em;
+    top: 0.7em;
+    /* left: 0; */
+    right: 0.75em;
+    transform: rotate(0deg);
   }
 }

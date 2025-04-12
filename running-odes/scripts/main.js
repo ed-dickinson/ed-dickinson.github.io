@@ -14,7 +14,6 @@ $$('.distance').forEach(d => {
 })
 
 let contents = $('#contents')
-// $('body').appendChild(contents)
 
 let poem_doms = []
 
@@ -39,6 +38,10 @@ $$('.poem').forEach(p => {
 
   title.addEventListener('click', () => {
     p.scrollIntoView({ behavior: "smooth", block: "start"})
+    if (window.screen.width <= 600) {
+      $('body').classList.toggle('contents-open')
+    }
+
   })
 
   poem_doms.push({
@@ -64,7 +67,7 @@ $('#contents-closer').addEventListener('click', () => {
 
 
 
-console.log(poem_doms)
+// console.log(poem_doms)
 
 
 let lastKnownScrollPosition = 0;
@@ -104,8 +107,3 @@ document.addEventListener("scroll", (event) => {
     ticking = true;
   }
 });
-
-
-// $('#loader').addEventListener('click', () => {
-//
-// })
