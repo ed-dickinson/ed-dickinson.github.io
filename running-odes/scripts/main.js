@@ -131,16 +131,15 @@ let fontSizeChanger = (i) => {
   let el_in_view = findInView(window.scrollY)
 
   let last_el = (el_in_view) ? (el_in_view.offsetTop + el_in_view.offsetParent.offsetTop) : undefined
-  // + el_in_view.children[0].offsetHeight
 
   // change font size
   $('#poems').style.fontSize = font_size + 'em'
   //
+
   if (window.scrollY === 0) {
     scrollTo(0, 0)
   } else if (last_el) {
     let new_el = el_in_view.offsetTop + el_in_view.offsetParent.offsetTop
-    // + el_in_view.children[0].offsetHeight
 
     let change = new_el - last_el
 
@@ -150,7 +149,6 @@ let fontSizeChanger = (i) => {
     // / if last then scroll to very end
     scrollTo(0, 99999)
   }
-  console.log(el_in_view)
 
 }
 

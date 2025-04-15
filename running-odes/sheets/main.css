@@ -4,7 +4,10 @@
   font-weight: normal;
   src: local('Inconsolata'), url('/../public/fonts/inconsolata-v31-latin-regular.woff') format('woff');
 }
-
+html {
+  --color1: hotpink;
+  --color2: darkviolet;
+}
 header {
   position: fixed;
   top: 0.45rem;
@@ -49,7 +52,7 @@ main {
 
 #contents-opener,  #contents-closer {
   position: fixed;
-  color: #fc5200;
+  color: var(--color1);
   cursor: pointer;
   height: 20px;
   width: 5ch;
@@ -87,7 +90,7 @@ main {
   z-index: 10;
   transition: 0.5s;
   right: 2rem;
-  border: 2px solid #fc5200;
+  border: 2px solid var(--color1);
   overflow-x: hidden;
   /* overflow-y: visible; */
   border-left-width: 0;
@@ -113,7 +116,7 @@ main {
 }
 .contents-open #contents {
   top: 0em;
-  color: #fc5200;
+  color: var(--color1);
   line-height: 1.4;
   z-index: 10;
   left: 0;
@@ -161,7 +164,7 @@ main div#divider {
   height: 2px;
   /* left: 0; */
   position: relative;
-  background-color: #fc5200;
+  background-color: var(--color1);
   /* display: inline-block; */
   /* overflow: visible; */
 }
@@ -190,7 +193,7 @@ main div#divider {
   margin-bottom: 1em;
   /* text-decoration: underline; */
   padding-bottom: 0.5em;
-  border-bottom: 2px solid #fc5200;
+  border-bottom: 2px solid var(--color1);
   padding: 0 0.5em 0.5em;
   left: -0.5em;
   position: relative;
@@ -220,11 +223,11 @@ main div#divider {
   display: block;
   width: 100%;
   margin: 4em 0 0;
-  color: #fc5200;
+  color: var(--color1);
 } */
 /* ꩜ */
 .poem-divider {
-  color: #fc5200;
+  color: var(--color1);
   text-align: center;
   margin: 2em 0;
 }
@@ -235,18 +238,18 @@ main div#divider {
 }
 
 hr {
-  border-top: 2px solid #fc5200;
+  border-top: 2px solid var(--color1);
   height: 0px;
   border-left: 0;
   border-right: 0;
-  border-bottom: 0px solid #fc5200;
+  border-bottom: 0px solid var(--color1);
   margin: 4em -1rem;
 
 }
 
 
 #blurb {
-  border-top: 2px solid #fc5200;
+  border-top: 2px solid var(--color1);
   box-sizing: border-box;
   padding: 1em;
 }
@@ -271,8 +274,8 @@ a:visited {
   border-color: darkmagenta;
 }
 footer a:visited {
-  color: #fc5200;
-  border-color: #fc5200;
+  color: var(--color1);
+  border-color: var(--color1);
 }
 
 #font-size-container {
@@ -360,7 +363,7 @@ footer a:visited {
 
   #font-size-container {
     display: inline-block;
-    border: 2px solid #fc5200;
+    border: 2px solid var(--color1);
     width: 4rem;
     height: 2.5rem;
     position: fixed;
@@ -375,17 +378,20 @@ footer a:visited {
     height: 100%;
     background-color: white;
     margin: 0;
-    color: #fc5200;
+    color: var(--color1);
     /* font-weight: bold; */
     font-size: 1rem;
     position: absolute;
     top: 0;
+    box-sizing: border-box;
+    text-align: center;
+    padding: 0;
   }
   #font-size-container #font-size-dec {
     left: 0;
   }
   #font-size-container #font-size-inc {
-    right: 0px;
+    right: 0;
   }
   #blurb {
     padding-top: 3rem;
