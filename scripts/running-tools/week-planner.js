@@ -41,6 +41,10 @@ const dom = () => {
   let i = 0
   let container = $('#week-planner')
   let days = ['M', 'T', 'W', 'T', 'F', 'S', 'S']
+
+  output = el('div', {class: 'total', content: '##'})
+  $('#week-planner').appendChild(output)
+
   for (let i = 0; i < 7; i++) {
 
     let row = el('div', {class: 'day'})
@@ -68,8 +72,7 @@ const dom = () => {
 
   // })
 
-  output = el('div', {class: 'total', content: '##'})
-  $('#week-planner').appendChild(output)
+
 
   output.classList.add('colorfade-animated')
 

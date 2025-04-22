@@ -89,6 +89,10 @@ main {
   display: inline-block;
 }
 
+#title {
+  margin-bottom: 0;
+}
+
 #week-planner > div.day {
   padding: 1px;
   height: 25px;
@@ -109,10 +113,11 @@ main {
 } */
 #week-planner .total {
   text-align: center;
-  font-size: 2em;
+  font-size: 2.5em;
   position: relative;
   top: 5px;
   color: var(--color);
+  margin-bottom: 0.5rem;
 }
 #week-planner .label {
   text-align: left;
