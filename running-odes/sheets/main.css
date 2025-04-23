@@ -40,8 +40,8 @@ main {
 */
 
 .contents-open #main-container {
-  max-width: calc(100% - 42ch + 12rem);
-  max-width: calc(100% - 52ch + 2rem);
+  /* max-width: calc(100% - 42ch + 12rem); */
+  max-width: calc(100% - 52ch + 6rem);
 }
 
 
@@ -91,7 +91,7 @@ main {
   transition: 0.5s;
   right: 2rem;
   border: 2px solid var(--color1);
-  overflow-x: hidden;
+  overflow-x: visible;
   /* overflow-y: visible; */
   border-left-width: 0;
   box-sizing: border-box;
@@ -106,6 +106,7 @@ main {
   height: calc(100vh - 4rem);
   width: 52ch;
   border-left-width: 2px;
+  overflow-x: hidden;
 }
 
 #contents {
@@ -244,7 +245,6 @@ hr {
   border-right: 0;
   border-bottom: 0px solid var(--color1);
   margin: 4em -1rem;
-
 }
 
 
