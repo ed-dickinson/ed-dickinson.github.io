@@ -1,0 +1,275 @@
+<!doctype html>
+<html>
+<head>
+<title>Race & Pace Equivalency</title>
+<meta charset="UTF-8">
+<meta name="keywords" content="running, pace, converter, miles, km, min/mile, min/km, calculator, chart, time, run">
+<meta name="description" content="A tool to convert running pace between min/mile and min/km.">
+<meta name="author" content="Ed Dickinson">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="icon.png">
+<link rel="stylesheet" type="text/css" href="../../stylesheets/running-tools.css"/>
+<style>
+
+
+body {
+  text-align: center;
+}
+#input-pace, #output-pace {
+  display: inline-block;
+  text-align: left;
+  font-size: 1.5em;
+}
+#input-cont, #output-cont {
+  display: inline-block;
+}
+#input-cont {
+  margin-top: 2em;
+}
+#divider {
+  font-size: 3.5em;
+}
+table {
+  margin: auto;
+  padding-left: 3em;
+}
+tr td:nth-of-type(1) {
+  text-align: right;
+  padding-right: 1em;
+}
+tr td:nth-of-type(2) {
+  text-align: left;
+}
+/* .slidecontainer {
+  width: 150px;
+} */
+
+/* The slider itself */
+#slider {
+  max-width: calc(100% - 4px);
+  width: 40em;
+  margin-top: 4em;
+  /* max-width: 26em; */
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  height: 40px; /* Specified height */
+  background: black;
+  outline: none; /* Remove outline */
+  opacity: 1; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+  border: 1px solid black;
+  border-radius: 22px;
+  z-index: 1;
+}
+
+/* Mouse-over effects */
+#slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+#slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 40px; /* Set a specific slider handle width */
+  height: 40px; /* Slider handle height */
+  background: white; /* Green background */
+  border: 0px solid black;
+  cursor: pointer; /* Cursor on hover */
+  border-radius: 20px; z-index: 2;
+}
+
+#slider::-moz-range-thumb {
+  width: 40px; /* Set a specific slider handle width */
+  height: 40px; /* Slider handle height */
+  /* background: dodgerblue; */
+  cursor: pointer; /* Cursor on hover */
+  z-index: 2;
+  border-radius: 20px;
+  border: 0px solid black;
+}
+
+@media only screen and (min-width: 800px) {
+  #slider {
+    height: 20px; /* Specified height */
+    border-radius: 11px;
+    z-index: 1;
+  }
+  #slider::-moz-range-thumb {
+    width: 20px; /* Set a specific slider handle width */
+    height: 20px;
+  }
+  #slider::-webkit-slider-thumb {
+    width: 20px; /* Set a specific slider handle width */
+    height: 20px; /* Slider handle height */
+    border-radius: 10px;
+    border: 0px solid black;
+  }
+}
+
+
+</style>
+
+</head>
+<body class="pink-purple">
+
+  <h1>Race & Pace Equivalency</h1>
+
+
+
+
+<div style="margin-top: 1em;">
+
+  <input id="slider" type="range" min="120" max="480" value="420" step="1" />
+</div>
+
+
+<output></output>
+
+<br />
+
+<div id="output-races">
+
+
+</div>
+
+<br />
+
+<div id="output-paces">
+
+
+</div>
+
+<footer>
+  <div id="see-also">
+    <a href='https://ed-dickinson.net' >Home</a>
+    <a href="../week-planner">Week Plan</a>
+    <a href="../interval-calculator">Intervals</a>
+    <a href="../lthr-calculator">LTHR</a>
+  </div>
+</footer>
+
+
+
+<script>
+dom = {
+  slider : document.querySelector('#slider'),
+  // input_pace : document.querySelector('#input-pace'),
+  output_paces : document.querySelector('#output-paces'),
+  output_races : document.querySelector('#output-races'),
+  // title : document.querySelector('h1'),
+
+  output : document.querySelector('output'),
+}
+
+const convertToMins = (s, option) => {
+
+  let mins = Math.floor(s / 60)
+  let secs = Math.round(s % 60)
+
+  if (secs < 10) {
+    secs = '0' + secs
+  }
+  let output
+  let time_limit = (option && option === 'half') ? 70 : 60
+  if (mins >= time_limit) {
+    let hours = Math.floor(mins / 60)
+    mins = mins % 60
+    if (mins < 10) {
+      mins = '0' + mins
+    }
+    output = hours + ':' + mins + '.' + secs
+  } else {
+    output = mins + '.' + secs
+  }
+
+  return output
+}
+
+const convertDecimalToSeconds = (value) => {
+  return Math.floor(value)
+}
+
+const riegel = (time1, dist1, dist2) => {
+  let constant_b = 1.06
+
+  let time2 = time1 * Math.pow(dist2 / dist1, constant_b)
+  return time2
+}
+
+const riegelPace = (time1, dist1, dist2) => {
+  let time2 = riegel(time1, dist1, dist2)
+
+  let pace = (time2 / (dist2 / 1609.344))
+
+  return pace
+}
+
+const doConversion = () => {
+
+
+
+  let time1 = (12 * 60) + Number(dom.slider.value)
+
+  // basic is a 5k
+  let dist1 = 5000
+
+  // let mi = 0.6213712
+
+  let mi = 1609.344
+
+
+
+  // dom.input_pace.innerHTML = convertToMins(slider.value * 1)
+  // dom.output_pace.innerHTML = convertToMins(slider.value / 1.609344)
+  //
+  dom.output_races.innerHTML = `<table>
+    <tr><td>
+        ${convertToMins(riegel(time1, dist1, 5000))}
+      </td><td>5k</td></tr>
+    <tr><td>
+        ${convertToMins(riegel(time1, dist1, 10000))}
+      </td><td>10k</td></tr>
+    <tr><td>
+        ${convertToMins(riegel(time1, dist1, 21097.5))}
+      </td><td>half marathon</td></tr>
+    <tr><td>
+        ${convertToMins(riegel(time1, dist1, 42195))}
+      </td><td>marathon</td></tr>
+  </table>`
+
+  dom.output_paces.innerHTML = `<table>
+
+    <tr><td>10k+</td><td>
+        ${convertToMins(riegelPace(time1, dist1, 10000))}+
+      </td></tr>
+    <tr><td>10 mile</td><td>
+        ${convertToMins(riegelPace(time1, dist1, 10 * mi))}
+      </td></tr>
+    <tr><td>HM+</td><td>
+        ${convertToMins(riegelPace(time1, dist1, 21097.5))}+
+      </td></tr>
+    <tr><td>25-30k</td><td>
+        ${convertToMins(riegelPace(time1, dist1, 27500))}
+      </td></tr>
+  </table>`
+}
+doConversion()
+
+
+dom.slider.addEventListener('input', ()=> {
+  event.preventDefault()
+  doConversion()
+  // changeColor(dom.slider)
+})
+
+
+
+</script>
+
+<!-- <script type='module' src='../../scripts/running-tools/pace-converter.js'></script> -->
+
+
+</body>
+</html>
