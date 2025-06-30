@@ -217,14 +217,40 @@ footer a:hover::after {
   }
   footer {
     position: relative;
+
     transform: none;
     text-align: right;
-    margin-top: 2em;
+    /* margin-top: 2em; */
+    /* width: 0; */
+    height: 0em;
+    background-color: red;
 
+    position: absolute;
+    bottom: 1em;
+    width: 0;
+    right: 1em;
+    transform: rotate(90deg);
   }
   h1, #title {
     margin-top: 1em;
   }
+
+
+  footer #see-also {
+
+    position: absolute;
+    /* top: 0; */
+    right: 0;
+    top: 0;
+    /* bottom: 100%; */
+    /* background-color: red; */
+    /* left: 100%; */
+    /* height: 0; */
+    /* width: 0; */
+    /* text-align: left; */
+  }
+
+
 }
 
 

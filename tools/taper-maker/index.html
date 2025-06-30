@@ -1,0 +1,550 @@
+<!doctype html>
+<html>
+<head>
+<title>Taper Maker</title>
+<meta charset="UTF-8">
+<meta name="keywords" content="running, pace, converter, miles, km, min/mile, min/km, calculator, chart, time, run">
+<meta name="description" content="A tool to convert running pace between min/mile and min/km.">
+<meta name="author" content="Ed Dickinson">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="icon.png">
+<link rel="stylesheet" type="text/css" href="../../stylesheets/running-tools.css"/>
+<style>
+
+
+body {
+  text-align: center;
+}
+#input-pace, #output-pace {
+  display: inline-block;
+  text-align: left;
+  font-size: 1.5em;
+}
+#input-cont, #output-cont {
+  display: inline-block;
+}
+#input-cont {
+  margin-top: 2em;
+}
+#divider {
+  font-size: 3.5em;
+}
+table {
+  margin: auto;
+  padding-left: 3em;
+}
+tr td:nth-of-type(1) {
+  text-align: right;
+  padding-right: 1em;
+}
+tr td:nth-of-type(2) {
+  text-align: left;
+}
+/* .slidecontainer {
+  width: 150px;
+} */
+
+/* The slider itself */
+#slider {
+  max-width: calc(100% - 4px);
+  width: 40em;
+  margin-top: 4em;
+  /* max-width: 26em; */
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  height: 40px; /* Specified height */
+  background: black;
+  outline: none; /* Remove outline */
+  opacity: 1; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+  border: 1px solid black;
+  border-radius: 22px;
+  z-index: 1;
+}
+
+/* Mouse-over effects */
+#slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+#slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 40px; /* Set a specific slider handle width */
+  height: 40px; /* Slider handle height */
+  background: white; /* Green background */
+  border: 0px solid black;
+  cursor: pointer; /* Cursor on hover */
+  border-radius: 20px; z-index: 2;
+}
+
+#slider::-moz-range-thumb {
+  width: 40px; /* Set a specific slider handle width */
+  height: 40px; /* Slider handle height */
+  /* background: dodgerblue; */
+  cursor: pointer; /* Cursor on hover */
+  z-index: 2;
+  border-radius: 20px;
+  border: 0px solid black;
+}
+
+@media only screen and (min-width: 800px) {
+  #slider {
+    height: 20px; /* Specified height */
+    border-radius: 11px;
+    z-index: 1;
+  }
+  #slider::-moz-range-thumb {
+    width: 20px; /* Set a specific slider handle width */
+    height: 20px;
+  }
+  #slider::-webkit-slider-thumb {
+    width: 20px; /* Set a specific slider handle width */
+    height: 20px; /* Slider handle height */
+    border-radius: 10px;
+    border: 0px solid black;
+  }
+}
+
+#chart {
+  position: relative;
+  display: inline-block;
+}
+
+#days {
+  padding-bottom: 0;
+  margin-bottom: 0;
+  max-width: 400px;
+}
+
+#days .day {
+  width: 18px;
+  height: 150px;
+  display: inline-block;
+  position: relative;
+  /* background-color: beige; */
+  margin-right: 2px;
+  margin-bottom: 0;
+}
+#days .clicker {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: inline-block;
+  background-color: beige;
+  /* background-color: pink; */
+  cursor: pointer;
+}
+#days .adjusted, #days .unadjusted {
+  width: 100%;
+  height: 50px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  /* background-color: pink; */
+  background-color: hotpink;
+}
+#days .unadjusted {
+  /* background-color: purple; */
+  background-color: pink;
+}
+#days .label {
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  text-align: center;
+  height: 1em;
+  font-size: 0.8em;
+}
+#days .miles {
+  position: absolute;
+  bottom: 100%;
+  width: 100%;
+  text-align: center;
+}
+#days .miles::after {
+  content: '/';
+  transform: rotate(45deg);
+  position: absolute;
+  bottom: 0.3em;
+  left: 25%;
+  display: inline-block;
+}
+#days .adj-miles, #days .unadj-miles {
+  font-size: 0.8em;
+  position: absolute;
+}
+#days .adj-miles {
+  left: -0em;
+  bottom: 1.25em;
+}
+#days .unadj-miles {
+  bottom: 0%;
+  right: 0;
+}
+
+
+.changeable {
+  cursor: pointer;
+  text-decoration: underline;
+  /* color: purple; */
+  /* color: darkviolet; */
+  color: hotpink;
+  animation: colorfade 2.5s -1s infinite linear alternate;
+}
+
+#race-day {
+  position: absolute;
+  left: 101%;
+  top: calc(100% - 0.35em);
+  height: 1.25em;
+  text-align: center;
+  width: 16px;
+}
+
+.selected::after {
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 100%;
+  border: 1px solid black;
+  display: inline-block;
+  left: -1px;
+  top: -1px;
+}
+
+.functions span {
+  display: inline-block;
+  position: relative;
+}
+.functions span.selected::after {
+  width: calc(4px + 100%);
+  height: calc(4px + 100%);
+  left: -3px;
+  top: -3px;
+}
+
+/* #unit-clicker {
+  position: absolute;
+  bottom: 100%;
+  width: 100%;
+  height: 2em;
+  cursor: pointer;
+} */
+
+
+</style>
+
+</head>
+<body class="pink-purple">
+
+  <h1>Taper Maker</h1>
+
+<div style="margin-top: 1em;" class="functions">
+
+  <span id="change-days" class="changeable">
+    days: #
+  </span> &nbsp;
+  <span id="change-amount" class="changeable">
+    amount: #
+  </span> &nbsp;
+  <span id="change-slope" class="changeable">
+    slope: #
+  </span>
+
+
+  <div id="tool" style="margin-top: 1.5em;">
+    <div id="chart" style="margin-top: 1.5em;">
+      <div id="days">
+
+      </div>
+      <div id="race-day" class="changeable">
+        R
+      </div>
+      <!-- <div id="unit-clicker">
+
+      </div> -->
+    </div>
+
+  </div>
+
+  <input id="slider" type="range" min="0" max="100" value="0" step="1" />
+</div>
+
+<footer>
+  <div id="see-also">
+    <a href='https://ed-dickinson.net' >Home</a>
+    <!-- <a href="../week-planner">Week Plan</a>
+    <a href="../interval-calculator">Intervals</a>
+    <a href="../lthr-calculator">LTHR</a> -->
+  </div>
+</footer>
+
+
+
+<script>
+const $ = (x) => document.querySelector(x)
+const el = (type, cla) => {
+  let element = document.createElement(type)
+  element.classList.add(cla)
+  return element
+}
+
+let slider_state = 'days'
+
+let states = JSON.parse(localStorage.getItem("taper"))
+
+if (!states) {
+
+  states = {
+    days : {
+      current : 10 ,
+      min : 1 ,
+      max : 14 ,
+      miles : []
+    } ,
+    day : {
+      current : 6 ,
+      min : 0 ,
+      max : 6 ,
+    } ,
+    slope : {
+      current : 100 ,
+      min : 0 ,
+      max : 100 ,
+    } ,
+    amount : {
+      current : 50 ,
+      min : 0 ,
+      max : 100 ,
+    } ,
+
+  }
+
+  for (let i = 1; i <= states.days.max; i++) {
+    states.days.miles.push(10)
+  }
+
+}
+
+// let unit = false
+//
+// $('#unit-clicker').addEventListener('click', ()=> {
+//   unit_clicker = !unit_clicker
+//   doPrint()
+// })
+
+let dom = {
+  slider : $('#slider') ,
+  chart : $('#chart')
+}
+
+
+$('#change-days').addEventListener('click', () => {
+  changeSlider('days')
+})
+$('#change-amount').addEventListener('click', () => {
+  changeSlider('amount')
+})
+$('#change-slope').addEventListener('click', () => {
+  changeSlider('slope')
+})
+$('#race-day').addEventListener('click', () => {
+  changeSlider('day')
+})
+
+
+const changeSlider = (state, i) => {
+  // console.log('changing slider---', state, i)
+  let changing_to = states[state]
+
+  if (state === 'miles') {
+    dom.slider.setAttribute('min', 0)
+    dom.slider.setAttribute('max', 20)
+    dom.slider.value = states.days.miles[states.days.max - i]
+    // $('#state').textContent = 'slider state: ' + state + ', day ' + i
+    slider_state = state + ' ' + i
+  } else {
+    dom.slider.setAttribute('min', changing_to.min)
+    dom.slider.setAttribute('max', changing_to.max)
+    // dom.slider.setAttribute('value', changing_to.current)
+    dom.slider.value = changing_to.current
+    // $('#state').textContent = 'slider state: ' + state
+    slider_state = state
+  }
+
+  if (event) {
+    $('.selected').classList.remove('selected')
+    if (event.target.parentNode.classList.contains('clicker')) {
+      event.target.parentNode.classList.add('selected')
+    } else {
+      event.target.classList.add('selected')
+    }
+
+  }
+
+
+}
+
+const changeDays = (days) => {
+  let parent = $('#days')
+  parent.innerHTML = ''
+  for (let i = days; i > 0; i--) {
+    let child = el('span', 'day')
+    parent.appendChild(child)
+    let clicker = el('div', 'clicker')
+    child.appendChild(clicker)
+    let unadjusted = el('div', 'unadjusted')
+    clicker.appendChild(unadjusted)
+    let adjusted = el('div', 'adjusted')
+    clicker.appendChild(adjusted)
+    let label = el('div', 'label')
+    child.appendChild(label)
+    label.textContent = 'D'
+    let miles = el('div', 'miles')
+    child.appendChild(miles)
+    let adj_miles = el('span', 'adj-miles')
+    miles.appendChild(adj_miles)
+    adj_miles.innerHTML = '££'
+    let unadj_miles = el('span', 'unadj-miles')
+    miles.appendChild(unadj_miles)
+    unadj_miles.innerHTML = '££'
+
+    clicker.addEventListener('click', () => {
+      changeSlider('miles', i)
+    })
+
+  }
+}
+
+changeSlider(slider_state)
+changeDays(states["days"].current)
+$('#change-days').classList.add('selected')
+
+const printDays = (value) => {
+  // states.day.current = slider.value
+  // let letters = ['M','T','W','T','F','S','S']
+  let letters = ['S','S','F','T','W','T','M']
+  $('#race-day').textContent = letters[6 - value]
+  let children = Array.from($('#days').children)
+  for (let i = children.length - 1; i >= 0; i--) {
+    let j = children.length - value - i + 6
+    let l = j % 7
+    children[i].querySelector('.label').textContent = letters[l]
+  }
+}
+
+
+const adjustMiles = (value) => {
+  return value
+}
+
+const doPrint = () => {
+
+  // slider action
+  if (slider_state === 'days') {
+    states.days.current = slider.value
+    changeDays(slider.value)
+    printDays(states.day.current)
+  } else if (slider_state === 'amount') {
+    states.amount.current = slider.value
+  } else if (slider_state === 'slope') {
+    states.slope.current = slider.value
+  } else if (slider_state === 'day') {
+    printDays(slider.value)
+  } else {
+    let i = Number(slider_state.split(' ')[1])
+    states.days.miles[states.days.max - i] = Number(slider.value)
+  }
+
+  $('#change-days').innerHTML = `days: ${states.days.current}`
+  $('#change-amount').innerHTML = `amount: ${states.amount.current}%`
+  $('#change-slope').innerHTML = `slope: ${states.slope.current}%`
+
+  // let consoletest = []
+  // let consoletest2 = []
+
+  let children = Array.from($('#days').children)
+  for (let i = 0; i < children.length; i++) {
+    // console.log(i)
+
+    // i is taper day (-)
+    let j = children.length - 1 - i // from 0 to max
+    // console.log(i,j, states.days.max)
+    let value = states.days.miles[states.days.max - 1 - i]
+    // let cont = children[j].querySelector('.clicker')
+    let unadj = children[j].querySelector('.unadjusted')
+    unadj.style.height = (value/20)*100 + '%'
+
+    let l = children.length // not - 1 for calcs
+    let p = (j + 1) / l // +1 for calcs, to get first day to reduce
+    // p is 0 --> 1, is proportion of reduction
+
+    pmin = 1 - p // gets smaller 1 ---> 0
+
+    //for ratioing
+    let s = states.slope.current / 100 // changes with slope slider 0-1
+
+    // change this to change slope
+    // reduction goes from 100 >>>>
+    //first option
+    // let reduction = (states.amount.current * p * (1 + (s * (pmin)) ))
+    // let total_reduction = value * (100 - reduction) / 100
+
+    // second, better slope
+    let reduction = (states.amount.current * p * (1 + (s * (pmin)) * (1 + (s * (pmin)))))
+    let total_reduction = value * (100 - reduction) / 100
+
+    // max is Math.pow(2, l)
+    // basic
+    // let reduction = (states.amount.current * p)
+    // let total_reduction = value * (100 - reduction) / 100
+
+
+
+    let adjusted_value = total_reduction
+    let adj = children[j].querySelector('.adjusted')
+    adj.style.height = (adjusted_value/20)*100 + '%'
+
+    children[j].querySelector('.unadj-miles').textContent = value
+    children[j].querySelector('.adj-miles').textContent = Math.round(adjusted_value)
+
+    // consoletest.push(Math.pow(2, j+1))
+    // consoletest2.push(s*pmin)
+    // consoletest.push(reduction)
+  }
+
+  // console.log(consoletest)
+  // console.log(consoletest2)
+
+  // localStorage.setItem("taper", JSON.stringify(states))
+
+}
+doPrint()
+printDays(states.day.current)
+
+
+dom.slider.addEventListener('input', ()=> {
+  event.preventDefault()
+  doPrint()
+})
+
+
+
+// unit clicker
+// $('#unit-clicker').addEventListener('click', () => {
+//   doPrint()
+// })
+
+
+</script>
+
+<!-- <script type='module' src='../../scripts/running-tools/pace-converter.js'></script> -->
+<script type='module' src='../../scripts/running-tools-menu.js'></script>
+
+</body>
+</html>

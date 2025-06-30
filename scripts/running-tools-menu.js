@@ -20,6 +20,12 @@ const tools = [{
 },{
   text : 'Week Plan' ,
   link : 'week-planner'
+},{
+  text : 'Race/Pace' ,
+  link : 'race-equivalency'
+},{
+  text : 'Taper' ,
+  link : 'taper-maker'
 }]
 
 let menu = $('#see-also')

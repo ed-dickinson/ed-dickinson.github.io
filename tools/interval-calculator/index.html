@@ -3,8 +3,8 @@
 <head>
 <title>Interval Calculator</title>
 <meta charset="UTF-8">
-<meta name="keywords" content="running, pace, converter, miles, km, min/mile, min/km, calculator, chart, time, run">
-<meta name="description" content="A tool to work out the length & distance of your intervals.">
+<meta name="keywords" content="running, pace, converter, miles, km, min/mile, interval, calculator, intervals, session, time, run">
+<meta name="description" content="A tool to work out how far and long an interval session will be.">
 <meta name="author" content="Ed Dickinson">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" href="icon.png">
@@ -147,17 +147,17 @@ tr td:nth-of-type(2) {
 </div>
 
 
-<input id="input-distance" class="slider" type="range" min="0" max="6" value="3" step="1" />
+<input id="input-distance" class="slider" type="range" min="0" max="10" value="3" step="1" />
 <div class="output">
-Distance: <span id="output-distance">#</span>mi
+Distance: <span id="output-distance">#</span>
 </div>
 
-<input id="input-float" class="slider" type="range" min="0" max="3" value="0" step="1" />
+<input id="input-float" class="slider" type="range" min="0" max="180" value="0" step="30" />
 <div class="output">
 Float: <span id="output-float">#</span>
 </div>
 
-<input id="input-pace" class="slider" type="range" min="240" max="360" value="300" step="1" />
+<input id="input-pace" class="slider" type="range" min="240" max="420" value="300" step="1" />
 <div class="output">
 Est. pace: <span id="output-pace" class="big">#</span> min/mile
 </div>
@@ -172,9 +172,9 @@ Total:
 <footer>
   <div id="see-also">
     <a href='https://ed-dickinson.net' >Home</a>
-    <a href="../pace-converter">Pace</a>
+    <!-- <a href="../pace-converter">Pace</a>
     <a href="../week-planner">Week Plan</a>
-    <a href="../lthr-calculator">LTHR</a>
+    <a href="../lthr-calculator">LTHR</a> -->
   </div>
 </footer>
 
@@ -244,17 +244,34 @@ const calcMins = (s, option) => {
   return mins + ':' + secs
 }
 
+let km = 0.6213712
+
+const distances = [
+  ['&#x00BC;mi', 0.25],
+  ['&#x00BD;mi', 0.5],
+  ['1k', 1 * km],
+  ['1mi', 1],
+  ['2km', 2 * km],
+  ['3km', 3 * km],
+  ['2mi', 2],
+  ['4km', 4 * km],
+  ['3mi', 3],
+  ['5km', 5 * km],
+  ['4mi', 4]
+]
+
 const doCalc = () => {
 
   let mi = 0.6213712
 
   dom.output_int.innerHTML = dom.input_int.value
 
-  let distance = [0.25, 0.5, 1, 2, 3, 4, 5][dom.input_distance.value]
-  dom.output_distance.innerHTML = distance
+  let distance_value = distances[dom.input_distance.value]
+  let distance = distance_value[1]
+  dom.output_distance.innerHTML = distance_value[0]
 
-  let float = floatCalc(dom.input_float.value)
-  dom.output_float.innerHTML = 'x' + float
+  let float = Number(dom.input_float.value)
+  dom.output_float.innerHTML = float <= 90 ? float + 's' : (float / 60) % 1 == 0.5 ? Math.floor(float/60) + '&#x00BD; min' : float/60 + ' min'
 
   let pace = dom.input_pace.value
   dom.output_pace.innerHTML = calcMins(pace)
@@ -262,12 +279,14 @@ const doCalc = () => {
   let float_pace = 600
 
   let on_dist = dom.input_int.value * distance
-  let off_dist = dom.input_int.value * distance * float
+  let off_dist = dom.input_int.value * (float / float_pace)
 
-  let tm = calcMins((on_dist * pace) + (off_dist * float_pace), 'mins')
+  // tm is time in s
+  let tm = calcMins((on_dist * pace) + (float * dom.input_int.value), 'mins')
+  // console.log(tm)
 
 
-  dom.output_total.innerHTML = `<span class="big">${(on_dist + off_dist)}</span>mi, in ~`
+  dom.output_total.innerHTML = `<span class="big">${(on_dist + off_dist).toFixed(1)}</span>mi, in ~`
 
   if (tm > 60) {
     dom.output_total.innerHTML += `<span class="big">${Math.floor(60/tm)+1}</span>hr<span class="big">${Math.floor(tm%60)}</span>mins`
@@ -299,7 +318,7 @@ dom.input_pace.addEventListener('input', ()=> {
 
 
 </script>
-
+<script type='module' src='../../scripts/running-tools-menu.js'></script>
 
 </body>
 </html>

@@ -48,7 +48,7 @@ tr td:nth-of-type(2) {
 #slider {
   max-width: calc(100% - 4px);
   width: 40em;
-  margin-top: 4em;
+  margin-top: 2em;
   /* max-width: 26em; */
   -webkit-appearance: none;  /* Override default CSS styles */
   appearance: none;
@@ -116,27 +116,26 @@ tr td:nth-of-type(2) {
 
   <h1>Race & Pace Equivalency</h1>
 
+<br />
+  <div id="output-races">
 
 
+  </div>
 
-<div style="margin-top: 1em;">
-
-  <input id="slider" type="range" min="120" max="480" value="420" step="1" />
+<div>
+  <input id="slider" type="range" min="120" max="480" value="256" step="1" />
 </div>
 
-
-<output></output>
 
 <br />
-
-<div id="output-races">
-
-
-</div>
-
 <br />
 
 <div id="output-paces">
+
+
+</div>
+<br />
+<div id="output-threshold">
 
 
 </div>
@@ -144,9 +143,9 @@ tr td:nth-of-type(2) {
 <footer>
   <div id="see-also">
     <a href='https://ed-dickinson.net' >Home</a>
-    <a href="../week-planner">Week Plan</a>
+    <!-- <a href="../week-planner">Week Plan</a>
     <a href="../interval-calculator">Intervals</a>
-    <a href="../lthr-calculator">LTHR</a>
+    <a href="../lthr-calculator">LTHR</a> -->
   </div>
 </footer>
 
@@ -159,6 +158,7 @@ dom = {
   output_paces : document.querySelector('#output-paces'),
   output_races : document.querySelector('#output-races'),
   // title : document.querySelector('h1'),
+  output_threshold : document.querySelector('#output-threshold'),
 
   output : document.querySelector('output'),
 }
@@ -208,7 +208,7 @@ const riegelPace = (time1, dist1, dist2) => {
 
 const doConversion = () => {
 
-
+// console.log(slider.value)
 
   let time1 = (12 * 60) + Number(dom.slider.value)
 
@@ -254,9 +254,51 @@ const doConversion = () => {
         ${convertToMins(riegelPace(time1, dist1, 27500))}
       </td></tr>
   </table>`
+
+  let ftp = time1 * 0.347 // is this acc?
+  let lthr = 165
+
+  let calc = (input) => {
+
+    let diff = input - 100
+
+    let output = 1 + ((diff * diff) / 1100) + (diff / 180)
+    return output
+  }
+
+//   dom.output_threshold.innerHTML = `Threshold Pace (FTP): ${convertToMins(ftp)}
+//
+//   <table>
+//     <tr>
+//     <th>
+//     Zone:
+//     </th><td>----1</td><td>----2</td><td>----3</td><td>----4</td><td>----5</td></th>
+//     <tr><th>Pace:</th><td>
+//     >
+//     </td><td>
+//         ${convertToMins(ftp * 1.29)}
+//       </td><td>
+//       ${convertToMins(ftp * 1.14)}
+//       </td><td>
+//       ${convertToMins(ftp * 1.06)}
+//       </td><td>
+//       ${convertToMins(ftp * 1)}
+//       </td></tr>
+//     <tr><th>HR:</th><td>
+//     >
+//     </td><td>${(lthr * 0.85).toFixed(0)}</td><td>${(lthr * 0.90).toFixed(0)}</td><td>${(lthr * 0.95).toFixed(0)}</td><td>${lthr}</td></tr>
+//
+//
+//
+//   </table>
+// <br />
+//   calc: ${calc(105)}, ${calc(110)}, ${calc(115)}
+//
+//   `
 }
 doConversion()
 
+// 0.85 90 95 100
 
 dom.slider.addEventListener('input', ()=> {
   event.preventDefault()
@@ -269,7 +311,7 @@ dom.slider.addEventListener('input', ()=> {
 </script>
 
 <!-- <script type='module' src='../../scripts/running-tools/pace-converter.js'></script> -->
-
+<script type='module' src='../../scripts/running-tools-menu.js'></script>
 
 </body>
 </html>
