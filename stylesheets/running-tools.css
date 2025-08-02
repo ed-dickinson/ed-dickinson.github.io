@@ -167,19 +167,31 @@ footer {
   right: 1em;
   /* z-index: -99; */
   position: absolute;
-  transform: rotate(270deg);
+
   text-align: left;
+  /* width: 0;
+  height: 0; */
+  transform: rotate(270deg);
+}
+#see-also {
+  /* transform: rotate(270deg); */
+  bottom: 0;
+  /* right: 0; */
+  left: 0;
+  width: auto;
+  height: auto;
+  display: block;
+  position: absolute;
 }
 footer a {
   right: 0;
   line-height: 1.25;
-}
-footer a {
   display: block;
   text-decoration: none;
   color: black;
   animation: colorfade 2.5s -1s infinite linear alternate;
   position: relative;
+  text-wrap: nowrap;
 }
 footer a::after {
   content: '<';
@@ -200,57 +212,45 @@ footer a:hover::after {
   to {color: var(--color2);}
 }
 
-/* #see-also {
-  position: fixed;
-  right: 1em;
-  bottom: 1em;
-} */
-
   /* MOBILE */
 
 @media only screen and (max-width: 600px) {
   nav {
     margin-top: 6em;
   }
-  nav, main, footer {
+  /* nav, main, footer {
     width: calc(100% - 1em);
-  }
-  footer {
-    position: relative;
-
-    transform: none;
-    text-align: right;
-    /* margin-top: 2em; */
-    /* width: 0; */
-    height: 0em;
-    background-color: red;
-
-    position: absolute;
-    bottom: 1em;
-    width: 0;
-    right: 1em;
-    transform: rotate(90deg);
+  } */
+  nav, main {
+    width: calc(100% - 1em);
   }
   h1, #title {
     margin-top: 1em;
   }
-
-
-  footer #see-also {
-
-    position: absolute;
-    /* top: 0; */
-    right: 0;
-    top: 0;
-    /* bottom: 100%; */
-    /* background-color: red; */
-    /* left: 100%; */
-    /* height: 0; */
-    /* width: 0; */
-    /* text-align: left; */
+  main {
+    margin-bottom: 0em;
   }
-
-
+  /* footer {
+    position: relative;
+    transform: none;
+    text-align: right;
+    height: 0em;
+    background-color: blue;
+    position: absolute;
+    bottom: 1em;
+    right: 1em;
+    width: 0;
+    height: 1em;
+  }
+  footer #see-also {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    transform: rotate(270deg);
+    background-color: red;
+  } */
 }
 
 
