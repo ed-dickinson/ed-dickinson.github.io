@@ -172,6 +172,24 @@ h3 {
 }
 
 
+.album-covers {
+  position: relative;
+}
+.click-container {
+  display: inline-block;
+}
+
+.heading-text {
+  display: inline-block;
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 20px);
+  transform: translate(-50%);
+  opacity: 0;
+}
+
+
+
 
 nav, main
 /* , footer */
@@ -247,11 +265,6 @@ menu a.current-page {
   animation: colorfade 2.5s -1s infinite linear alternate;
 }
 
-/* main img.album-art {
-  float: left;
-  width: 34%;
-  margin-right: 1em;
-} */
 
 
 main .album-covers {
@@ -264,6 +277,10 @@ main .album-covers a {
   margin: 0 10px;
 }
 
+a .cd {
+  margin-bottom: 15px;
+}
+
 main .album-covers a.cd {
   transform: rotate(-2deg);
   display: inline-block;
@@ -271,6 +288,10 @@ main .album-covers a.cd {
 
 main .album-covers a:hover img {
   transform: scale(101%);
+}
+
+main .album-covers a:hover + div.heading-text {
+  opacity: 1;
 }
 
 
