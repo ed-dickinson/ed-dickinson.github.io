@@ -8,9 +8,9 @@
   position: absolute;
 }
 
-body {
+/* body {
   font-family: inconsolata;
-}
+} */
 body.yellow-red {
   --color1: gold;
   --color2: tomato;

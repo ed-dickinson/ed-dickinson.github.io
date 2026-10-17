@@ -4,6 +4,12 @@
   font-weight: normal;
   src: local('Inconsolata'), url('../public/fonts/inconsolata-v31-latin-regular.woff') format('woff');
 }
+@font-face {
+  font-family: 'Bembo';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Bembo'), url('../public/fonts/bembo.otf');
+}
 #loader {
   font-size: 2em;
   width: 0;
@@ -16,6 +22,9 @@
 
 body {
   font-family: inconsolata;
+  /* font-family: 'Bembo';
+  font-size: 18px; */
+  line-height: 1;
 }
 body.yellow-red {
   --color1: gold;
@@ -30,7 +39,9 @@ body.pink-purple {
   --color2: darkviolet;
 }
 
-
+p {
+  line-height: 1.2;
+}
 
 h3 {
   margin-top: 2em;
@@ -240,7 +251,7 @@ nav, main
   max-width: 600px;
 }
 nav {
-  margin-top: 2.25em;
+  margin-top: 4em;
 }
 menu {
   padding-left: 0.5em;
@@ -306,10 +317,30 @@ menu a.current-page {
   animation: colorfade 2.5s -1s infinite linear alternate;
 }
 
-main img.album-art {
+/* main img.album-art {
   float: left;
   width: 34%;
   margin-right: 1em;
+} */
+
+
+main .album-covers {
+  text-align: center;
+  margin-top: 20vh;
+}
+
+main .album-covers a {
+  vertical-align: center;
+  margin: 0 10px;
+}
+
+main .album-covers a.cd {
+  transform: rotate(-2deg);
+  display: inline-block;
+}
+
+main .album-covers a:hover img {
+  transform: scale(101%);
 }
 
 

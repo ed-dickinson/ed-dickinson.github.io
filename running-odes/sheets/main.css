@@ -4,6 +4,12 @@
   font-weight: normal;
   src: local('Inconsolata'), url('/../public/fonts/inconsolata-v31-latin-regular.woff') format('woff');
 }
+@font-face {
+  font-family: 'Bembo';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Bembo'), url('/../public/fonts/bembo.otf');
+}
 html {
   --color1: hotpink;
   --color2: darkviolet;
@@ -14,8 +20,9 @@ header {
 }
 
 body {
-  font-family: 'Inconsolata', inconsolata, monospace;
-  font-size: 0.9;
+  /* font-family: 'Inconsolata', inconsolata, monospace; */
+  /* font-size: 0.9; */
+  font-family: 'Bembo';
 }
 
 #contents {
@@ -215,7 +222,8 @@ main div#divider {
   content: '';
 }
 .poem .distance::after {
-  content: ' - ';
+  /* content: ' - '; */
+  content: ' — ';
 }
 
 /* .poem::after {
@@ -252,6 +260,8 @@ hr {
   border-top: 2px solid var(--color1);
   box-sizing: border-box;
   padding: 1em;
+  line-height: 1.4;
+  padding-top: 2em;
 }
 
 footer {
