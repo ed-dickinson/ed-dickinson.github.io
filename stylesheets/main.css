@@ -171,77 +171,7 @@ h3 {
   0%, 100% {color: black;}
 }
 
-#decoration-line, .decoration-border {
-  overflow-x: hidden;
-}
-.intro #decoration-line {
-  display: inline-block;
-  width: 0%;
-  animation: uncover 1s 1.5s 1 ease-in-out forwards;
-} @keyframes uncover {
-from {width: 0%}
-  to {width: 100%}
-}
 
-#decoration-line div, .decoration-box .decoration-slider {
-  width: 300%;
-  height: 2px;
-  top: 0;
-
-  display: inline-block;
-  background: linear-gradient(to right, var(--color2), var(--color1), var(--color2), var(--color1));
-  animation: slide 5s infinite linear;
-} @keyframes slide {
-  from {transform: translateX(0%);}
-  to {transform: translateX(-66.67%);}
-}
-
-.decoration-box {
-  width: 100%;
-  display: inline-block;
-  position: relative;
-  margin-top: 1em;
-
-}
-.decoration-box p:last-of-type {
-  margin-bottom: 0;
-}
-.decoration-box + h3 {
-  margin-top: 3em;
-}
-.decoration-border {
-  width: calc(100% + 2em - 2px);
-  height: calc(100% + 0.5em);
-  position: absolute;
-  left: calc(-1em - 0px);
-  top: 0.5rem;
-  background-color: grey;
-  overflow: hidden;
-  z-index: -1;
-}
-.decoration-border .decoration-slider {
-  width: 300%;
-  height: 100%;
-}
-.decoration-border::after {
-  content: '';
-  background-color: white;
-  position: absolute;
-  left: 2px;
-  top: 2px;
-  height: calc(100% - 4px);
-  width: calc(100% - 4px);
-}
-.decoration-box h3 {
-  margin-top: 0;
-  /* top: -0.5rem; */
-  background-color: white;
-  display: inline-block;
-  left: -1rem;
-  position: relative;
-  padding: 0 1em;
-  margin-bottom: 0;
-}
 
 nav, main
 /* , footer */
@@ -346,57 +276,6 @@ main .album-covers a:hover img {
 
 
 
-
-/* CARAVAN */
-
-main img, main video {
-  max-width: 100%;
-  height: auto;
-}
-
-
-#caravan video {
-  position: absolute;
-  left: 0; top: 0;
-  opacity: 1;
-  transition: opacity 0.5s;
-}
-#caravan.playing video {
-  opacity: 1;
-}
-
-#caravan {
-  position: relative;
-  cursor: pointer;
-  margin: 2em 0;
-}
-#caravan::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  border-left: 15px solid white;
-  border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent;
-  transform: translate(-50%, -50%);
-  opacity: 0;
-  transition: opacity 0.25s;
-}
-#caravan:hover::after {
-  opacity: 1;
-}
-#caravan.playing:hover::after {
-  opacity: 0;
-}
-
-#caravan #subtitles {
-  position: absolute;
-  bottom: 1em;
-  background-color: black;
-  color: white;
-  left: 1em;
-  padding: 0 0.5em;
-}
 
 html {
   position: relative;
