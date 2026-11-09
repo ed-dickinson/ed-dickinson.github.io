@@ -10,11 +10,55 @@
   <link rel="icon" href="public/icon-peace-hand.png">
   <link rel="stylesheet" type="text/css" href="stylesheets/main.css"/>
   <style>
+  .album-covers {
+    position: relative;
+    transform: scale(70%);
+  }
+  .click-container {
+    display: inline-block;
+  }
+
+  .heading-text {
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    top: calc(100% + 20px);
+    transform: translate(-50%);
+    opacity: 0;
+  }
+
+  main .album-covers {
+    text-align: center;
+    margin-top: 20vh;
+  }
+
+  main .album-covers a {
+    vertical-align: center;
+    margin: 0 10px;
+  }
+
+  a .cd {
+    margin-bottom: 15px;
+  }
+
+  main .album-covers a.cd {
+    transform: rotate(-2deg);
+    display: inline-block;
+  }
+
+  main .album-covers a:hover img {
+    transform: scale(101%);
+  }
+
+  main .album-covers a:hover + div.heading-text {
+    opacity: 1;
+  }
+
 
   </style>
 
   </head>
-  <body class="yellow-red">
+  <body>
     <!-- <header>
       <div id="loader">
 
@@ -78,7 +122,7 @@
         <div class="click-container">
 
           <a href='https://crumbdouglas.bandcamp.com/album/crumbs-of-heaven' class="cd">
-            <img src="public/assets/art-heaven-cd-white-500.png" class="album-art cd" width="160" height="160" alt="Crumbs of Heaven CD jewel case" />
+            <img src="public/assets/art-heaven-cd-white-500.png" class="album-art cd" width="160" alt="Crumbs of Heaven CD jewel case" />
           </a>
           <div class="heading-text">
             <img src="../public/assets/heading-crumbs.png" class="heading-png" alt="Crumbs of Heaven" width="300" />
