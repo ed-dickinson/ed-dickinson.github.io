@@ -1,0 +1,201 @@
+<!doctype html>
+<html>
+  <head>
+  <title>Ed Dickinson</title>
+  <meta charset="UTF-8">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+  <meta name="author" content="Ed Dickinson">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/public/icon-peace-hand.png">
+  <link rel="stylesheet" type="text/css" href="/public/stylesheets/main.css"/>
+  <style>
+
+  </style>
+
+  </head>
+  <body>
+    <!-- <header>
+      <div id="loader">
+
+        <span id="circular">ED NIKCID</span>
+        <div id="sun"><span>☼</span></div>
+      </div>
+    </header> -->
+
+    <!-- <nav>
+      <menu>
+        <a href="" class="current-page">About</a>
+        <a href="/music">Music</a>
+        <a href="/tools">Things</a>
+      </menu>
+
+      <div id="decoration-line">
+        <div>
+
+        </div>
+      </div>
+
+    </nav> -->
+
+    <nav>
+      <span id="nav-home">...</span>
+      <div class="nav1">
+        <div class="item">
+          music
+        </div>
+        <div class="item">
+          poems /
+          <div class="nav2">
+            <div class="item">
+              <a href="/running-odes">Running Odes</a>
+            </div>
+            <div class="item">
+              2026
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <div id="title">
+        Songs of Myself
+      </div>
+
+      <div id="main-album-art">
+        <img src="/public/assets/me-lakes.jpg" id="lakes-square" />
+      </div>
+<br />
+<br />
+      <div id="blurb">
+        <p>
+          An ode that tells of my great love for the world. An album that will change and grow with me as the seasons and years progress, as I add new songs, tinker with old ones, and prune the ones that lose their luster.
+        </p>
+
+        <p>
+          I wanted a home for the songs I write, somewhere they fit, wherever they came from in my life. So I thought I could have one long album that I add to as I go, representing my life through the songs. I was inspired by my endless, majestic hero Walt Whitman, who kept adding to his poetic opus ‘Leaves of Grass’ for as long as he lived.
+        </p>
+
+
+
+      </div>
+
+      <div id="controls">
+        <div id="play-button">
+          <div id="icon">
+
+          </div>
+        </div>
+      </div>
+
+      <div id="tracklist">
+
+          <div class="track-title" song="mountain of happiness"></div>
+          <!-- <div class="track-title" song="bugs"></div> -->
+          <div class="track-title" song="thankful"></div>
+          <!-- <div class="track-title" song="wild animal"></div> -->
+          <div class="track-title" song="dress"></div>
+          <div class="track-title" song="fixedabode"></div>
+          <div class="track-title" song="anything"></div>
+          <div class="track-title" song="fullmoon"></div>
+          <!-- <div class="track-title" song="missyou"></div> -->
+          <div class="track-title" song="unshriven"></div>
+          <!-- <div class="track-title" song="acorns"></div> -->
+          <div class="track-title" song="ground"></div>
+          <div class="track-title" song="strawberry"></div>
+          <div class="track-title" song="moment"></div>
+          <div class="track-title" song="flowersbloom"></div>
+          <div class="track-title" song="steel"></div>
+          <div class="track-title" song="meadowmouse"></div>
+          <div class="track-title" song="redsky"></div>
+
+      </div>
+
+
+
+      <div class="album-covers">
+
+
+
+
+        <div class="click-container">
+
+          <a href='https://crumbdouglas.bandcamp.com/album/crumbs-of-heaven' class="cd">
+            <img src="/public/assets/art-heaven-cd-white-500.png" class="album-art cd" width="160" height="160" alt="Crumbs of Heaven CD jewel case" />
+          </a>
+          <div class="heading-text">
+            <img src="/public/assets/heading-crumbs.png" class="heading-png" alt="Crumbs of Heaven" width="300" />
+          </div>
+
+        </div>
+
+        <div class="click-container">
+
+          <a href='https://crumbdouglas.bandcamp.com/album/rural-loaf'>
+            <img src="/public/assets/art-man-white-500.png" class="album-art" alt="Rural Loaf ceramic man" width="200" />
+          </a>
+
+          <div class="heading-text">
+            <img src="/public/assets/heading-loaf.png" class="heading-png" alt="Rural Loaf" width="180" />
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
+
+    <div id="lyrics-overlay">
+      <div id="lyrics-close">
+        ✕
+        <!-- ✖ -->
+      </div>
+      <div id="lyrics-inner">
+        <div id="lyrics-title">
+
+        </div>
+        <div id="lyrics-body">
+          <div id="lyrics-content">
+
+          </div>
+          <div id="lyrics-date">
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <footer>
+      <!-- <div class="links">
+        <a href="mailto:hello@ed-dickinson.net">Contact</a>
+        <a href="../sitemap">Sitemap</a>
+      </div> -->
+    </footer>
+
+    <!-- <script src='scripts/loader.js'></script> -->
+    <script src='/public/scripts/menu.js'></script>
+
+    <script src='/public/scripts/main.js' type='module'></script>
+    <script src='/public/scripts/player.js' type='module'></script>
+    <script>
+    // let today = new Date()
+    // let birthDate = new Date('1990-03-19')
+    // let age = today.getFullYear() - birthDate.getFullYear()
+    // let m = today.getMonth() - birthDate.getMonth()
+    // if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) age--
+    // document.querySelector('#age').textContent = age
+
+    document.querySelector('#nav-home').addEventListener('click',
+      ()=>{
+      document.querySelector('nav').classList.toggle('expanded')
+    })
+
+
+    </script>
+
+  </body>
+
+</html>

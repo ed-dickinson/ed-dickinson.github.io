@@ -7,65 +7,141 @@
   <meta name="description" content="">
   <meta name="author" content="Ed Dickinson">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="public/icon-peace-hand.png">
-  <link rel="stylesheet" type="text/css" href="stylesheets/main.css"/>
+  <link rel="icon" href="/public/icon-peace-hand.png">
+  <!-- <link rel="stylesheet" type="text/css" href="/public/stylesheets/main.css"/> -->
+  <link rel="stylesheet" type="text/css" href="/public/stylesheets/logo.css"/>
   <style>
-  .album-covers {
+  @font-face {
+    font-family: 'Inconsolata';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Inconsolata'), url('../public/fonts/inconsolata-v31-latin-regular.woff') format('woff');
+  }
+  @font-face {
+    font-family: 'Bembo';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Bembo'), url('/public/fonts/bembo.otf');
+  }
+
+
+  body {
+    font-family: inconsolata;
+    /* font-family: 'Bembo'; */
+    font-size: 14px;
+    line-height: 1;
+  }
+
+  #projects {
+    display: flex;
+    margin-top: 50vh;
+    width: 100%;
+    /* background-color: beige; */
+    height: 42vw;
+    /* margin: 0; */
+    transform: translateY(-50%);
+  }
+
+  div.project a {
+    /* text-decoration: none; */
+    text-decoration: none;
+    color: black;
+  }
+
+.project {
+  /* display: inline-block; */
+  width: 19vh;
+  flex: auto;
+  /* margin: 0px; */
+  /* background-color: gold; */
+  margin: 5px;
+}
+
+.project:hover img {
+  opacity: 0.9;
+}
+.project:hover .name {
+  opacity: 0.8;
+}
+
+.image, .project .image, img {
+  /* max-width: 150px; */
+  width: 100%;
+  /* max-height: 150px; */
+}
+
+.project:nth-of-type(5n+1) {
+  margin-top: 15%;
+  position: relative;
+}
+.project:nth-of-type(5n+2) {
+  margin-top: 5%;
+  position: relative;
+}
+.project:nth-of-type(5n+3) {
+  margin-top: 10%;
+  position: relative;
+}
+.project:nth-of-type(5) {
+  margin-top: 12%;
+  position: relative;
+}
+
+
+img.landscape {
+  display: none;
+}
+
+@media only screen and (max-width: 600px) {
+
+  #projects {
+    width: 100%;
+    display: flex;
+    /* background-color: beige; */
+    flex-wrap: wrap;
+    flex-grow: 1;
+    margin-top: 0;
+    transform: none;
+  }
+  main {
+    margin-bottom: 20px;
+  }
+  .project {
+    display: inline-block;
+    width: 40%;
+    padding: 0;
+    margin: 10px;
+    margin-bottom: 10px;
+    /* background-color: gold; */
+    /* height: 50%; */
+    /* margin-top: 10px !important; */
+  }
+  .project:nth-of-type(1) {
+    margin-left: calc(50% + 10px);
+  }
+  .project:nth-of-type(2n+1) {
     position: relative;
-    transform: scale(70%);
+    /* top: -150px; */
+    /* opacity: 0.5; */
   }
-  .click-container {
-    display: inline-block;
+  .project:nth-of-type(2n+2) {
+    position: relative;
+    margin-top: -100px;
+    /* top: -150px; */
+    /* opacity: 0.5; */
   }
-
-  .heading-text {
-    display: inline-block;
-    position: absolute;
-    left: 50%;
-    top: calc(100% + 20px);
-    transform: translate(-50%);
-    opacity: 0;
-  }
-
-  main .album-covers {
-    text-align: center;
-    margin-top: 20vh;
-  }
-
-  main .album-covers a {
-    vertical-align: center;
-    margin: 0 10px;
-  }
-
-  a .cd {
-    margin-bottom: 15px;
-  }
-
-  main .album-covers a.cd {
-    transform: rotate(-2deg);
-    display: inline-block;
-  }
-
-  main .album-covers a:hover img {
-    transform: scale(101%);
-  }
-
-  main .album-covers a:hover + div.heading-text {
-    opacity: 1;
-  }
-
-
+}
   </style>
 
   </head>
   <body>
-    <!-- <header>
+    <header>
       <div id="loader">
 
         <span id="circular">ED NIKCID</span>
         <div id="sun"><span>☼</span></div>
       </div>
-    </header> -->
+    </header>
 
     <!-- <nav>
       <menu>
@@ -82,67 +158,109 @@
 
     </nav> -->
 
-    <main>
-      <!-- <p>
-        "Each of us has a unique and necessary gift to the world, and the purpose of our lives is to express this gift."
-        <span style="text-align:right; display:block;">
-          — Somebody I believe
-        </span>
-      </p> -->
-
-      <!-- <div id="caravan">
-        <img src="../public/assets/caravan-screenshot.jpg" width="600" height="337" alt="A photograph of Ed Dickinson playing guitar, standing in the open door of a static caravan. The caravan is in a field, on a clear day with the rugged peaks of the Isle of Rum in the background." />
-        <video
-          src="../public/assets/caravan.mp4" width="600" height="337" poster="" disablepictureinpicture>
-        </video>
-        <div id="subtitles">
-
+    <!-- <nav>
+      <span id="nav-home">...</span>
+      <div class="nav1">
+        <div class="item">
+          music
         </div>
-      </div> -->
-
-      <!-- <p>
-        I'm a <span id="age">??</span> year old man, and sometimes musician, who currently lives in Cornwall.
-      </p>
-      <p>
-        I have lived in other places, and they have all left their impression upon me. Like a hermit crab, I have taken little pieces of them, and used them to adorn the shell of my spirit.
-      </p>
-      <p>
-        My life's work is making people feel better. Or at least not feeling so bad about not feeling better.
-      </p>
-      <p>
-        <br /><br />
-        <a href="mailto:hello@ed-dickinson.net">I also make websites, if ye ask nicely :)</a>
-      </p> -->
-
-      <div class="album-covers">
-
-
-
-
-        <div class="click-container">
-
-          <a href='https://crumbdouglas.bandcamp.com/album/crumbs-of-heaven' class="cd">
-            <img src="public/assets/art-heaven-cd-white-500.png" class="album-art cd" width="160" alt="Crumbs of Heaven CD jewel case" />
-          </a>
-          <div class="heading-text">
-            <img src="../public/assets/heading-crumbs.png" class="heading-png" alt="Crumbs of Heaven" width="300" />
+        <div class="item">
+          poems /
+          <div class="nav2">
+            <div class="item">
+              <a href="/running-odes">Running Odes</a>
+            </div>
+            <div class="item">
+              2026
+            </div>
           </div>
 
         </div>
-
-        <div class="click-container">
-
-          <a href='https://crumbdouglas.bandcamp.com/album/rural-loaf'>
-            <img src="public/assets/art-man-white-500.png" class="album-art" alt="Rural Loaf ceramic man" width="200" />
-          </a>
-
-          <div class="heading-text">
-            <img src="../public/assets/heading-loaf.png" class="heading-png" alt="Rural Loaf" width="180" />
-          </div>
-
-        </div>
-
       </div>
+    </nav> -->
+
+    <main>
+      <div id="projects">
+        <!-- <div class="project">
+          <div class="image">
+            <img src="/public/assets/me-lakes.jpg"/>
+          </div>
+          <div class="name">
+            Songs of Myself
+          </div>
+        </div> -->
+
+
+        <div class="project">
+
+            <div class="image">
+              <a href="/">
+              <img class="portrait" src="/public/assets/me-lakes-port.jpg" class="project-image" alt="A man in a cottage doorway" />
+              </a>
+            </div>
+
+            <div class="name">
+              <a href="/">Songs of Myself</a>
+            </div>
+
+        </div>
+
+
+        <div class="project">
+          <div class="image">
+            <a href="/running-odes">
+              <!-- <img src="/public/assets/me-running.jpg" class="project-image" alt="Me running" /> -->
+              <img class="portrait" src="/public/assets/eigg-portrait.jpg" class="project-image" />
+            </a>
+          </div>
+          <div class="name">
+            <a href="/running-odes">Running Odes</a>
+          </div>
+        </div>
+
+        <div class="project">
+          <div class="image">
+            <a href="https://crumbdouglas.bandcamp.com/album/rural-loaf">
+              <img class="portrait" src="/public/assets/ceramic-man-portrait.jpeg" class="album-art" alt="Rural Loaf ceramic man" width="200" />
+            </a>
+            <!-- <a href="https://crumbdouglas.bandcamp.com/album/rural-loaf"><img src="/public/assets/eigg-loaf.jpg" class="album-art" alt="Rural Loaf ceramic man" width="200" /></a> -->
+          </div>
+          <div class="name">
+            <a href="https://crumbdouglas.bandcamp.com/album/rural-loaf">Rural Loaf</a>
+          </div>
+        </div>
+
+
+      <div class="project">
+        <div class="image">
+          <a href="https://crumbdouglas.bandcamp.com/album/crumbs-of-heaven">
+          <img class="portrait" src="/public/assets/cd-heaven-portrait.jpg" class="album-art cd" width="200" alt="Crumbs of Heaven CD jewel case" />
+        </a>
+        </div>
+        <div class="name">
+          <a href="https://crumbdouglas.bandcamp.com/album/crumbs-of-heaven">Crumbs of Heaven</a>
+        </div>
+      </div>
+
+
+
+      <div class="project">
+        <div class="image">
+          <a href="/tumbleword">
+          <img src="/public/assets/tumbleword.jpeg" class="album-art" alt="Rural Loaf ceramic man" width="200" />
+          </a>
+        </div>
+        <div class="name">
+          <a href="/tumbleword">Tumbleword</a>
+        </div>
+      </div>
+
+
+
+    </div>
+
+
+
 
     </main>
 
@@ -153,8 +271,11 @@
       </div> -->
     </footer>
 
-    <!-- <script src='scripts/loader.js'></script> -->
+    <script src='/public/scripts/loader.js'></script>
+    <!-- <script src='/public/scripts/menu.js'></script> -->
 
+    <!-- <script src='/public/scripts/main.js' type='module'></script> -->
+    <!-- <script src='/public/scripts/player.js' type='module'></script> -->
     <script>
     // let today = new Date()
     // let birthDate = new Date('1990-03-19')
@@ -163,6 +284,10 @@
     // if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) age--
     // document.querySelector('#age').textContent = age
 
+    document.querySelector('#nav-home').addEventListener('click',
+      ()=>{
+      document.querySelector('nav').classList.toggle('expanded')
+    })
 
 
     </script>
